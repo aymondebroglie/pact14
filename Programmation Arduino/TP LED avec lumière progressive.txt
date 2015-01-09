@@ -1,0 +1,32 @@
+int LEDa = 9;
+int LEDb = 12;
+int tps = 10;
+
+
+void setup()
+{
+ 
+	pinMode(LEDa, INPUT);
+	pinMode(LEDb, INPUT);
+	
+ 
+}
+
+void loop()
+{
+
+	for(int i=0; i =255; i++) {
+    analogWrite(LEDb, i);  //on éteint la LED2
+    analogWrite(LEDa, 255-i);  //on éteint la LED1
+
+	delay(tps); }
+ 
+		for(int i=0; i =255; i++) {
+    analogWrite(LEDa, i);  //on éteint la LED2
+    analogWrite(LEDb, 255-i);  //on éteint la LED1
+
+	delay(tps); }   
+   
+  
+}
+

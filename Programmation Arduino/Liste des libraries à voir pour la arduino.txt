@@ -1,0 +1,14 @@
+-lecture d'une donnée analogique
+-utilisation du tableau (serial)
+-utilisation du bluetooth (demander le module supplémentaire)
+-test fonction avec des boutons
+-utilisation écran lcd
+-trouver un alogorythme d'intégration
+-utilisation de l'horloge sur la arduino
+-demande plaque avec des composants
+-connection au lecteur rfid
+
+-question : sous quelle forme l'envoie des données doit-elle etre faite?
+
+/*il smeble plus simple que l'envoie de la quantité versé se face une fois que le barman 
+à verser son  verre et non en continue*/

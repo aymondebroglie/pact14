@@ -1,0 +1,28 @@
+int LEDa = 9;
+int LEDb = 12;
+int tps = 300;
+
+void setup()
+{
+ 
+	pinMode(LEDa, INPUT);
+	pinMode(LEDb, INPUT);
+	
+ 
+}
+
+void loop()
+{
+    digitalWrite(LEDb, HIGH);  //on éteint la LED2
+   digitalWrite(LEDa, LOW);  //on éteint la LED1
+
+	delay(tps);
+ 
+   
+   digitalWrite(LEDb, LOW);  //on éteint la LED2
+   digitalWrite(LEDa, HIGH); //on allume la LED1
+	delay(tps);
+  
+}
+
+//ça marche, on essaye avec tableau de tension
