@@ -1,21 +1,32 @@
 package windows;
 
-public class ViewController {
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class ViewController {//Classe permettant de controller ce qui se passe quand on appuie sur un bouton, c'est elle qui
+	//interrogera la base de donnée 
 	private Window window;
 
 public ViewController(Window window){
 	this.window = window;
 }
 
-public void bouttonBarman(){
-	ViewBarmanHome vbh = new ViewBarmanHome();
+public void bouttonBarman(){//Méthode appelée quan on appui sur Barman sur l'écran d'acceuil
+	ViewBarmanHome vbh = new ViewBarmanHome(this);
 	 window.setContentPane(vbh);
-	 window.repaint();
+	 window.validate();
 }
 
-public void bouttonGestionnaire(){
+public void bouttonGestionnaire(){//{//Méthode appelée quan on appui sur Barman sur l'écran d'acceuil
 	ViewBossHome vbh = new ViewBossHome();
 	 window.setContentPane(vbh);
-	 window.repaint();
+	 window.validate();
+}
+
+public void imprimerNote(){//Méthode appelée si on appuie sur imprimer note dans l'écran du Barman
+	JPanel pan = new JPanel();
+	pan.add(new JLabel("réussi"));
+	window.setContentPane(pan);
+	window.validate();
 }
 }
