@@ -13,12 +13,12 @@ public class ViewWelcome extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JButton barman = new JButton("Barman");
 	private JButton gestionnaire = new JButton("Gestionnaire");
+	private ViewController view;
 
 	private class BouttonBarman implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			ViewBarmanHome vbh = new ViewBarmanHome();
-			Window window = new Window(vbh);
+			view.bouttonBarman();
 
 		}
 
@@ -27,13 +27,13 @@ public class ViewWelcome extends JPanel {
 	private class BouttonGestionnaire implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			ViewBossHome vbh = new ViewBossHome();
-			Window window = new Window(vbh);
+			view.bouttonGestionnaire();
 
 		}
 
 	}
-	public ViewWelcome() {
+	public ViewWelcome(ViewController view) {
+		this.view = view;
 		BouttonBarman bouttonBarman = new BouttonBarman();
 		BouttonGestionnaire bouttonGestionnaire = new BouttonGestionnaire();
 		barman.addActionListener(bouttonBarman);

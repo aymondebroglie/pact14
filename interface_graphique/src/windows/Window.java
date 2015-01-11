@@ -12,14 +12,12 @@ public class Window extends JFrame
 	private int height = 100;
 	
 	
-	public Window(JPanel pan)
+	public Window()
 	{
 		this.setTitle(title);
 		this.setSize(width,height);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		this.setContentPane(pan);
 		this.setVisible(true);
 	}
 }
