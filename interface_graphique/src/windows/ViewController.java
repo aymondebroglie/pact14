@@ -24,6 +24,7 @@ public void bouttonGestionnaire(){//{//Méthode appelée quan on appui sur Barman 
 }
 
 public void imprimerNote(){//Méthode appelée si on appuie sur imprimer note dans l'écran du Barman
+	//Code pour le test, il faudra demander a la base de donnée de nous fournir la note pour le serveur donné
 	JPanel pan = new JPanel();
 	pan.add(new JLabel("réussi"));
 	window.setContentPane(pan);
