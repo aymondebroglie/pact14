@@ -2,13 +2,14 @@ package mains;
 
 import windows.ViewBossHome;
 import windows.ViewBottlesManagement;
+import windows.ViewWelcome;
 import windows.Window;
 
 public class MainTest 
 {
 	public static void main(String[] args) 
 	{
-		ViewBottlesManagement vbm = new ViewBottlesManagement();
+		ViewWelcome vbm = new ViewWelcome();
 		Window window = new Window(vbm);
 
 	}
