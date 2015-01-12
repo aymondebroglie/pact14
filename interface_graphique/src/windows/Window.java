@@ -12,8 +12,8 @@ import javax.swing.JRadioButtonMenuItem;
 public class Window extends JFrame
 {
 	 String title ="OptiBar" ;
-	private int width = 400;
-	private int height = 103; 
+	private static int width = 400;
+	private static int height = 130; 
 	
 	private JMenuBar menubar = new JMenuBar();
 	private JMenu general = new JMenu("Général");
@@ -22,6 +22,12 @@ public class Window extends JFrame
 	private JRadioButtonMenuItem boss = new JRadioButtonMenuItem("Patron");
 	
 	private JMenu settings = new JMenu("Paramètres");
+	
+	public static void setWSize(int width,int height)
+	{
+		Window.width = width;
+		Window.height = height;
+	}
 	
 	public Window()
 	{

@@ -71,6 +71,7 @@ public void retirerGoulot()
 	
 }
 
+/** View Login*/
 public void motDePasse(String message){
 	//Il faut interroger la base de donnée pour savoir si le mot de passe est le bon 
 	JPanel pan = new JPanel();

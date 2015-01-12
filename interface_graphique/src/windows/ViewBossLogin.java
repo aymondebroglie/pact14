@@ -44,7 +44,7 @@ private JFormattedTextField mdp = new JFormattedTextField("Mot de Passe");
 		
 	}
 	
-	public ViewBossLogin(Controller view){
+	public ViewBossLogin(Controller view){	
 		this.view = view;
 		this.add(new JLabel("Veuillez rentrer votre mot de passe"));
 		MotDePasse mp = new MotDePasse();
