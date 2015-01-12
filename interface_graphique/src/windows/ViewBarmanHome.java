@@ -7,9 +7,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import controller.Controller;
+
 public class ViewBarmanHome extends JPanel
 {
-private ViewController view;
+private Controller view;
 
 private class ImprimerNote implements ActionListener {
 	@Override
@@ -23,7 +25,7 @@ private class ImprimerNote implements ActionListener {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public ViewBarmanHome(ViewController view){
+	public ViewBarmanHome(Controller view){
 		this.view = view;
 		 JButton Note = new JButton("Imprimer Note");
 		 ImprimerNote imprimerNote = new ImprimerNote();
