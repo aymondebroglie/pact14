@@ -64,4 +64,20 @@ public void gestionStocks()
 	 window.validate();
 }
 
+public void retirerGoulot()
+{
+	//Demander quel goulot il faut prendre pour l'instant il ferme la fenêtre pour le test
+	window.dispose();
+	
+}
+
+public void motDePasse(String message){
+	//Il faut interroger la base de donnée pour savoir si le mot de passe est le bon 
+	JPanel pan = new JPanel();
+	pan.add(new JLabel(message));
+	window.setContentPane(pan);
+	window.validate();
+	
+}
+
 }

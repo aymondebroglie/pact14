@@ -1,8 +1,7 @@
 package mains;
 
 import controller.Controller;
-import windows.ViewBossHome;
-import windows.ViewBottlesManagement;
+import windows.ViewBossLogin;
 import windows.ViewWelcome;
 import windows.Window;
 
@@ -12,7 +11,7 @@ public class MainTest
 	{
 		Window window = new Window();
 		Controller controller = new Controller(window);
-		ViewWelcome viewWelcome = new ViewWelcome(controller);
+		ViewBossLogin viewWelcome = new ViewBossLogin(controller);
 		window.setContentPane(viewWelcome);
 		window.validate();
 ;	}
