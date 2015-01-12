@@ -2,16 +2,14 @@ package windows;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controller.Controller;
 
 public class ViewBarmanHome extends JPanel
 {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID1 = 1L;
 
 	private Controller view;
 
