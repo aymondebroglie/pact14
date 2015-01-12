@@ -7,15 +7,20 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import controller.Controller;
+
 public class ViewBarmanHome extends JPanel
 {
-private ViewController view;
+	private static final long serialVersionUID = 1L;
 
-private class ImprimerNote implements ActionListener {
+	private Controller view;
+
+private class ImprimerNote implements ActionListener 
+{
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent arg0) 
+	{
 		view.imprimerNote();
-
 	}
 }
 
@@ -31,7 +36,10 @@ private class RetirerGoulot implements ActionListener {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public ViewBarmanHome(ViewController view){
+	
+
+	public ViewBarmanHome(Controller view)
+	{
 		this.view = view;
 		 JButton note = new JButton("Imprimer Note");
 		 ImprimerNote imprimerNote = new ImprimerNote();
