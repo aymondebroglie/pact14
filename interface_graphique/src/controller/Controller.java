@@ -3,9 +3,8 @@ package controller;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import windows.ViewBarmanHome;
-import windows.ViewBossHome;
-import windows.Window;
+import windows.*;
+
 
 public class Controller 
 {
@@ -19,24 +18,26 @@ public Controller(Window window)
 	this.window = window;
 }
 
-public void bouttonBarman()
+/** ViewWelcome */
+public void boutonBarman()
 {
-	//Méthode appelée quan on appui sur Barman sur l'écran d'acceuil
+	//Méthode appelée quand on appuie sur Barman sur l'écran d'accueil
 	
 	ViewBarmanHome vbh = new ViewBarmanHome(this);
 	 window.setContentPane(vbh);
 	 window.validate();
 }
 
-public void bouttonGestionnaire()
+public void boutonGestionnaire()
 {
-	//Méthode appelée quan on appui sur Barman sur l'écran d'acceuil
+	//Méthode appelée quand on appuie sur Barman sur l'écran d'accueil
 	
-	ViewBossHome vbh = new ViewBossHome();
+	ViewBossHome vbh = new ViewBossHome(this);
 	 window.setContentPane(vbh);
 	 window.validate();
 }
 
+/** ViewBarmanHome */
 public void imprimerNote()
 {
 	//Méthode appelée si on appuie sur imprimer note dans l'écran du Barman
@@ -47,4 +48,20 @@ public void imprimerNote()
 	window.setContentPane(pan);
 	window.validate();
 }
+
+/** ViewBossHome */
+public void consulterVosDonnees() 
+{
+	ViewSeeDatas vsd = new ViewSeeDatas(this);
+	 window.setContentPane(vsd);
+	 window.validate();
+}
+
+public void gestionStocks() 
+{
+	ViewStocksManagement vsm = new ViewStocksManagement(this);
+	 window.setContentPane(vsm);
+	 window.validate();
+}
+
 }

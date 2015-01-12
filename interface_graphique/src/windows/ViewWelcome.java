@@ -14,31 +14,31 @@ public class ViewWelcome extends JPanel
 	private JButton gestionnaire = new JButton("Gestionnaire");
 	private Controller view;
 
-	private class BouttonBarman implements ActionListener 
+	private class BoutonBarman implements ActionListener 
 	{
 		@Override
 		public void actionPerformed(ActionEvent arg0) 
 		{
-			view.bouttonBarman();
+			view.boutonBarman();
 		}
 
 	}
 
-	private class BouttonGestionnaire implements ActionListener 
+	private class BoutonGestionnaire implements ActionListener 
 	{
 		@Override
 		public void actionPerformed(ActionEvent arg0) 
 		{
-			view.bouttonGestionnaire();
+			view.boutonGestionnaire();
 		}
 	}
 	public ViewWelcome(Controller view) 
 	{
 		this.view = view;
-		BouttonBarman bouttonBarman = new BouttonBarman();
-		BouttonGestionnaire bouttonGestionnaire = new BouttonGestionnaire();
-		barman.addActionListener(bouttonBarman);
-		gestionnaire.addActionListener(bouttonGestionnaire);
+		BoutonBarman boutonBarman = new BoutonBarman();
+		BoutonGestionnaire boutonGestionnaire = new BoutonGestionnaire();
+		barman.addActionListener(boutonBarman);
+		gestionnaire.addActionListener(boutonGestionnaire);
 		this.add(barman);
 		this.add(gestionnaire);
 
