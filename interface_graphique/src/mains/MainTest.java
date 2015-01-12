@@ -14,5 +14,6 @@ public class MainTest
 		ViewController controller = new ViewController(window);
 		ViewWelcome viewWelcome = new ViewWelcome(controller);
 		window.setContentPane(viewWelcome);
+		window.validate();
 ;	}
 }

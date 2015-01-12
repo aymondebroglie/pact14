@@ -14,7 +14,7 @@ public ViewController(Window window){
 public void bouttonBarman(){//Méthode appelée quan on appui sur Barman sur l'écran d'acceuil
 	ViewBarmanHome vbh = new ViewBarmanHome(this);
 	 window.setContentPane(vbh);
-	 window.validate();
+	
 }
 
 public void bouttonGestionnaire(){//{//Méthode appelée quan on appui sur Barman sur l'écran d'acceuil
