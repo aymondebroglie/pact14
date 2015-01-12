@@ -36,4 +36,13 @@ public void retirerGoulot(){
 	window.dispose();
 	
 }
+
+public void motDePasse(String message){
+	//Il faut interroger la base de donnée pour savoir si le mot de passe est le bon 
+	JPanel pan = new JPanel();
+	pan.add(new JLabel(message));
+	window.setContentPane(pan);
+	window.validate();
+	
+}
 }

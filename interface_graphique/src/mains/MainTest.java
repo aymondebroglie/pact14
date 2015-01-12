@@ -1,5 +1,6 @@
 package mains;
 
+import windows.ViewBossLogin;
 import windows.ViewController;
 import windows.ViewWelcome;
 import windows.Window;
@@ -10,7 +11,7 @@ public class MainTest
 	{
 		Window window = new Window();
 		ViewController controller = new ViewController(window);
-		ViewWelcome viewWelcome = new ViewWelcome(controller);
+		ViewBossLogin viewWelcome = new ViewBossLogin(controller);
 		window.setContentPane(viewWelcome);
 		window.validate();
 ;	}
