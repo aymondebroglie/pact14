@@ -24,14 +24,30 @@ private class ImprimerNote implements ActionListener
 	}
 }
 
+private class RetirerGoulot implements ActionListener {
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		view.retirerGoulot();
+
+	}
+}
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	
 
 	public ViewBarmanHome(Controller view)
 	{
 		this.view = view;
-		 JButton Note = new JButton("Imprimer Note");
+		 JButton note = new JButton("Imprimer Note");
 		 ImprimerNote imprimerNote = new ImprimerNote();
-		 Note.addActionListener(imprimerNote);
-		 this.add(Note);
-	}
+		 RetirerGoulot retirerGoulot = new RetirerGoulot();
+		 note.addActionListener(imprimerNote);
+		 this.add(note);
+		 JButton goulot = new JButton("retirer goulot");
+		 goulot.addActionListener(retirerGoulot);
+		 this.add(goulot);
+;	}
 }
