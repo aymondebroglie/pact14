@@ -14,7 +14,7 @@ public ViewController(Window window){
 public void bouttonBarman(){//Méthode appelée quan on appui sur Barman sur l'écran d'acceuil
 	ViewBarmanHome vbh = new ViewBarmanHome(this);
 	 window.setContentPane(vbh);
-	
+	window.validate();
 }
 
 public void bouttonGestionnaire(){//{//Méthode appelée quan on appui sur Barman sur l'écran d'acceuil
@@ -29,5 +29,11 @@ public void imprimerNote(){//Méthode appelée si on appuie sur imprimer note dans
 	pan.add(new JLabel("réussi"));
 	window.setContentPane(pan);
 	window.validate();
+}
+
+public void retirerGoulot(){
+	//Demander quel goulot il faut prendre pour l'instant il ferme la fenêtre pour le test
+	window.dispose();
+	
 }
 }

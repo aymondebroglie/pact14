@@ -1,7 +1,5 @@
 package mains;
 
-import windows.ViewBossHome;
-import windows.ViewBottlesManagement;
 import windows.ViewController;
 import windows.ViewWelcome;
 import windows.Window;
