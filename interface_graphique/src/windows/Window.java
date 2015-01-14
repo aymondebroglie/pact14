@@ -13,7 +13,7 @@ public class Window extends JFrame
 {
 	 String title ="OptiBar" ;
 	private int width = 400;
-	private int height = 103; 
+	private int height = 120; 
 	
 	private JMenuBar menubar = new JMenuBar();
 	private JMenu general = new JMenu("Général");
