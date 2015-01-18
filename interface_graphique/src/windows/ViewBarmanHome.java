@@ -9,8 +9,6 @@ import controller.Controller;
 
 public class ViewBarmanHome extends JPanel
 {
-	private static final long serialVersionUID1 = 1L;
-
 	private Controller view;
 
 private class ImprimerNote implements ActionListener 

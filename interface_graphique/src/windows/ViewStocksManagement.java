@@ -7,6 +7,7 @@ import controller.Controller;
 
 public class ViewStocksManagement extends JPanel
 {
+	private static final long serialVersionUID = 1L;
 
 	public ViewStocksManagement(Controller controller) 
 	{
