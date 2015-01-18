@@ -19,9 +19,9 @@ public class Window extends JFrame
 {
 	 String title ="OptiBar" ;
 	private static int width = 400;
-	private static int height = 130; 
+	private int width = 400;
 	
-	private Controller view;
+	private int height = 120; 
 	
 	private JMenuBar menubar = new JMenuBar();
 	private JMenu general = new JMenu("Général");
