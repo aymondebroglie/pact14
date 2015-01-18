@@ -72,6 +72,13 @@ public void retirerGoulot()
 }
 
 /** View Login*/
+public void login() 
+{
+	ViewBossLogin vbl = new ViewBossLogin(this);
+	 window.setContentPane(vbl);
+	 window.validate();
+}
+
 public void motDePasse(String message){
 	//Il faut interroger la base de donnée pour savoir si le mot de passe est le bon 
 	JPanel pan = new JPanel();

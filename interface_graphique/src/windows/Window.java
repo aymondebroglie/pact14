@@ -18,11 +18,10 @@ import controller.Controller;
 public class Window extends JFrame
 {
 	 String title ="OptiBar" ;
-	private static int width = 400;
 	private int width = 400;
-	
 	private int height = 120; 
 	
+	private Controller view = new Controller(this);
 	private JMenuBar menubar = new JMenuBar();
 	private JMenu general = new JMenu("Général");
 	private JMenu general_user = new JMenu("Utilisateur");
@@ -31,10 +30,10 @@ public class Window extends JFrame
 	
 	private JMenu settings = new JMenu("Paramètres");
 	
-	public static void setWSize(int width,int height)
+	public void setWSize(int width,int height)
 	{
-		Window.width = width;
-		Window.height = height;
+		this.width = width;
+		this.height = height;
 	}
 	
 	public Window()
@@ -64,7 +63,7 @@ public class Window extends JFrame
 			{					
 				public void actionPerformed(ActionEvent arg0)
 				{
-					view.boutonGestionnaire();
+					view.login();
 				}
 			});
 			this.general_user.addSeparator();

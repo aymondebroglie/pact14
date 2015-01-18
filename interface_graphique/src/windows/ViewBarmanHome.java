@@ -44,7 +44,7 @@ private class RetirerGoulot implements ActionListener {
 		 RetirerGoulot retirerGoulot = new RetirerGoulot();
 		 note.addActionListener(imprimerNote);
 		 this.add(note);
-		 JButton goulot = new JButton("retirer goulot");
+		 JButton goulot = new JButton("Retirer goulot");
 		 goulot.addActionListener(retirerGoulot);
 		 this.add(goulot);
 ;	}
