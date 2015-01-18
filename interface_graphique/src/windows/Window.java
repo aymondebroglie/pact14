@@ -1,11 +1,17 @@
 package windows;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JRadioButtonMenuItem;
+
+import controller.Controller;
+
 
 
 
@@ -14,6 +20,8 @@ public class Window extends JFrame
 	 String title ="OptiBar" ;
 	private static int width = 400;
 	private static int height = 130; 
+	
+	private Controller view;
 	
 	private JMenuBar menubar = new JMenuBar();
 	private JMenu general = new JMenu("Général");
@@ -44,7 +52,21 @@ public class Window extends JFrame
 				bg.add(boss);
 			boss.setSelected(true);
 			this.general_user.add(barman);
+				this.barman.addActionListener(new ActionListener()
+				{					
+					public void actionPerformed(ActionEvent arg0)
+					{
+						view.boutonBarman();
+					}
+				});
 			this.general_user.add(boss);
+			this.boss.addActionListener(new ActionListener()
+			{					
+				public void actionPerformed(ActionEvent arg0)
+				{
+					view.boutonGestionnaire();
+				}
+			});
 			this.general_user.addSeparator();
 		this.general.add(this.general_user);
 			
