@@ -34,7 +34,7 @@ public void boutonGestionnaire()
 {
 	//Méthode appelée quand on appuie sur Barman sur l'écran d'accueil
 	
-	ViewBossHome vbh = new ViewBossHome(this);
+	ViewBossLogin vbh = new ViewBossLogin(this);
 	 window.setContentPane(vbh);
 	 window.validate();
 }
