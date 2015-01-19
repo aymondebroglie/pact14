@@ -1,0 +1,10 @@
+package windows;
+
+public class ViewSeeDatas 
+{
+
+	public ViewSeeDatas(Controller controller) {
+		// TODO Auto-generated constructor stub
+	}
+
+}

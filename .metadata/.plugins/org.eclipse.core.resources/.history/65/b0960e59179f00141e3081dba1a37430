@@ -1,0 +1,101 @@
+package windows;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JPanel;
+import javax.swing.JRadioButtonMenuItem;
+
+import controller.Controller;
+
+
+
+
+public class Window extends JFrame
+{
+	private static final long serialVersionUID = 1L;
+	String title ="OptiBar" ;
+	private int width = 400;
+	private int height = 130; 
+	
+	private Controller view = new Controller(this);
+	
+	private JMenuBar menubar = new JMenuBar();
+	private JMenu general = new JMenu("Général");
+	private JMenu general_user = new JMenu("Utilisateur");
+	private JRadioButtonMenuItem barman = new JRadioButtonMenuItem("Barman");
+	private JRadioButtonMenuItem boss = new JRadioButtonMenuItem("Patron");
+	
+	private JMenu settings = new JMenu("Paramètres");
+	private JMenu settings_language = new JMenu("Langue");
+	private JMenu settings_units = new JMenu("Unités");
+	private JMenu settings_units_money = new JMenu("Monnaie");
+	private JMenu settings_units_metric = new JMenu("Système mètrique"); 
+	
+	private JMenu help = new JMenu("Aide");
+	private JMenu help_help = new JMenu("Aide");
+	private JMenu help_about = new JMenu("A propos d'OptiBar");
+	
+	public void setWSize(int width,int height)
+	{
+		this.width = width;
+		this.height = height;
+	}
+	
+	public Window()
+	{
+		this.setTitle(title);
+		this.setSize(width,height); 
+		this.setLocationRelativeTo(null);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+	/** Menu general*/
+		//Sous-menu utilisateur
+		//this.general.add(this.general_user);
+			ButtonGroup bg = new ButtonGroup();
+				bg.add(barman);
+				bg.add(boss);
+			boss.setSelected(true);
+			this.general_user.add(barman);
+				this.barman.addActionListener(new ActionListener()
+				{					
+					public void actionPerformed(ActionEvent arg0)
+					{
+						view.boutonBarman();
+					}
+				});
+			this.general_user.add(boss);
+			this.boss.addActionListener(new ActionListener()
+			{					
+				public void actionPerformed(ActionEvent arg0)
+				{
+					view.login();
+				}
+			});
+			this.general_user.addSeparator();
+		this.general.add(this.general_user);
+			
+		// Sous_menu 2
+		
+	/** Menu settings*/
+		// Sous-menu langue
+		this.settings.add(this.settings_language);
+			
+		
+		// Sous-menu units
+		
+		this.settings.add(this.settings_units);
+	/** Menu help*/
+		
+		this.menubar.add(general);
+		this.menubar.add(settings);
+		this.menubar.add(help);
+			
+		this.setJMenuBar(menubar);
+		this.setVisible(true);
+	} 
+}
