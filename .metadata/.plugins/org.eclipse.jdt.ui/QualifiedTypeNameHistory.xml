@@ -12,4 +12,8 @@
 <fullyQualifiedTypeName name="controller.Controller"/>
 <fullyQualifiedTypeName name="java.awt.event.ActionEvent"/>
 <fullyQualifiedTypeName name="javax.swing.JMenuItem"/>
+<fullyQualifiedTypeName name="com.hp.hpl.jena.rdf.model.ModelFactory"/>
+<fullyQualifiedTypeName name="com.hp.hpl.jena.rdf.model.Resource"/>
+<fullyQualifiedTypeName name="com.hp.hpl.jena.datatypes.xsd.XSDDatatype"/>
+<fullyQualifiedTypeName name="com.hp.hpl.jena.rdf.model.Property"/>
 </qualifiedTypeNameHistroy>
