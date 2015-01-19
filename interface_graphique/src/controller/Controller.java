@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.Arrays;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -79,13 +81,30 @@ public void login()
 	 window.validate();
 }
 
-public void motDePasse(String message){
+public void motDePasse(char[] cs){
 	//Il faut interroger la base de donnée pour savoir si le mot de passe est le bon 
-	JPanel pan = new JPanel();
-	pan.add(new JLabel(message));
-	window.setContentPane(pan);
+	if(this.verifMotDePAsse(cs)){
+	ViewBossHome vbh = new ViewBossHome(this);
+	window.setContentPane(vbh);
 	window.validate();
+	}
+	else{
+		ViewBossLogin vbh = new ViewBossLogin(this);
+		vbh.add(new JLabel("Faux mdp"));
+		window.setContentPane(vbh);
+		window.validate();
+	}
+
 	
+	
+}
+
+private Boolean verifMotDePAsse(char[] cs){
+	// Cette méthode sert a verifier que le mot de passe est le bon  
+	char vraimdp[] = new char[5];
+	//Normalemnt il faut demander à la base de donnée ici on prend 8 a 
+	Arrays.fill(vraimdp, 'a');
+	return Arrays.equals(cs,vraimdp);
 }
 
 }
