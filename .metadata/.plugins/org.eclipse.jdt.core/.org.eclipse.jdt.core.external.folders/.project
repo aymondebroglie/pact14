@@ -19,5 +19,10 @@
 			<type>2</type>
 			<location>C:/Users/Achille/Documents/Cours/PACT/depotPACT/jena/jena-fuseki-1.1.1</location>
 		</link>
+		<link>
+			<name>.link2</name>
+			<type>2</type>
+			<location>C:/Users/Achille/Documents/Cours/PACT/depotPACT/jena/jena-fuseki-1.1.1</location>
+		</link>
 	</linkedResources>
 </projectDescription>
