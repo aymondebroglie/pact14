@@ -11,7 +11,7 @@ public class MainTest
 	{
 		Window window = new Window();
 		Controller controller = new Controller(window);
-		ViewBossLogin viewWelcome = new ViewBossLogin(controller);
+		ViewWelcome viewWelcome = new ViewWelcome(controller);
 		window.setContentPane(viewWelcome);
 		window.validate();
 ;	}
