@@ -17,7 +17,7 @@ public class ViewChangePassword extends JPanel {
 	private JPasswordField nmdp2 = new JPasswordField();
 
 	
-	private class MotDePasse implements ActionListener {
+	private class ChangeMotDePasse implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
@@ -35,14 +35,14 @@ public class ViewChangePassword extends JPanel {
 	
 	public ViewChangePassword(Controller view){
 		this.view = view;
-		MotDePasse mp = new MotDePasse();
+		ChangeMotDePasse mp = new ChangeMotDePasse();
 		this.add(new JLabel("Nouveau mot de passe"));
 		nmdp1.setPreferredSize(new Dimension(300,25));
-		this.add(new JLabel("Confirmer le mot de passe"));
 		nmdp2.setPreferredSize(new Dimension(300,25));
 		JButton boutton = new JButton("OK");
 		boutton.addActionListener(mp);
 		this.add(nmdp1);
+		this.add(new JLabel("Confirmer le mot de passe"));
 		this.add(nmdp2);
 		this.add(boutton);
 	}

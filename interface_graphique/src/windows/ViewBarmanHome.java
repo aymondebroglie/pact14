@@ -27,6 +27,7 @@ private class RetirerGoulot implements ActionListener {
 
 	}
 }
+
 	/**
 	 * 
 	 */

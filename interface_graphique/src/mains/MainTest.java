@@ -1,8 +1,6 @@
 package mains;
 
 import controller.Controller;
-import windows.ViewBossLogin;
-import windows.ViewChangePassword;
 import windows.ViewWelcome;
 import windows.Window;
 
@@ -12,7 +10,7 @@ public class MainTest
 	{
 		Window window = new Window();
 		Controller controller = new Controller(window);
-		ViewChangePassword viewWelcome = new ViewChangePassword(controller);
+		ViewWelcome viewWelcome = new ViewWelcome(controller);
 		window.setContentPane(viewWelcome);
 		window.validate();	
 	}

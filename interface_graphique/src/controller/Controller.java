@@ -108,15 +108,24 @@ private Boolean verifMotDePAsse(char[] cs){
 }
 
 public void changeMotDePasse(char[] cs1, char[] cs2){
-	if(cs1.equals(cs2)){
+	if(Arrays.equals(cs1,cs2)){
 		JPanel paneau = new JPanel();
 		paneau.add(new JLabel("Mot de Passe change"));
-		window.add(paneau);
+		window.setContentPane(paneau);
 		window.validate();
 		//Appeler la base de donnée pour changer le mot de passe
 	}
 	else{
-		
+		JPanel paneau = new JPanel();
+		paneau.add(new JLabel("Echec"));
+		window.setContentPane(paneau);
+		window.validate();
 	}
+}
+
+public void ecranChangeMotDePasse(){
+	ViewChangePassword cp = new ViewChangePassword(this);
+	window.setContentPane(cp);
+	window.validate();
 }
 }
