@@ -53,4 +53,16 @@ public class BDD implements BDDInterface
 		return false;
 	}
 
+	@Override
+	public boolean ajouterGoulot(int bluetooth) 
+	{
+		try {
+			st.executeQuery("INSERT INTO Goulots ("+bluetooth+",0,100)");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+
 }
