@@ -23,9 +23,28 @@ public class BDD implements BDDInterface
 	}
 	
 	@Override
-	public boolean ajouterConsommation(int bluetoothID, int rFID, int volume) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean ajouterConsommation(int bluetoothID, int rFID, int volume) 
+	{
+		int cPK;
+		int codeBarre;
+		try
+		{
+			rs=st.executeQuery("SELECT CodeBarre FROM Associe WHERE Associe.BluetoothID="+bluetoothID);
+			rs.next();
+			codeBarre=rs.getInt(1);
+			rs=st.executeQuery("SELECT CPK FROM Barman WHERE Barman.CPK="+rFID);
+			rs.next();
+			cPK=rs.getInt(1);
+			st.executeQuery("INSERT INTO Composition ("+codeBarre+","+volume+","+cPK+")");
+			//on met a jour le stock à la fin de la commande.
+			
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	@Override
