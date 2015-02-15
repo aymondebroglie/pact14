@@ -16,7 +16,7 @@ public class BDD implements BDDInterface
 	            con = DriverManager.getConnection("jdbc:mysql://localhost/"+dbname+"?" +
                         "user="+user+"&password="+mdp);
 	            st = con.createStatement();
-               System.out.println("yes");
+               System.out.println("Connection établie");
 	        } catch (Exception e) {
 	        	e.printStackTrace();
 	        }
@@ -123,8 +123,8 @@ public class BDD implements BDDInterface
 	public boolean modifierInformationBarman(String rFID, String nom,
 			String prenom, int age, String dateEmbauche, int cPK) 
 	{
-		String updateSql = "UPDATE Barman SET Nom="
-				+ nom+", Prenom="+prenom+",Age= "+age+",DateEmbauche=" +dateEmbauche+",CPK="+cPK+" WHERE RFID="+rFID;
+		String updateSql = "UPDATE Barman SET Nom='"
+				+ nom+"', Prenom='"+prenom+"',Age= '"+age+"',DateEmbauche='" +dateEmbauche+"',CPK='"+cPK+"' WHERE RFID='"+rFID+"'";
 		try {
 		int updateResultat=st.executeUpdate(updateSql);
 		System.out.println("UPDATE:" + updateResultat);
