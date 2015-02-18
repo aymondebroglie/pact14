@@ -1,4 +1,6 @@
 import java.sql.*;
+import java.util.ArrayList;
+
 
 
 
@@ -16,7 +18,7 @@ public class BDD implements BDDInterface
 	            con = DriverManager.getConnection("jdbc:mysql://localhost/"+dbname+"?" +
                         "user="+user+"&password="+mdp);
 	            st = con.createStatement();
-               System.out.println("Connection établie");
+               System.out.println("Connection avec la Base De Données "+dbname+" établie.\n");
 	        } catch (Exception e) {
 	        	e.printStackTrace();
 	        }
@@ -29,23 +31,26 @@ public class BDD implements BDDInterface
 		int codeBarre=0;
 		try
 		{
-			rs=st.executeQuery("SELECT CodeBarre FROM Associe WHERE Associe.BluetoothID="+bluetoothID);
-			while(rs.next())
-			{
+			rs=st.executeQuery("SELECT CodeBarre FROM Associe WHERE Associe.BluetoothID='"+bluetoothID+"'");
+			if(!rs.next())
+				throw(new Exception("Pas de goulot associé à l'identifiant bluetooth "+bluetoothID));
 			codeBarre=rs.getInt(1);
-			}
-			rs=st.executeQuery("SELECT CPK FROM Barman WHERE Barman.CPK="+rFID);
-			while(rs.next())
-			{
+			
+			rs=st.executeQuery("SELECT CPK FROM Barman WHERE Barman.CPK='"+rFID+"'");
+			if(!rs.next())
+				throw(new Exception("Pas de barman associé à l'identifiant RFID "+rFID));
 			cPK=rs.getInt(1);
-			}
-			if((codeBarre!=0)&&(cPK!=0))
+			if(codeBarre==0)
+				throw(new Exception("Pas de boisson associée au goulot d'identifiant RFID "+rFID));
+			if(cPK==0)
 			{
-				st.executeUpdate("INSERT INTO Composition ("+codeBarre+","+volume+","+cPK+")");
-				//maque de méthode pour vérifier si bien Update.
-				System.out.println("Bien ajouter une consommation.");
+				rs=st.executeQuery("SELECT CPK FROM Servi");
+				while(rs.next())
+					cPK=Math.max(rs.getInt(1),cPK);
+				cPK++;
 			}
-			//on met a jour le stock à la fin de la commande.
+			st.executeUpdate("INSERT INTO Composition ('"+codeBarre+"','"+cPK+"','"+volume+"')");
+			System.out.println("La consommation a bien été ajoutée.\n");
 		}
 		catch(Exception e)
 		{
@@ -81,7 +86,7 @@ public class BDD implements BDDInterface
 				+ niveauDeCharge+ "WHERE BluetoothID ="+bluetooth;
 		try {
 			int updateResultat=st.executeUpdate(updateSql);
-			System.out.println("UPDATE:" + updateResultat);
+			System.out.println("UPDATE:" + updateResultat+"\n");
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -129,7 +134,7 @@ public class BDD implements BDDInterface
 				+ nom+"', Prenom='"+prenom+"',Age= '"+age+"',DateEmbauche='" +sqlTime+"',CPK='"+cPK+"' WHERE RFID='"+rFID+"'";
 		try {
 		int updateResultat=st.executeUpdate(updateSql);
-		System.out.println("UPDATE:" + updateResultat);
+		System.out.println("UPDATE:" + updateResultat+"\n");
 		
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
@@ -144,7 +149,7 @@ public class BDD implements BDDInterface
 		String updateSql = "UPDATE Barman SET CPK="+cPK+" WHERE RFID="+rFID;
 		try {
 		int updateResultat=st.executeUpdate(updateSql);
-		System.out.println("UPDATE:" + updateResultat);
+		System.out.println("UPDATE:" + updateResultat+"\n");
 		
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
@@ -183,7 +188,15 @@ public class BDD implements BDDInterface
 	}
 
 	@Override
-	public boolean bouteilleFinie(int bluetoothID) {
+	public boolean bouteilleFinie(int bluetoothID) 
+	{
+		//A COMPLETER
+		String sql="SELCT Date FROM Stocks";
+		return false;
+	}
+
+	@Override
+	public boolean livraison(ArrayList<Livraison> livraison) {
 		// TODO Auto-generated method stub
 		return false;
 	}
