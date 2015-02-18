@@ -105,11 +105,12 @@ public class BDD implements BDDInterface
 	}
 
 	@Override
-	public boolean ajouterBarman(String rFID, String nom, String prenom,
-			int age, String dateEmbauche, int cPK) 
+	public boolean ajouterBarman(int rFID, String nom, String prenom,
+			int age, java.util.Date dateEmbauche, int cPK) 
 	{
+		java.sql.Timestamp sqlTime= new java.sql.Timestamp(dateEmbauche.getTime());
 		String sql = "INSERT INTO Barman (RFID, Nom, Prenom,Age, DateEmbauche,CPK)" +
-				"VALUES ('"+rFID+"','"+nom+"','"+prenom+"','"+age+"','"+dateEmbauche+"','"+cPK+"')";
+				"VALUES ('"+rFID+"','"+nom+"','"+prenom+"','"+age+"','"+sqlTime+"','"+cPK+"')";
 		try {
 			st.executeUpdate(sql);
 		} catch (SQLException e) {
@@ -120,11 +121,12 @@ public class BDD implements BDDInterface
 	}
 
 	@Override
-	public boolean modifierInformationBarman(String rFID, String nom,
-			String prenom, int age, String dateEmbauche, int cPK) 
+	public boolean modifierInformationBarman(int rFID, String nom,
+			String prenom, int age, java.util.Date dateEmbauche, int cPK) 
 	{
+		java.sql.Timestamp sqlTime= new java.sql.Timestamp(dateEmbauche.getTime());
 		String updateSql = "UPDATE Barman SET Nom='"
-				+ nom+"', Prenom='"+prenom+"',Age= '"+age+"',DateEmbauche='" +dateEmbauche+"',CPK='"+cPK+"' WHERE RFID='"+rFID+"'";
+				+ nom+"', Prenom='"+prenom+"',Age= '"+age+"',DateEmbauche='" +sqlTime+"',CPK='"+cPK+"' WHERE RFID='"+rFID+"'";
 		try {
 		int updateResultat=st.executeUpdate(updateSql);
 		System.out.println("UPDATE:" + updateResultat);
@@ -138,7 +140,7 @@ public class BDD implements BDDInterface
 	}
 
 	@Override
-	public boolean modifierCommandeDeBarman(String rFID, int cPK) {
+	public boolean modifierCommandeDeBarman(int rFID, int cPK) {
 		String updateSql = "UPDATE Barman SET CPK="+cPK+" WHERE RFID="+rFID;
 		try {
 		int updateResultat=st.executeUpdate(updateSql);
@@ -152,7 +154,7 @@ public class BDD implements BDDInterface
 	}
 
 	@Override
-	public boolean supprimerBarman(String rFID) {
+	public boolean supprimerBarman(int rFID) {
 		String sql = "DELETE FROM Barman WHERE RFID = "+rFID;
 		try
 		{
@@ -178,6 +180,12 @@ public class BDD implements BDDInterface
 			e.printStackTrace();
 			return false;
 		}return true;
+	}
+
+	@Override
+	public boolean bouteilleFinie(int bluetoothID) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
