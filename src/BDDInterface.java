@@ -9,6 +9,7 @@ public interface BDDInterface
 	boolean ajouterGoulot(int bluetooth);
 	public boolean modifierGoulot(int bluetooth,int enCharge, float niveauDeCharge);
 	public boolean supprimerGoulot(int bluetooth);
+	boolean associerGoulot(int blutoothID, long codeBarre);
 //Barman
 	boolean ajouterBarman(int rFID,String nom,String prenom,int age,java.util.Date dateEmbauche
 			,int cPK);
@@ -17,11 +18,11 @@ public interface BDDInterface
 	public boolean modifierCommandeDeBarman(int rFID,int cPK);
 	public boolean supprimerBarman(int rFID);
 //Boisson
-    public boolean ajouterBoisson(int codeBarre,String nom,String marque, int degre);
+    public boolean ajouterBoisson(long codeBarre,String nom,String marque, int volume, int degre);
 //Cocktail
     
 //Commande
-	boolean ajouterConsommation(int bluetoothID, int rFID, int volume ); //il faut mettre le volume en multiple de 5cL. Divisez votre volume par 5cL, utilisez une fonction d'arrondi et remultipliez
+	boolean ajouterConsommation(int bluetoothID, int rFID, int volume ); //il faut mettre le volume en cL, un entier.
 	boolean finDeCommande(int rFID);
 //Stock
 	boolean bouteilleFinie(int bluetoothID);

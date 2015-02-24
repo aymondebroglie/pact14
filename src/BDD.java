@@ -28,7 +28,7 @@ public class BDD implements BDDInterface
 	public boolean ajouterConsommation(int bluetoothID, int rFID, int volume) 
 	{
 		int cPK=0;
-		int codeBarre=0;
+		long codeBarre=0;
 		try
 		{
 			rs=st.executeQuery("SELECT CodeBarre FROM Associe WHERE Associe.BluetoothID='"+bluetoothID+"'");
@@ -72,6 +72,7 @@ public class BDD implements BDDInterface
 		try {
 			st.executeUpdate("INSERT INTO Goulots (BluetoothID, EnCharge, NiveauDeCharge )" +
 					"VALUES ('"+bluetooth+"','0','1.0')");
+			st.executeUpdate("INSERT INTO Associe (CodeBarre, BluetoothID)" + "VALUES ('0',"+bluetooth+"')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -173,11 +174,11 @@ public class BDD implements BDDInterface
 	}
 
 	@Override
-	public boolean ajouterBoisson(int codeBarre, String nom, String marque,
+	public boolean ajouterBoisson(long codeBarre, String nom, String marque,int volume,
 			int degre) 
 	{
-		String sql = "INSERT INTO Boisson (CodeBarre,Nom,Marque,Degre)" +
-				"VALUES ('"+codeBarre+"','"+nom+"','"+marque+"','"+degre+"')";
+		String sql = "INSERT INTO Boisson (CodeBarre,Nom,Marque,Volume, Degre)" +
+				"VALUES ('"+codeBarre+"','"+nom+"','"+marque+"','"+volume+"','"+degre+"')";
 		try {
 			st.executeUpdate(sql);
 		} catch (SQLException e) {
@@ -198,6 +199,12 @@ public class BDD implements BDDInterface
 	@Override
 	public boolean livraison(ArrayList<Livraison> livraison) {
 		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean associerGoulot(int blutoothID, long codeBarre) {
+		//String sql = ""
 		return false;
 	}
 
