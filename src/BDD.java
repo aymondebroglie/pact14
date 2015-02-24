@@ -77,8 +77,33 @@ public class BDD implements BDDInterface
 		// TODO Auto-generated method stub
 		//ajouter une entrée dans Servi
 		//passer le CPK de barman à 0
-		
+		long cpk;
+		try{
+		rs=st.executeQuery("SELECT CPK FROM Barman WHERE RFID="+rFID);
+		if(!rs.next())
+			throw(new Exception("Pas de Barman associé à l'identifiant rFID "+rFID));
+		cpk=rs.getLong(1);
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+//********************************
+		try {
+			st.executeUpdate("INSERT INTO Servi(CPK, RFID )" + 
+					"VALUES ('"+cpk+"','"+rFID+"')");
+			String updateSql = "UPDATE Barman SET CPK="+0+" WHERE RFID="+rFID;
+		int updateResultat=st.executeUpdate(updateSql);
+		System.out.println("UPDATE:" + updateResultat+"\n");
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 		return false;
+}
+//****************************************
+		
+		
+		return true;
 	}
 
 	@Override
