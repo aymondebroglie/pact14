@@ -16,7 +16,7 @@ public class OpenFoodFacts
 	{
 			// Create an empty in-memory model and populate it from the graph
 			Model model = ModelFactory.createDefaultModel();
-			model.read("http://opendata1.opendata.u-psud.fr:8890/sparql/"); 
+			model.read("http://data.lirmm.fr/ontologies/food#"); 
 				
 			// Create a new query
 			String queryString = 
