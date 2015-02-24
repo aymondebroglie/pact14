@@ -128,4 +128,21 @@ public void ecranChangeMotDePasse(){
 	window.setContentPane(cp);
 	window.validate();
 }
+
+
+public void obtenirstock(){
+	window.dispose();
 }
+
+public void commande(){
+	
+}
+
+public void budget(){
+	
+}
+}
+
+
+
+
