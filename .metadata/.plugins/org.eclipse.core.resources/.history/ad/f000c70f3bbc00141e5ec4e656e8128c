@@ -46,7 +46,6 @@ public class OpenFoodFacts
 					return results ;
 	}
 	
-	// renvoie le nom de la boisson (second résultat)
 	public String getName(ResultSet results)
 	{
 		ResultSet m_results =results ;
@@ -58,20 +57,19 @@ public class OpenFoodFacts
 	
 	public String getTypeAlcohol(String name)
 	{
-		return "0" ;
+		
 	}
 	
 	public int getVolume(String name)
 	{
-		return 0 ;
+		
 	}
 	
 	public String getBrand(String name)
 	{
-		return "0" ;
+		
 	}
 	
-	// renvoie le codebarre de la boisson (troisième résultat)
 	public long getCode(ResultSet results)
 	{
 		ResultSet m_results = results ;
@@ -82,7 +80,6 @@ public class OpenFoodFacts
 		return codebarre ;
 	}
 	
-	// renvoie le degré d'alcool de la boisson (quatrième résultat)
 	public long getDegree(ResultSet results)
 	{
 		ResultSet m_results = results ;
