@@ -27,29 +27,41 @@ public class BDD implements BDDInterface
 	@Override
 	public boolean ajouterConsommation(int bluetoothID, int rFID, int volume) 
 	{
-		int cPK=0;
+		int cPK=0, ancienVolume;
 		long codeBarre=0;
 		try
 		{
 			rs=st.executeQuery("SELECT CodeBarre FROM Associe WHERE Associe.BluetoothID='"+bluetoothID+"'");
 			if(!rs.next())
 				throw(new Exception("Pas de goulot associé à l'identifiant bluetooth "+bluetoothID));
-			codeBarre=rs.getInt(1);
+			codeBarre=rs.getLong(1);
 			
-			rs=st.executeQuery("SELECT CPK FROM Barman WHERE Barman.CPK='"+rFID+"'");
+			rs=st.executeQuery("SELECT CPK FROM Barman WHERE Barman.RFID='"+rFID+"'");
 			if(!rs.next())
 				throw(new Exception("Pas de barman associé à l'identifiant RFID "+rFID));
 			cPK=rs.getInt(1);
 			if(codeBarre==0)
-				throw(new Exception("Pas de boisson associée au goulot d'identifiant RFID "+rFID));
+				throw(new Exception("Pas de boisson associée au goulot d'identifiant bluetooth "+bluetoothID));
 			if(cPK==0)
 			{
 				rs=st.executeQuery("SELECT CPK FROM Servi");
 				while(rs.next())
 					cPK=Math.max(rs.getInt(1),cPK);
 				cPK++;
+				st.executeUpdate("UPDATE Barman SET CPK="+cPK+" WHERE RFID="+rFID);
 			}
-			st.executeUpdate("INSERT INTO Composition ('"+codeBarre+"','"+cPK+"','"+volume+"')");
+			
+			
+			rs=st.executeQuery("SELECT Volume " +
+					"FROM Composition " +
+					"WHERE Composition.CPK="+cPK+" AND Composition.CodeBarre="+codeBarre);
+			if(rs.next())
+			{	
+				ancienVolume=rs.getInt(1);
+				st.executeUpdate("UPDATE Composition SET Volume="+(ancienVolume+volume)+" WHERE Composition.CPK="+cPK+" AND Composition.CodeBarre="+codeBarre);
+			}
+			else
+			st.executeUpdate("INSERT INTO Composition (CodeBarre, CPK, Volume) VALUES ('"+codeBarre+"','"+cPK+"','"+volume+"')");
 			System.out.println("La consommation a bien été ajoutée.\n");
 		}
 		catch(Exception e)
@@ -63,6 +75,9 @@ public class BDD implements BDDInterface
 	@Override
 	public boolean finDeCommande(int rFID) {
 		// TODO Auto-generated method stub
+		//ajouter une entrée dans Servi
+		//passer le CPK de barman à 0
+		
 		return false;
 	}
 
@@ -72,7 +87,8 @@ public class BDD implements BDDInterface
 		try {
 			st.executeUpdate("INSERT INTO Goulots (BluetoothID, EnCharge, NiveauDeCharge )" +
 					"VALUES ('"+bluetooth+"','0','1.0')");
-			st.executeUpdate("INSERT INTO Associe (CodeBarre, BluetoothID)" + "VALUES ('0',"+bluetooth+"')");
+			st.executeUpdate("INSERT INTO Associe (CodeBarre, BluetoothID )" + 
+					"VALUES ('0','"+bluetooth+"')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -101,7 +117,8 @@ public class BDD implements BDDInterface
 		String sql = "DELETE FROM Goulots WHERE BluetoothID = "+bluetooth;
 		try
 		{
-		long deleteRes = st.executeUpdate(sql);
+		int deleteRes = st.executeUpdate(sql);
+		st.executeUpdate("DELETE FROM Associe WHERE BluetoothID = "+bluetooth);
 		 System.out.print("DELETE:" + deleteRes);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -192,20 +209,28 @@ public class BDD implements BDDInterface
 	public boolean bouteilleFinie(int bluetoothID) 
 	{
 		//A COMPLETER
-		String sql="SELCT Date FROM Stocks";
+		//Mettre à jour le stock, avec un bouteille en moins dans bluetoothID
 		return false;
 	}
 
 	@Override
 	public boolean livraison(ArrayList<Livraison> livraison) {
 		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
 	@Override
-	public boolean associerGoulot(int blutoothID, long codeBarre) {
-		//String sql = ""
-		return false;
+	public boolean associerGoulot(int bluetoothID, long codeBarre) {
+		String sql = "UPDATE Associe SET CodeBarre="+codeBarre+" WHERE BluetoothID="+bluetoothID;
+		
+		try {
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}return true;
 	}
 
 }

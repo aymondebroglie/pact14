@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 //pour tous tables,on manque les méthodes affichant des dennées (attent des interfaces des autres modules)
 //Remarquez le type Date utilisé. Si vous voulez mettre la date actuelle, mettez juste new java.util.Date(), sinon allez voir la doc
+// pour utiliser des longs, il faut metter un L à la fin, exemple  :  		long test =3268840001008L;
 public interface BDDInterface 
 {
 
