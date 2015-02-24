@@ -1,15 +1,15 @@
 
 public class Livraison 
 {
-	private final int rFID;
+	private final int codeBarre;
 	private final int volume; //en bouteilles
-	public Livraison(int rFID, int volume)
+	public Livraison(int codeBarre, int volume)
 	{
-		this.rFID=rFID;
+		this.codeBarre=codeBarre;
 		this.volume=volume;
 	}
-	public int getrFID() {
-		return rFID;
+	public int getcodeBarre() {
+		return codeBarre;
 	}
 	public int getVolume() {
 		return volume;
