@@ -234,8 +234,40 @@ public class BDD implements BDDInterface
 	public boolean bouteilleFinie(int bluetoothID) 
 	{
 		//A COMPLETER
-		//Mettre à jour le stock, avec un bouteille en moins dans bluetoothID
-		return false;
+		java.sql.Timestamp derniereDate=new java.sql.Timestamp(0), maintenant=new java.sql.Timestamp(new java.util.Date().getTime());
+		long codeBarre=0;
+		int ancienVolume;
+		
+		try {
+			rs=st.executeQuery("SELECT Date FROM Stock");
+			while(rs.next())
+			{
+				derniereDate=rs.getTimestamp(1).after(derniereDate)?rs.getTimestamp(1):derniereDate;
+			}
+			rs=st.executeQuery("SELECT CodeBarre, Volume FROM Disponibilite WHERE Date="+derniereDate);
+			st.executeUpdate("INSERT INTO Stock (Date) VALUES ('"+maintenant+"'");
+			while(rs.next())
+			{
+				st.executeUpdate("INSERT INTO Disponibilite (Date, CodeBarre, Volume) VALUES ('"+maintenant+"','"+rs.getLong(1)+"','"+rs.getInt(2));
+			}
+			////
+			rs=st.executeQuery("SELECT CodeBarre FROM Associe WHERE BluetoothID="+bluetoothID);
+			if(!rs.next())
+				throw new Exception("Il n'y a pas de goulot associé au bluetooth "+bluetoothID);
+			codeBarre=rs.getLong(1);
+			
+			rs=st.executeQuery("SELECT Volume FROM Disponibilite WHERE CodeBarre="+codeBarre+" AND Date="+maintenant);
+			if(!rs.next())
+				throw new Exception("Boisson introuvable dans les stocks");
+			ancienVolume=rs.getInt(1);
+			st.executeUpdate("UPDATE Disponibilite SET Volume="+ancienVolume--+" WHERE CodeBarre="+codeBarre+" AND Date="+maintenant);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	@Override
