@@ -1,0 +1,20 @@
+package openFoodFacts;
+
+import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.Resource;
+
+public class OpenFoodFacts 
+{
+
+	public static void main(String[] args) 
+	{
+		Model m = ModelFactory.createDefaultModel();
+		String NS = "http://fr.openfoodfacts.org/";
+
+		m.read(NS);
+	}
+
+}
