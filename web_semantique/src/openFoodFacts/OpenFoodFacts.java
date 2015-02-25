@@ -9,20 +9,30 @@ import com.hp.hpl.jena.query.ResultSetFormatter;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 
+import BDD.BDDInterface;
 
-public class OpenFoodFacts 
+
+public class OpenFoodFacts
 {
+	BDDInterface bdd;
+	
+	public OpenFoodFacts(BDDInterface bdd) 
+	{
+		this.bdd = bdd ;
+	}
+	
 	public ResultSet getResults(long codebarre)
 	{
 		// Create an empty in-memory model and populate it from the graph
 					Model model = ModelFactory.createDefaultModel();
-					model.read("http://opendata1.opendata.u-psud.fr:8890/sparql/"); 
+					String backslash= System.getProperty("file.separator") ;
+					model.read("C:"+ backslash +"Users"+ backslash +"Achille"+ backslash +"Documents"+ backslash +"Cours"+ backslash +"PACT"+ backslash +"Modules"+ backslash +"Web Sémantique"+ backslash +"fr.openfoodfacts.org.products.rdf"); 
 						
 					// Create a new query
 					String queryString = 
 			"select distinct ?s ?name ?codebarre ?degree where "
 		+ 	"{"
-		+		"graph <http://fr.openfoodfacts.org> "
+		+		"graph <fr.openfoodfacts.org.products.rdf> "
 		+ 		"{"
 		+ 			"?s <http://data.lirmm.fr/ontologies/food#name> ?name."
 		+ 			"?s <http://data.lirmm.fr/ontologies/food#code> " + codebarre + "."
@@ -49,23 +59,62 @@ public class OpenFoodFacts
 	// renvoie le nom de la boisson (second résultat)
 	public String getName(ResultSet results)
 	{
-		ResultSet m_results =results ;
+		ResultSet m_results = results ;
 		m_results.next();
 		
 		String name = m_results.next().getLiteral("name").getString();
 		return name ;
 	}
 	
+	/** lit le nom et en ressort le type */
 	public String getTypeAlcohol(String name)
 	{
-		return "0" ;
+		int i = 0 ;
+		
+		String X = "x";
+		char x ;
+			
+		while(X.compareTo(" ") != 0)
+		{
+			x = name.charAt(i); 
+			X = String.valueOf(x);
+			i++;
+		}
+
+		String type = name.substring(0, i) ;
+		return type ;
 	}
 	
+	/** lit le nom et en ressort le volume */
 	public int getVolume(String name)
 	{
-		return 0 ;
+		String X = "x";
+		char x ;
+		
+		int i = 0 ;	
+		while(X.compareTo(" ") != 0)
+		{
+			x = name.charAt(i); 
+			X = String.valueOf(x);
+			i++;
+		}
+		
+		int j = i+1 ;
+		while(X.compareTo(" ") != 0)
+		{
+			x = name.charAt(i); 
+			X = String.valueOf(x);
+			j++;
+		}
+		
+		String s_volume = name.substring(i,j) ;
+		int volume = Integer.parseInt(s_volume);
+		
+		return volume ;
+		
 	}
 	
+	/** lit le nom et en ressort la marque*/
 	public String getBrand(String name)
 	{
 		return "0" ;
@@ -78,19 +127,32 @@ public class OpenFoodFacts
 		m_results.next();
 		m_results.next();
 		
-		long codebarre = m_results.next().getLiteral("codebarre").getLong();
-		return codebarre ;
+		long code = m_results.next().getLiteral("codebarre").getLong();
+		return code ;
 	}
 	
 	// renvoie le degré d'alcool de la boisson (quatrième résultat)
-	public long getDegree(ResultSet results)
+	public int getDegree(ResultSet results)
 	{
 		ResultSet m_results = results ;
 		m_results.next();
 		m_results.next();
 		m_results.next();
 		
-		long degree = m_results.next().getLiteral("degree").getInt();
+		int degree = m_results.next().getLiteral("degree").getInt();
 		return degree ;
+	}
+	
+	public boolean ajouterBoisson(ResultSet results)
+	{
+		String r_name = getName(results);
+		String type = getTypeAlcohol(r_name);
+		String brand = getBrand(r_name);
+		int volume = getVolume(r_name);
+		
+		long code = getCode(results);
+		int degree = getDegree(results);
+				
+		return bdd.ajouterBoisson(code, type, brand, volume, degree) ;
 	}
 }

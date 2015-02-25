@@ -1,6 +1,10 @@
 package prise_en_main;
 
+import openFoodFacts.OpenFoodFacts;
+import BDD.BDDInterface;
+
 import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
+import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
@@ -10,16 +14,17 @@ public class MainTest {
 
 	public static void main(String[] args) 
 	{
-		Model m = ModelFactory.createDefaultModel();
-		String NS = "http://example.com/test/";
+		BDDInterface bdd = null;
 		
-		Resource r = m.createResource( NS + "r" );
-		Property p = m.createProperty( NS + "p" );
+		OpenFoodFacts openFoodFacts = new OpenFoodFacts(bdd);
 		
-		r.addProperty( p, "Hello world", XSDDatatype.XSDstring );
+		long codebarre = 3147690059004L ;
+		ResultSet result = openFoodFacts.getResults(codebarre);
 		
-		m.write(System.out, "Turtle");
+		String name = openFoodFacts.getName(result);
 		
+		
+		System.out.println(name);
 	}
 
 }

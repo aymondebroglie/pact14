@@ -16,4 +16,7 @@
 <fullyQualifiedTypeName name="com.hp.hpl.jena.rdf.model.Resource"/>
 <fullyQualifiedTypeName name="com.hp.hpl.jena.datatypes.xsd.XSDDatatype"/>
 <fullyQualifiedTypeName name="com.hp.hpl.jena.rdf.model.Property"/>
+<fullyQualifiedTypeName name="BDD.BDDInterface"/>
+<fullyQualifiedTypeName name="openFoodFacts.OpenFoodFacts"/>
+<fullyQualifiedTypeName name="com.hp.hpl.jena.query.ResultSet"/>
 </qualifiedTypeNameHistroy>
