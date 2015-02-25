@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="windows.Window"/>
+<fullyQualifiedTypeName name="javax.swing.JButton"/>
+<fullyQualifiedTypeName name="windows.ViewStocksManagement"/>
+<fullyQualifiedTypeName name="javax.swing.JPanel"/>
+<fullyQualifiedTypeName name="javax.swing.JMenuBar"/>
+<fullyQualifiedTypeName name="javax.swing.JMenu"/>
+<fullyQualifiedTypeName name="javax.swing.JRadioButtonMenuItem"/>
+<fullyQualifiedTypeName name="javax.swing.ButtonGroup"/>
+<fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
+<fullyQualifiedTypeName name="controller.Controller"/>
+<fullyQualifiedTypeName name="java.awt.event.ActionEvent"/>
+<fullyQualifiedTypeName name="javax.swing.JMenuItem"/>
+<fullyQualifiedTypeName name="com.hp.hpl.jena.rdf.model.ModelFactory"/>
+<fullyQualifiedTypeName name="com.hp.hpl.jena.rdf.model.Resource"/>
+<fullyQualifiedTypeName name="com.hp.hpl.jena.datatypes.xsd.XSDDatatype"/>
+<fullyQualifiedTypeName name="com.hp.hpl.jena.rdf.model.Property"/>
+<fullyQualifiedTypeName name="BDD.BDDInterface"/>
+<fullyQualifiedTypeName name="openFoodFacts.OpenFoodFacts"/>
+<fullyQualifiedTypeName name="com.hp.hpl.jena.query.ResultSet"/>
+<fullyQualifiedTypeName name="java.util.Base64"/>
+<fullyQualifiedTypeName name="org.apache.jena.atlas.web.auth.SimpleAuthenticator"/>
+<fullyQualifiedTypeName name="org.apache.jena.atlas.web.auth.FormsAuthenticator"/>
+<fullyQualifiedTypeName name="org.apache.jena.atlas.web.auth.FormLogin"/>
+<fullyQualifiedTypeName name="org.apache.jena.atlas.web.auth.ApacheModAuthFormLogin"/>
+<fullyQualifiedTypeName name="java.net.URI"/>
+<fullyQualifiedTypeName name="org.apache.jena.atlas.web.auth.ScopedAuthenticator"/>
+<fullyQualifiedTypeName name="org.apache.jena.atlas.web.auth.PreemptiveBasicAuthenticator"/>
+<fullyQualifiedTypeName name="org.apache.jena.atlas.web.auth.HttpAuthenticator"/>
+</qualifiedTypeNameHistroy>
