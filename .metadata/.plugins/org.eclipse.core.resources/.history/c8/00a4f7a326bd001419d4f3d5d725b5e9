@@ -1,14 +1,14 @@
 package prise_en_main;
 
-import java.net.URISyntaxException;
-
 import openFoodFacts.OpenFoodFacts;
 import BDD.BDDInterface;
 
-
-
+import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
 import com.hp.hpl.jena.query.ResultSet;
-
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.Resource;
 
 public class MainTest {
 
@@ -19,23 +19,12 @@ public class MainTest {
 		OpenFoodFacts openFoodFacts = new OpenFoodFacts(bdd);
 		
 		long codebarre = 3147690059004L ;
-		ResultSet result;
-		
-		try 
-		{
-			
-			result = openFoodFacts.getResults(codebarre);
-		
+		ResultSet result = openFoodFacts.getResults(codebarre);
 		
 		String name = openFoodFacts.getName(result);
 		
 		
 		System.out.println(name);
-		
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 }

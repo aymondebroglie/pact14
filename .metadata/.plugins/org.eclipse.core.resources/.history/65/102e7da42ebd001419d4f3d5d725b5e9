@@ -36,12 +36,11 @@ public class OpenFoodFacts
 	{
 		
 		// Create an empty in-memory model and populate it from the graph
-		Model model = ModelFactory.createDefaultModel();
-		model.read(ENDPOINT); 
+					Model model = ModelFactory.createDefaultModel();
+					model.read(ENDPOINT); 
 						
-		// Create a new query
-		String queryString =
-				
+					// Create a new query
+					String queryString = 
 			"select distinct ?s ?name ?codebarre ?degree where "
 		+ 	"{"
 		+		"prefix food: <http://data.lirmm.fr/ontologies/food#name> "	
@@ -54,27 +53,29 @@ public class OpenFoodFacts
 		+ 		"}"
 		+ 	"}" ;
 
-		Query query = QueryFactory.create(queryString);
+					Query query = QueryFactory.create(queryString);
 
-		// Execute and authenticate the query and obtain results 
-		QueryExecution query_execution = QueryExecutionFactory.create(query, model); 
+					// Execute the query and obtain results
+					
+					/*QueryExecution qe = QueryExecutionFactory.create(query, model); */
 	
 					
-		HttpAuthenticator authenticator = new PreemptiveBasicAuthenticator
-				(
-						new ScopedAuthenticator(new URI(ENDPOINT), USERNAME, PASSWORD.toCharArray())
-				);
-		
-		query_execution = QueryExecutionFactory.sparqlService(ENDPOINT, query, authenticator);
-		ResultSet results = query_execution.execSelect();
-				        
-		// Output query results
-		ResultSetFormatter.out(System.out, results, query);
+					 HttpAuthenticator authenticator = new PreemptiveBasicAuthenticator(
+				                new ScopedAuthenticator(new URI(ENDPOINT), USERNAME, PASSWORD.toCharArray())
+				        );
+				        QueryExecution qe = QueryExecutionFactory.sparqlService(ENDPOINT, query, authenticator);
+				        ResultSet results = qe.execSelect();
+					// Output query results	
+					ResultSetFormatter.out(System.out, results, query);
 
-		// Important - free up resources used running the query					
-		query_execution.close();
-							
-		return results ;		
+					// Important - free up resources used running the query
+					qe.close();
+					
+					
+					return results ;
+		
+		
+		
 	}
 	
 	// renvoie le nom de la boisson (second résultat)

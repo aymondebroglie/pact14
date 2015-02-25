@@ -57,7 +57,7 @@ public class OpenFoodFacts
 		Query query = QueryFactory.create(queryString);
 
 		// Execute and authenticate the query and obtain results 
-		QueryExecution query_execution = QueryExecutionFactory.create(query, model); 
+		QueryExecution qe = QueryExecutionFactory.create(query, model); 
 	
 					
 		HttpAuthenticator authenticator = new PreemptiveBasicAuthenticator
@@ -65,14 +65,14 @@ public class OpenFoodFacts
 						new ScopedAuthenticator(new URI(ENDPOINT), USERNAME, PASSWORD.toCharArray())
 				);
 		
-		query_execution = QueryExecutionFactory.sparqlService(ENDPOINT, query, authenticator);
-		ResultSet results = query_execution.execSelect();
+		qe = QueryExecutionFactory.sparqlService(ENDPOINT, query, authenticator);
+		ResultSet results = qe.execSelect();
 				        
 		// Output query results
 		ResultSetFormatter.out(System.out, results, query);
 
 		// Important - free up resources used running the query					
-		query_execution.close();
+		qe.close();
 							
 		return results ;		
 	}
