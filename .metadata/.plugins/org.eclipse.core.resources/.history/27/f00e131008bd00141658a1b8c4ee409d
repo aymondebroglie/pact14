@@ -25,13 +25,14 @@ public class OpenFoodFacts
 	{
 		// Create an empty in-memory model and populate it from the graph
 					Model model = ModelFactory.createDefaultModel();
-					model.read("http://opendata1.opendata.u-psud.fr:8890/sparql/"); 
+					String backslash= System.getProperty("file.separator") ;
+					model.read("C:"+ backslash +"Users"+ backslash +"Achille"+ backslash +"Documents"+ backslash +"Cours"+ backslash +"PACT"+ backslash +"Modules"+ backslash +"Web Sémantique"+ backslash +"fr.openfoodfacts.org.products.rdf"); 
 						
 					// Create a new query
 					String queryString = 
 			"select distinct ?s ?name ?codebarre ?degree where "
 		+ 	"{"
-		+		"graph <http://fr.openfoodfacts.org> "
+		+		"graph <fr.openfoodfacts.org.products.rdf> "
 		+ 		"{"
 		+ 			"?s <http://data.lirmm.fr/ontologies/food#name> ?name."
 		+ 			"?s <http://data.lirmm.fr/ontologies/food#code> " + codebarre + "."
@@ -113,7 +114,7 @@ public class OpenFoodFacts
 		
 	}
 	
-	/** lit le nom et en ressort la marque */
+	/** lit le nom et en ressort la marque*/
 	public String getBrand(String name)
 	{
 		return "0" ;
