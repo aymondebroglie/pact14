@@ -11,6 +11,11 @@ public class BDD implements BDDInterface
     Statement st,st2 ;
     ResultSet rs ;
     
+    private String echapper(String string)
+    {
+		return string.replace("'", "''");
+    	
+    }
 	public BDD(String dbname, String user, String mdp)
 	{
 		 try {
@@ -159,7 +164,7 @@ public class BDD implements BDDInterface
 	{
 		java.sql.Timestamp sqlTime= new java.sql.Timestamp(dateEmbauche.getTime());
 		String sql = "INSERT INTO Barman (RFID, Nom, Prenom,Age, DateEmbauche,CPK)" +
-				"VALUES ('"+rFID+"','"+nom+"','"+prenom+"','"+age+"','"+sqlTime+"','"+cPK+"')";
+				"VALUES ('"+rFID+"','"+echapper(nom)+"','"+echapper(prenom)+"','"+age+"','"+sqlTime+"','"+cPK+"')";
 		try {
 			st.executeUpdate(sql);
 		} catch (SQLException e) {
@@ -175,7 +180,7 @@ public class BDD implements BDDInterface
 	{
 		java.sql.Timestamp sqlTime= new java.sql.Timestamp(dateEmbauche.getTime());
 		String updateSql = "UPDATE Barman SET Nom='"
-				+ nom+"', Prenom='"+prenom+"',Age= '"+age+"',DateEmbauche='" +sqlTime+"',CPK='"+cPK+"' WHERE RFID='"+rFID+"'";
+				+ echapper(nom)+"', Prenom='"+echapper(prenom)+"',Age= '"+age+"',DateEmbauche='" +sqlTime+"',CPK='"+cPK+"' WHERE RFID='"+rFID+"'";
 		try {
 		int updateResultat=st.executeUpdate(updateSql);
 		System.out.println("UPDATE:" + updateResultat);
@@ -222,7 +227,7 @@ public class BDD implements BDDInterface
 	{
 		java.sql.Timestamp derniereDate=new java.sql.Timestamp(0), maintenant=new java.sql.Timestamp(new java.util.Date().getTime());
 		String sql = "INSERT INTO Boisson (CodeBarre,Nom,Marque,Volume, Degre)" +
-				"VALUES ('"+codeBarre+"','"+nom+"','"+marque+"','"+volume+"','"+degre+"')";
+				"VALUES ('"+codeBarre+"','"+echapper(nom)+"','"+echapper(marque)+"','"+volume+"','"+degre+"')";
 		
 		try {
 			st.executeUpdate(sql);
