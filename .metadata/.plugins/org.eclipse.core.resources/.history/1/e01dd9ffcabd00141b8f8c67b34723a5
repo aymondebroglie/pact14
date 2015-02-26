@@ -1,0 +1,26 @@
+package main;
+
+import modele.DataSet;
+import modele_exceptions.DimensionException;
+
+public class MainTest 
+{
+
+	public static void main(String[] args) throws DimensionException 
+	{
+		DataSet A = DataSet.ones(5);
+		DataSet B = DataSet.stairs(5);
+		
+		System.out.println("A = " + A);
+		System.out.println("B = " + B);
+		
+		double a = 2.0 ;
+		double b = 3.0 ;
+		double c = a-b ;
+		System.out.println("a-b = " + c);
+		
+		DataSet C = A.minus(B);
+		System.out.println("A-B = " + C);
+	}
+
+}

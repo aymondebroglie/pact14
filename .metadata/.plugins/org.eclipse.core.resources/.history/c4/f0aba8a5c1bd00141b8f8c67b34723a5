@@ -1,0 +1,78 @@
+package modele;
+
+
+import java.util.ArrayList;
+import java.lang.Math ;
+
+public class DataSet extends ArrayList<Double>
+{
+	private static final long serialVersionUID = 1L;
+		
+	public Dataset()
+	{
+		super();
+	} 
+	
+	private double dot(Dataset otherdataset)
+	{
+		int length = this.size();
+		double dotproduct = 0.0 ;
+		
+		for(int i = 0 ; i < length ; i++ )
+		{
+			double a = this.get(i) ;
+			double b = otherdataset.get(i)  ;
+			
+			dotproduct = dotproduct + a*b ;
+		}
+		
+		return dotproduct ;
+	}
+	
+	private double norm()
+	{
+		double normcarre = this.dot(this);
+		return(Math.sqrt(normcarre)) ;
+	}
+	
+	private Dataset ones()
+	{
+		int length = this.size();
+		Dataset ones = new Dataset() ;
+		
+		for(int i = 0 ; i < length ; i++)
+		{
+			ones.add(1.0);
+		}
+		
+		return ones ;
+	}
+	
+	private Dataset stairs()
+	{
+		int length = this.size();
+		Dataset stairs = new Dataset() ;
+		
+		for(int i = 0 ; i < length ; i++)
+		{
+			stairs.add((double) i);
+		}
+		
+		return stairs ;
+	}
+	
+	public ArrayList<Double> moindrecarre()
+	{
+		ArrayList<Double> Y = new ArrayList<Double>(2);
+		
+		int t = this.size();
+		
+		Dataset A = 
+		
+		return Y ;
+	}
+	
+	
+	
+	
+}

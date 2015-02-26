@@ -1,0 +1,135 @@
+package modele;
+
+
+import java.util.ArrayList;
+import java.lang.Math ;
+
+public class DataSet extends ArrayList<Double>
+{
+	private static final long serialVersionUID = 1L;
+		
+	public DataSet()
+	{
+		super();
+	} 
+	
+	private DataSet smultiply(double alpha)
+	{
+		int length = this.size();
+		DataSet result = new DataSet() ;
+		
+		for(int i = 0 ; i < length ; i++)
+		{
+			double coeff = this.get(i);
+			coeff = coeff*alpha ;
+			
+			result.add(coeff);
+		}
+		
+		return result ;
+	}
+	
+	private DataSet minus(DataSet otherdataset) throws DimensionException
+	{
+		int length = this.size();
+		int length_otherdataset = otherdataset.size();
+		DataSet result = new DataSet() ;
+		
+		if(length == length_otherdataset)
+		{
+			for(int i = 0 ; i < length ; i++)
+			{
+				double a = this.get(i) ;
+				double b = this.get(i) ;
+				double coeff = a - b ;
+				
+				result.add(coeff) ;
+			}
+		}
+		else
+		{
+			throw new DimensionException();
+		}
+		
+		return result ;
+	}
+	
+	private double dot(DataSet otherdataset) throws DimensionException
+	{
+		int length = this.size();
+		int length_otherdataset = otherdataset.size();
+		double dotproduct = 0.0 ;
+		
+		if(length == length_otherdataset)
+		{
+			for(int i = 0 ; i < length ; i++ )
+			{
+				double a = this.get(i) ;
+				double b = otherdataset.get(i)  ;
+				
+				dotproduct = dotproduct + a*b ;
+			}
+		}
+		else
+		{
+			throw new DimensionException();
+		}
+		
+		return dotproduct ;
+	}
+	
+	private double norm()
+	{
+		double normcarre = this.dot(this);
+		return(Math.sqrt(normcarre)) ;
+	}
+	
+	private DataSet ones()
+	{
+		int length = this.size();
+		DataSet ones = new DataSet() ;
+		
+		for(int i = 0 ; i < length ; i++)
+		{
+			ones.add(1.0);
+		}
+		
+		return ones ;
+	}
+	
+	private DataSet stairs()
+	{
+		int length = this.size();
+		DataSet stairs = new DataSet() ;
+		
+		for(int i = 0 ; i < length ; i++)
+		{
+			stairs.add((double) i);
+		}
+		
+		return stairs ;
+	}
+	
+	public ArrayList<Double> moindrecarre()
+	{
+		ArrayList<Double> Y = new ArrayList<Double>(2);
+		
+				
+		DataSet A = this.stairs();
+		DataSet B = this.ones();
+		double nB = B.norm();
+		
+		DataSet B1 = B.smultiply(1/nB);
+		
+		
+		double d = A.dot(B1);
+		DataSet A0 = A 
+		
+		
+		return Y ;
+	}
+	
+	
+	
+	
+}
