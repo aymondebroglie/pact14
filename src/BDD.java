@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class BDD implements BDDInterface
 {
 	Connection con ;
-    Statement st ;
+    Statement st,st2 ;
     ResultSet rs ;
     
 	public BDD(String dbname, String user, String mdp)
@@ -18,6 +18,7 @@ public class BDD implements BDDInterface
 	            con = DriverManager.getConnection("jdbc:mysql://localhost/"+dbname+"?" +
                         "user="+user+"&password="+mdp);
 	            st = con.createStatement();
+	            st2 =con.createStatement();
                System.out.println("Connection avec la Base De Données "+dbname+" établie.");
 	        } catch (Exception e) {
 	        	e.printStackTrace();
@@ -235,7 +236,7 @@ public class BDD implements BDDInterface
 			
 			while(rs.next())
 			{
-				st.executeUpdate("INSERT INTO Disponibilite (Date, CodeBarre, Volume) VALUES ('"+maintenant+"','"+rs.getLong(1)+"','"+rs.getInt(2));
+				st2.executeUpdate("INSERT INTO Disponibilite (Date, CodeBarre, Volume) VALUES ('"+maintenant+"','"+rs.getLong(1)+"','"+rs.getInt(2)+"')");
 			}
 			st.executeUpdate("INSERT INTO Disponibilite (Date, CodeBarre, Volume) VALUES ('"+maintenant+"','"+codeBarre+"','0')");
 			System.out.println("La boisson "+nom+" a bien été ajoutée");
@@ -264,7 +265,7 @@ public class BDD implements BDDInterface
 			st.executeUpdate("INSERT INTO Stock (Date) VALUES ('"+maintenant+"'");
 			while(rs.next())
 			{
-				st.executeUpdate("INSERT INTO Disponibilite (Date, CodeBarre, Volume) VALUES ('"+maintenant+"','"+rs.getLong(1)+"','"+rs.getInt(2));
+				st2.executeUpdate("INSERT INTO Disponibilite (Date, CodeBarre, Volume) VALUES ('"+maintenant+"','"+rs.getLong(1)+"','"+rs.getInt(2));
 			}
 			////
 			rs=st.executeQuery("SELECT CodeBarre FROM Associe WHERE BluetoothID="+bluetoothID);
