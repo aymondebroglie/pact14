@@ -18,7 +18,7 @@ public class BDD implements BDDInterface
 	            con = DriverManager.getConnection("jdbc:mysql://localhost/"+dbname+"?" +
                         "user="+user+"&password="+mdp);
 	            st = con.createStatement();
-               System.out.println("Connection avec la Base De Données "+dbname+" établie.\n");
+               System.out.println("Connection avec la Base De Données "+dbname+" établie.");
 	        } catch (Exception e) {
 	        	e.printStackTrace();
 	        }
@@ -62,7 +62,7 @@ public class BDD implements BDDInterface
 			}
 			else
 			st.executeUpdate("INSERT INTO Composition (CodeBarre, CPK, Volume) VALUES ('"+codeBarre+"','"+cPK+"','"+volume+"')");
-			System.out.println("La consommation a bien été ajoutée.\n");
+			System.out.println("La consommation a bien été ajoutée.");
 		}
 		catch(Exception e)
 		{
@@ -94,7 +94,7 @@ public class BDD implements BDDInterface
 					"VALUES ('"+cpk+"','"+rFID+"')");
 			String updateSql = "UPDATE Barman SET CPK="+0+" WHERE RFID="+rFID;
 		int updateResultat=st.executeUpdate(updateSql);
-		System.out.println("UPDATE:" + updateResultat+"\n");
+		System.out.println("UPDATE:" + updateResultat);
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -128,7 +128,7 @@ public class BDD implements BDDInterface
 				+ niveauDeCharge+ "WHERE BluetoothID ="+bluetooth;
 		try {
 			int updateResultat=st.executeUpdate(updateSql);
-			System.out.println("UPDATE:" + updateResultat+"\n");
+			System.out.println("UPDATE:" + updateResultat);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -177,7 +177,7 @@ public class BDD implements BDDInterface
 				+ nom+"', Prenom='"+prenom+"',Age= '"+age+"',DateEmbauche='" +sqlTime+"',CPK='"+cPK+"' WHERE RFID='"+rFID+"'";
 		try {
 		int updateResultat=st.executeUpdate(updateSql);
-		System.out.println("UPDATE:" + updateResultat+"\n");
+		System.out.println("UPDATE:" + updateResultat);
 		
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
@@ -192,7 +192,7 @@ public class BDD implements BDDInterface
 		String updateSql = "UPDATE Barman SET CPK="+cPK+" WHERE RFID="+rFID;
 		try {
 		int updateResultat=st.executeUpdate(updateSql);
-		System.out.println("UPDATE:" + updateResultat+"\n");
+		System.out.println("UPDATE:" + updateResultat);
 		
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
@@ -219,10 +219,26 @@ public class BDD implements BDDInterface
 	public boolean ajouterBoisson(long codeBarre, String nom, String marque,int volume,
 			int degre) 
 	{
+		java.sql.Timestamp derniereDate=new java.sql.Timestamp(0), maintenant=new java.sql.Timestamp(new java.util.Date().getTime());
 		String sql = "INSERT INTO Boisson (CodeBarre,Nom,Marque,Volume, Degre)" +
 				"VALUES ('"+codeBarre+"','"+nom+"','"+marque+"','"+volume+"','"+degre+"')";
+		
 		try {
 			st.executeUpdate(sql);
+			rs=st.executeQuery("SELECT Date FROM Stock");
+			while(rs.next())
+			{
+				derniereDate=rs.getTimestamp(1).after(derniereDate)?rs.getTimestamp(1):derniereDate;
+			}
+			st.executeUpdate("INSERT INTO Stock (Date) VALUES ('"+maintenant+"')");
+			rs=st.executeQuery("SELECT CodeBarre, Volume FROM Disponibilite WHERE Date='"+derniereDate+"'");
+			
+			while(rs.next())
+			{
+				st.executeUpdate("INSERT INTO Disponibilite (Date, CodeBarre, Volume) VALUES ('"+maintenant+"','"+rs.getLong(1)+"','"+rs.getInt(2));
+			}
+			st.executeUpdate("INSERT INTO Disponibilite (Date, CodeBarre, Volume) VALUES ('"+maintenant+"','"+codeBarre+"','0')");
+			System.out.println("La boisson "+nom+" a bien été ajoutée");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
