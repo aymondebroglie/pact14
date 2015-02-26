@@ -94,6 +94,7 @@ public class SerialTest implements SerialPortEventListener {
 			try {
 				String inputLine=input.readLine();
 				System.out.println(inputLine);
+				output.write(12);
 			} catch (Exception e) {
 				System.err.println(e.toString());
 			}
