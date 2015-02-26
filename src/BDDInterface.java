@@ -1,5 +1,6 @@
 import java.util.ArrayList;
-import java.util.Calendar;
+
+
 
 /*pour tous tables,on manque les méthodes affichant des dennées (attent des interfaces des autres modules)
 Remarquez le type Date utilisé. Si vous voulez mettre la date actuelle, mettez juste new Date() (le package est java.util, pas java.sql)
@@ -37,4 +38,5 @@ public interface BDDInterface
 	boolean livraison(ArrayList<Livraison> livraison);
 //Visu de données
 	ArrayList<DispoBoisson> etatDesStocks(java.util.Date date); //l'objet livrasion est juste un couple boisson volume pas super bien nommé
+	
 }

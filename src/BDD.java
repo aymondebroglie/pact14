@@ -55,10 +55,10 @@ public class BDD implements BDDInterface
 				while(rs.next())
 					cPK=Math.max(rs.getInt(1),cPK);
 				cPK++;
+				st.executeUpdate("INSERT INTO Commande (CPK,Date,Prix) VALUES ('"+cPK+"','"+new Timestamp(0)+"','0.0')");
 				st.executeUpdate("UPDATE Barman SET CPK="+cPK+" WHERE RFID="+rFID);
 			}
-			
-			
+			st.executeUpdate("UPDATE Commande SET Date='"+new Timestamp(new Date().getTime())+"' WHERE CPK="+cPK);
 			rs=st.executeQuery("SELECT Volume " +
 					"FROM Composition " +
 					"WHERE Composition.CPK="+cPK+" AND Composition.CodeBarre="+codeBarre);
@@ -102,13 +102,13 @@ public class BDD implements BDDInterface
 			String updateSql = "UPDATE Barman SET CPK="+0+" WHERE RFID="+rFID;
 		int updateResultat=st.executeUpdate(updateSql);
 		System.out.println("UPDATE:" + updateResultat);
-	} catch (SQLException e) {
+			} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 		return false;
-}
+			}
 //****************************************
-		
+		System.out.println("La commande numéro "+ cpk +" a bien été enregistrée");
 		
 		return true;
 	}
@@ -125,7 +125,9 @@ public class BDD implements BDDInterface
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
-		}return true;
+		}
+		System.out.println("Un goulot d'identifiant bluetooh "+bluetooth+" a été ajouté.");
+		return true;
 		
 	}
 	
@@ -141,7 +143,9 @@ public class BDD implements BDDInterface
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
-	}return true;
+	}
+		System.out.println("Le goulot "+bluetooth+" a été mis à jour avec succès");
+		return true;
 	}
 	
 	public boolean supprimerGoulot(int bluetooth)
@@ -172,7 +176,9 @@ public class BDD implements BDDInterface
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
-		}return true;
+		}
+		System.out.println("Barman ajouté.");
+		return true;
 	}
 
 	@Override
