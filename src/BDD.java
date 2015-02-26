@@ -1,5 +1,6 @@
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 
@@ -9,7 +10,7 @@ public class BDD implements BDDInterface
 {
 	Connection con ;
     Statement st,st2 ;
-    ResultSet rs ;
+    ResultSet rs,rs2 ;
     
     private String echapper(String string)
     {
@@ -310,6 +311,37 @@ public class BDD implements BDDInterface
 			e.printStackTrace();
 			return false;
 		}return true;
+	}
+	@Override
+	public ArrayList<DispoBoisson> etatDesStocks(Date date) 
+	{
+		java.sql.Timestamp sqlTime=new java.sql.Timestamp(date.getTime()),derniereDate=new java.sql.Timestamp(0);
+		ArrayList<DispoBoisson> result = new ArrayList<DispoBoisson>();
+		String nom;
+		try {
+			rs=st.executeQuery("SELECT Date FROM Stock WHERE Date <= '"+sqlTime+"'");
+			while(rs.next())
+			{
+				System.out.println(sqlTime);
+				derniereDate=rs.getTimestamp(1).after(derniereDate)?rs.getTimestamp(1):derniereDate;
+
+			}
+			rs=st.executeQuery("SELECT CodeBarre, Volume FROM Disponibilite WHERE Date='"+derniereDate+"'");
+			while(rs.next())
+			{
+				rs2=st2.executeQuery("SELECT Nom FROM Boisson WHERE CodeBarre='"+rs.getLong(1)+"'");			
+				rs2.next();
+				nom=rs2.getString(1);
+				result.add(new DispoBoisson(nom,rs.getInt(2)));
+			}
+			return result;
+		} catch (SQLException e) {
+			
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		
 	}
 
 }

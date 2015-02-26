@@ -1,8 +1,15 @@
 import java.util.ArrayList;
+import java.util.Calendar;
 
-//pour tous tables,on manque les méthodes affichant des dennées (attent des interfaces des autres modules)
-//Remarquez le type Date utilisé. Si vous voulez mettre la date actuelle, mettez juste new java.util.Date(), sinon allez voir la doc
-// pour utiliser des longs, il faut metter un L à la fin, exemple  :  		long test =3268840001008L;
+/*pour tous tables,on manque les méthodes affichant des dennées (attent des interfaces des autres modules)
+Remarquez le type Date utilisé. Si vous voulez mettre la date actuelle, mettez juste new Date() (le package est java.util, pas java.sql)
+Pour créer une autre date il faut faire comme suit.
+	Calendar calendar=Calendar.getInstance();
+	Date date = new Date();
+calendar.set(2015,01,26,17,00);
+date=calendar.getTime();
+ATTENTION ici, la date créée est en février, les mois commencent à 0 !!!!!!!!!!!!!
+pour utiliser des longs, il faut metter un L à la fin, exemple  :  		long test =3268840001008L;*/
 public interface BDDInterface 
 {
 
@@ -28,4 +35,6 @@ public interface BDDInterface
 //Stock
 	boolean bouteilleFinie(int bluetoothID);
 	boolean livraison(ArrayList<Livraison> livraison);
+//Visu de données
+	ArrayList<DispoBoisson> etatDesStocks(java.util.Date date); //l'objet livrasion est juste un couple boisson volume pas super bien nommé
 }
