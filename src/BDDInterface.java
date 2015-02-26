@@ -20,16 +20,13 @@ public interface BDDInterface
 	public boolean supprimerGoulot(int bluetooth);
 	boolean associerGoulot(int blutoothID, long codeBarre);
 //Barman
-	boolean ajouterBarman(int rFID,String nom,String prenom,int age,java.util.Date dateEmbauche
-			,int cPK);
-	public boolean modifierInformationBarman(int rFID,String nom,String prenom,int age,java.util.Date dateEmbauche
-			,int cPK);
-	public boolean modifierCommandeDeBarman(int rFID,int cPK);
+	boolean ajouterBarman(int rFID,String nom,String prenom,int age,java.util.Date dateEmbauche);
+	public boolean modifierInformationBarman(int rFID,String nom,String prenom,int age,java.util.Date dateEmbauche);
 	public boolean supprimerBarman(int rFID);
 //Boisson
     public boolean ajouterBoisson(long codeBarre,String nom,String marque, int volume, int degre);
 //Cocktail
-    
+    //après PAN3
 //Commande
 	boolean ajouterConsommation(int bluetoothID, int rFID, int volume ); //il faut mettre le volume en cL, un entier.
 	boolean finDeCommande(int rFID);

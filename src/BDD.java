@@ -165,11 +165,11 @@ public class BDD implements BDDInterface
 
 	@Override
 	public boolean ajouterBarman(int rFID, String nom, String prenom,
-			int age, java.util.Date dateEmbauche, int cPK) 
+			int age, java.util.Date dateEmbauche) 
 	{
 		java.sql.Timestamp sqlTime= new java.sql.Timestamp(dateEmbauche.getTime());
 		String sql = "INSERT INTO Barman (RFID, Nom, Prenom,Age, DateEmbauche,CPK)" +
-				"VALUES ('"+rFID+"','"+echapper(nom)+"','"+echapper(prenom)+"','"+age+"','"+sqlTime+"','"+cPK+"')";
+				"VALUES ('"+rFID+"','"+echapper(nom)+"','"+echapper(prenom)+"','"+age+"','"+sqlTime+"','0')";
 		try {
 			st.executeUpdate(sql);
 		} catch (SQLException e) {
@@ -183,11 +183,11 @@ public class BDD implements BDDInterface
 
 	@Override
 	public boolean modifierInformationBarman(int rFID, String nom,
-			String prenom, int age, java.util.Date dateEmbauche, int cPK) 
+			String prenom, int age, java.util.Date dateEmbauche) 
 	{
 		java.sql.Timestamp sqlTime= new java.sql.Timestamp(dateEmbauche.getTime());
 		String updateSql = "UPDATE Barman SET Nom='"
-				+ echapper(nom)+"', Prenom='"+echapper(prenom)+"',Age= '"+age+"',DateEmbauche='" +sqlTime+"',CPK='"+cPK+"' WHERE RFID='"+rFID+"'";
+				+ echapper(nom)+"', Prenom='"+echapper(prenom)+"',Age= '"+age+"',DateEmbauche='" +sqlTime+"' WHERE RFID='"+rFID+"'";
 		try {
 		int updateResultat=st.executeUpdate(updateSql);
 		System.out.println("UPDATE:" + updateResultat);
@@ -200,19 +200,6 @@ public class BDD implements BDDInterface
 
 	}
 
-	@Override
-	public boolean modifierCommandeDeBarman(int rFID, int cPK) {
-		String updateSql = "UPDATE Barman SET CPK="+cPK+" WHERE RFID="+rFID;
-		try {
-		int updateResultat=st.executeUpdate(updateSql);
-		System.out.println("UPDATE:" + updateResultat);
-		
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-		return false;
-}return true;
-	}
 
 	@Override
 	public boolean supprimerBarman(int rFID) {
