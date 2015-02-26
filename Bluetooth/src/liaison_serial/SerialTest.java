@@ -16,7 +16,7 @@ public class SerialTest implements SerialPortEventListener {
 			"/dev/tty.usbserial-A9007UX1", // Mac OS X
                         "/dev/ttyACM0", // Raspberry Pi
 			"/dev/ttyUSB0", // Linux
-			"COM3", // Windows
+			"COM3", "COM5"// Windows
 	};
 	/**
 	* A BufferedReader which will be fed by a InputStreamReader 
@@ -29,7 +29,7 @@ public class SerialTest implements SerialPortEventListener {
 	/** Milliseconds to block while waiting for port open */
 	private static final int TIME_OUT = 2000;
 	/** Default bits per second for COM port. */
-	private static final int DATA_RATE = 9600;
+	private static final int DATA_RATE = 115200;
 
 	public void initialize() {
                
