@@ -190,7 +190,11 @@ public class BDD implements BDDInterface
 				+ echapper(nom)+"', Prenom='"+echapper(prenom)+"',Age= '"+age+"',DateEmbauche='" +sqlTime+"' WHERE RFID='"+rFID+"'";
 		try {
 		int updateResultat=st.executeUpdate(updateSql);
-		System.out.println("UPDATE:" + updateResultat);
+		if(updateResultat==0){
+			System.out.println("Barman introuvable");
+			return false;
+		 }
+		 System.out.println("Barman mis à jour");
 		
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
@@ -206,8 +210,13 @@ public class BDD implements BDDInterface
 		String sql = "DELETE FROM Barman WHERE RFID = "+rFID;
 		try
 		{
-		long deleteRes = st.executeUpdate(sql);
-		 System.out.print("DELETE:" + deleteRes);
+		int deleteRes = st.executeUpdate(sql);
+		 if(deleteRes==0){
+			System.out.println("Goulot introuvable");
+			return false;
+		 }
+		 System.out.println("Goulot supprimé");
+		 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -298,7 +307,12 @@ public class BDD implements BDDInterface
 		String sql = "UPDATE Associe SET CodeBarre="+codeBarre+" WHERE BluetoothID="+bluetoothID;
 		
 		try {
-			st.executeUpdate(sql);
+			int res=st.executeUpdate(sql);
+			if(res==0){
+				System.out.println("Goulot introuvable");
+				return false;
+			 }
+			 System.out.println("Goulot associé");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
