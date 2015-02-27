@@ -479,5 +479,23 @@ public class BDD implements BDDInterface
 		
 		return codeBarre;
 	}
+	@Override
+	public boolean ajoueterCocktail(long coPK, String nom, float prix,
+			ArrayList<DispoBoisson> recette) {
+	/*On change l'attribut dans table Recette de CodeBarre a Nom?*/
+		try{
+			for(DispoBoisson temp:recette)
+			{
+				st.executeQuery("INSERT INTO Recette(Nom,CoPK,Volume) VALUES ('"+echapper(temp.getBoisson())+"','"+coPK+"','"+temp.getVolume());
+			}
+			st.executeQuery("INSERT INTO Cocktail(CoPK,Nom,Prix) VALUES ('"+coPK+"','"+echapper(nom)+"','"+prix);
+			
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return false;
+	}
 
 }

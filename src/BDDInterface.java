@@ -27,7 +27,8 @@ public interface BDDInterface
 //Boisson
     public boolean ajouterBoisson(long codeBarre,String nom,String marque, int volume, int degre);
 //Cocktail
-    //après PAN3
+    public boolean ajoueterCocktail(long coPK,String nom,float prix,ArrayList<DispoBoisson> recette);
+
 //Commande
 	boolean ajouterConsommation(int bluetoothID, int rFID, int volume ); //il faut mettre le volume en cL, un entier.
 	boolean finDeCommande(int rFID);
