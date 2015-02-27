@@ -19,6 +19,7 @@ public interface BDDInterface
 	public boolean modifierGoulot(int bluetooth,int enCharge, float niveauDeCharge);
 	public boolean supprimerGoulot(int bluetooth);
 	boolean associerGoulot(int blutoothID, long codeBarre);
+	public int attributionDeGoulot();
 //Barman
 	boolean ajouterBarman(int rFID,String nom,String prenom,int age,java.util.Date dateEmbauche);
 	public boolean modifierInformationBarman(int rFID,String nom,String prenom,int age,java.util.Date dateEmbauche);

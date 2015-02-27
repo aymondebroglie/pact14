@@ -373,8 +373,37 @@ public class BDD implements BDDInterface
 	@Override
 	public boolean livraison(ArrayList<Livraison> livraison) {
 		// TODO Auto-generated method stub
-		
-		return false;
+	/**/
+		try{
+			java.sql.Timestamp derniereDate=new java.sql.Timestamp(0), maintenant=new java.sql.Timestamp(new java.util.Date().getTime());			
+				rs=st.executeQuery("SELECT Date FROM Stock");
+				while(rs.next())
+				{
+					derniereDate=rs.getTimestamp(1).after(derniereDate)?rs.getTimestamp(1):derniereDate;
+				}
+				rs=st.executeQuery("SELECT CodeBarre, Volume FROM Disponibilite WHERE Date="+derniereDate);
+				st.executeUpdate("INSERT INTO Stock (Date) VALUES ('"+maintenant+"'");
+				while(rs.next())
+				{/*a cause de un date a juste un boisson, donc on a qu'une resultat;
+				  Et bien remarquer l'importance d'utilisation de st2*/
+					st2.executeUpdate("INSERT INTO Disponibilite (Date, CodeBarre, Volume) VALUES ('"+maintenant+"','"+rs.getLong(1)+"','"+rs.getInt(2));
+				}
+				
+			int  ancienVolume=0;
+			for(Livraison temp:livraison)
+			{
+				rs=st.executeQuery("SELECT Volume FROM Disponibilite WHERE CodeBarre="+temp.getcodeBarre()+" AND Date="+maintenant);
+				if(!rs.next())
+					throw new Exception("Boisson introuvable dans les stocks");
+				ancienVolume=rs.getInt(1);
+				st.executeUpdate("UPDATE Disponibilite SET Volume="+(ancienVolume+temp.getVolume())+" WHERE CodeBarre="+temp.getcodeBarre()+" AND Date="+maintenant);
+			}
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	@Override
@@ -424,6 +453,31 @@ public class BDD implements BDDInterface
 			return null;
 		}
 		
+	}
+	@Override
+	public int attributionDeGoulot() {
+		// TODO Auto-generated method stub
+		/*On suppose il va distribuer qu'une goulot*/
+		int codeBarre=0;
+		try{
+			float niveauChargeMax=0;
+			rs=st.executeQuery("SELECT BluetoothID,NiveauDeCharge FROM Goulots");
+			while(rs.next())
+			{
+				if(rs.getFloat(2)>niveauChargeMax)
+				{
+					niveauChargeMax=rs.getFloat(2);
+					codeBarre=rs.getInt(1);
+				}
+			}
+			
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+		
+		return codeBarre;
 	}
 
 }
