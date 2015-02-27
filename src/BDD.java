@@ -113,9 +113,12 @@ public class BDD implements BDDInterface
 		return true;
 	}
 
+
 	@Override
 	public boolean ajouterGoulot(int bluetooth) 
 	{
+	/*Dans 'Associe', on a une liste de Goulots, à chaque changement, 
+	 on change BluettoothID associé a chaque goulot*/
 		try {
 			st.executeUpdate("INSERT INTO Goulots (BluetoothID, EnCharge, NiveauDeCharge )" +
 					"VALUES ('"+bluetooth+"','0','1.0')");
@@ -132,7 +135,7 @@ public class BDD implements BDDInterface
 	}
 	
 	public boolean modifierGoulot(int bluetooth,int enCharge, float niveauDeCharge)
-	{   
+	{ /*Ici on modifie pas bluetooth d'un goulot*/  
 		String updateSql = "UPDATE Goulots SET EnCharge="+enCharge+",NiveauDeCharge="
 				+ niveauDeCharge+ "WHERE BluetoothID ="+bluetooth;
 		try {
@@ -149,7 +152,7 @@ public class BDD implements BDDInterface
 	}
 	
 	public boolean supprimerGoulot(int bluetooth)
-	{
+	{  /*si bien supprimer, on affiche 1*/
 		String sql = "DELETE FROM Goulots WHERE BluetoothID = "+bluetooth;
 		try
 		{
@@ -184,7 +187,7 @@ public class BDD implements BDDInterface
 	@Override
 	public boolean modifierInformationBarman(int rFID, String nom,
 			String prenom, int age, java.util.Date dateEmbauche) 
-	{
+	{/*Ici on suppose dateEmbauche doit être mis à maintenant quand on fait modification*/
 		java.sql.Timestamp sqlTime= new java.sql.Timestamp(dateEmbauche.getTime());
 		String updateSql = "UPDATE Barman SET Nom='"
 				+ echapper(nom)+"', Prenom='"+echapper(prenom)+"',Age= '"+age+"',DateEmbauche='" +sqlTime+"' WHERE RFID='"+rFID+"'";
@@ -212,10 +215,10 @@ public class BDD implements BDDInterface
 		{
 		int deleteRes = st.executeUpdate(sql);
 		 if(deleteRes==0){
-			System.out.println("Goulot introuvable");
+			System.out.println("Barman introuvable");
 			return false;
 		 }
-		 System.out.println("Goulot supprimé");
+		 System.out.println("Barman supprimé");
 		 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -224,28 +227,55 @@ public class BDD implements BDDInterface
 	}return true;
 	}
 
-	@Override
+//	@Override
+//	public boolean ajouterBoisson(long codeBarre, String nom, String marque,int volume,
+//			int degre) 
+//	{/*PAS CLAIRE POUR FONCTIONNALITE(-Yunzhi)*/
+//	 /*Ici on crée dernierDate dans ce méthode, et on juste ajoute 1 line d'information,
+//	   donc généralement, on a juste un boisson lié à un data. Modifier après ou 
+//	   rest comme ça*/
+//		java.sql.Timestamp derniereDate=new java.sql.Timestamp(0), maintenant=new java.sql.Timestamp(new java.util.Date().getTime());
+//		String sql = "INSERT INTO Boisson (CodeBarre,Nom,Marque,Volume, Degre)" +
+//				"VALUES ('"+codeBarre+"','"+echapper(nom)+"','"+echapper(marque)+"','"+volume+"','"+degre+"')";
+//		
+//		try {
+//			st.executeUpdate(sql);
+//			rs=st.executeQuery("SELECT Date FROM Stock");
+//			while(rs.next())
+//			{
+//	/*?*/			derniereDate=rs.getTimestamp(1).after(derniereDate)?rs.getTimestamp(1):derniereDate;
+//			}
+//			st.executeUpdate("INSERT INTO Stock (Date) VALUES ('"+maintenant+"')");
+//			rs=st.executeQuery("SELECT CodeBarre, Volume FROM Disponibilite WHERE Date='"+derniereDate+"'");
+//			
+//			while(rs.next())
+//			{
+//				st2.executeUpdate("INSERT INTO Disponibilite (Date, CodeBarre, Volume) VALUES ('"+maintenant+"','"+rs.getLong(1)+"','"+rs.getInt(2)+"')");
+//			}
+//			st.executeUpdate("INSERT INTO Disponibilite (Date, CodeBarre, Volume) VALUES ('"+maintenant+"','"+codeBarre+"','0')");
+//			System.out.println("La boisson "+nom+" a bien été ajoutée");
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			return false;
+//		}return true;
+//	}
+	
 	public boolean ajouterBoisson(long codeBarre, String nom, String marque,int volume,
 			int degre) 
-	{
-		java.sql.Timestamp derniereDate=new java.sql.Timestamp(0), maintenant=new java.sql.Timestamp(new java.util.Date().getTime());
+	{/*PAS CLAIRE POUR FONCTIONNALITE(-Yunzhi)*/
+	 /*Ici on crée dernierDate dans ce méthode, et on juste ajoute 1 line d'information,
+	   donc généralement, on a juste un boisson lié à un data. Modifier après ou 
+	   rest comme ça*/
+
+/*Dans cette méthode, je pense on dois supposer le Boisson n'existe pas dans notre base de donnes*/
+		java.sql.Timestamp  maintenant=new java.sql.Timestamp(new java.util.Date().getTime());
 		String sql = "INSERT INTO Boisson (CodeBarre,Nom,Marque,Volume, Degre)" +
 				"VALUES ('"+codeBarre+"','"+echapper(nom)+"','"+echapper(marque)+"','"+volume+"','"+degre+"')";
 		
 		try {
 			st.executeUpdate(sql);
-			rs=st.executeQuery("SELECT Date FROM Stock");
-			while(rs.next())
-			{
-				derniereDate=rs.getTimestamp(1).after(derniereDate)?rs.getTimestamp(1):derniereDate;
-			}
 			st.executeUpdate("INSERT INTO Stock (Date) VALUES ('"+maintenant+"')");
-			rs=st.executeQuery("SELECT CodeBarre, Volume FROM Disponibilite WHERE Date='"+derniereDate+"'");
-			
-			while(rs.next())
-			{
-				st2.executeUpdate("INSERT INTO Disponibilite (Date, CodeBarre, Volume) VALUES ('"+maintenant+"','"+rs.getLong(1)+"','"+rs.getInt(2)+"')");
-			}
 			st.executeUpdate("INSERT INTO Disponibilite (Date, CodeBarre, Volume) VALUES ('"+maintenant+"','"+codeBarre+"','0')");
 			System.out.println("La boisson "+nom+" a bien été ajoutée");
 		} catch (SQLException e) {
@@ -255,36 +285,79 @@ public class BDD implements BDDInterface
 		}return true;
 	}
 
+//	@Override
+//	public boolean bouteilleFinie(int bluetoothID) 
+//	{
+//		//A COMPLETER
+//		java.sql.Timestamp derniereDate=new java.sql.Timestamp(0), maintenant=new java.sql.Timestamp(new java.util.Date().getTime());
+//		long codeBarre=0;
+//		int ancienVolume;
+//		
+//		try {
+//			rs=st.executeQuery("SELECT Date FROM Stock");
+//			while(rs.next())
+//			{
+//				derniereDate=rs.getTimestamp(1).after(derniereDate)?rs.getTimestamp(1):derniereDate;
+//			}
+//			rs=st.executeQuery("SELECT CodeBarre, Volume FROM Disponibilite WHERE Date="+derniereDate);
+//			st.executeUpdate("INSERT INTO Stock (Date) VALUES ('"+maintenant+"'");
+//			while(rs.next())
+//			{/*a cause de un date a juste un boisson, donc on a qu'une resultat;
+//			  Et bien remarquer l'importance d'utilisation de st2*/
+//				st2.executeUpdate("INSERT INTO Disponibilite (Date, CodeBarre, Volume) VALUES ('"+maintenant+"','"+rs.getLong(1)+"','"+rs.getInt(2));
+//			}
+//			////
+//			rs=st.executeQuery("SELECT CodeBarre FROM Associe WHERE BluetoothID="+bluetoothID);
+//			if(!rs.next())
+//				throw new Exception("Il n'y a pas de goulot associé au bluetooth "+bluetoothID);
+//			codeBarre=rs.getLong(1);
+//			
+//			rs=st.executeQuery("SELECT Volume FROM Disponibilite WHERE CodeBarre="+codeBarre+" AND Date="+maintenant);
+//			if(!rs.next())
+//				throw new Exception("Boisson introuvable dans les stocks");
+//			ancienVolume=rs.getInt(1);
+//			st.executeUpdate("UPDATE Disponibilite SET Volume="+ancienVolume--+" WHERE CodeBarre="+codeBarre+" AND Date="+maintenant);
+//			
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			return false;
+//		}
+//		return true;
+//	}
+
 	@Override
 	public boolean bouteilleFinie(int bluetoothID) 
-	{
+	{ /*il faut trouver derniereDate concernant un boisson que l'on consomme maintenant;
+	    De plus, je suis pas sur table 'Stock' est nécessaire ou pas*/
 		//A COMPLETER
 		java.sql.Timestamp derniereDate=new java.sql.Timestamp(0), maintenant=new java.sql.Timestamp(new java.util.Date().getTime());
 		long codeBarre=0;
-		int ancienVolume;
+		int ancienVolume=0;
 		
 		try {
-			rs=st.executeQuery("SELECT Date FROM Stock");
-			while(rs.next())
-			{
-				derniereDate=rs.getTimestamp(1).after(derniereDate)?rs.getTimestamp(1):derniereDate;
-			}
-			rs=st.executeQuery("SELECT CodeBarre, Volume FROM Disponibilite WHERE Date="+derniereDate);
-			st.executeUpdate("INSERT INTO Stock (Date) VALUES ('"+maintenant+"'");
-			while(rs.next())
-			{
-				st2.executeUpdate("INSERT INTO Disponibilite (Date, CodeBarre, Volume) VALUES ('"+maintenant+"','"+rs.getLong(1)+"','"+rs.getInt(2));
-			}
-			////
 			rs=st.executeQuery("SELECT CodeBarre FROM Associe WHERE BluetoothID="+bluetoothID);
 			if(!rs.next())
 				throw new Exception("Il n'y a pas de goulot associé au bluetooth "+bluetoothID);
 			codeBarre=rs.getLong(1);
 			
-			rs=st.executeQuery("SELECT Volume FROM Disponibilite WHERE CodeBarre="+codeBarre+" AND Date="+maintenant);
+			rs=st.executeQuery("SELECT Date FROM Disponibilite Where CodeBarre="+codeBarre);
 			if(!rs.next())
 				throw new Exception("Boisson introuvable dans les stocks");
-			ancienVolume=rs.getInt(1);
+			while(rs.next())
+			{
+/*?*/				derniereDate=rs.getTimestamp(1).after(derniereDate)?rs.getTimestamp(1):derniereDate;
+			}
+			rs=st.executeQuery("SELECT CodeBarre, Volume FROM Disponibilite WHERE Date="+derniereDate);
+			st.executeUpdate("INSERT INTO Stock (Date) VALUES ('"+maintenant+"'");
+			/*à verifier si INSERT ne retourne pas de résultat dans statement*/
+			while(rs.next())
+			{/*a cause de un date a juste un boisson, donc on a qu'une resultat;
+			  Et bien remarquer l'importance d'utilisation de st2*/
+				ancienVolume=rs.getInt(2);
+				st2.executeUpdate("INSERT INTO Disponibilite (Date, CodeBarre, Volume) VALUES ('"+maintenant+"','"+rs.getLong(1)+"','"+rs.getInt(2));
+			}
+
 			st.executeUpdate("UPDATE Disponibilite SET Volume="+ancienVolume--+" WHERE CodeBarre="+codeBarre+" AND Date="+maintenant);
 			
 		} catch (Exception e) {
