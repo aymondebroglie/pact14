@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.swing.JLabel;
@@ -14,10 +15,12 @@ public class Controller
 	//interrogera la base de donnée
 	
 	private Window window;
+	private ArrayList<Boisson> tableauAlcools;//Ce tableau permet de connaitre les alcools à afficher pour la gestion des stocks
 
 public Controller(Window window)
 {
 	this.window = window;
+	this.tableauAlcools = new ArrayList<Boisson>();
 }
 
 /** ViewWelcome */
@@ -131,7 +134,9 @@ public void ecranChangeMotDePasse(){
 
 
 public void obtenirstock(){
-	window.dispose();
+	ViewStocksManagement vsm = new ViewStocksManagement(this);
+	window.setContentPane(vsm);
+	window.validate();
 }
 
 public void commande(){
@@ -141,6 +146,22 @@ public void commande(){
 public void budget(){
 	
 }
+
+public void ajoutAlcool(String nom){
+	tableauAlcools.add(new Boisson(nom));
+    System.out.println(tableauAlcools);
+}
+
+public void enleverAlcool(String nom){
+	for (Boisson boisson : tableauAlcools){
+		if (boisson.getNom() == nom){
+			tableauAlcools.remove(boisson);
+		}
+	}
+	System.out.println(tableauAlcools);
+}
+
+
 }
 
 
