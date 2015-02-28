@@ -1,14 +1,14 @@
 
 public class Livraison 
 {
-	private final int codeBarre;
+	private final long codeBarre;
 	private final int volume; //en bouteilles
-	public Livraison(int codeBarre, int volume)
+	public Livraison(long codeBarre, int volume)
 	{
 		this.codeBarre=codeBarre;
 		this.volume=volume;
 	}
-	public int getcodeBarre() {
+	public long getcodeBarre() {
 		return codeBarre;
 	}
 	public int getVolume() {

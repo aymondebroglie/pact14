@@ -292,6 +292,9 @@ public class BDD implements BDDInterface
 	{
 		//A COMPLETER
 		java.sql.Timestamp derniereDate=new java.sql.Timestamp(0), maintenant=new java.sql.Timestamp(new java.util.Date().getTime());
+		long millisecondes=maintenant.getTime()%1000;
+		millisecondes=millisecondes>500?maintenant.getTime()-millisecondes:maintenant.getTime()-millisecondes+1000;
+		maintenant=new java.sql.Timestamp(millisecondes);
 		long codeBarre=0;
 		int ancienVolume;
 		
@@ -301,12 +304,11 @@ public class BDD implements BDDInterface
 			{
 				derniereDate=rs.getTimestamp(1).after(derniereDate)?rs.getTimestamp(1):derniereDate;
 			}
-			rs=st.executeQuery("SELECT CodeBarre, Volume FROM Disponibilite WHERE Date="+derniereDate);
-			st.executeUpdate("INSERT INTO Stock (Date) VALUES ('"+maintenant+"'");
+			st.executeUpdate("INSERT INTO Stock (Date) VALUES ('"+maintenant+"')");
+			rs=st.executeQuery("SELECT CodeBarre, Volume FROM Disponibilite WHERE Date='"+derniereDate+"'");
 			while(rs.next())
-			{/*a cause de un date a juste un boisson, donc on a qu'une resultat;
-			  Et bien remarquer l'importance d'utilisation de st2*/
-				st2.executeUpdate("INSERT INTO Disponibilite (Date, CodeBarre, Volume) VALUES ('"+maintenant+"','"+rs.getLong(1)+"','"+rs.getInt(2));
+			{//on a autant de résulats que de boisson
+				st2.executeUpdate("INSERT INTO Disponibilite (Date, CodeBarre, Volume) VALUES ('"+maintenant+"','"+rs.getLong(1)+"','"+rs.getInt(2)+"')");
 			}
 			////
 			rs=st.executeQuery("SELECT CodeBarre FROM Associe WHERE BluetoothID="+bluetoothID);
@@ -314,11 +316,11 @@ public class BDD implements BDDInterface
 				throw new Exception("Il n'y a pas de goulot associé au bluetooth "+bluetoothID);
 			codeBarre=rs.getLong(1);
 			
-			rs=st.executeQuery("SELECT Volume FROM Disponibilite WHERE CodeBarre="+codeBarre+" AND Date="+maintenant);
+			rs=st.executeQuery("SELECT Volume FROM Disponibilite WHERE CodeBarre="+codeBarre+" AND Date='"+maintenant+"'");
 			if(!rs.next())
 				throw new Exception("Boisson introuvable dans les stocks");
 			ancienVolume=rs.getInt(1);
-			st.executeUpdate("UPDATE Disponibilite SET Volume="+ancienVolume--+" WHERE CodeBarre="+codeBarre+" AND Date="+maintenant);
+			st.executeUpdate("UPDATE Disponibilite SET Volume="+(ancienVolume-1)+" WHERE CodeBarre="+codeBarre+" AND Date='"+maintenant+"'");
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -375,34 +377,40 @@ public class BDD implements BDDInterface
 		// TODO Auto-generated method stub
 	/**/
 		try{
-			java.sql.Timestamp derniereDate=new java.sql.Timestamp(0), maintenant=new java.sql.Timestamp(new java.util.Date().getTime());			
-				rs=st.executeQuery("SELECT Date FROM Stock");
-				while(rs.next())
-				{
-					derniereDate=rs.getTimestamp(1).after(derniereDate)?rs.getTimestamp(1):derniereDate;
-				}
-				rs=st.executeQuery("SELECT CodeBarre, Volume FROM Disponibilite WHERE Date="+derniereDate);
-				st.executeUpdate("INSERT INTO Stock (Date) VALUES ('"+maintenant+"'");
-				while(rs.next())
-				{/*a cause de un date a juste un boisson, donc on a qu'une resultat;
-				  Et bien remarquer l'importance d'utilisation de st2*/
-					st2.executeUpdate("INSERT INTO Disponibilite (Date, CodeBarre, Volume) VALUES ('"+maintenant+"','"+rs.getLong(1)+"','"+rs.getInt(2));
-				}
+			java.sql.Timestamp derniereDate=new java.sql.Timestamp(0), maintenant=new java.sql.Timestamp(new java.util.Date().getTime());	
+			long millisecondes=maintenant.getTime()%1000;
+			millisecondes=millisecondes>500?maintenant.getTime()-millisecondes:maintenant.getTime()-millisecondes+1000;
+			maintenant=new java.sql.Timestamp(millisecondes);
+			rs=st.executeQuery("SELECT Date FROM Stock");
+			while(rs.next())
+			{
+				derniereDate=rs.getTimestamp(1).after(derniereDate)?rs.getTimestamp(1):derniereDate;
+			}
+			st.executeUpdate("INSERT INTO Stock (Date) VALUES ('"+maintenant+"')");
+			rs=st.executeQuery("SELECT CodeBarre, Volume FROM Disponibilite WHERE Date='"+derniereDate+"'");
+			
+			while(rs.next())
+			{
+				st2.executeUpdate("INSERT INTO Disponibilite (Date, CodeBarre, Volume) VALUES ('"+maintenant+"','"+rs.getLong(1)+"','"+rs.getInt(2)+"')");
+			}
 				
 			int  ancienVolume=0;
 			for(Livraison temp:livraison)
 			{
-				rs=st.executeQuery("SELECT Volume FROM Disponibilite WHERE CodeBarre="+temp.getcodeBarre()+" AND Date="+maintenant);
+				String query="SELECT Volume FROM Disponibilite WHERE CodeBarre="+temp.getcodeBarre()+" AND Date='"+maintenant+"'"  ;
+				rs=st.executeQuery(query);
 				if(!rs.next())
-					throw new Exception("Boisson introuvable dans les stocks");
+					throw new Exception("Boisson " +temp.getcodeBarre()+" introuvable dans les stocks");
+					
 				ancienVolume=rs.getInt(1);
-				st.executeUpdate("UPDATE Disponibilite SET Volume="+(ancienVolume+temp.getVolume())+" WHERE CodeBarre="+temp.getcodeBarre()+" AND Date="+maintenant);
+				st.executeUpdate("UPDATE Disponibilite SET Volume="+(ancienVolume+temp.getVolume())+" WHERE CodeBarre="+temp.getcodeBarre()+" AND Date='"+maintenant+"'");
 			}
 		}catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}
+		System.out.println("Livraison bien enregistrée");
 		return true;
 	}
 
