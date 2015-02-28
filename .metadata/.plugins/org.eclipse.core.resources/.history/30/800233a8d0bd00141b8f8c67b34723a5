@@ -13,7 +13,7 @@ public class MainTest
 		DataSet A = DataSet.stairs(4);
 		DataSet B = DataSet.ones(6);
 		
-
+		A.minus(B);
 		
 		
 		ArrayList<Double> Y = A.moindrecarre();

@@ -28,4 +28,7 @@
 <fullyQualifiedTypeName name="org.apache.jena.atlas.web.auth.ScopedAuthenticator"/>
 <fullyQualifiedTypeName name="org.apache.jena.atlas.web.auth.PreemptiveBasicAuthenticator"/>
 <fullyQualifiedTypeName name="org.apache.jena.atlas.web.auth.HttpAuthenticator"/>
+<fullyQualifiedTypeName name="java.util.Vector"/>
+<fullyQualifiedTypeName name="modele.DataSet"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>
