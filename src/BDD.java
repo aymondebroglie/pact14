@@ -80,11 +80,12 @@ public class BDD implements BDDInterface
 	}
 
 	@Override
-	public boolean finDeCommande(int rFID) {
+	public float finDeCommande(int rFID) {
 		// TODO Auto-generated method stub
 		//ajouter une entrée dans Servi
 		//passer le CPK de barman à 0
 		long cpk;
+		float prix;
 		try{
 		rs=st.executeQuery("SELECT CPK FROM Barman WHERE RFID="+rFID);
 		if(!rs.next())
@@ -93,7 +94,7 @@ public class BDD implements BDDInterface
 		}catch(Exception e)
 		{
 			e.printStackTrace();
-			return false;
+			return 0;
 		}
 //********************************
 		try {
@@ -102,15 +103,19 @@ public class BDD implements BDDInterface
 			String updateSql = "UPDATE Barman SET CPK="+0+" WHERE RFID="+rFID;
 		int updateResultat=st.executeUpdate(updateSql);
 		System.out.println("UPDATE:" + updateResultat);
-			} catch (SQLException e) {
+		rs=st.executeQuery("SELECT Prix FROM Commande WHERE CPK="+cpk);
+		if(!rs.next())
+			throw new Exception("Commande introuvable");
+		prix=rs.getFloat(1);
+			} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
-		return false;
+		return 0;
 			}
 //****************************************
 		System.out.println("La commande numéro "+ cpk +" a bien été enregistrée");
 		
-		return true;
+		return prix;
 	}
 
 
@@ -504,6 +509,58 @@ public class BDD implements BDDInterface
 			return false;
 		}
 		return false;
+	}
+	@Override
+	public boolean boissonConnue(long codeBarre) 
+	{
+		try {
+			rs=st.executeQuery("SELECT CodeBarre FROM Boisson WHERE CodeBarre=+"+codeBarre);
+			if(!rs.next())
+				return false;
+			return true;
+		} catch (SQLException e) {
+			
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
+	@Override
+	public ArrayList<HistoBoisson> evolutionDesStocks(String boisson) 
+	{
+		long codeBarre;
+		ArrayList<HistoBoisson> result=new ArrayList<HistoBoisson>();
+		try {
+			rs=st.executeQuery("SELECT CodeBarre FROM Boisson WHERE Nom='"+boisson+"'");
+			if(!rs.next())
+				throw new Exception("Boisson introuvable");
+			codeBarre=rs.getLong(1);
+			rs=st.executeQuery("SELECT Date,Volume FROM Disponibilite WHERE CodeBarre="+codeBarre);
+			while(rs.next())
+				result.add(new HistoBoisson(new Date(rs.getTimestamp(1).getTime()),rs.getInt(2)));
+			return result;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public ArrayList<String> listeDesBoissons() {
+		ArrayList<String> result = new ArrayList<String>();
+		try {
+			rs=st.executeQuery("SELECT Nom FROM Boisson");
+			while(rs.next())
+				result.add(rs.getString(1));
+			return result;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

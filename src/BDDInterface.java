@@ -26,16 +26,21 @@ public interface BDDInterface
 	public boolean supprimerBarman(int rFID);
 //Boisson
     public boolean ajouterBoisson(long codeBarre,String nom,String marque, int volume, int degre);
+    public boolean boissonConnue(long codeBarre);
 //Cocktail
     public boolean ajoueterCocktail(long coPK,String nom,float prix,ArrayList<DispoBoisson> recette);
 
 //Commande
 	boolean ajouterConsommation(int bluetoothID, int rFID, int volume ); //il faut mettre le volume en cL, un entier.
-	boolean finDeCommande(int rFID);
+	float finDeCommande(int rFID); //retourne le prix à payer, pour l'instant c'est toujours 0
 //Stock
 	boolean bouteilleFinie(int bluetoothID);
 	boolean livraison(ArrayList<Livraison> livraison);
 //Visu de données
-	ArrayList<DispoBoisson> etatDesStocks(java.util.Date date); //l'objet livrasion est juste un couple boisson volume pas super bien nommé
+	ArrayList<DispoBoisson> etatDesStocks(java.util.Date date); 
+	ArrayList<HistoBoisson> evolutionDesStocks(String boisson); //évolution des stocks pour une boisson donnée.
+	ArrayList<String> listeDesBoissons();
+	
+	
 	
 }
