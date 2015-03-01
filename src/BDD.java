@@ -531,7 +531,7 @@ public class BDD implements BDDInterface
 		long codeBarre;
 		ArrayList<HistoBoisson> result=new ArrayList<HistoBoisson>();
 		try {
-			rs=st.executeQuery("SELECT CodeBarre FROM Boisson WHERE Nom='"+boisson+"'");
+			rs=st.executeQuery("SELECT CodeBarre FROM Boisson WHERE Nom='"+echapper(boisson)+"'");
 			if(!rs.next())
 				throw new Exception("Boisson introuvable");
 			codeBarre=rs.getLong(1);
