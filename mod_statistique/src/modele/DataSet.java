@@ -8,14 +8,14 @@ import modele_exceptions.DimensionException ;
 public class DataSet extends ArrayList<Double>
 {
 	private static final long serialVersionUID = 1L ;
-		
+	
 	public DataSet()
 	{
 		super() ;
-	} 
-	
+	}
+		
 	/**************************************************************************************/
-	// methode de manipulation de vecteurs (produit scalaire, multiplication par un scalaire,
+	// methodes de manipulation de vecteurs (produit scalaire, multiplication par un scalaire,
 	//addition de deux vecteurs, etc...)
 	
 	// multiplication par un scalaire alpha : A.smultiply(alpha) <=> alpha*A
@@ -94,18 +94,24 @@ public class DataSet extends ArrayList<Double>
 	}
 	
 	/**************************************************************************************/
-	// methode de construction de vecteurs particuliers ones et stairs
+	// génération exponentielle de nombres aléatoires (Poisson)
+	
+	public static 
+	
+	
+	/**************************************************************************************/
+	// methode de construction de vecteurs particuliers ones, stairs, salle, barman, commandes ...
 	
 	public static DataSet ones(int length)
 	{
-		DataSet ones = new DataSet() ;
+		DataSet constant = new DataSet() ;
 		
 		for(int i = 0 ; i < length ; i++)
 		{
-			ones.add(1.0) ;
+			constant.add(1.0) ;
 		}
 		
-		return ones ;
+		return constant ;
 	}
 	
 	public static DataSet stairs(int length)
@@ -116,8 +122,99 @@ public class DataSet extends ArrayList<Double>
 		{
 			stairs.add((double) i) ;
 		}
-		
+				
 		return stairs ;
+	}
+	
+	public static DataSet salle()
+	{
+		Modele modele = new Modele() ;
+		
+		// Etude sur un créneau de 10h (entre 19h00 et 5h00), soit 600 minutes. (cf def. Modele)
+		int t = modele.getTime() ;
+
+		// Capacité du bar à accueillir ses clients. (en théorie un entier, en pratique un réel)
+		double capacite = modele.getCapaciteSalle() ;
+
+		// On discrétise l'ensemble.
+		DataSet l_IN = new DataSet() ;
+
+		for( int k = 0 ; k < t ; k++)
+		{
+			l_IN.add(modele.lambdaIN((double)k));
+		}
+		        
+		DataSet l_OUT = new DataSet() ;
+
+		for( int k = 0 ; k < t ; k++)
+		{
+		   	l_OUT.add(modele.lambdaOUT((double)k));
+		}
+
+		/*
+		 * Création du vecteur X(t) qui contiendra les nombres de personnes dans le
+		 * bar aux instants k = 0, 1, ... , (t-1) .
+		 */
+		DataSet X = new DataSet() ;
+		X.add(0.0) ;
+		
+		/*
+	     * Le nombre X[k] de personnes dans le bar à un instant k vaut ce qu'il y avait
+		 * au temps (k-1) plus ce qui rentre ( poissrnd(l_IN(k-1)) ) ce qui sort (
+		 * poissrnd(l_OUT(k-1)) ). L'utilisation du max est pour forcer la
+		 * positivité du résultat sans passer par une valeur absolue qui inverserait
+		 * le rôle de lambdaIN et lambdaOUT.
+		 */
+		    
+		for(int k=1 ; k<t ; k++)
+		{
+		  	X.add(  Math.min(capacite, Math.max(0,X.get(k-1) + poissrnd(l_IN.get(k-1)) - poissrnd(l_OUT.get(k-1))))  )
+		}
+		    
+		return X ;
+	}
+	
+	public static DataSet barman(DataSet X)
+	{
+		// X : nombre de clients dans le bar.
+
+		Modele modele = new Modele() ;
+		
+		// Etude sur un créneau de 10h (entre 19h00 et 5h00), soit 600 minutes.
+		int t = modele.getTime() ;
+
+		// Capacité du bar à servir ses clients.
+		int capacite = modele.getCapaciteBarman() ;
+
+		// On discrétise. 
+		DataSet l_Barman = new DataSet() ;
+
+		for( int k = 0 ; k < t ; k++)
+		{
+			l_Barman.add(modele.lambdaBarman((double)k));
+		}
+
+		/*
+		 * Création du vecteur x(t) qui contiendra les nombres de commandes passées
+		 * dans le bar aux instants k = 0, 1, ... , (t-1) .
+		 */
+				
+		DataSet x = new DataSet() ;
+		x.add(0.0) ;
+				    
+		/*
+		 * Le nombre x[k] ne peut déjà pas être plus grand que le nombre de
+		 * personnes dans la salle un instant plus tôt : ce qui explique la présence
+		 * du min. Ensuite le nombre de commandes est proportionnel au nombre de
+		 * personnes dans le bar un instant plus tôt.
+		 */
+		
+		for(int k = 1 ; k<t ; k++)
+		{
+		   	x.add(  Math.min(Math.min(capacite, X.get(k-1)), poissrnd(l_Barman.get(k-1)* X.get(k-1)))  );
+		}     
+				        
+		return x ;
 	}
 	
 	/**************************************************************************************/

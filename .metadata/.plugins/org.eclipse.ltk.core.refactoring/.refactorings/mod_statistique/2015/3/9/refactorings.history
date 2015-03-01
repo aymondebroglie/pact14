@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;ones&apos; in &apos;modele.DataSet.constant(...)&apos; to &apos;constant&apos;&#x0D;&#x0A;- Original project: &apos;mod_statistique&apos;&#x0D;&#x0A;- Original element: &apos;modele.DataSet.constant(int, double).ones&apos;&#x0D;&#x0A;- Renamed element: &apos;ones&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;ones&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;modele{DataSet.java[DataSet~constant~I~D@ones!2400!2429!2408!2411!QDataSet;!0!false" name="constant" references="true" stamp="1425175272921" version="1.0"/>
+</session>

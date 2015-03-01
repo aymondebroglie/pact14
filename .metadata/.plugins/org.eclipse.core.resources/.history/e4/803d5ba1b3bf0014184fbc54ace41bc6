@@ -1,0 +1,81 @@
+package modele;
+
+import java.lang.Math ;
+
+public class Modele 
+{
+	private static final double e = Math.exp(1) ;
+	private double t = 600 ;
+	
+	public Modele()
+	{
+		
+	}
+	
+	protected double lambdaIN(double x)
+	{	    
+	    double in = 1.5 ;
+	    	    
+	    double t1 = (3/10)*t ;
+	    double t2 = (5/10)*t ;
+	    double t3 = (9.5/10)*t ;
+	    
+	    double y = 0 ;
+
+	    if( (x >= 0) && (x < t1) )
+	    {
+	    	y = in*e*Math.exp( -1/Math.pow( 1-((x/t1)-1 ),4) ) ;
+	    }
+
+	    if( (x >= t1) && (x < t2) )
+	    {
+	    	y = in ;
+	    }
+	    
+	    if( (t2<= x) && (x <t3) )
+	    {
+	    	y = in*e*Math.exp( -1/Math.pow( 1-((x-t2)/(t3-t2)), 4 ) ) ;
+	    }  
+	    
+	    return y ;	    
+	}
+	
+	protected double lambdaOUT(double x)
+	{
+		double out = 1.5 ;
+	    	    
+	    double t1 = (0.5/10)*t ;
+	    double t2 = (4/10)*t ;
+	    double t3 = (9/10)*t ;
+	    double t4 = (11/10)*t ;
+
+	    double y = 0 ;
+
+	    if( (x >= t1) && (x < t2))
+	    {
+	        y = out*e*Math.exp( -1/Math.pow( 1-(((x-t1)/(t2-t1))-1),2) ) ;
+	    }
+
+	    if( (t2<= x) && (x <t) )
+	    {
+	    	y = out*e*Math.exp( -1/Math.pow( 1-(((x-t2)/(t4-t2)) ),4) ) ;
+	    } 
+	    
+	    if( (x >= t3) && (x < t) )
+	    {
+	    	y = y + Math.pow(10,-2)*Math.exp( (1-2*((x-t3)/(t-t3)))/(((x-t3)/(t-t3))*(((x-t3)/(t-t3))-1)) ) ;
+	    }
+	        
+	    return y ;
+	}
+	
+	protected double lambdaBarman(double x)
+	{
+		
+	}
+	
+	public static void plotLambda()
+	{
+		
+	}
+}

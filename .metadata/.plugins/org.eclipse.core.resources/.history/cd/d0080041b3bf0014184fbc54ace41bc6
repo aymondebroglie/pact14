@@ -1,0 +1,50 @@
+package modele;
+
+import java.lang.Math ;
+
+public class Modele 
+{
+	public Modele()
+	{
+		
+	}
+	
+	protected double lambdaIN(double x)
+	{
+		double e = Math.exp(1) ;
+	    
+	    double in = 1.5 ;
+	    
+	    double t = 600 ;
+	    double t1 = (3/10)*t ;
+	    double t2 = (5/10)*t ;
+	    double t3 = (9.5/10)*t ;
+	    
+
+	    double y = 0 ;
+
+	    if( (x >= 0) && (x < t1) )
+	        y = in*e*Math.exp( -1/Math.pow( 1-((x/t1)-1 ),4) ) ;
+	    
+
+	    if( (x >= t1) && (x < t2) )
+	        y = in ;
+	    
+	    
+	    if( (t2<= x) && (x <t3) )
+	        y = in*e*Math.exp( -1/Math.pow( 1-((x-t2)/(t3-t2)), 4 ) ) ;
+	    
+	    return(y);
+	    
+	}
+	
+	protected double lambdaOUT(double x)
+	{
+		
+	}
+	
+	protected double lambdaBarman(double x)
+	{
+		
+	}
+}

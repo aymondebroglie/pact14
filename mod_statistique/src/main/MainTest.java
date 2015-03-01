@@ -21,6 +21,14 @@ public class MainTest
 		
 		Y = B.moindrecarre();
 		System.out.println(Y) ;
+		
+		int t = 2 ;
+		
+		double t1 = 1.5 ;
+		
+		double m = Math.min(t ,t1) ;
+		
+		System.out.println(m);
 	}
 
 }
