@@ -1,0 +1,47 @@
+package main;
+
+import modele.Alea;
+import modele.BarModele;
+import modele.DataSet;
+import modele_exceptions.DimensionException;
+import modele_exceptions.TestException;
+
+public class MainTest 
+{
+
+	public static void main(String[] args) throws DimensionException, TestException 
+	{
+		
+		/*System.out.println("***************************************") ;		
+		 
+		for(int i = 0 ; i < 5 ; i++)
+		{
+			int a = Alea.randomPoisson(10) ;
+			System.out.println(a);
+		}
+		
+		System.out.println("***************************************") ;*/
+		
+		/* DataSet X = DataSet.salle() ;
+		System.out.println("X = " + X ) ; */
+		/*DataSet x = DataSet.barman(X) ;
+		System.out.println("x = " + x ) ;*/
+		
+		
+		
+		int t = 600 ;
+
+		System.out.println(t) ;
+		
+		double t1 = (3/10)*(double)t ;
+		System.out.println(t1) ;
+		double t2 = (double) t ;
+		System.out.println(t2) ;
+		double t12 = (3./10.)*t2 ;
+		System.out.println(t12) ;
+		
+		
+		
+	}
+
+}

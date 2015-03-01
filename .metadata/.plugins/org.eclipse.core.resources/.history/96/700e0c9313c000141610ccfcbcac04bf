@@ -1,0 +1,5 @@
+package modele_exceptions;
+
+public class TestException {
+
+}

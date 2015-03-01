@@ -1,0 +1,19 @@
+package modele;
+
+import java.util.Random;
+
+// classe inspirée du poly de MDI104 : page 159
+public class Alea 
+{
+	private static Random alea = new Random() ;
+	
+	public static int uniforme()
+	{
+		return alea.nextInt();
+	}
+	
+	public static int exponentielle(double lambda)
+	{
+		return (int) (  -Math.log(1-Alea.uniforme())/lambda   ) ;
+	}
+}

@@ -1,0 +1,54 @@
+package modele;
+
+import java.util.ArrayList;
+import java.util.Random;
+
+// classe inspirée du poly de MDI104 : page 159
+public class Alea 
+{
+	private static Random alea = new Random() ;
+	
+	public static int uniforme()
+	{
+		return alea.nextInt();
+	}
+	
+	public static int factorielle(int k)
+	{
+		int result = 1 ;
+		
+		for(int i = 0 ; i<k ; i++)
+		{
+			result = result*(i+1) ;
+		}
+		
+		return result ;
+	}
+	
+	public static double loiPoisson(double lambda , int k)
+	{
+		return (  Math.pow(lambda, k)/(Alea.factorielle(k))*Math.exp(-lambda)  ) ;
+	}
+	
+	public static ArrayList<Double> distributionPoisson(double lambda)
+	{
+		ArrayList<Double> distribution = new ArrayList<Double>() ;
+		
+		double poids = 0 ;
+		int i = 0 ;
+		
+		while(poids < 0.95)
+		{
+			double p_i = Alea.loiPoisson(lambda, i) ;
+			distribution.add( p_i ) ;
+			poids = poids + p_i ;
+			i++ ;
+		}
+		
+		distribution.add(0, distribution.get(0) + (1 - poids) ) ;
+		
+		return distribution ;
+	}
+	
+	
+}

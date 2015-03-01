@@ -1,34 +1,33 @@
 package main;
 
-import java.util.ArrayList;
-
+import modele.Alea;
 import modele.DataSet;
 import modele_exceptions.DimensionException;
+import modele_exceptions.TestException;
 
 public class MainTest 
 {
 
-	public static void main(String[] args) throws DimensionException 
+	public static void main(String[] args) throws DimensionException, TestException 
 	{
-		DataSet A = DataSet.stairs(4);
-		DataSet B = DataSet.ones(6);
 		
-
+		System.out.println("***************************************") ;		
+		 
+		for(int i = 0 ; i < 5 ; i++)
+		{
+			int a = Alea.randomPoisson(10) ;
+			System.out.println(a);
+		}
+		
+		System.out.println("***************************************") ;
+		
+		 DataSet X = DataSet.salle() ;
+		System.out.println("X = " + X ) ; 
+		DataSet x = DataSet.barman(X) ;
+		System.out.println("x = " + x ) ;
 		
 		
-		ArrayList<Double> Y = A.moindrecarre();
-		System.out.println(Y);
 		
-		Y = B.moindrecarre();
-		System.out.println(Y) ;
-		
-		int t = 2 ;
-		
-		double t1 = 1.5 ;
-		
-		double m = Math.min(t ,t1) ;
-		
-		System.out.println(m);
 	}
 
 }
