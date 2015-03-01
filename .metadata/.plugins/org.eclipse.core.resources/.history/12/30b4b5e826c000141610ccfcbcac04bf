@@ -213,26 +213,6 @@ public class DataSet extends ArrayList<Double>
 		return x ;
 	}
 	
-	// evolution de la quantite totale d'alcool servie
-	public static DataSet commandes(DataSet x)
-	{
-		int t = x.size() ;
-		
-		DataSet commandes = new DataSet() ;
-		
-		double coeff = 0.0 ;
-		commandes.add(coeff) ;
-		
-		for (int k= 1 ; k<t ; k++ )
-		{
-			coeff = coeff + x.get(k) ; 
-		    commandes.add(coeff) ; 
-		}
-		
-		return commandes ;
-		        
-	}
-	
 	/**************************************************************************************/
 	// methode moindrecarre
 	

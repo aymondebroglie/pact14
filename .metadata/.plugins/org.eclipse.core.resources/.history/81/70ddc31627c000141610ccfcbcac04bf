@@ -213,7 +213,6 @@ public class DataSet extends ArrayList<Double>
 		return x ;
 	}
 	
-	// evolution de la quantite totale d'alcool servie
 	public static DataSet commandes(DataSet x)
 	{
 		int t = x.size() ;
