@@ -2,7 +2,7 @@ package modele;
 
 import java.lang.Math ;
 
-public class BarModele implements BarModeleInterface
+public class BarModele 
 {
 	private static final double e = Math.exp(1) ;
 	

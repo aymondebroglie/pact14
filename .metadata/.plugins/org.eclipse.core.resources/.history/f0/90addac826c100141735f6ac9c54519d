@@ -7,11 +7,11 @@ import java.lang.Math ;
 import modele_exceptions.DimensionException ;
 import modele_exceptions.TestException;
 
-public class DataSet extends ArrayList<Double> implements DataSetInterface
+public class DataSet extends ArrayList<Double>
 {
 	private static final long serialVersionUID = 1L ;
 	
-	public DataSet() 
+	public DataSet()
 	{
 		super() ;
 	}
