@@ -20,7 +20,7 @@ public interface BDDInterface
 	public boolean modifierCommandeDeBarman(int rFID,int cPK);
 	public boolean supprimerBarman(int rFID);
 //Boisson
-    public boolean ajouterBoisson(long codeBarre,String nom, int volume, double degree);
+    public boolean ajouterBoisson(long codeBarre,String nom, double degree);
 //Cocktail
     
 //Commande

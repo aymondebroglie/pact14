@@ -122,13 +122,12 @@ public class OpenFoodFacts
 	}
 	
 	// ajoute les données récoltées à la base de données
-	public boolean ajouterBoisson(List<QuerySolution> solutionlist) throws VolumeException
+	public boolean ajouterBoisson(List<QuerySolution> solutionlist)
 	{
-		long code = this.getCode(solutionlist);
-		String nom = this.getName(solutionlist) ;
-		int volume = this.getVolume(nom) ;
-		double degree = this.getDegree(solutionlist);
+		String nom = getName(solutionlist) ;
+		long code = getCode(solutionlist);
+		double degree = getDegree(solutionlist);
 				
-		return bdd.ajouterBoisson( code, nom, volume, degree) ;
+		return bdd.ajouterBoisson( code, nom, degree) ;
 	}
 }
