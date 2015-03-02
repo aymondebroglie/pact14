@@ -75,13 +75,13 @@ public class OpenFoodFacts implements OFFInterface
 	// renvoie (si possible) le volume de la bouteille 
 	public int getVolume(String name) throws VolumeException
 	{
-		// on vérifie la présence d'un volume par la présence de " cl " (volumes donnés en centilitres)
+		// on vï¿½rifie la prï¿½sence d'un volume par la prï¿½sence de " cl " (volumes donnï¿½s en centilitres)
 		if(!name.contains(" cl "))
 		{
 			throw new VolumeException() ;
 		}
 		
-		// l'endroit où se trouve " cl " nous donne la fin de la séquence de chiffres correspondants au volume.
+		// l'endroit oï¿½ se trouve " cl " nous donne la fin de la sï¿½quence de chiffres correspondants au volume.
 		int i_fin = name.indexOf(" cl ")  ;
 		int k = i_fin  ;
 		
@@ -94,9 +94,9 @@ public class OpenFoodFacts implements OFFInterface
 		}
 		while( chartest != ' ' ) ;
 		int i_debut = k+1 ;
-		// Rq : i_debut = k+1 pour ne pas récupérer l'espace à gauche
+		// Rq : i_debut = k+1 pour ne pas rï¿½cupï¿½rer l'espace ï¿½ gauche
 		
-		// on a l'indice de début, l'indice de fin : on récupère la portion de string correspondante
+		// on a l'indice de dï¿½but, l'indice de fin : on rï¿½cupï¿½re la portion de string correspondante
 		String svolume = name.subSequence(i_debut, i_fin).toString() ;
 		
 		// on retourne cette portion convertie en int		
@@ -112,7 +112,7 @@ public class OpenFoodFacts implements OFFInterface
 		return codebarre ;
 	}
 	
-	// renvoie le degré d'alcool de la boisson
+	// renvoie le degrï¿½ d'alcool de la boisson
 	public double getDegree(List<QuerySolution> solutionlist)
 	{
 		QuerySolution qs = solutionlist.get(0) ;
@@ -121,14 +121,26 @@ public class OpenFoodFacts implements OFFInterface
 		return degree ;
 	}
 	
-	// ajoute les données récoltées à la base de données
-	public boolean ajouterBoisson(List<QuerySolution> solutionlist) throws VolumeException
-	{
+	// ajoute les donnï¿½es rï¿½coltï¿½es ï¿½ la base de donnï¿½es
+	public boolean ajouterBoisson(long codebarre)
+	{   try
+	   {
+		List<QuerySolution> solutionlist=getResults(long codebarre);
 		long code = this.getCode(solutionlist);
 		String nom = this.getName(solutionlist) ;
 		int volume = this.getVolume(nom) ;
 		double degree = this.getDegree(solutionlist);
-				
 		return bdd.ajouterBoisson( code, nom, volume, degree) ;
+	   }
+	  catch(VolumeException e)
+	  {
+		  e.printStackTrace();
+		  return false;
+	  }
+	  catch(BarCodeException e)
+	  {
+		  e.printStackTrace();
+		  return false;
+	  }
 	}
 }
