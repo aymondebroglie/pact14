@@ -14,7 +14,7 @@ import com.hp.hpl.jena.query.ResultSetFormatter;
 import BDD.BDDInterface;
 
 
-public class OpenFoodFacts implements OFFInterface
+public class OpenFoodFacts
 {
 	private BDDInterface bdd ;
 	private final static HttpAuthenticator authenticator = new SimpleAuthenticator("off", "off".toCharArray());	
