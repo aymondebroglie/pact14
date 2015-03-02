@@ -1,0 +1,5 @@
+package openFoodFactsExceptions;
+
+public class HasVolumeException extends Exception {
+
+}

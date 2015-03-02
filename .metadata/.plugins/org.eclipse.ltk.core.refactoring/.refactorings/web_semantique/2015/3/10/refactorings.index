@@ -1,3 +1,9 @@
 1425325862627	Rename local variable 'm_results'
 1425325892786	Rename local variable 'querysolution'
 1425325905887	Rename local variable 'results'
+1425328575715	Move compilation unit
+1425328588193	Delete element
+1425328910107	Move compilation unit
+1425328912988	Delete element
+1425329009291	Rename type 'HasVolumeException'
+1425329024975	Rename type 'HolumeException'

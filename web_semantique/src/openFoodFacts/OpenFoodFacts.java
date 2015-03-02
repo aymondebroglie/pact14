@@ -1,24 +1,16 @@
 package openFoodFacts;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
 
+import openFoodFactsExceptions.BarCodeException;
+import openFoodFactsExceptions.VolumeException;
 import org.apache.jena.atlas.web.auth.HttpAuthenticator;
-import org.apache.jena.atlas.web.auth.PreemptiveBasicAuthenticator;
-import org.apache.jena.atlas.web.auth.ScopedAuthenticator;
 import org.apache.jena.atlas.web.auth.SimpleAuthenticator;
-
-import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
-import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.query.ResultSetFormatter;
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
-
 import BDD.BDDInterface;
 
 
@@ -36,11 +28,6 @@ public class OpenFoodFacts
 	
 	public List<QuerySolution> getResults(long codebarre) throws BarCodeException  
 	{
-		
-		// Create an empty in-memory model and populate it from the graph
-		//Model model = ModelFactory.createDefaultModel();
-		//model.read(ENDPOINT); 
-						
 		// Create a new query
 		String queryString =
 				
@@ -55,9 +42,6 @@ public class OpenFoodFacts
 		+ 			"?s food:alcoholPer100g ?degree."
 		+ 		"}"
 		+ 	"}" ;
-
-		
-		/** System.out.println(queryString) ; */
 
 		// Execute and authenticate the query and obtain results 
 		QueryExecution query_execution = QueryExecutionFactory.sparqlService(ENDPOINT, queryString, authenticator);
@@ -78,8 +62,8 @@ public class OpenFoodFacts
 							
 		return solutionlist ;		
 	}
-	
-	// renvoie le nom de la boisson (second résultat)
+
+	// renvoie le nom de la boisson
 	public String getName(List<QuerySolution> solutionlist)
 	{
 		QuerySolution qs = solutionlist.get(0) ;
@@ -87,8 +71,39 @@ public class OpenFoodFacts
 		String name = qs.getLiteral("name").getString();
 		return name ;
 	}
+	
+	// renvoie (si possible) le volume de la bouteille 
+	public int getVolume(String name) throws VolumeException
+	{
+		// on vérifie la présence d'un volume par la présence de " cl " (volumes donnés en centilitres)
+		if(!name.contains(" cl "))
+		{
+			throw new VolumeException() ;
+		}
 		
-	// renvoie le codebarre de la boisson (troisième résultat)
+		// l'endroit où se trouve " cl " nous donne la fin de la séquence de chiffres correspondants au volume.
+		int i_fin = name.indexOf(" cl ")  ;
+		int k = i_fin  ;
+		
+		// on descend jusqu'au prochain espace
+		char chartest ;
+		do
+		{
+			k-- ;
+			chartest = name.charAt(k) ;
+		}
+		while( chartest != ' ' ) ;
+		int i_debut = k+1 ;
+		// Rq : i_debut = k+1 pour ne pas récupérer l'espace à gauche
+		
+		// on a l'indice de début, l'indice de fin : on récupère la portion de string correspondante
+		String svolume = name.subSequence(i_debut, i_fin).toString() ;
+		
+		// on retourne cette portion convertie en int		
+		return Integer.parseInt(svolume) ;	
+	}
+	
+	// renvoie le codebarre de la boisson
 	public long getCode(List<QuerySolution> solutionlist)
 	{
 		QuerySolution qs = solutionlist.get(0) ;
@@ -97,7 +112,7 @@ public class OpenFoodFacts
 		return codebarre ;
 	}
 	
-	// renvoie le degré d'alcool de la boisson (quatrième résultat)
+	// renvoie le degré d'alcool de la boisson
 	public double getDegree(List<QuerySolution> solutionlist)
 	{
 		QuerySolution qs = solutionlist.get(0) ;
@@ -106,6 +121,7 @@ public class OpenFoodFacts
 		return degree ;
 	}
 	
+	// ajoute les données récoltées à la base de données
 	public boolean ajouterBoisson(List<QuerySolution> solutionlist)
 	{
 		String nom = getName(solutionlist) ;

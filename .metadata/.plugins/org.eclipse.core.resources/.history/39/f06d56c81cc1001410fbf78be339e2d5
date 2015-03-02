@@ -1,0 +1,12 @@
+package openFoodFactsExceptions;
+
+public class HasVolumeException extends Exception 
+{
+
+	private static final long serialVersionUID = 1L;
+
+	public HasVolumeException()
+	{
+		super("WARNING : no informations about contenant's volume detected") ;
+	}
+}

@@ -1,0 +1,12 @@
+package openFoodFactsExceptions;
+
+public class HolumeException extends Exception 
+{
+
+	private static final long serialVersionUID = 1L;
+
+	public HolumeException()
+	{
+		super("WARNING : no informations about contenant's volume detected") ;
+	}
+}

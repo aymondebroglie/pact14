@@ -1,0 +1,143 @@
+package openFoodFacts;
+
+import java.util.List;
+
+import openFoodFactsExceptions.BarCodeException;
+import openFoodFactsExceptions.VolumeException;
+
+import org.apache.jena.atlas.web.auth.HttpAuthenticator;
+import org.apache.jena.atlas.web.auth.SimpleAuthenticator;
+
+import com.hp.hpl.jena.query.QueryExecution;
+import com.hp.hpl.jena.query.QueryExecutionFactory;
+import com.hp.hpl.jena.query.QuerySolution;
+import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.query.ResultSetFormatter;
+
+import BDD.BDDInterface;
+
+
+public class OpenFoodFacts
+{
+	private BDDInterface bdd ;
+	private final static HttpAuthenticator authenticator = new SimpleAuthenticator("off", "off".toCharArray());	
+	private final static String ENDPOINT = "http://opendata1.opendata.u-psud.fr:8890/sparql-auth/" ;
+
+	
+	public OpenFoodFacts(BDDInterface bdd) 
+	{
+		this.bdd = bdd ;
+	}
+	
+	public List<QuerySolution> getResults(long codebarre) throws BarCodeException  
+	{
+		
+		// Create an empty in-memory model and populate it from the graph
+		//Model model = ModelFactory.createDefaultModel();
+		//model.read(ENDPOINT); 
+						
+		// Create a new query
+		String queryString =
+				
+		"prefix food: <http://data.lirmm.fr/ontologies/food#>\n " +	
+			"select distinct ?s ?name ?codebarre ?degree where "
+		+ 	"{"
+		+		"graph <http://fr.openfoodfacts.org> "
+		+ 		"{"
+		+ 			"?s food:name ?name."
+		+ 			"?s food:code '" + codebarre + "'."
+		+ 			"?s food:code ?codebarre."
+		+ 			"?s food:alcoholPer100g ?degree."
+		+ 		"}"
+		+ 	"}" ;
+
+		
+		/** System.out.println(queryString) ; */
+
+		// Execute and authenticate the query and obtain results 
+		QueryExecution query_execution = QueryExecutionFactory.sparqlService(ENDPOINT, queryString, authenticator);
+		ResultSet results = query_execution.execSelect();
+				        
+		// Output query results
+		List<QuerySolution> solutionlist = ResultSetFormatter.toList(results);		
+		
+		// Important - free up resources used running the query					
+		query_execution.close();
+		
+		int length = solutionlist.size() ;
+		
+		if( length != 1)
+		{
+			throw new BarCodeException(codebarre) ;
+		}
+							
+		return solutionlist ;		
+	}
+
+	// renvoie le nom de la boisson
+	public String getName(List<QuerySolution> solutionlist)
+	{
+		QuerySolution qs = solutionlist.get(0) ;
+		
+		String name = qs.getLiteral("name").getString();
+		return name ;
+	}
+	
+	// renvoie si possible le volume de la bouteille 
+	public int getVolume(String name) throws VolumeException
+	{
+		if(!name.contains(" cl "))
+		{
+			throw new VolumeException() ;
+		}
+		
+		int i_fin = name.indexOf(name)  ;
+		int k = i_fin ;
+		
+		System.out.println(k) ;
+		
+		char chartest = name.charAt(k) ;
+		while( chartest == ' ' )
+		{
+			k-- ;
+		}
+		int i_debut = k+1 ;
+		
+		String svolume = (String) name.subSequence(i_debut, i_fin) ;
+		System.out.println(svolume);
+		
+		return 1 ;
+		
+		
+	}
+	
+	
+		
+	// renvoie le codebarre de la boisson
+	public long getCode(List<QuerySolution> solutionlist)
+	{
+		QuerySolution qs = solutionlist.get(0) ;
+		
+		long codebarre = qs.getLiteral("codebarre").getLong();
+		return codebarre ;
+	}
+	
+	// renvoie le degré d'alcool de la boisson
+	public double getDegree(List<QuerySolution> solutionlist)
+	{
+		QuerySolution qs = solutionlist.get(0) ;
+		
+		double degree = qs.getLiteral("degree").getDouble();
+		return degree ;
+	}
+	
+	// ajoute les données récoltées à la base de données
+	public boolean ajouterBoisson(List<QuerySolution> solutionlist)
+	{
+		String nom = getName(solutionlist) ;
+		long code = getCode(solutionlist);
+		double degree = getDegree(solutionlist);
+				
+		return bdd.ajouterBoisson( code, nom, degree) ;
+	}
+}
