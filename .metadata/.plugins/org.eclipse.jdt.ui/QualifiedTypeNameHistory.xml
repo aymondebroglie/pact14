@@ -20,4 +20,6 @@
 <fullyQualifiedTypeName name="openFoodFacts.OpenFoodFacts"/>
 <fullyQualifiedTypeName name="com.hp.hpl.jena.query.ResultSet"/>
 <fullyQualifiedTypeName name="org.apache.jena.atlas.web.auth.SimpleAuthenticator"/>
+<fullyQualifiedTypeName name="com.hp.hpl.jena.query.QuerySolution"/>
+<fullyQualifiedTypeName name="java.util.List"/>
 </qualifiedTypeNameHistroy>

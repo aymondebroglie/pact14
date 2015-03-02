@@ -1,0 +1,121 @@
+package openFoodFacts;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+
+import org.apache.jena.atlas.web.auth.HttpAuthenticator;
+import org.apache.jena.atlas.web.auth.PreemptiveBasicAuthenticator;
+import org.apache.jena.atlas.web.auth.ScopedAuthenticator;
+import org.apache.jena.atlas.web.auth.SimpleAuthenticator;
+
+import com.hp.hpl.jena.query.Query;
+import com.hp.hpl.jena.query.QueryExecution;
+import com.hp.hpl.jena.query.QueryExecutionFactory;
+import com.hp.hpl.jena.query.QueryFactory;
+import com.hp.hpl.jena.query.QuerySolution;
+import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.query.ResultSetFormatter;
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
+
+import BDD.BDDInterface;
+
+
+public class OpenFoodFacts
+{
+	private BDDInterface bdd;
+	private final static String ENDPOINT = "http://opendata1.opendata.u-psud.fr:8890/sparql-auth/" ;
+	/*private final static String USERNAME = "off" ;
+	private final static String PASSWORD = "off" ; */
+	
+	
+	public OpenFoodFacts(BDDInterface bdd) 
+	{
+		this.bdd = bdd ;
+	}
+	
+	public List<QuerySolution> getResults(long codebarre) throws URISyntaxException
+	{
+		
+		// Create an empty in-memory model and populate it from the graph
+		//Model model = ModelFactory.createDefaultModel();
+		//model.read(ENDPOINT); 
+						
+		// Create a new query
+		String queryString =
+				
+		"prefix food: <http://data.lirmm.fr/ontologies/food#>\n " +	
+			"select distinct ?s ?name ?codebarre ?degree where "
+		+ 	"{"
+		+		"graph <http://fr.openfoodfacts.org> "
+		+ 		"{"
+		+ 			"?s food:name ?name."
+		+ 			"?s food:code '" + codebarre + "'."
+		+ 			"?s food:code ?codebarre."
+		+ 			"?s food:alcoholPer100g ?degree."
+		+ 		"}"
+		+ 	"}" ;
+
+		System.out.println(queryString) ;
+			
+		// Query query = QueryFactory.create(queryString);
+
+		// Execute and authenticate the query and obtain results 
+		/*QueryExecution query_execution = QueryExecutionFactory.create(query, model);*/ 
+	
+					
+		HttpAuthenticator authenticator = new SimpleAuthenticator("off", "off".toCharArray());
+		
+		
+		
+		QueryExecution query_execution = QueryExecutionFactory.sparqlService(ENDPOINT, queryString, authenticator);
+		ResultSet results = query_execution.execSelect();
+				        
+		// Output query results
+		List<QuerySolution> solutionlist = ResultSetFormatter.toList(results);		
+		
+		// Important - free up resources used running the query					
+		query_execution.close();
+							
+		return solutionlist ;		
+	}
+	
+	// renvoie le nom de la boisson (second résultat)
+	public String getName(List<QuerySolution> solutionlist)
+	{
+		QuerySolution qs = solutionlist.get(0) ;
+		
+		String name = qs.getLiteral("name").getString();
+		return name ;
+	}
+		
+	// renvoie le codebarre de la boisson (troisième résultat)
+	public long getCode(List<QuerySolution> solutionlist)
+	{
+		QuerySolution qs = solutionlist.get(0) ;
+		
+		long codebarre = qs.getLiteral("codebarre").getLong();
+		return codebarre ;
+	}
+	
+	// renvoie le degré d'alcool de la boisson (quatrième résultat)
+	public int getDegree(List<QuerySolution> solutionlist)
+	{
+		QuerySolution qs = solutionlist.get(0) ;
+		
+		int degree = qs.getLiteral("degree").getInt();
+		return degree ;
+	}
+	
+	public boolean ajouterBoisson(ResultSet results)
+	{
+		String r_name = getName(results);
+
+		String nom = getName(results) ;
+		long code = getCode(results);
+		int degree = getDegree(results);
+				
+		return bdd.ajouterBoisson( code, nom, degree) ;
+	}
+}
