@@ -43,15 +43,15 @@ public class OpenFoodFacts
 		// Create a new query
 		String queryString =
 				
-		"prefix food: <http://data.lirmm.fr/ontologies/food#>\n " +	
+		"prefix food: <http://data.lirmm.fr/ontologies/food#name>\n " +	
 			"select distinct ?s ?name ?codebarre ?degree where "
 		+ 	"{"
 		+		"graph <http://fr.openfoodfacts.org> "
 		+ 		"{"
-		+ 			"?s food:name ?name."
-		+ 			"?s food:code '" + codebarre + "'."
-		+ 			"?s food:code ?codebarre."
-		+ 			"?s food:alcoholPer100g ?degree."
+		+ 			"?s food#name ?name."
+		+ 			"?s food#code " + codebarre + "."
+		+ 			"?s food#code ?codebarre."
+		+ 			"?s food#alcoholPer100g ?degree."
 		+ 		"}"
 		+ 	"}" ;
 

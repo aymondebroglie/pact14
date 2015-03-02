@@ -23,7 +23,7 @@ import BDD.BDDInterface;
 public class OpenFoodFacts
 {
 	private BDDInterface bdd;
-	private final static String ENDPOINT = "http://opendata1.opendata.u-psud.fr:8890/sparql-auth/" ;
+	private final static String ENDPOINT = "http://off:off@opendata1.opendata.u-psud.fr:8890/sparql-auth/" ;
 	/*private final static String USERNAME = "off" ;
 	private final static String PASSWORD = "off" ; */
 	
@@ -37,27 +37,27 @@ public class OpenFoodFacts
 	{
 		
 		// Create an empty in-memory model and populate it from the graph
-		//Model model = ModelFactory.createDefaultModel();
-		//model.read(ENDPOINT); 
+		Model model = ModelFactory.createDefaultModel();
+		model.read(ENDPOINT); 
 						
 		// Create a new query
 		String queryString =
 				
-		"prefix food: <http://data.lirmm.fr/ontologies/food#>\n " +	
 			"select distinct ?s ?name ?codebarre ?degree where "
 		+ 	"{"
+		+		"prefix food: <http://data.lirmm.fr/ontologies/food#name> "	
 		+		"graph <http://fr.openfoodfacts.org> "
 		+ 		"{"
-		+ 			"?s food:name ?name."
-		+ 			"?s food:code '" + codebarre + "'."
-		+ 			"?s food:code ?codebarre."
-		+ 			"?s food:alcoholPer100g ?degree."
+		+ 			"?s food#name ?name."
+		+ 			"?s food#code " + codebarre + "."
+		+ 			"?s food#code ?codebarre."
+		+ 			"?s food#alcoholPer100g ?degree."
 		+ 		"}"
 		+ 	"}" ;
 
 		System.out.println(queryString) ;
 			
-		// Query query = QueryFactory.create(queryString);
+		/*Query query = QueryFactory.create(queryString);*/
 
 		// Execute and authenticate the query and obtain results 
 		/*QueryExecution query_execution = QueryExecutionFactory.create(query, model);*/ 
@@ -71,7 +71,7 @@ public class OpenFoodFacts
 		ResultSet results = query_execution.execSelect();
 				        
 		// Output query results
-		ResultSetFormatter.out(System.out, results);
+		ResultSetFormatter.out(System.out, results, queryString);
 
 		// Important - free up resources used running the query					
 		query_execution.close();

@@ -49,7 +49,7 @@ public class OpenFoodFacts
 		+		"graph <http://fr.openfoodfacts.org> "
 		+ 		"{"
 		+ 			"?s food:name ?name."
-		+ 			"?s food:code '" + codebarre + "'."
+		+ 			"?s food:code " + codebarre + "."
 		+ 			"?s food:code ?codebarre."
 		+ 			"?s food:alcoholPer100g ?degree."
 		+ 		"}"
