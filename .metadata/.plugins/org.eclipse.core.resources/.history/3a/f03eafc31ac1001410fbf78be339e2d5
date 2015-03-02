@@ -106,11 +106,13 @@ public class OpenFoodFacts
 		return degree ;
 	}
 	
-	public boolean ajouterBoisson(List<QuerySolution> solutionlist)
+	public boolean ajouterBoisson(ResultSet results)
 	{
-		String nom = getName(solutionlist) ;
-		long code = getCode(solutionlist);
-		double degree = getDegree(solutionlist);
+		String r_name = getName(results);
+
+		String nom = getName(results) ;
+		long code = getCode(results);
+		int degree = getDegree(results);
 				
 		return bdd.ajouterBoisson( code, nom, degree) ;
 	}
