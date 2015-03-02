@@ -22,4 +22,5 @@
 <fullyQualifiedTypeName name="org.apache.jena.atlas.web.auth.SimpleAuthenticator"/>
 <fullyQualifiedTypeName name="com.hp.hpl.jena.query.QuerySolution"/>
 <fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="openFoodFactsExceptions.BarCodeException"/>
 </qualifiedTypeNameHistroy>
