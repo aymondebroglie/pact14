@@ -27,7 +27,7 @@ public class ViewStocksManagement extends JPanel  implements ItemListener
 			}
 	private BoissonCheckBox vodka = new BoissonCheckBox("Vodka");
 	private BoissonCheckBox  whisky = new BoissonCheckBox ("Whisky");
-	private BoissonCheckBox  alcool= new BoissonCheckBox ("Whisky");
+	private BoissonCheckBox  alcool= new BoissonCheckBox ("Alcool");
 	private static final long serialVersionUID = 1L;
 	private Controller controller;
 
