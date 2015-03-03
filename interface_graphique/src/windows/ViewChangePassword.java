@@ -29,9 +29,6 @@ public class ViewChangePassword extends JPanel {
 							
 		}		
 	}
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	
@@ -45,11 +42,11 @@ public class ViewChangePassword extends JPanel {
 		this.add(new JLabel("Nouveau mot de passe"));
 		nmdp1.setPreferredSize(new Dimension(300,25));
 		nmdp2.setPreferredSize(new Dimension(300,25));
-		JButton boutton = new JButton("OK");
-		boutton.addActionListener(mp);
+		JButton bouton = new JButton("OK");
+		bouton.addActionListener(mp);
 		this.add(nmdp1);
 		this.add(new JLabel("Confirmer le mot de passe"));
 		this.add(nmdp2);
-		this.add(boutton,BorderLayout.WEST);
+		this.add(bouton);
 	}
 }

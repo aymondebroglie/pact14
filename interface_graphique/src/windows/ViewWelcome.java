@@ -1,9 +1,13 @@
 package windows;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import controller.Controller;
 
 public class ViewWelcome extends JPanel 
@@ -35,6 +39,8 @@ public class ViewWelcome extends JPanel
 	public ViewWelcome(Controller view) 
 	{
 		this.view = view;
+		
+		// this.add(new JLabel("Bonjour !"));
 		BoutonBarman boutonBarman = new BoutonBarman();
 		BoutonGestionnaire boutonGestionnaire = new BoutonGestionnaire();
 		barman.addActionListener(boutonBarman);

@@ -33,6 +33,7 @@ public class Window extends JFrame
 	
 	private JMenu settings = new JMenu("Paramètres");
 	private JMenuItem settings_language = new JMenuItem("Langue");
+	private JMenuItem settings_mdp = new JMenuItem("Mot de Passe");
 	private JMenu settings_units = new JMenu("Unités");
 	private JMenuItem settings_units_money = new JMenuItem("Monnaie");
 	private JMenuItem settings_units_metric = new JMenuItem("Système mètrique"); 
@@ -83,6 +84,17 @@ public class Window extends JFrame
 		// Sous_menu 2
 		
 	/** Menu settings*/
+		// Sous-menu mdp	
+		this.settings.add(settings_mdp);
+		this.settings_mdp.addActionListener(new ActionListener()
+		{					
+			public void actionPerformed(ActionEvent arg0)
+			{
+				view.ecranChangeMotDePasse();
+			}
+		});	
+		this.settings.addSeparator() ;
+		
 		// Sous-menu langue
 		this.settings.add(this.settings_language);
 			
@@ -92,6 +104,8 @@ public class Window extends JFrame
 		this.settings.add(this.settings_units);
 			this.settings_units.add(this.settings_units_money);
 			this.settings_units.add(this.settings_units_metric);
+
+		
 		
 	/** Menu help*/
 		this.help.add(this.help_help);

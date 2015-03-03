@@ -22,20 +22,15 @@ public class ViewBossHome extends JPanel
 		
 		JButton consultervosdonnees =  new JButton("Consulter vos donnees");
 		JButton gerervosstocks =  new JButton("Gérer vos stocks");
-		JButton changerMotDePasse = new JButton("Changer le mot de passe");
 		
 		this.add(consultervosdonnees);
-		this.add(gerervosstocks);
-		this.add(changerMotDePasse);
+		this.add(gerervosstocks) ;
 		
 		ConsulterVosDonnees cvd_listener = new ConsulterVosDonnees();
 		consultervosdonnees.addActionListener(cvd_listener);
 		
 		GererVosStocks gvs_listener = new GererVosStocks();
 		gerervosstocks.addActionListener(gvs_listener);
-		
-		ChangeMotdePasse  cmdp_listener = new ChangeMotdePasse();
-		changerMotDePasse.addActionListener(cmdp_listener);
 	}
 	
 	private class ConsulterVosDonnees implements ActionListener 
@@ -52,14 +47,6 @@ public class ViewBossHome extends JPanel
 		public void actionPerformed(ActionEvent arg0) 
 		{
 			view.gestionStocks();
-		}
-	}
-	
-	private class ChangeMotdePasse implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			view.ecranChangeMotDePasse();
-
 		}
 	}
 }
