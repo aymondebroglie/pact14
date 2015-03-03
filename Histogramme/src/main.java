@@ -9,8 +9,10 @@ import org.jfree.chart.*;
 import org.jfree.chart.plot.*; 
 import org.jfree.data.*; 
 import org.jfree.data.general.DefaultPieDataset;
-public class main{
-public static void main(String[] a){
+
+public class main {
+
+	public static void main(String[] a){
 	List<Float> donnees = new ArrayList<Float>();
 	List<String> l1 = new ArrayList<String>();
 	List<String> l2 = new ArrayList<String>();
