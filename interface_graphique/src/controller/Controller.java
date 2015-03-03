@@ -11,18 +11,20 @@ import javax.swing.JPanel;
 import BDD.BDDInterface;
 import windows.*;
 
-
+//Classe permettant de controller ce qui se passe quand on appuie sur un bouton, c'est elle qui
+//interrogera la base de donnée
 public class Controller 
 {
-	//Classe permettant de controller ce qui se passe quand on appuie sur un bouton, c'est elle qui
-	//interrogera la base de donnée
+	// gestion du mot de passe pour la session gestionnaire
+	// attribut + setter
 	private char vraimdp[] = new char[5];
 	
 	public void setMDP(char[] newmdp)
 	{
 		this.vraimdp = newmdp ;
 	}
- 
+  
+	/****************************************************************************************************/
 	
 	private BDDInterface bdd;
 	private Window window;
@@ -50,10 +52,9 @@ public void boutonBarman()
 public void boutonGestionnaire()
 {
 	//Méthode appelée quand on appuie sur Barman sur l'écran d'accueil
-	
 	ViewBossLogin vbh = new ViewBossLogin(this);
-	 window.setContentPane(vbh);
-	 window.validate();
+	window.setContentPane(vbh);
+	window.validate();
 }
 
 /** ViewBarmanHome */
@@ -63,7 +64,7 @@ public void imprimerNote()
 	//Code pour le test, il faudra demander a la base de donnée de nous fournir la note pour le serveur donné
 	
 	JPanel pan = new JPanel();
-	pan.add(new JLabel("réussi"));
+	pan.add(new JLabel("test imprimerNote() réussi"));
 	window.setContentPane(pan);
 	window.validate();
 }
@@ -86,7 +87,10 @@ public void gestionStocks()
 public void retirerGoulot()
 {
 	//Demander quel goulot il faut prendre pour l'instant il ferme la fenêtre pour le test
-	window.dispose();
+	JPanel pan = new JPanel();
+	pan.add(new JLabel("test retirerGoulot() réussi"));
+	window.setContentPane(pan);
+	window.validate();
 	
 }
 
