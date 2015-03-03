@@ -4,6 +4,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 
+import websem.OFFInterface;
+import websem.OpenFoodFacts;
+
 
 
 
@@ -563,6 +566,12 @@ public class BDD implements BDDInterface
 			e.printStackTrace();
 		}
 		return null;
+	}
+	@Override
+	public boolean ajouterBoissonParWeb(long codeBarre) {
+		OFFInterface openfood=new OpenFoodFacts(this);
+		openfood.ajouterBoisson(codeBarre);
+		return false;
 	}
 
 }

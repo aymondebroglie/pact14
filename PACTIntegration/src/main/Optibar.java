@@ -11,9 +11,10 @@ public class Optibar {
 //        bdd.ajouterBoisson(007, "minami", "ke", 10, 0.1);
 		
 // test pour WebSemantique,bien marcher. (il faut connecter à internet)
-		OFFInterface openfood=new OpenFoodFacts(bdd);
+	/*	OFFInterface openfood=new OpenFoodFacts(bdd);
 		openfood.ajouterBoisson(3147690059004L);
-		
+		*/
+		bdd.ajouterBoissonParWeb(3147690059004L);
 	}
 
 }

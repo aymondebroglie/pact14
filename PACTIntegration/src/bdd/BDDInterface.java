@@ -29,6 +29,7 @@ public interface BDDInterface
 //Boisson
     public boolean ajouterBoisson(long codeBarre,String nom,String marque, int volume, double degre);
     public boolean boissonConnue(long codeBarre);
+    public boolean ajouterBoissonParWeb(long codeBarre);
 //Cocktail
     public boolean ajoueterCocktail(long coPK,String nom,float prix,ArrayList<DispoBoisson> recette);
 
