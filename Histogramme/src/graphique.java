@@ -41,20 +41,7 @@
 		private Color[] couleursBarres = {Color.cyan.darker(), 
 				Color.red, Color.green, Color.cyan, Color.magenta, 
 				Color.yellow, Color.pink, Color.darkGray, Color.orange};
-
-		/**
-
-	    Constructeur
-	    @param titre : le titre du graphique
-	    @param abscisse : le nom de l'axe des abscisses
-	    @param ordonnee : le nom de l'axe des ordonnées
-	    @param valeurs : les valeurs
-	    @param fond : la couleur de fond
-	    @param listeSeries : les séries
-	    @param listeCategory : les catégories
-	    @param legende : vrai si on affiche la légende
-	    */
-
+		
 
 		public graphique(String titre, String abscisse, String ordonnee, List<Float> valeurs, Color fond, List<String> listeSeries, List<String> listeCategory, boolean legende) {
 			super(new GridLayout(1,0));
@@ -121,28 +108,4 @@
 
 			add(chartPanel);
 		} 
-
-
-		public static void main(String[] a){
-			List<Float> donnees = new ArrayList<Float>();
-			List<String> l1 = new ArrayList<String>();
-			List<String> l2 = new ArrayList<String>();
-			l2.add("0");
-			l1.add("1");
-			l1.add("2");
-			l1.add("3");
-			l1.add("4");
-			donnees.add(1f);
-			donnees.add(2f);
-			donnees.add(4f);
-			donnees.add(8f);
-			JFrame f = new JFrame();
-			f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			f.setBounds(10,10,500,500);
-			graphique g = new graphique("Consommation Poliakoff", "jour", "litre", donnees, Color.white, l2, l1, true);
-			f.add(g);
-			f.setVisible(true);
-		}
-
-	
 }
