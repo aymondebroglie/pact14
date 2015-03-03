@@ -1,28 +1,36 @@
-import javax.swing.JFrame;
-import org.math.plot.*;
+import java.awt.*; 
+import java.awt.event.*; 
+import java.util.ArrayList;
+import java.util.List;
 
-public class Main {
+import javax.swing.*; 
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-		
-		  
-		  double x[] = {1,2}  ;
-		  double y[] = {2,3} ;
-		  
-		 
-		  // create your PlotPanel (you can use it as a JPanel)
-		  Plot2DPanel plot = new Plot2DPanel();
-		 
-		  // add a line plot to the PlotPanel
-		  plot.addLinePlot("my plot",x,y);
-		 
-		  // put the PlotPanel in a JFrame, as a JPanel
-		  JFrame frame = new JFrame("a plot panel");
-		  frame.setContentPane(plot);
-		  frame.setVisible(true);
+import org.jfree.chart.*; 
+import org.jfree.chart.plot.*; 
+import org.jfree.data.*; 
+import org.jfree.data.general.DefaultPieDataset;
 
-	}
+public class main {
+
+	public static void main(String[] a){
+	List<Float> donnees = new ArrayList<Float>();
+	List<String> l1 = new ArrayList<String>();
+	List<String> l2 = new ArrayList<String>();
+	l2.add("0");
+	l1.add("1");
+	l1.add("2");
+	l1.add("3");
+	l1.add("4");
+	donnees.add(1f);
+	donnees.add(2f);
+	donnees.add(4f);
+	donnees.add(8f);
+	JFrame f = new JFrame();
+	f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	f.setBounds(10,10,500,500);
+	graphique g = new graphique("Consommation Poliakoff", "jour", "litre", donnees, Color.white, l2, l1, true);
+	f.add(g);
+	f.setVisible(true);
+}
 
 }
