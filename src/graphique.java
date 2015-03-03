@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 	
+
 import javax.swing.JPanel;
 
 	import org.jfree.chart.ChartFactory;
@@ -59,28 +60,30 @@ import Interface.*;
 			initialiser();
 		}
 		
-		public graphique(ArrayList<HistoBoisson> data,String boisson) 
+		public graphique(ArrayList<ArrayList<HistoBoisson>> data,ArrayList<String> boissons) 
 		{
 			super(new GridLayout(1,0));
-			this.titre=boisson;
+			this.titre="Evolution des stocks";
 			this.ordonnee="Volume";
 			this.abscisse="Temps";
 			this.valeurs= new ArrayList<Float>();
-			for(HistoBoisson temp:data)
+			for(ArrayList<HistoBoisson> temp1:data)
 			{
-				valeurs.add((float)temp.getVolume());
+				for(HistoBoisson temp:temp1)
+				{
+					valeurs.add((float)temp.getVolume());
+				}
 			}
-			
-			this.series=new ArrayList<String>();
-			series.add(boisson);
+			this.series=boissons;
 			
 			this.categories=new ArrayList<String>();
-			for(HistoBoisson temp:data)
+		
+			for(HistoBoisson temp:data.get(0))
 			{
 				categories.add(temp.getDate().toString());
 			}
 			
-			this.legende=false;
+			this.legende=true;
 			this.couleurFond=Color.white;
 			initialiser();
 		}

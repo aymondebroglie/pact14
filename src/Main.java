@@ -1,37 +1,36 @@
 import java.awt.*; 
- 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.*; 
+
+import Interface.HistoBoisson;
 
 
 
 public class main {
 
 	public static void main(String[] a){
-	List<Float> donnees = new ArrayList<Float>();
-	List<String> l1 = new ArrayList<String>();
-	List<String> l2 = new ArrayList<String>();
-	l2.add("Vodka");
-	l2.add("Bière");
-	l1.add("1");
-	l1.add("2");
-	l1.add("3");
-	l1.add("4");
-	donnees.add(1f);
-	donnees.add(2f);
-	donnees.add(4f);
-	donnees.add(8f);
-	donnees.add(3f);
-	donnees.add(5f);
-	donnees.add(5f);
-	donnees.add(9f);
 	
+	ArrayList<String> boissons = new ArrayList<String>();
+	ArrayList<ArrayList<HistoBoisson>> dataHisto = new ArrayList<ArrayList<HistoBoisson>>();
+	ArrayList<HistoBoisson> temp = new ArrayList<HistoBoisson>();;
+	boissons.add("Whisky");
+	boissons.add("Vodka");
+	temp.add(new HistoBoisson(new Date(432536345L),12));
+	temp.add(new HistoBoisson(new Date(4325363422L),3));
+	dataHisto.add(new ArrayList<HistoBoisson>(temp));
+
+	temp.clear();
+	temp.add(new HistoBoisson(new Date(432536345L),4));
+	temp.add(new HistoBoisson(new Date(4325363422L),70));
+	dataHisto.add(new ArrayList<HistoBoisson>(temp));
+
 	JFrame f = new JFrame();
 	f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	f.setBounds(10,10,500,500);
-	graphique g = new graphique("Consommation", "jour", "litre", donnees, Color.white, l2, l1, true);
+	graphique g = new graphique(dataHisto, boissons);
 	f.add(g);
 	f.setVisible(true);
 }
