@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import BDD.BDDInterface;
@@ -102,44 +103,51 @@ public void login()
 	 window.validate();
 }
 
+// vérifie si la chaine de caractères en entrée correspond avec 
+// le mot de passe en vigueur et retourne juste une fenêtre d'erreur sinon
 public void motDePasse(char[] cs){
-	//Il faut interroger la base de donnée pour savoir si le mot de passe est le bon 
-	if(this.verifMotDePAsse(cs)){
+
+	if(this.verifMotDePasse(cs)){
 	ViewBossHome vbh = new ViewBossHome(this);
 	window.setContentPane(vbh);
 	window.validate();
 	}
 	else{
-		ViewBossLogin vbh = new ViewBossLogin(this);
-		vbh.add(new JLabel("Mot de Passe invalide"));
-		window.setContentPane(vbh);
-		window.validate();
+		//Boîte du message préventif		
+		JOptionPane.showMessageDialog(null, "Mot de passe invalide", "Erreur", JOptionPane.ERROR_MESSAGE);
 	}
 
 	
 	
 }
 
-private Boolean verifMotDePAsse(char[] cs){
-	
+// teste juste l'égalité du mot de passse et de la chaine entrée
+private Boolean verifMotDePasse(char[] cs)
+{
 	return Arrays.equals(cs,vraimdp);
 }
 
-public void changeMotDePasse(char[] cs1, char[] cs2){
-	if(Arrays.equals(cs1,cs2)){
-		JPanel paneau = new JPanel();
-		this.setMDP(cs1);
-		paneau.add(new JLabel("Mot de Passe changé"));
-		window.setContentPane(paneau);
-		window.validate();
-		
-		//Appeler la base de donnée pour changer le mot de passe
+// changer de mot de passe
+public void changeMotDePasse(char[] cs0, char[] cs1, char[] cs2){
+	if(this.verifMotDePasse(cs0))
+	{
+		if(Arrays.equals(cs1,cs2))
+		{
+			JPanel panneau = new JPanel();
+			this.setMDP(cs1);
+			JOptionPane.showMessageDialog(null, "Mot de passe changé avec succès !", "Information", JOptionPane.INFORMATION_MESSAGE);
+			panneau.add(new JLabel("Mot de Passe changé"));
+			window.setContentPane(panneau);
+			window.validate();
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null, "Les deux derniers champs saisis ne correspondent pas.", "Erreur", JOptionPane.ERROR_MESSAGE);
+		}
 	}
-	else{
-		JPanel paneau = new JPanel();
-		paneau.add(new JLabel("Echec"));
-		window.setContentPane(paneau);
-		window.validate();
+	else
+	{
+		JOptionPane.showMessageDialog(null, "Mot de Passe Invalide.", "Erreur", JOptionPane.ERROR_MESSAGE);
 	}
 }
 

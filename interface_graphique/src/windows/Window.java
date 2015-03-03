@@ -21,7 +21,7 @@ public class Window extends JFrame
 	private static final long serialVersionUID = 1L;
 	String title ="OptiBar" ;
 	private int width = 400;
-	private int height = 200; 
+	private int height = 300; 
 	
 	private Controller view = new Controller(this);
 	
