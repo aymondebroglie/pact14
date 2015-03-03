@@ -16,7 +16,12 @@ public class Controller
 {
 	//Classe permettant de controller ce qui se passe quand on appuie sur un bouton, c'est elle qui
 	//interrogera la base de donnée
-	char vraimdp[] = new char[5];
+	private char vraimdp[] = new char[5];
+	
+	public void setMDP(char[] newmdp)
+	{
+		this.vraimdp = newmdp ;
+	}
  
 	
 	private BDDInterface bdd;
@@ -102,7 +107,7 @@ public void motDePasse(char[] cs){
 	}
 	else{
 		ViewBossLogin vbh = new ViewBossLogin(this);
-		vbh.add(new JLabel("Faux mdp"));
+		vbh.add(new JLabel("Mot de Passe invalide"));
 		window.setContentPane(vbh);
 		window.validate();
 	}
@@ -119,10 +124,11 @@ private Boolean verifMotDePAsse(char[] cs){
 public void changeMotDePasse(char[] cs1, char[] cs2){
 	if(Arrays.equals(cs1,cs2)){
 		JPanel paneau = new JPanel();
-		paneau.add(new JLabel("Mot de Passe change"));
+		this.setMDP(cs1);
+		paneau.add(new JLabel("Mot de Passe changé"));
 		window.setContentPane(paneau);
 		window.validate();
-		vraimdp = cs1;
+		
 		//Appeler la base de donnée pour changer le mot de passe
 	}
 	else{
