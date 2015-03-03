@@ -2,10 +2,12 @@ package liaison_serial;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+
 import gnu.io.CommPortIdentifier; 
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent; 
 import gnu.io.SerialPortEventListener; 
+
 import java.util.Enumeration;
 
 
@@ -16,7 +18,7 @@ public class SerialTest implements SerialPortEventListener {
 			"/dev/tty.usbserial-A9007UX1", // Mac OS X
                         "/dev/ttyACM0", // Raspberry Pi
 			"/dev/ttyUSB0", // Linux
-			"COM3", "COM5"// Windows
+			"COM3", // Windows
 	};
 	/**
 	* A BufferedReader which will be fed by a InputStreamReader 
@@ -24,12 +26,16 @@ public class SerialTest implements SerialPortEventListener {
 	* making the displayed results codepage independent
 	*/
 	private BufferedReader input;
+	
+	private BDDInterface bdd ;
 	/** The output stream to the port */
 	private OutputStream output;
 	/** Milliseconds to block while waiting for port open */
 	private static final int TIME_OUT = 2000;
 	/** Default bits per second for COM port. */
 	private static final int DATA_RATE = 115200;
+	
+
 
 	public void initialize() {
                
@@ -93,8 +99,9 @@ public class SerialTest implements SerialPortEventListener {
 		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 			try {
 				String inputLine=input.readLine();
-				System.out.println(inputLine);
-				output.write(12);
+				int volume  = Integer.parseInt(inputLine);
+				bdd.ajouterConsommation(0, 0, volume);
+				System.out.println(volume);
 			} catch (Exception e) {
 				System.err.println(e.toString());
 			}
@@ -102,19 +109,8 @@ public class SerialTest implements SerialPortEventListener {
 		// Ignore all the other eventTypes, but you should consider the other ones.
 	}
 
-	public static void main(String[] args) throws Exception {
-		SerialTest main = new SerialTest();
-		main.initialize();
-		Thread t=new Thread() {
-			public void run() {
-				//the following line will keep this app alive for 1000 seconds,
-				//waiting for events to occur and responding to them (printing incoming messages to console).
-				try {Thread.sleep(1000000);} catch (InterruptedException ie) {}
-			}
-		};
-		t.start();
-		System.out.println("Started");
-	}
+
 }
+	
 	
 
