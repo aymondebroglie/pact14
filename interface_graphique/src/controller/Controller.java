@@ -8,7 +8,7 @@ import java.util.Arrays;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import mains.BDDInterface;
+import BDD.BDDInterface;
 import windows.*;
 
 
