@@ -1,6 +1,7 @@
 package bdd;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 
 
@@ -40,7 +41,7 @@ public interface BDDInterface
 	boolean livraison(ArrayList<Livraison> livraison);
 //Visu de données
 	ArrayList<DispoBoisson> etatDesStocks(java.util.Date date); 
-	ArrayList<HistoBoisson> evolutionDesStocks(String boisson); //évolution des stocks pour une boisson donnée.
+	ArrayList<HistoBoisson> evolutionDesStocks(String boisson, Date dateDebut, Date dateFin); //évolution des stocks pour une boisson donnée.
 	ArrayList<String> listeDesBoissons();
 	
 	

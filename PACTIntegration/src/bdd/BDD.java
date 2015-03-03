@@ -528,16 +528,17 @@ public class BDD implements BDDInterface
 		}
 	}
 	@Override
-	public ArrayList<HistoBoisson> evolutionDesStocks(String boisson) 
+	public ArrayList<HistoBoisson> evolutionDesStocks(String boisson, Date dateDebut, Date dateFin) 
 	{
 		long codeBarre;
+		Timestamp debut=new Timestamp(dateDebut.getTime()), fin = new Timestamp(dateFin.getTime());
 		ArrayList<HistoBoisson> result=new ArrayList<HistoBoisson>();
 		try {
 			rs=st.executeQuery("SELECT CodeBarre FROM Boisson WHERE Nom='"+echapper(boisson)+"'");
 			if(!rs.next())
 				throw new Exception("Boisson introuvable");
 			codeBarre=rs.getLong(1);
-			rs=st.executeQuery("SELECT Date,Volume FROM Disponibilite WHERE CodeBarre="+codeBarre);
+			rs=st.executeQuery("SELECT Date,Volume FROM Disponibilite WHERE CodeBarre="+codeBarre+" AND Disponibilite.Date BETWEEN '"+ debut+"' AND '"+fin+"'");
 			while(rs.next())
 				result.add(new HistoBoisson(new Date(rs.getTimestamp(1).getTime()),rs.getInt(2)));
 			return result;
