@@ -125,12 +125,12 @@ public class OpenFoodFacts implements OFFInterface
 	public boolean ajouterBoisson(long codebarre)
 	{   try
 	   {
-		List<QuerySolution> solutionlist=getResults(long codebarre);
+		List<QuerySolution> solutionlist=getResults(codebarre);
 		long code = this.getCode(solutionlist);
 		String nom = this.getName(solutionlist) ;
 		int volume = this.getVolume(nom) ;
 		double degree = this.getDegree(solutionlist);
-		return bdd.ajouterBoisson( code, nom, volume, degree) ;
+		return bdd.ajouterBoisson(code, nom, "in the name",volume, degree);
 	   }
 	  catch(VolumeException e)
 	  {
