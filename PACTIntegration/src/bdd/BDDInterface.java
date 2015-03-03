@@ -27,7 +27,7 @@ public interface BDDInterface
 	public boolean modifierInformationBarman(int rFID,String nom,String prenom,int age,java.util.Date dateEmbauche);
 	public boolean supprimerBarman(int rFID);
 //Boisson
-    public boolean ajouterBoisson(long codeBarre,String nom,String marque, int volume, int degre);
+    public boolean ajouterBoisson(long codeBarre,String nom,String marque, int volume, double degre);
     public boolean boissonConnue(long codeBarre);
 //Cocktail
     public boolean ajoueterCocktail(long coPK,String nom,float prix,ArrayList<DispoBoisson> recette);

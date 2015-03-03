@@ -237,7 +237,7 @@ public class BDD implements BDDInterface
 	@Override
 /*NEGLIGER LES COMMENTAIRES DE CE METHODE, TOUT EST BON MAINTENANT*/
 	public boolean ajouterBoisson(long codeBarre, String nom, String marque,int volume,
-			int degre) 
+			double degre) 
 	{
 	 /*PAS CLAIRE POUR FONCTIONNALITE(-Yunzhi)*/
 	 /*Ici on crée dernierDate dans ce méthode, et on juste ajoute 1 line d'information,
