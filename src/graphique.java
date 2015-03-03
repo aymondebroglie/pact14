@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-	import javax.swing.JFrame;
+	
 import javax.swing.JPanel;
 
 	import org.jfree.chart.ChartFactory;
@@ -17,6 +17,8 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
+
+import Interface.*;
 
 	public class graphique extends JPanel {
 
@@ -66,7 +68,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 			this.valeurs= new ArrayList<Float>();
 			for(HistoBoisson temp:data)
 			{
-				valeurs.add(temp.getVolume());
+				valeurs.add((float)temp.getVolume());
 			}
 			
 			this.series=new ArrayList<String>();
@@ -92,7 +94,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 			this.valeurs= new ArrayList<Float>();
 			for(DispoBoisson temp:data)
 			{
-				valeurs.add(temp.getVolume());
+				valeurs.add((float)temp.getVolume());
 			}
 			
 			this.series=new ArrayList<String>();
@@ -101,7 +103,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 			this.categories=new ArrayList<String>();
 			for(DispoBoisson temp:data)
 			{
-				categories.add(temp.getNom());
+				categories.add(temp.getBoisson());
 			}
 			
 			this.legende=false;
