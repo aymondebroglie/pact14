@@ -1,11 +1,14 @@
 package controller;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import mains.BDDInterface;
 import windows.*;
 
 
@@ -13,14 +16,20 @@ public class Controller
 {
 	//Classe permettant de controller ce qui se passe quand on appuie sur un bouton, c'est elle qui
 	//interrogera la base de donnée
+	char vraimdp[] = new char[5];
+ 
 	
+	private BDDInterface bdd;
 	private Window window;
-	private ArrayList<Boisson> tableauAlcools;//Ce tableau permet de connaitre les alcools à afficher pour la gestion des stocks
+	private ArrayList<String> tableauAlcools;//Ce tableau permet de connaitre les alcools à afficher pour la gestion des stocks
+	private String temps = "mois";
 
-public Controller(Window window)
+public Controller(Window window/*,BDDInterface bdd*/)
 {
 	this.window = window;
-	this.tableauAlcools = new ArrayList<Boisson>();
+	Arrays.fill(vraimdp, 'a');
+	this.bdd=bdd;
+	this.tableauAlcools = new ArrayList<String>();
 }
 
 /** ViewWelcome */
@@ -103,10 +112,7 @@ public void motDePasse(char[] cs){
 }
 
 private Boolean verifMotDePAsse(char[] cs){
-	// Cette méthode sert a verifier que le mot de passe est le bon  
-	char vraimdp[] = new char[5];
-	//Normalemnt il faut demander à la base de donnée ici on prend 8 a 
-	Arrays.fill(vraimdp, 'a');
+	
 	return Arrays.equals(cs,vraimdp);
 }
 
@@ -116,6 +122,7 @@ public void changeMotDePasse(char[] cs1, char[] cs2){
 		paneau.add(new JLabel("Mot de Passe change"));
 		window.setContentPane(paneau);
 		window.validate();
+		vraimdp = cs1;
 		//Appeler la base de donnée pour changer le mot de passe
 	}
 	else{
@@ -135,7 +142,13 @@ public void ecranChangeMotDePasse(){
 
 public void obtenirstock(){
 	ViewStocksManagement vsm = new ViewStocksManagement(this);
-	window.setContentPane(vsm);
+	Container cp = window.getContentPane();
+	cp.removeAll();
+	window.validate();
+	ViewStockManagementSouth pan2 = new ViewStockManagementSouth(this);
+	
+	window.add(vsm,BorderLayout.EAST);
+	window.add(pan2,BorderLayout.SOUTH);
 	window.validate();
 }
 
@@ -148,19 +161,22 @@ public void budget(){
 }
 
 public void ajoutAlcool(String nom){
-	tableauAlcools.add(new Boisson(nom));
+	tableauAlcools.add(nom);
     System.out.println(tableauAlcools);
 }
 
 public void enleverAlcool(String nom){
-	for (Boisson boisson : tableauAlcools){
-		if (boisson.getNom() == nom){
+	for (String boisson : tableauAlcools){
+		if (boisson == nom){
 			tableauAlcools.remove(boisson);
 		}
 	}
 	System.out.println(tableauAlcools);
 }
 
+public ArrayList<String> obtenirAlcools(){
+	return bdd.listeDesBoissons();
+}
 
 }
 

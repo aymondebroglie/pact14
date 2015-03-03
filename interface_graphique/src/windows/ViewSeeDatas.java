@@ -49,7 +49,7 @@ public class ViewSeeDatas extends JPanel
 		this.controller = controller;
 		this.add(stocks);
 		this.add(commande);
-		this.add(budget);
+		//this.add(budget);
 	}
 
 }
