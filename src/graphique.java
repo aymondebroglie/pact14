@@ -55,6 +55,32 @@
 			this.couleurFond=fond;
 			initialiser();
 		}
+		
+		public graphique(ArrayList<HistoBoisson> data,String boisson) 
+		{
+			super(new GridLayout(1,0));
+			this.titre=boisson;
+			this.ordonnee="Volume";
+			this.abscisse="Temps";
+			this.valeurs= new ArrayList<Float>();
+			for(HistoBoisson temp:data)
+			{
+				valeurs.add(temp.getVolume());
+			}
+			
+			this.series=new ArrayList<String>();
+			series.add(boisson);
+			
+			this.categories=new ArrayList<String>();
+			for(HistoBoisson temp:data)
+			{
+				categories.add(temp.getDate().toString());
+			}
+			
+			this.legende=false;
+			this.couleurFond=Color.white;
+			initialiser();
+		}
 
 
 		private void initialiser(){
