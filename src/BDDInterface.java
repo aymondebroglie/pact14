@@ -1,4 +1,7 @@
+package bdd;
+
 import java.util.ArrayList;
+import java.util.Date;
 
 
 
@@ -25,8 +28,9 @@ public interface BDDInterface
 	public boolean modifierInformationBarman(int rFID,String nom,String prenom,int age,java.util.Date dateEmbauche);
 	public boolean supprimerBarman(int rFID);
 //Boisson
-    public boolean ajouterBoisson(long codeBarre,String nom,String marque, int volume, int degre);
+    public boolean ajouterBoisson(long codeBarre,String nom,String marque, int volume, double degre);
     public boolean boissonConnue(long codeBarre);
+    public boolean ajouterBoissonParWeb(long codeBarre);
 //Cocktail
     public boolean ajoueterCocktail(long coPK,String nom,float prix,ArrayList<DispoBoisson> recette);
 
@@ -38,8 +42,9 @@ public interface BDDInterface
 	boolean livraison(ArrayList<Livraison> livraison);
 //Visu de données
 	ArrayList<DispoBoisson> etatDesStocks(java.util.Date date); 
-	ArrayList<HistoBoisson> evolutionDesStocks(String boisson); //évolution des stocks pour une boisson donnée.
+	ArrayList<HistoBoisson> evolutionDesStocks(String boisson, Date dateDebut, Date dateFin); //évolution des stocks pour une boisson donnée.
 	ArrayList<String> listeDesBoissons();
+	
 	
 	
 	
