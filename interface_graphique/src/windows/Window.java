@@ -103,7 +103,7 @@ public class Window extends JFrame {
 		{					
 			public void actionPerformed(ActionEvent arg0)
 			{
-				controller.ecranChangeMotDePasse();
+				controller.changementMDP();
 			}
 		});
 		this.settings.addSeparator();

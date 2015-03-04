@@ -27,7 +27,7 @@ public class ViewChangePassword extends JPanel {
 		public void actionPerformed(ActionEvent arg0) {
 
 		controller.addPreviousView(ViewChangePassword.this);
-		controller.changeMotDePasse(mdp.getPassword(),nmdp1.getPassword(),nmdp2.getPassword());	
+		controller.changerMDP(mdp.getPassword(),nmdp1.getPassword(),nmdp2.getPassword());	
 
 							
 	

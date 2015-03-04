@@ -2,6 +2,16 @@ package controller;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Stack;
@@ -11,6 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import BDD.BDDInterface;
+import GUIExceptions.SettingsFromBDDException;
 import windows.*;
 
 //Classe permettant de controller ce qui se passe quand on appuie sur un bouton, c'est elle qui
@@ -26,30 +37,82 @@ public class Controller
 	{
 		this.window = window ;
 		this.bdd = bdd ;
-		this.vraimdp = "aaaaa".toCharArray() ;
+		this.loadMDP() ;
 		
 	}
 	
 	/****************************************************************************************************/
 	// gestion du mot de passe pour la session gestionnaire
 	// attribut + setter
-	private char[] vraimdp = new char[5] ;
+	String vraimdp ;
+	
 
-	public void setMDP(char[] newmdp) 
+	public void setMDP(String newpassword)
 	{
-		this.vraimdp = newmdp ;
+		this.vraimdp = newpassword ;
+	}
+	
+	public void loadMDP()
+	{
+		FileReader fs = null ;
+        BufferedReader bs = null ;
+        String filename = "datas" + File.separator + "Password" ;
+		
+		try 
+		{
+			fs = new FileReader(filename) ;
+		} 
+		catch (FileNotFoundException e1) 
+		{
+			e1.printStackTrace();
+		}
+		
+		bs = new BufferedReader(fs) ;
+		
+		try 
+		{
+            String crypted = bs.readLine();   
+            this.setMDP(crypted) ;
+		}
+		catch (Exception e) 
+		{
+            System.err.println(e) ;
+            e.printStackTrace(System.err);
+		}
+	}
+	
+	public void printMDP(String word)
+	{
+		String filename = "datas" + File.separator + "Password" ;
+		String crypted = String.valueOf(word.hashCode()) ;
+		try
+        {
+			PrintWriter ps = new PrintWriter(filename) ; 
+        	ps.print(crypted) ;
+        	ps.close() ;
+        }
+        catch(Exception e)
+        {
+        	System.err.println(e) ;
+            e.printStackTrace(System.err) ;
+        }
+		
+		this.setMDP(crypted) ;
+		
 	}
 	
 	// teste juste l'égalité du mot de passse et de la chaine entrée
-	private Boolean verifMotDePasse(char[] cs)
+	private Boolean verifMDP(char[] cs)
 	{
-		return Arrays.equals(cs,vraimdp);		
+		String word = String.valueOf(cs) ;
+		String crypted = Integer.toString(word.hashCode()) ;
+		return (crypted.equals(vraimdp));		
 	}
 	
 	// changer de mot de passe
 	
 
-	public void ecranChangeMotDePasse()
+	public void changementMDP()
 	{
 		ViewChangePassword cp = new ViewChangePassword(this);
 		window.setContentPane(cp);
@@ -186,7 +249,7 @@ public void login()
 
 public void motDePasse(char[] cs)
 {
-	if(this.verifMotDePasse(cs))
+	if(this.verifMDP(cs))
 	{
 		ViewBossHome vbh = new ViewBossHome(this);
 		window.setContentPane(vbh);
@@ -201,11 +264,12 @@ public void motDePasse(char[] cs)
 	
 
 	// changer de mot de passe
-	public void changeMotDePasse(char[] cs0, char[] cs1, char[] cs2) {
-		if (this.verifMotDePasse(cs0)) {
+	public void changerMDP(char[] cs0, char[] cs1, char[] cs2) {
+		if (this.verifMDP(cs0)) {
 			if (Arrays.equals(cs1, cs2)) {
 				JPanel panneau = new JPanel();
-				this.setMDP(cs1);
+				
+				this.printMDP(String.valueOf(cs1));
 				JOptionPane.showMessageDialog(null,
 						"Mot de passe changé avec succès !", "Information",
 						JOptionPane.INFORMATION_MESSAGE);
