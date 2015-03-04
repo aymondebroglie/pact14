@@ -1,4 +1,6 @@
-	import java.awt.Color;
+package visu;
+
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GradientPaint;
 import java.awt.GridLayout;
@@ -19,7 +21,9 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-import Interface.*;
+import bdd.DispoBoisson;
+import bdd.HistoBoisson;
+
 
 	public class graphique extends JPanel {
 
@@ -69,39 +73,38 @@ import Interface.*;
 			this.valeurs= new ArrayList<Float>();
 			/*j'avais dis des bêtises, les différentes arraylist<histoBoisson> n'ont pas nécessairement le même nombre d'élément, je complète donc avec des zéros*/
 			ArrayList<HistoBoisson> plusLongue= new ArrayList<HistoBoisson>();
-			int i;
-			for(ArrayList<HistoBoisson> temp1:data)
+			int i,j=0,size;
+			
+			for(ArrayList<HistoBoisson> temp:data)
 			{
-				plusLongue=plusLongue.size()<temp1.size()?temp1:plusLongue;//ca s'appelle une condition ternaire la flemme d'expliquer c'est facile.
+				plusLongue=temp.size()>plusLongue.size()?temp:plusLongue;
 			}
-			for(ArrayList<HistoBoisson> temp1:data)
+			size=plusLongue.size();
+			int[] compteurs=new int[data.size()];
+			for(i=0; i<data.size();i++)
+				compteurs[i]=0;
+			for(i=0; i<size; i++)
 			{
-				i=0;
-				if(temp1.size()!=0)
+				for(j=0; j<data.size(); j++)
 				{
-					while(temp1.get(0).getDate().after(plusLongue.get(i).getDate()))
-					{
+					if(plusLongue.get(i).getDate().before(data.get(j).get(compteurs[j]).getDate()))
 						valeurs.add(0f);
-						i++;
+					else if (compteurs[j]== data.get(j).size())
+						valeurs.add(0f);
+					else
+					{
+						valeurs.add((float)data.get(j).get(compteurs[j]).getVolume());
+						compteurs[j]++;
 					}
-				}
-				for(HistoBoisson temp:temp1)
-				{
-					valeurs.add((float)temp.getVolume());
-					i++;
-				}
-				while(i<plusLongue.size())
-				{
-					valeurs.add(0f);
-					i++;
+					
 				}
 			}
-			//voilà ça change pas le fonctionnement global
+			//voilà en fait j'en ai chié des boules c'était pas évident du tout.
 			this.series=boissons;
 			
 			this.categories=new ArrayList<String>();
 		
-			for(HistoBoisson temp:data.get(0))
+			for(HistoBoisson temp:plusLongue)
 			{
 				categories.add(temp.getDate().toString());
 			}
