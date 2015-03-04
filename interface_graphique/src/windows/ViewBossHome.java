@@ -6,49 +6,40 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-
-
 import controller.Controller;
 
-public class ViewBossHome extends JPanel 
-{	
+public class ViewBossHome extends JPanel {
 	private static final long serialVersionUID = 1L;
-	
-	private Controller controller ;
-	
-	public  ViewBossHome(Controller controller)
-	{
-		this.controller = controller;
-		
-		JButton consultervosdonnees =  new JButton("Consulter vos donnees");
-		JButton gerervosstocks =  new JButton("Gérer vos stocks");
-		
+
+	private Controller view;
+
+	public ViewBossHome(Controller view) {
+		this.view = view;
+
+		JButton consultervosdonnees = new JButton("Consulter vos donnees");
+		JButton gerervosstocks = new JButton("Gérer vos stocks");
+
 		this.add(consultervosdonnees);
-		this.add(gerervosstocks) ;
-		
+		this.add(gerervosstocks);
+
 		ConsulterVosDonnees cvd_listener = new ConsulterVosDonnees();
 		consultervosdonnees.addActionListener(cvd_listener);
-		
+
 		GererVosStocks gvs_listener = new GererVosStocks();
 		gerervosstocks.addActionListener(gvs_listener);
 	}
-	
-	private class ConsulterVosDonnees implements ActionListener 
-	{
+
+	private class ConsulterVosDonnees implements ActionListener {
 		@Override
-		public void actionPerformed(ActionEvent arg0) 
-		{
-			controller.addPreviousView(ViewBossHome.this);
-			controller.consulterVosDonnees();
+		public void actionPerformed(ActionEvent arg0) {
+			view.consulterVosDonnees();
 		}
 	}
-	private class GererVosStocks implements ActionListener 
-	{
+
+	private class GererVosStocks implements ActionListener {
 		@Override
-		public void actionPerformed(ActionEvent arg0) 
-		{
-			controller.addPreviousView(ViewBossHome.this);
-			controller.gestionStocks();
+		public void actionPerformed(ActionEvent arg0) {
+			view.gestionStocks();
 		}
 	}
 }

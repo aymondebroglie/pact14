@@ -12,6 +12,10 @@ import javax.swing.JPasswordField;
 import controller.Controller;
 
 public class ViewChangePassword extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Controller controller;
 	private JPasswordField mdp = new JPasswordField();
 	private JPasswordField nmdp1 = new JPasswordField();
@@ -21,21 +25,14 @@ public class ViewChangePassword extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-<<<<<<< HEAD
 
-			controller.changeMotDePasse(mdp.getPassword(), nmdp1.getPassword(),
-					nmdp2.getPassword());
-
-		}
-=======
 			controller.addPreviousView(ViewChangePassword.this);
 				controller.changeMotDePasse(mdp.getPassword(),nmdp1.getPassword(),nmdp2.getPassword());	
 							
-		}		
->>>>>>> depot-pact/Interface_graphique
+	
 	}
-
-	private static final long serialVersionUID = 1L;
+	}
+	
 
 	public ViewChangePassword(Controller view) {
 		this.controller = view;

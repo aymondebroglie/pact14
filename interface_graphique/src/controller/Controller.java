@@ -31,28 +31,7 @@ public class Controller {
 	}
 	
 	// changer de mot de passe
-	public void changeMotDePasse(char[] cs0, char[] cs1, char[] cs2){
-		if(this.verifMotDePasse(cs0))
-		{
-			if(Arrays.equals(cs1,cs2))
-			{
-				JPanel panneau = new JPanel();
-				this.setMDP(cs1);
-				JOptionPane.showMessageDialog(null, "Mot de passe changé avec succès !", "Information", JOptionPane.INFORMATION_MESSAGE);
-				panneau.add(new JLabel("Mot de Passe changé"));
-				window.setContentPane(panneau);
-				window.validate();
-			}
-			else
-			{
-				JOptionPane.showMessageDialog(null, "Les deux derniers champs saisis ne correspondent pas.", "Erreur", JOptionPane.ERROR_MESSAGE);
-			}
-		}
-		else
-		{
-			JOptionPane.showMessageDialog(null, "Mot de Passe Invalide.", "Erreur", JOptionPane.ERROR_MESSAGE);
-		}
-	}
+	
 
 	public void ecranChangeMotDePasse()
 	{
@@ -114,7 +93,7 @@ public class Controller {
 	private String duree;// Ce tableau permet de connaitre la durée à afficher
 	private String temps = "mois";
 
-public Controller(Window window/*BDDInterface bdd*/)
+
 
 	public Controller(Window window, BDDInterface bdd ) {
 		this.window = window;
@@ -171,6 +150,7 @@ public Controller(Window window/*BDDInterface bdd*/)
 		pan.add(new JLabel("test retirerGoulot() réussi"));
 		window.setContentPane(pan);
 		window.validate();
+	}
 
 
 	// changer de mot de passe
@@ -198,11 +178,7 @@ public Controller(Window window/*BDDInterface bdd*/)
 		}
 	}
 
-	public void ecranChangeMotDePasse() {
-		ViewChangePassword cp = new ViewChangePassword(this);
-		window.setContentPane(cp);
-		window.validate();
-	}
+
 
 	public void obtenirstock() {
 		ViewStocksManagement vsm = new ViewStocksManagement(this);
