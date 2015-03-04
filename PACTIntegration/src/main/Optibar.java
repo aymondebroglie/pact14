@@ -23,8 +23,10 @@ public class Optibar {
 		Date threeDaysBefore =calendar.getTime();
 		ArrayList<ArrayList<HistoBoisson>> data= new ArrayList<ArrayList<HistoBoisson>>();
 		data.add(bdd.evolutionDesStocks("Rhum Blanc",threeDaysBefore,maintenant));
+		data.add(bdd.evolutionDesStocks("Vodka 100 cl Poliakov",threeDaysBefore,maintenant));
 		ArrayList<String> noms = new ArrayList<String>();
-		noms.add("Curacao");
+		noms.add("Rhum Blanc");
+		noms.add("Vodka 100 cl Poliakov");
 		/*for(ArrayList<HistoBoisson> test1:data)
 		{	
 			for(HistoBoisson test:test1)
