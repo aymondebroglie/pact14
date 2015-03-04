@@ -1,5 +1,7 @@
 package windows;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
@@ -11,41 +13,57 @@ import javax.swing.JPanel;
 
 import controller.Controller;
 
+public class ViewStocksManagement extends JPanel {
 
-public class ViewStocksManagement extends JPanel  implements ItemListener
-{
-	
 	private ArrayList<BoissonCheckBox> tableauBouton = new ArrayList<BoissonCheckBox>();
-		@Override
-		public void itemStateChanged(ItemEvent e) {
-			if(ItemEvent.SELECTED == e.getStateChange()){
-				controller.ajoutAlcool(((BoissonCheckBox) (e.getItem())).getNom());
-				
-			}
-			else {
-				controller.enleverAlcool(((BoissonCheckBox) (e.getItem())).getNom());
-			}
-			}
-		private Controller controller;
-		ArrayList<String> tableauAlcool = new ArrayList<String>();
-				
-	
+	private Controller controller;
+	ArrayList<String> tableauAlcool = /*controller.obtenirAlcools();*/ 
+			new ArrayList<String>() {/**
+				 */
+				private static final long serialVersionUID = 1L;
+
+			{ add("Whisky"); add("Vodka"); add("Alcool"); }};
 	private static final long serialVersionUID = 1L;
 	
-
-	public ViewStocksManagement(Controller controller) 
-	{
-	this.controller = controller;
-	tableauAlcool.add("Whisky");
-	tableauAlcool.add("Vodka");
-	for(String boisson : tableauAlcool){
-		tableauBouton.add(new BoissonCheckBox(boisson));
+	public class EcouteurAction implements ActionListener {
 		
+		private ViewStocksManagement vsm;
+		
+		public EcouteurAction(ViewStocksManagement vsm){
+			this.vsm =vsm;
+		}
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			controller.visualiser(vsm);
+			
 	}
-	for(BoissonCheckBox boutton : tableauBouton){
-		boutton.addItemListener(this);
+	}
+
+	public ViewStocksManagement(Controller controller) {
+		this.controller = controller;
+		for (String boisson : tableauAlcool) {
+			tableauBouton.add(new BoissonCheckBox(boisson));
+
+		}
+		for(BoissonCheckBox boutton: tableauBouton){
+			this.add(boutton);
+		}
+		JButton boutton = new JButton("Visualiser");
+		EcouteurAction ea = new EcouteurAction(this);
+		boutton.addActionListener(ea);
 		this.add(boutton);
 	}
-;	}
-	
+
+	public ArrayList<String> obtenirBouttonAlcool() {
+
+		ArrayList<String> tableau = new ArrayList<String>();
+		for (BoissonCheckBox boutton : tableauBouton) {
+			if (boutton.isSelected()) {
+				tableau.add(boutton.getNom());
+			}
+		}
+		return tableau;
+
+	}
+
 }

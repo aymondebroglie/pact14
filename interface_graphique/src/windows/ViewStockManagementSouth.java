@@ -1,9 +1,13 @@
 package windows;
 
+
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
+
+
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 import controller.Controller;
 
@@ -17,10 +21,10 @@ public class ViewStockManagementSouth extends JPanel  implements ItemListener
 			
 			}
 		private Controller controller;
-		private BoissonCheckBox soiree= new BoissonCheckBox("soirée");
-		private BoissonCheckBox semaine= new BoissonCheckBox("semaine");
-		private BoissonCheckBox mois= new BoissonCheckBox("mois");
-		private BoissonCheckBox annee= new BoissonCheckBox("annee");
+		private JRadioButton soiree= new JRadioButton("soirée");
+		private JRadioButton  semaine= new JRadioButton ("semaine");
+		private JRadioButton  mois= new JRadioButton ("mois");
+		private JRadioButton  annee= new JRadioButton ("annee");
 		
 				
 	
@@ -38,6 +42,7 @@ public class ViewStockManagementSouth extends JPanel  implements ItemListener
 	this.add(semaine);
 	this.add(mois);
 	this.add(annee);
+
 	
 	}
 	

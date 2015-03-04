@@ -32,7 +32,7 @@ public class Controller
 	private ArrayList<String> tableauAlcools;//Ce tableau permet de connaitre les alcools à afficher pour la gestion des stocks
 	private String temps = "mois";
 
-public Controller(Window window/*,BDDInterface bdd*/)
+public Controller(Window window/*BDDInterface bdd*/)
 {
 	this.window = window;
 	Arrays.fill(vraimdp, 'a');
@@ -196,8 +196,14 @@ public ArrayList<String> obtenirAlcools(){
 	return bdd.listeDesBoissons();
 }
 
+
+
+public void visualiser(ViewStocksManagement vsm){
+	ArrayList<String> tableauAffichage = vsm.obtenirBouttonAlcool();
+	System.out.println(tableauAffichage);
 }
 
+}
 
 
 
