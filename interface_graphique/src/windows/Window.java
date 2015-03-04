@@ -24,8 +24,8 @@ public class Window extends JFrame {
 	private JMenuBar menubar = new JMenuBar();
 	private JMenu general = new JMenu("Général");
 	private JMenu general_user = new JMenu("Utilisateur");
-	private JRadioButtonMenuItem barman = new JRadioButtonMenuItem("Barman");
-	private JRadioButtonMenuItem boss = new JRadioButtonMenuItem("Patron");
+	private JMenuItem barman = new JMenuItem("Barman");
+	private JMenuItem boss = new JMenuItem("Patron");
 	private JMenu general_navigation = new JMenu("Navigation");
 	private JMenuItem previous = new JMenuItem("<<<");
 	private JMenuItem next = new JMenuItem(">>>");
@@ -71,14 +71,10 @@ public class Window extends JFrame {
 					controller.nextView();
 				}
 			});
-			this.general_user.addSeparator();
+			
 			
 			//Sous-menu navigation
 			this.general.add(this.general_navigation);
-				ButtonGroup bg_navigation = new ButtonGroup();
-					bg_navigation.add(previous);
-					bg_navigation.add(next);
-				//boss.setSelected(true);
 				this.general_user.add(barman);
 					this.barman.addActionListener(new ActionListener()
 					{					
@@ -95,7 +91,7 @@ public class Window extends JFrame {
 						controller.boutonGestionnaire();
 					}
 				});
-				this.general_user.addSeparator();
+				
 		
 			
 		// Sous_menu 2
