@@ -23,13 +23,16 @@ public class Window extends JFrame
 	private int width = 400;
 	private int height = 300; 
 	
-	private Controller view = new Controller(this);
+	private Controller controller = new Controller(this);
 	
 	private JMenuBar menubar = new JMenuBar();
 	private JMenu general = new JMenu("Général");
 	private JMenu general_user = new JMenu("Utilisateur");
 	private JRadioButtonMenuItem barman = new JRadioButtonMenuItem("Barman");
 	private JRadioButtonMenuItem boss = new JRadioButtonMenuItem("Patron");
+	private JMenu general_navigation = new JMenu("Navigation");
+	private JMenuItem previous = new JMenuItem("<<<");
+	private JMenuItem next = new JMenuItem(">>>");
 	
 	private JMenu settings = new JMenu("Paramètres");
 	private JMenuItem settings_language = new JMenuItem("Langue");
@@ -58,27 +61,47 @@ public class Window extends JFrame
 	/** Menu general*/
 		//Sous-menu utilisateur
 		this.general.add(this.general_user);
-			ButtonGroup bg = new ButtonGroup();
-				bg.add(barman);
-				bg.add(boss);
-			boss.setSelected(true);
-			this.general_user.add(barman);
-				this.barman.addActionListener(new ActionListener()
+			this.general_navigation.add(previous);
+				this.previous.addActionListener(new ActionListener()
 				{					
 					public void actionPerformed(ActionEvent arg0)
 					{
-						view.boutonBarman();
+						controller.previousView();
 					}
 				});
-			this.general_user.add(boss);
-			this.boss.addActionListener(new ActionListener()
+			this.general_navigation.add(next);
+			this.next.addActionListener(new ActionListener()
 			{					
 				public void actionPerformed(ActionEvent arg0)
 				{
-					view.login();
+					controller.nextView();
 				}
 			});
 			this.general_user.addSeparator();
+			
+			//Sous-menu navigation
+			this.general.add(this.general_navigation);
+				ButtonGroup bg_navigation = new ButtonGroup();
+					bg_navigation.add(previous);
+					bg_navigation.add(next);
+				//boss.setSelected(true);
+				this.general_user.add(barman);
+					this.barman.addActionListener(new ActionListener()
+					{					
+						public void actionPerformed(ActionEvent arg0)
+						{
+							controller.boutonBarman();
+						}
+					});
+				this.general_user.add(boss);
+				this.boss.addActionListener(new ActionListener()
+				{					
+					public void actionPerformed(ActionEvent arg0)
+					{
+						controller.login();
+					}
+				});
+				this.general_user.addSeparator();
 		
 			
 		// Sous_menu 2
@@ -90,7 +113,7 @@ public class Window extends JFrame
 		{					
 			public void actionPerformed(ActionEvent arg0)
 			{
-				view.ecranChangeMotDePasse();
+				controller.ecranChangeMotDePasse();
 			}
 		});	
 		this.settings.addSeparator() ;

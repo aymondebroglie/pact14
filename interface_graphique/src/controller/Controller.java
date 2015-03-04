@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Stack;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -24,8 +25,91 @@ public class Controller
 	{
 		this.vraimdp = newmdp ;
 	}
+	
+	// teste juste l'égalité du mot de passse et de la chaine entrée
+	private Boolean verifMotDePasse(char[] cs)
+	{
+		return Arrays.equals(cs,vraimdp);
+	}
+	
+	// changer de mot de passe
+	public void changeMotDePasse(char[] cs0, char[] cs1, char[] cs2){
+		if(this.verifMotDePasse(cs0))
+		{
+			if(Arrays.equals(cs1,cs2))
+			{
+				JPanel panneau = new JPanel();
+				this.setMDP(cs1);
+				JOptionPane.showMessageDialog(null, "Mot de passe changé avec succès !", "Information", JOptionPane.INFORMATION_MESSAGE);
+				panneau.add(new JLabel("Mot de Passe changé"));
+				window.setContentPane(panneau);
+				window.validate();
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null, "Les deux derniers champs saisis ne correspondent pas.", "Erreur", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null, "Mot de Passe Invalide.", "Erreur", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	public void ecranChangeMotDePasse()
+	{
+		ViewChangePassword cp = new ViewChangePassword(this);
+		window.setContentPane(cp);
+		window.validate();
+	}
+	
+	
   
 	/****************************************************************************************************/
+	
+	private Stack<JPanel> stackpreviousview = new Stack<JPanel>() ; 
+	private Stack<JPanel> stacknextview = new Stack<JPanel>() ;
+	
+	public void addPreviousView(JPanel previousview)
+	{
+		stackpreviousview.push(previousview) ;
+	}
+	
+	public void previousView()
+	{
+		if(stackpreviousview.empty())
+		{
+			JOptionPane.showMessageDialog(null, "L'opération demandée est impossible", "Attention", JOptionPane.WARNING_MESSAGE);
+		}
+		else
+		{
+			JPanel previousview = stackpreviousview.pop() ;
+			stacknextview.push(previousview) ;
+			window.setContentPane(previousview);
+			window.validate();
+		}
+	}
+	
+	public void nextView()
+	{
+		if(stacknextview.empty())
+		{
+			JOptionPane.showMessageDialog(null, "L'opération demandée est impossible", "Attention", JOptionPane.WARNING_MESSAGE);
+		}
+		else
+		{
+			JPanel nextview = stacknextview.pop() ;
+			stackpreviousview.push(nextview) ;
+			window.setContentPane(nextview);
+			window.validate();
+		}
+	}
+
+	
+	
+	
+	/****************************************************************************************************/
+
 	
 	private BDDInterface bdd;
 	private Window window;
@@ -44,10 +128,9 @@ public Controller(Window window/*BDDInterface bdd*/)
 public void boutonBarman()
 {
 	//Méthode appelée quand on appuie sur Barman sur l'écran d'accueil
-	
 	ViewBarmanHome vbh = new ViewBarmanHome(this);
-	 window.setContentPane(vbh);
-	 window.validate();
+	window.setContentPane(vbh);
+	window.validate();
 }
 
 public void boutonGestionnaire()
@@ -121,41 +204,9 @@ public void motDePasse(char[] cs){
 	
 }
 
-// teste juste l'égalité du mot de passse et de la chaine entrée
-private Boolean verifMotDePasse(char[] cs)
-{
-	return Arrays.equals(cs,vraimdp);
-}
 
-// changer de mot de passe
-public void changeMotDePasse(char[] cs0, char[] cs1, char[] cs2){
-	if(this.verifMotDePasse(cs0))
-	{
-		if(Arrays.equals(cs1,cs2))
-		{
-			JPanel panneau = new JPanel();
-			this.setMDP(cs1);
-			JOptionPane.showMessageDialog(null, "Mot de passe changé avec succès !", "Information", JOptionPane.INFORMATION_MESSAGE);
-			panneau.add(new JLabel("Mot de Passe changé"));
-			window.setContentPane(panneau);
-			window.validate();
-		}
-		else
-		{
-			JOptionPane.showMessageDialog(null, "Les deux derniers champs saisis ne correspondent pas.", "Erreur", JOptionPane.ERROR_MESSAGE);
-		}
-	}
-	else
-	{
-		JOptionPane.showMessageDialog(null, "Mot de Passe Invalide.", "Erreur", JOptionPane.ERROR_MESSAGE);
-	}
-}
 
-public void ecranChangeMotDePasse(){
-	ViewChangePassword cp = new ViewChangePassword(this);
-	window.setContentPane(cp);
-	window.validate();
-}
+
 
 
 public void obtenirstock(){

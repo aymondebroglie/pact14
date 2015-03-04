@@ -2,6 +2,7 @@ package windows;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -9,21 +10,23 @@ import controller.Controller;
 
 public class ViewBarmanHome extends JPanel
 {
-	private Controller view;
+	private Controller controller;
 
 private class ImprimerNote implements ActionListener 
 {
 	@Override
 	public void actionPerformed(ActionEvent arg0) 
 	{
-		view.imprimerNote();
+		controller.addPreviousView(ViewBarmanHome.this);
+		controller.imprimerNote();
 	}
 }
 
 private class RetirerGoulot implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		view.retirerGoulot();
+		controller.addPreviousView(ViewBarmanHome.this);
+		controller.retirerGoulot();
 
 	}
 }
@@ -37,7 +40,7 @@ private class RetirerGoulot implements ActionListener {
 
 	public ViewBarmanHome(Controller view)
 	{
-		this.view = view;
+		this.controller = view;
 		 JButton note = new JButton("Imprimer Note");
 		 ImprimerNote imprimerNote = new ImprimerNote();
 		 RetirerGoulot retirerGoulot = new RetirerGoulot();
