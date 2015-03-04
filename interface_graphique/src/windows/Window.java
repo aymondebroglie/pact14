@@ -26,7 +26,10 @@ public class Window extends JFrame {
 	private JMenu general_user = new JMenu("Utilisateur");
 	private JRadioButtonMenuItem barman = new JRadioButtonMenuItem("Barman");
 	private JRadioButtonMenuItem boss = new JRadioButtonMenuItem("Patron");
-
+	private JMenu general_navigation = new JMenu("Navigation");
+	private JMenuItem previous = new JMenuItem("<<<");
+	private JMenuItem next = new JMenuItem(">>>");
+	
 	private JMenu settings = new JMenu("Paramètres");
 	private JMenuItem settings_language = new JMenuItem("Langue");
 	private JMenuItem settings_mdp = new JMenuItem("Mot de Passe");
@@ -52,32 +55,59 @@ public class Window extends JFrame {
 		/** Menu general */
 		// Sous-menu utilisateur
 		this.general.add(this.general_user);
-		ButtonGroup bg = new ButtonGroup();
-		bg.add(barman);
-		bg.add(boss);
-		boss.setSelected(true);
-		this.general_user.add(barman);
-		this.barman.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				view.boutonBarman();
-			}
-		});
-		this.general_user.add(boss);
-		this.boss.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				view.login();
-			}
-		});
-		this.general_user.addSeparator();
-
+			this.general_navigation.add(previous);
+				this.previous.addActionListener(new ActionListener()
+				{					
+					public void actionPerformed(ActionEvent arg0)
+					{
+						controller.previousView();
+					}
+				});
+			this.general_navigation.add(next);
+			this.next.addActionListener(new ActionListener()
+			{					
+				public void actionPerformed(ActionEvent arg0)
+				{
+					controller.nextView();
+				}
+			});
+			this.general_user.addSeparator();
+			
+			//Sous-menu navigation
+			this.general.add(this.general_navigation);
+				ButtonGroup bg_navigation = new ButtonGroup();
+					bg_navigation.add(previous);
+					bg_navigation.add(next);
+				//boss.setSelected(true);
+				this.general_user.add(barman);
+					this.barman.addActionListener(new ActionListener()
+					{					
+						public void actionPerformed(ActionEvent arg0)
+						{
+							controller.boutonBarman();
+						}
+					});
+				this.general_user.add(boss);
+				this.boss.addActionListener(new ActionListener()
+				{					
+					public void actionPerformed(ActionEvent arg0)
+					{
+						controller.login();
+					}
+				});
+				this.general_user.addSeparator();
+		
+			
 		// Sous_menu 2
 
 		/** Menu settings */
 		// Sous-menu mdp
 		this.settings.add(settings_mdp);
-		this.settings_mdp.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				view.ecranChangeMotDePasse();
+		this.settings_mdp.addActionListener(new ActionListener()
+		{					
+			public void actionPerformed(ActionEvent arg0)
+			{
+				controller.ecranChangeMotDePasse();
 			}
 		});
 		this.settings.addSeparator();

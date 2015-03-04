@@ -14,11 +14,11 @@ public class ViewBossHome extends JPanel
 {	
 	private static final long serialVersionUID = 1L;
 	
-	private Controller view ;
+	private Controller controller ;
 	
-	public  ViewBossHome(Controller view)
+	public  ViewBossHome(Controller controller)
 	{
-		this.view = view;
+		this.controller = controller;
 		
 		JButton consultervosdonnees =  new JButton("Consulter vos donnees");
 		JButton gerervosstocks =  new JButton("Gérer vos stocks");
@@ -38,7 +38,8 @@ public class ViewBossHome extends JPanel
 		@Override
 		public void actionPerformed(ActionEvent arg0) 
 		{
-			view.consulterVosDonnees();
+			controller.addPreviousView(ViewBossHome.this);
+			controller.consulterVosDonnees();
 		}
 	}
 	private class GererVosStocks implements ActionListener 
@@ -46,7 +47,8 @@ public class ViewBossHome extends JPanel
 		@Override
 		public void actionPerformed(ActionEvent arg0) 
 		{
-			view.gestionStocks();
+			controller.addPreviousView(ViewBossHome.this);
+			controller.gestionStocks();
 		}
 	}
 }

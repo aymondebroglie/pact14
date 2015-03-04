@@ -21,11 +21,18 @@ public class ViewChangePassword extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
+<<<<<<< HEAD
 
 			controller.changeMotDePasse(mdp.getPassword(), nmdp1.getPassword(),
 					nmdp2.getPassword());
 
 		}
+=======
+			controller.addPreviousView(ViewChangePassword.this);
+				controller.changeMotDePasse(mdp.getPassword(),nmdp1.getPassword(),nmdp2.getPassword());	
+							
+		}		
+>>>>>>> depot-pact/Interface_graphique
 	}
 
 	private static final long serialVersionUID = 1L;

@@ -18,6 +18,7 @@ public class ViewSeeDatas extends JPanel
 		@Override
 		public void actionPerformed(ActionEvent arg0) 
 		{
+			controller.addPreviousView(ViewSeeDatas.this);
 			controller.obtenirstock();
 		}
 	}
@@ -26,6 +27,7 @@ public class ViewSeeDatas extends JPanel
 		@Override
 		public void actionPerformed(ActionEvent arg0) 
 		{
+			controller.addPreviousView(ViewSeeDatas.this);
 			controller.commande();
 		}
 	}
@@ -33,6 +35,7 @@ public class ViewSeeDatas extends JPanel
 	private class Budget implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
+			controller.addPreviousView(ViewSeeDatas.this);
 			controller.budget();
 
 		}
