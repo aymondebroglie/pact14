@@ -15,19 +15,35 @@ import windows.*;
 
 //Classe permettant de controller ce qui se passe quand on appuie sur un bouton, c'est elle qui
 //interrogera la base de donnée
-public class Controller {
+public class Controller
+{
+	private BDDInterface bdd;
+	private Window window;
+	private String duree;// Ce tableau permet de connaitre la durée à afficher
+	private String temps = "mois";
+
+	public Controller(Window window, BDDInterface bdd) 
+	{
+		this.window = window ;
+		this.bdd = bdd ;
+		this.vraimdp = "aaaaa".toCharArray() ;
+		
+	}
+	
+	/****************************************************************************************************/
 	// gestion du mot de passe pour la session gestionnaire
 	// attribut + setter
-	private char vraimdp[] = new char[5];
-	
-	public void setMDP(char[] newmdp) {
-		this.vraimdp = newmdp;
+	private char[] vraimdp = new char[5] ;
+
+	public void setMDP(char[] newmdp) 
+	{
+		this.vraimdp = newmdp ;
 	}
 	
 	// teste juste l'égalité du mot de passse et de la chaine entrée
 	private Boolean verifMotDePasse(char[] cs)
 	{
-		return Arrays.equals(cs,vraimdp);
+		return Arrays.equals(cs,vraimdp);		
 	}
 	
 	// changer de mot de passe
@@ -39,20 +55,29 @@ public class Controller {
 		window.setContentPane(cp);
 		window.validate();
 	}
-	
-	
   
 	/****************************************************************************************************/
 	
 	private Stack<JPanel> stackpreviousview = new Stack<JPanel>() ; 
 	private Stack<JPanel> stacknextview = new Stack<JPanel>() ;
+	private JPanel actualview ;
+	
+	public void setActualView(JPanel actualview)
+	{
+		this.actualview = actualview ;
+	}
+	
+	public JPanel getActualView()
+	{
+		return actualview ;
+	}
 	
 	public void addPreviousView(JPanel previousview)
 	{
 		stackpreviousview.push(previousview) ;
 	}
 	
-	public void previousView()
+	public void previousView(JPanel actualview)
 	{
 		if(stackpreviousview.empty())
 		{
@@ -61,13 +86,13 @@ public class Controller {
 		else
 		{
 			JPanel previousview = stackpreviousview.pop() ;
-			stacknextview.push(previousview) ;
+			stacknextview.push(actualview) ;
 			window.setContentPane(previousview);
 			window.validate();
 		}
 	}
 	
-	public void nextView()
+	public void nextView(JPanel actualview)
 	{
 		if(stacknextview.empty())
 		{
@@ -76,82 +101,104 @@ public class Controller {
 		else
 		{
 			JPanel nextview = stacknextview.pop() ;
-			stackpreviousview.push(nextview) ;
+			stackpreviousview.push(actualview) ;
 			window.setContentPane(nextview);
 			window.validate();
 		}
 	}
 
 	
-	
-	
 	/****************************************************************************************************/
 
 	
-	private BDDInterface bdd;
-	private Window window;
-	private String duree;// Ce tableau permet de connaitre la durée à afficher
-	private String temps = "mois";
 
 
+/** ViewWelcome */
+public void boutonBarman()
+{
+	//Méthode appelée quand on appuie sur Barman sur l'écran d'accueil
+	ViewBarmanHome vbh = new ViewBarmanHome(this);
+	this.setActualView(vbh) ;
+	window.setContentPane(vbh);
+	window.validate();
+}
 
-	public Controller(Window window, BDDInterface bdd ) {
-		this.window = window;
-		Arrays.fill(vraimdp, 'a');
-		this.bdd = bdd;
+public void boutonGestionnaire()
+{
+	//Méthode appelée quand on appuie sur Barman sur l'écran d'accueil
+	ViewBossLogin vbh = new ViewBossLogin(this);
+	window.setContentPane(vbh);
+	this.setActualView(vbh) ;
+	window.validate(); 
+}
 
-	}
+/** ViewBarmanHome */
+public void imprimerNote()
+{
+	//Méthode appelée si on appuie sur imprimer note dans l'écran du Barman
+	//Code pour le test, il faudra demander a la base de donnée de nous fournir la note pour le serveur donné
+	JPanel pan = new JPanel();
+	pan.add(new JLabel("test imprimerNote() réussi"));
+	window.setContentPane(pan);
+	this.setActualView(pan) ;
+	window.validate();
+}
 
-	/** ViewWelcome */
-	public void boutonBarman() {
-		// Méthode appelée quand on appuie sur Barman sur l'écran d'accueil
+/** ViewBossHome */
+public void consulterVosDonnees() 
+{
+	ViewSeeDatas vsd = new ViewSeeDatas(this);
+	 window.setContentPane(vsd);
+	 this.setActualView(vsd) ;
+	 window.validate();
+}
 
-		ViewBarmanHome vbh = new ViewBarmanHome(this);
+public void gestionStocks() 
+{
+	ViewStocksManagement vsm = new ViewStocksManagement(this);
+	 window.setContentPane(vsm);
+	 this.setActualView(vsm) ;
+	 window.validate();
+}
+
+public void retirerGoulot()
+{
+	//Demander quel goulot il faut prendre pour l'instant il ferme la fenêtre pour le test
+	JPanel pan = new JPanel();
+	pan.add(new JLabel("test retirerGoulot() réussi"));
+	window.setContentPane(pan);
+	this.setActualView(pan) ;
+	window.validate();
+	
+}
+
+/** View Login*/
+public void login() 
+{
+	ViewBossLogin vbl = new ViewBossLogin(this);
+	 window.setContentPane(vbl);
+	 this.setActualView(vbl) ;
+	 window.validate();
+}
+
+
+		
+
+public void motDePasse(char[] cs)
+{
+	if(this.verifMotDePasse(cs))
+	{
+		ViewBossHome vbh = new ViewBossHome(this);
 		window.setContentPane(vbh);
+		this.setActualView(vbh) ;
 		window.validate();
 	}
-
-	public void boutonGestionnaire() {
-		// Méthode appelée quand on appuie sur Barman sur l'écran d'accueil
-		ViewBossLogin vbh = new ViewBossLogin(this);
-		window.setContentPane(vbh);
-		window.validate();
+	else
+	{
+		JOptionPane.showMessageDialog(null, "Mot de passe invalide.", "Erreur", JOptionPane.ERROR_MESSAGE);
 	}
-
-	/** ViewBarmanHome */
-	public void imprimerNote() {
-		// Méthode appelée si on appuie sur imprimer note dans l'écran du Barman
-		// Code pour le test, il faudra demander a la base de donnée de nous
-		// fournir la note pour le serveur donné
-
-		JPanel pan = new JPanel();
-		pan.add(new JLabel("test imprimerNote() réussi"));
-		window.setContentPane(pan);
-		window.validate();
-	}
-
-	/** ViewBossHome */
-	public void consulterVosDonnees() {
-		ViewSeeDatas vsd = new ViewSeeDatas(this);
-		window.setContentPane(vsd);
-		window.validate();
-	}
-
-	public void gestionStocks() {
-		ViewStocksManagement vsm = new ViewStocksManagement(this);
-		window.setContentPane(vsm);
-		window.validate();
-	}
-
-	public void retirerGoulot() {
-		// Demander quel goulot il faut prendre pour l'instant il ferme la
-		// fenêtre pour le test
-		JPanel pan = new JPanel();
-		pan.add(new JLabel("test retirerGoulot() réussi"));
-		window.setContentPane(pan);
-		window.validate();
-	}
-
+}
+	
 
 	// changer de mot de passe
 	public void changeMotDePasse(char[] cs0, char[] cs1, char[] cs2) {
@@ -228,5 +275,7 @@ public class Controller {
 	public void setDuree(String duree) {
 		this.duree = duree;
 	}
+
+
 
 }

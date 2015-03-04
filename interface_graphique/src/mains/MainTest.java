@@ -11,8 +11,8 @@ public class MainTest {
 		Window window = new Window();
 		BDDInterface bdd = null;
 		Controller controller = new Controller(window, bdd);
-		ViewSeeDatas vsd = new ViewSeeDatas(controller);
-		window.setContentPane(vsd);
+		ViewWelcome welcome = new ViewWelcome(controller);
+		window.setContentPane(welcome);
 		window.validate();
 	}
 }

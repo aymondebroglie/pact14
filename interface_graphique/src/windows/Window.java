@@ -60,7 +60,7 @@ public class Window extends JFrame {
 				{					
 					public void actionPerformed(ActionEvent arg0)
 					{
-						controller.previousView();
+						controller.previousView(controller.getActualView());
 					}
 				});
 			this.general_navigation.add(next);
@@ -68,7 +68,7 @@ public class Window extends JFrame {
 			{					
 				public void actionPerformed(ActionEvent arg0)
 				{
-					controller.nextView();
+					controller.nextView(controller.getActualView());
 				}
 			});
 			
