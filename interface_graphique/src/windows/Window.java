@@ -19,7 +19,7 @@ public class Window extends JFrame {
 	private int width = 400;
 	private int height = 300;
 	BDDInterface bdd = null;
-	private Controller view = new Controller(this, bdd);
+	private Controller controller = new Controller(this, bdd);
 
 	private JMenuBar menubar = new JMenuBar();
 	private JMenu general = new JMenu("Général");
@@ -92,7 +92,7 @@ public class Window extends JFrame {
 				{					
 					public void actionPerformed(ActionEvent arg0)
 					{
-						controller.login();
+						controller.boutonGestionnaire();
 					}
 				});
 				this.general_user.addSeparator();
