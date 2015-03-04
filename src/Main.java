@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.swing.*; 
 
-import Interface.HistoBoisson;
+import Interface.*;
 
 
 
@@ -33,6 +33,15 @@ public class main {
 	graphique g = new graphique(dataHisto, boissons);
 	f.add(g);
 	f.setVisible(true);
+	
+	ArrayList<DispoBoisson> temp2 = new ArrayList<DispoBoisson>();
+	temp2.add(new DispoBoisson("Whisky", 10));
+	temp2.add(new DispoBoisson("Vodka", 15));
+	temp2.add(new DispoBoisson("Tequila", 20));
+	Date date = new Date(432536345L);
+	
+	PieChart tpc = new PieChart(temp2, date); 
+    tpc.setVisible(true); 
 }
 
 }
