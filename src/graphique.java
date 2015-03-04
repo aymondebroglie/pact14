@@ -25,23 +25,23 @@ import Interface.*;
 
 		private static final long serialVersionUID = 1L;
 
-		/** titre : Le titre du graphique affiché en haut */
+		/** titre : Le titre du graphique affichï¿½ en haut */
 		private String titre;
-		/** ordonnee : le nom de l'axe des ordonnées */
+		/** ordonnee : le nom de l'axe des ordonnï¿½es */
 		private String ordonnee;
 		/** abscisses : le nom de l'axe des abscisses */
 		private String abscisse;
-		/** valeurs : les valeurs à afficher, elles sont triées par séries et par catégories*/
+		/** valeurs : les valeurs ï¿½ afficher, elles sont triï¿½es par sï¿½ries et par catï¿½gories*/
 		private List<Float> valeurs;
-		/** series : la liste des séries */
+		/** series : la liste des sï¿½ries */
 		private List<String> series;
 		/** categories : la liste des categories */
 		private List<String> categories;
-		/** legende : booleen vrai si on affiche la légende */
+		/** legende : booleen vrai si on affiche la lï¿½gende */
 		private boolean legende;
 		/** couleurFond : la couleur du fond */
 		private Color couleurFond;
-		/** couleurBarres : les couleurs appliquées aux barres */
+		/** couleurBarres : les couleurs appliquï¿½es aux barres */
 		private Color[] couleursBarres = {Color.cyan.darker(), 
 				Color.red, Color.green, Color.cyan, Color.magenta, 
 				Color.yellow, Color.pink, Color.darkGray, Color.orange};
@@ -67,13 +67,36 @@ import Interface.*;
 			this.ordonnee="Volume";
 			this.abscisse="Temps";
 			this.valeurs= new ArrayList<Float>();
+			/*j'avais dis des bÃªtises, les diffÃ©rentes arraylist<histoBoisson> n'ont pas nÃ©cessairement le mÃªme nombre d'Ã©lÃ©ment, je complÃ¨te donc avec des zÃ©ros*/
+			ArrayList<HistoBoisson> plusLongue= new ArrayList<HistoBoisson>();
+			int i;
 			for(ArrayList<HistoBoisson> temp1:data)
 			{
+				plusLongue=plusLongue.size()<temp1.size()?temp1:plusLongue;//ca s'appelle une condition ternaire la flemme d'expliquer c'est facile.
+			}
+			for(ArrayList<HistoBoisson> temp1:data)
+			{
+				i=0;
+				if(temp1.size()!=0)
+				{
+					while(temp1.get(0).getDate().after(plusLongue.get(i).getDate()))
+					{
+						valeurs.add(0f);
+						i++;
+					}
+				}
 				for(HistoBoisson temp:temp1)
 				{
 					valeurs.add((float)temp.getVolume());
+					i++;
+				}
+				while(i<plusLongue.size())
+				{
+					valeurs.add(0f);
+					i++;
 				}
 			}
+			//voilÃ  Ã§a change pas le fonctionnement global
 			this.series=boissons;
 			
 			this.categories=new ArrayList<String>();
@@ -91,7 +114,7 @@ import Interface.*;
 		public graphique(ArrayList<DispoBoisson> data,Date date ) 
 		{
 			super(new GridLayout(1,0));
-			this.titre="Etat des stocks ˆ la date "+date.toString();
+			this.titre="Etat des stocks ï¿½ la date "+date.toString();
 			this.ordonnee="Volume";
 			this.abscisse="Boissons";
 			this.valeurs= new ArrayList<Float>();
