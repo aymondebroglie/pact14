@@ -8,8 +8,6 @@ import java.util.Date;
 import javax.swing.*; 
 
 import org.jfree.chart.*; 
-import org.jfree.chart.plot.*; 
-import org.jfree.data.*; 
 import org.jfree.data.general.DefaultPieDataset;
 
 public class PieChart extends JFrame { 
