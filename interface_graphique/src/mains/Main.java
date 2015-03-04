@@ -1,12 +1,14 @@
 package mains;
 
-import BDD.BDDInterface;
-import controller.Controller;
 import windows.ViewWelcome;
 import windows.Window;
+import BDD.BDDInterface;
+import controller.Controller;
 
-public class MainTest {
-	public static void main(String[] args) {
+public class Main {
+
+	public static void main(String[] args) 
+	{
 		Window window = new Window();
 		BDDInterface bdd = null;
 		Controller controller = new Controller(window, bdd);
@@ -14,4 +16,5 @@ public class MainTest {
 		window.setContentPane(welcome);
 		window.validate();
 	}
+
 }

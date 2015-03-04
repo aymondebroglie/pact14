@@ -2,27 +2,19 @@ package controller;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Stack;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
-import BDD.BDDInterface;
-import GUIExceptions.SettingsFromBDDException;
 import windows.*;
+import BDD.BDDInterface;
 
 //Classe permettant de controller ce qui se passe quand on appuie sur un bouton, c'est elle qui
 //interrogera la base de donnée
@@ -31,7 +23,7 @@ public class Controller
 	private BDDInterface bdd;
 	private Window window;
 	private String duree;// Ce tableau permet de connaitre la durée à afficher
-	private String temps = "mois";
+	/** private String temps = "mois"; */
 
 	public Controller(Window window, BDDInterface bdd) 
 	{
@@ -44,12 +36,11 @@ public class Controller
 	/****************************************************************************************************/
 	// gestion du mot de passe pour la session gestionnaire
 	// attribut + setter
-	String vraimdp ;
+	String currentcryptedMDP ;
 	
-
-	public void setMDP(String newpassword)
+	public void setMDP(String newcryptedMDP)
 	{
-		this.vraimdp = newpassword ;
+		this.currentcryptedMDP = newcryptedMDP ;
 	}
 	
 	public void loadMDP()
@@ -71,8 +62,8 @@ public class Controller
 		
 		try 
 		{
-            String crypted = bs.readLine();   
-            this.setMDP(crypted) ;
+            String savedcryptedMDP = bs.readLine();   
+            this.setMDP(savedcryptedMDP) ;
 		}
 		catch (Exception e) 
 		{
@@ -81,14 +72,15 @@ public class Controller
 		}
 	}
 	
-	public void printMDP(String word)
+	public void printMDP(char[] cs)
 	{
 		String filename = "datas" + File.separator + "Password" ;
-		String crypted = String.valueOf(word.hashCode()) ;
+		String word = String.valueOf(cs) ;
+		String savingcryptedMDP = String.valueOf(word.hashCode()) ;
 		try
         {
 			PrintWriter ps = new PrintWriter(filename) ; 
-        	ps.print(crypted) ;
+        	ps.print(savingcryptedMDP) ;
         	ps.close() ;
         }
         catch(Exception e)
@@ -97,7 +89,7 @@ public class Controller
             e.printStackTrace(System.err) ;
         }
 		
-		this.setMDP(crypted) ;
+		this.setMDP(savingcryptedMDP) ;
 		
 	}
 	
@@ -105,8 +97,8 @@ public class Controller
 	private Boolean verifMDP(char[] cs)
 	{
 		String word = String.valueOf(cs) ;
-		String crypted = Integer.toString(word.hashCode()) ;
-		return (crypted.equals(vraimdp));		
+		String cryptedword = Integer.toString(word.hashCode()) ;
+		return (cryptedword.equals(currentcryptedMDP));		
 	}
 	
 	// changer de mot de passe
@@ -118,6 +110,32 @@ public class Controller
 		window.setContentPane(cp);
 		window.validate();
 	}
+	
+	// changer de mot de passe
+		public void changerMDP(char[] cs0, char[] cs1, char[] cs2) {
+			if (this.verifMDP(cs0)) {
+				if (Arrays.equals(cs1, cs2)) {
+					JPanel panneau = new JPanel();
+					
+					this.printMDP(cs1);
+					JOptionPane.showMessageDialog(null,
+							"Mot de passe changé avec succès !", "Information",
+							JOptionPane.INFORMATION_MESSAGE);
+					panneau.add(new JLabel("Mot de Passe changé"));
+					window.setContentPane(panneau);
+					window.validate();
+				} else {
+					JOptionPane
+							.showMessageDialog(
+									null,
+									"Les deux derniers champs saisis ne correspondent pas.",
+									"Erreur", JOptionPane.ERROR_MESSAGE);
+				}
+			} else {
+				JOptionPane.showMessageDialog(null, "Mot de Passe Invalide.",
+						"Erreur", JOptionPane.ERROR_MESSAGE);
+			}
+		}
   
 	/****************************************************************************************************/
 	
@@ -263,31 +281,7 @@ public void motDePasse(char[] cs)
 }
 	
 
-	// changer de mot de passe
-	public void changerMDP(char[] cs0, char[] cs1, char[] cs2) {
-		if (this.verifMDP(cs0)) {
-			if (Arrays.equals(cs1, cs2)) {
-				JPanel panneau = new JPanel();
-				
-				this.printMDP(String.valueOf(cs1));
-				JOptionPane.showMessageDialog(null,
-						"Mot de passe changé avec succès !", "Information",
-						JOptionPane.INFORMATION_MESSAGE);
-				panneau.add(new JLabel("Mot de Passe changé"));
-				window.setContentPane(panneau);
-				window.validate();
-			} else {
-				JOptionPane
-						.showMessageDialog(
-								null,
-								"Les deux derniers champs saisis ne correspondent pas.",
-								"Erreur", JOptionPane.ERROR_MESSAGE);
-			}
-		} else {
-			JOptionPane.showMessageDialog(null, "Mot de Passe Invalide.",
-					"Erreur", JOptionPane.ERROR_MESSAGE);
-		}
-	}
+	
 
 
 
