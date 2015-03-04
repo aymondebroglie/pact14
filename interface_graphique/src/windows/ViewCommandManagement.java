@@ -9,36 +9,38 @@ import javax.swing.JPanel;
 
 import controller.Controller;
 
-public class ViewStocksManagement extends JPanel {
-
+public class ViewCommandManagement extends JPanel {
 	private ArrayList<BoissonCheckBox> tableauBouton = new ArrayList<BoissonCheckBox>();
 	private Controller controller;
-	ArrayList<String> tableauAlcool = controller.obtenirAlcools();
+	ArrayList<String> tableauAlcool = /*controller.obtenirAlcools();*/ 
+			new ArrayList<String>() {/**
+				 */
+				private static final long serialVersionUID = 1L;
 
+			{ add("Whisky"); add("Vodka"); add("Alcool"); }};
 	private static final long serialVersionUID = 1L;
-
+	
 	public class EcouteurAction implements ActionListener {
-
-		private ViewStocksManagement vsm;
-
-		public EcouteurAction(ViewStocksManagement vsm) {
-			this.vsm = vsm;
+		
+		private ViewCommandManagement vsm;
+		
+		public EcouteurAction(ViewCommandManagement viewCommandManagement){
+			this.vsm =viewCommandManagement;
 		}
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			controller.visualiser(vsm);
-
-		}
+			controller.visualiserCommandes(vsm);
+			
+	}
 	}
 
-	public ViewStocksManagement(Controller controller) {
+	public ViewCommandManagement(Controller controller) {
 		this.controller = controller;
 		for (String boisson : tableauAlcool) {
 			tableauBouton.add(new BoissonCheckBox(boisson));
 
 		}
-		for (BoissonCheckBox boutton : tableauBouton) {
+		for(BoissonCheckBox boutton: tableauBouton){
 			this.add(boutton);
 		}
 		JButton boutton = new JButton("Visualiser");
@@ -58,5 +60,4 @@ public class ViewStocksManagement extends JPanel {
 		return tableau;
 
 	}
-
 }
