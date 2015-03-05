@@ -1,11 +1,16 @@
 package main;
+import ui.ViewWelcome;
+import ui.Window;
+import ui.Controller;
 
-
+import java.io.File;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import bdd.*;
 import visu.*;
@@ -15,39 +20,20 @@ public class Optibar {
 	public static void main(String[] args)
 	{
 		BDDInterface bdd = new BDD("BAR", "root", "12345678");
+		Window window =new Window(bdd);
 		
-/*		long dayMilli=86400000L;
-		Calendar calendar= Calendar.getInstance();
-		calendar.setTime(new Date());
-		Date maintenant=calendar.getTime();
-		calendar.setTimeInMillis(calendar.getTime().getTime()-5*dayMilli);
-		Date threeDaysBefore =calendar.getTime();
-		ArrayList<ArrayList<HistoBoisson>> data= new ArrayList<ArrayList<HistoBoisson>>();
-		data.add(bdd.evolutionDesStocks("Rhum Blanc",threeDaysBefore,maintenant));
-		data.add(bdd.evolutionDesStocks("Vodka 100 cl Poliakov",threeDaysBefore,maintenant));
-		ArrayList<String> noms = new ArrayList<String>();
-		noms.add("Rhum Blanc");
-		noms.add("Vodka 100 cl Poliakov");
-		/*for(ArrayList<HistoBoisson> test1:data)
-		{	
-			for(HistoBoisson test:test1)
-				System.out.println(test.getVolume());
-		}*/
-/*		graphique graph= new graphique(data,noms);
-		
-		/****************************/
 		
 		/*ArrayList<DispoBoisson> data2=new ArrayList<DispoBoisson>();
 		data2=bdd.etatDesStocks(maintenant);
-		graphique graph2=new graphique(data2,maintenant);*/
-/*		JFrame f = new JFrame();
+		graphique graph2=new graphique(data2,maintenant);
+	JFrame f = new JFrame();
 		
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setBounds(10,10,500,500);
 		
-		f.add(graph);
-		f.setVisible(true);
-*/		
+		f.add(graph2);
+		f.setVisible(true);*/
+		
 		
 		
 /****pour fonctionnalité 'prix'****/

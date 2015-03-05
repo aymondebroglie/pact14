@@ -13,7 +13,7 @@ public class Window extends JFrame {
 	private int width = 400;
 	private int height = 300;
 	BDDInterface bdd = null;
-	private Controller controller = new Controller(this, bdd);
+	private Controller controller ;
 
 	private JMenuBar menubar = new JMenuBar();
 	private JMenu general = new JMenu("G�n�ral");
@@ -40,7 +40,8 @@ public class Window extends JFrame {
 		this.height = height;
 	}
 
-	public Window() {
+	public Window(BDDInterface bdd) {
+		this.bdd=bdd;
 		this.setTitle(title);
 		this.setSize(width, height);
 		this.setLocationRelativeTo(null);
@@ -121,5 +122,10 @@ public class Window extends JFrame {
 
 		this.setJMenuBar(menubar);
 		this.setVisible(true);
+		
+		controller=new Controller(this,bdd);
+		ViewWelcome welcome = new ViewWelcome(controller); 
+		this.setContentPane(welcome);
+		this.validate();
 	}
 }

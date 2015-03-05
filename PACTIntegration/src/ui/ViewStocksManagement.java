@@ -13,7 +13,7 @@ public class ViewStocksManagement extends JPanel {
 
 	private ArrayList<BoissonCheckBox> tableauBouton = new ArrayList<BoissonCheckBox>();
 	private Controller controller;
-	ArrayList<String> tableauAlcool = controller.obtenirAlcools();
+	ArrayList<String> tableauAlcool;
 
 	private static final long serialVersionUID = 1L;
 
@@ -34,6 +34,7 @@ public class ViewStocksManagement extends JPanel {
 
 	public ViewStocksManagement(Controller controller) {
 		this.controller = controller;
+		tableauAlcool=controller.obtenirAlcools();
 		for (String boisson : tableauAlcool) {
 			tableauBouton.add(new BoissonCheckBox(boisson));
 
