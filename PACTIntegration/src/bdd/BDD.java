@@ -266,6 +266,8 @@ public class BDD implements BDDInterface
 			}
 			st.executeUpdate("INSERT INTO Disponibilite (Date, CodeBarre, Volume) VALUES ('"+maintenant+"','"+codeBarre+"','0')");
 			System.out.println("La boisson "+nom+" a bien été ajoutée");
+ /*Ici pour prix*/
+			st.executeUpdate("INSERT INTO PrixBoisson (CodeBarre, Prix) VALUES ('"+codeBarre+"','"+0.0+"')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -597,5 +599,19 @@ public class BDD implements BDDInterface
 			return false;
 	}return true;
 	}
+	
+	@Override
+	public boolean setPrixParBoisson(long codeBarre,double prix) {	
+	    try{ 
+		rs=st.executeQuery("SELECT Prix From PrixBoisson WHERE CodeBarre="+codeBarre);
+		if(!rs.next())
+			throw new Exception("Boisson introuvable");
+		 st.executeQuery("UPDATE PrixBoisson SET Prix="+prix+"WHERE CodeBarre="+codeBarre);	
+	    }catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return false;
+        }return true;
+    }
 
 }

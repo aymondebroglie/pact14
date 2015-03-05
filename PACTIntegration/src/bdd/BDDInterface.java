@@ -17,6 +17,7 @@ pour utiliser des longs, il faut metter un L à la fin, exemple  :  		long test 
 public interface BDDInterface 
 {
     boolean initialisation();
+    boolean setPrixParBoisson(long codeBarre,double prix);
 //Goulots
 	boolean ajouterGoulot(int bluetooth);
 	public boolean modifierGoulot(int bluetooth,int enCharge, float niveauDeCharge);
