@@ -341,37 +341,43 @@ public void motDePasse(char[] cs)
 	public void visualiser(ViewStocksManagement vsm) {
 		long dayMilli=86400000L;
 		Date maintenant=new Date(),debut;
-		System.out.println(duree);
-		switch(duree)
+		graphique g;
+		if(duree!=null)
 		{
-		case "soiree":
-			debut=new Date(maintenant.getTime()-dayMilli);
-			break;
-		case "semaine":
-			debut=new Date(maintenant.getTime()-dayMilli*7);
-			break;
-		case "mois":
-			debut=new Date(maintenant.getTime()-dayMilli*30);
-			break;
-		case "année":
-			debut=new Date(maintenant.getTime()-dayMilli*365);
-			break;
-		default :
-			debut=new Date(0);
+			switch(duree)
+			{
+			case "soiree":
+				debut=new Date(maintenant.getTime()-dayMilli);
+				break;
+			case "semaine":
+				debut=new Date(maintenant.getTime()-dayMilli*7);
+				break;
+			case "mois":
+				debut=new Date(maintenant.getTime()-dayMilli*30);
+				break;
+			case "année":
+				debut=new Date(maintenant.getTime()-dayMilli*365);
+				break;
+			default :
+				debut=new Date(0);
+			}
+			ArrayList<ArrayList<HistoBoisson>> data= new ArrayList<ArrayList<HistoBoisson>>();
+			
+			ArrayList<String> tableauAffichage = vsm.obtenirBouttonAlcool();
+			for(String nom:tableauAffichage)
+			{
+				data.add(bdd.evolutionDesStocks(nom,debut,maintenant));
+			}
+			 g=new graphique(data,tableauAffichage);
 		}
-		ArrayList<ArrayList<HistoBoisson>> data= new ArrayList<ArrayList<HistoBoisson>>();
-		
-		ArrayList<String> tableauAffichage = vsm.obtenirBouttonAlcool();
-		for(String nom:tableauAffichage)
-		{
-			data.add(bdd.evolutionDesStocks(nom,debut,maintenant));
-		}
-		graphique g=new graphique(data,tableauAffichage);
-		JFrame f = new JFrame();
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		else 
+			 g = new graphique(bdd.etatDesStocks(maintenant),maintenant);
+		window.add(g,BorderLayout.CENTER);
+		window.validate();
+		/*JFrame f = new JFrame();
 		f.setBounds(10,10,500,500);
 		f.add(g);
-		f.setVisible(true);
+		f.setVisible(true);*/
 		/*vsm.add(g);
 		 window.setContentPane(vsm);
 		 this.setActualView(vsm) ;
@@ -387,6 +393,10 @@ public void motDePasse(char[] cs)
 
 	public void setDuree(String duree) {
 		this.duree = duree;
+	}
+	
+	public void etatDesStocks(){
+		
 	}
 
 

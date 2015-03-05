@@ -31,11 +31,11 @@ public class ViewSeeDatas extends JPanel
 		}
 	}
 	
-	private class Budget implements ActionListener {
+	private class EtatDesStocks implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			controller.addPreviousView(ViewSeeDatas.this);
-			controller.budget();
+			controller.etatDesStocks();
 
 		}
 	}
@@ -44,13 +44,14 @@ public class ViewSeeDatas extends JPanel
 	public ViewSeeDatas(Controller controller) {
 		JButton stocks =new JButton("Stocks");
 		JButton commande =new JButton("Commandes");
-		JButton budget =new JButton("Budget");
+		JButton etatDesStocks = new JButton("Etat des Stocks");
 		stocks.addActionListener(new Stocks());
 		commande.addActionListener(new Commande());
-		budget.addActionListener(new Budget());
+		etatDesStocks.addActionListener(new EtatDesStocks());
 		this.controller = controller;
 		this.add(stocks);
 		this.add(commande);
+		this.add(etatDesStocks);
 		//this.add(budget);
 	}
 
