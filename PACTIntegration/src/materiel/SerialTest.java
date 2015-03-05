@@ -1,4 +1,7 @@
-package liaison_serial;
+
+
+package materiel;
+import bdd.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;

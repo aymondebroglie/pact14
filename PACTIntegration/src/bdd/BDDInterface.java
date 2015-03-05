@@ -36,7 +36,6 @@ public interface BDDInterface
     public boolean ajoueterCocktail(long coPK,String nom,float prix,ArrayList<DispoBoisson> recette);
 
 //Commande
-    boolean associeBluetoothCodeBarre(long codeBarre,long bluetoothID);//pour module Arduino, faire appel quand scanner.
 	boolean ajouterConsommation(int bluetoothID, int rFID, int volume ); //il faut mettre le volume en cL, un entier.
 	float finDeCommande(int rFID); //retourne le prix à payer, pour l'instant c'est toujours 0
 //Stock

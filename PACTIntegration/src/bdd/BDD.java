@@ -630,18 +630,4 @@ public class BDD implements BDDInterface
 		return false;
         }return true;
     }
-	@Override
-	public boolean associeBluetoothCodeBarre(long codeBarre, long bluetoothID) {
-		try
-		{   rs=st.executeQuery("SELECT CodeBarre From Associe WHERE BluetoothID="+bluetoothID);
-		if(!rs.next())
-			throw new Exception("Boisson introuvable");
-			st.executeUpdate("UPDATE Associe SET CodeBarre="+codeBarre+" WHERE BluetoothID="+bluetoothID);
-		}catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-	        }return true;
-	    }
-
 }
