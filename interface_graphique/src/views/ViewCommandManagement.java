@@ -1,4 +1,4 @@
-package windows;
+package views;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import boxes.BoissonCheckBox;
 import controller.Controller;
 
 public class ViewCommandManagement extends JPanel {

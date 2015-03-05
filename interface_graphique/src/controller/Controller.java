@@ -9,12 +9,17 @@ import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Stack;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import windows.*;
+
+import window.Window;
+import views.*;
 import BDD.BDDInterface;
+import BDD.HistoBoisson;
 
 //Classe permettant de controller ce qui se passe quand on appuie sur un bouton, c'est elle qui
 //interrogera la base de donnée
@@ -187,6 +192,18 @@ public class Controller
 			window.validate();
 		}
 	}
+	
+	public void clearStacks()
+	{
+		while(!stacknextview.empty())
+		{
+			stacknextview.pop() ;
+		} 
+		while(!stackpreviousview.empty())
+		{
+			stackpreviousview.pop() ;
+		}
+	}
 
 	/*
 	 * L'idée est la suivante : 
@@ -207,11 +224,7 @@ public class Controller
 	 * */
 	
 	/****************************************************************************************************/
-
-	
-
-
-/** ViewWelcome */
+												/** ViewWelcome */
 public void boutonBarman()
 {
 	//Méthode appelée quand on appuie sur Barman sur l'écran d'accueil
@@ -230,7 +243,8 @@ public void boutonGestionnaire()
 	window.validate(); 
 }
 
-/** ViewBarmanHome */
+	/****************************************************************************************************/
+												/** ViewBarmanHome */
 public void imprimerNote()
 {
 	//Méthode appelée si on appuie sur imprimer note dans l'écran du Barman
@@ -242,7 +256,34 @@ public void imprimerNote()
 	window.validate();
 }
 
-/** ViewBossHome */
+public void retirerGoulot()
+{
+	//Demander quel goulot il faut prendre pour l'instant il ferme la fenêtre pour le test
+	JPanel pan = new JPanel();
+	pan.add(new JLabel("test retirerGoulot() réussi"));
+	window.setContentPane(pan);
+	this.setActualView(pan) ;
+	window.validate();
+	
+}
+		/*****************************************************************************************************/
+												/** ViewBossLogin */
+public void motDePasse(char[] cs)
+{
+	if(this.verifMDP(cs))
+	{
+		ViewBossHome vbh = new ViewBossHome(this);
+		window.setContentPane(vbh);
+		this.setActualView(vbh) ;
+		window.validate();
+	}
+	else
+	{
+		JOptionPane.showMessageDialog(null, "Mot de passe invalide.", "Erreur", JOptionPane.ERROR_MESSAGE);
+	}
+}
+	/****************************************************************************************************/
+												/** ViewBossHome */
 public void consulterVosDonnees() 
 {
 	ViewSeeDatas vsd = new ViewSeeDatas(this);
@@ -258,48 +299,7 @@ public void gestionStocks()
 	 this.setActualView(vsm) ;
 	 window.validate();
 }
-
-public void retirerGoulot()
-{
-	//Demander quel goulot il faut prendre pour l'instant il ferme la fenêtre pour le test
-	JPanel pan = new JPanel();
-	pan.add(new JLabel("test retirerGoulot() réussi"));
-	window.setContentPane(pan);
-	this.setActualView(pan) ;
-	window.validate();
-	
-}
-
-/** View Login*/
-public void login() 
-{
-	ViewBossLogin vbl = new ViewBossLogin(this);
-	 window.setContentPane(vbl);
-	 this.setActualView(vbl) ;
-	 window.validate();
-}
-
-
-		
-
-public void motDePasse(char[] cs)
-{
-	if(this.verifMDP(cs))
-	{
-		ViewBossHome vbh = new ViewBossHome(this);
-		window.setContentPane(vbh);
-		this.setActualView(vbh) ;
-		window.validate();
-	}
-	else
-	{
-		JOptionPane.showMessageDialog(null, "Mot de passe invalide.", "Erreur", JOptionPane.ERROR_MESSAGE);
-	}
-}
-	
-
-	
-
+	/****************************************************************************************************/
 
 
 	public void obtenirstock() {
@@ -326,7 +326,8 @@ public void motDePasse(char[] cs)
 		window.validate();
 	}
 
-	public void budget() {
+	public void budget() 
+	{
 
 	}
 
@@ -335,9 +336,44 @@ public void motDePasse(char[] cs)
 	}
 
 	public void visualiser(ViewStocksManagement vsm) {
-		ArrayList<String> tableauAffichage = vsm.obtenirBouttonAlcool();
-		System.out.println(tableauAffichage);
-		System.out.println(duree);
+		long dayMilli=86400000L;
+        Date maintenant=new Date(),debut;
+        System.out.println(duree);
+        switch(duree)
+        {
+        case "soiree":
+                debut=new Date(maintenant.getTime()-dayMilli);
+                break;
+        case "semaine":
+                debut=new Date(maintenant.getTime()-dayMilli*7);
+                break;
+        case "mois":
+                debut=new Date(maintenant.getTime()-dayMilli*30);
+                break;
+        case "année":
+                debut=new Date(maintenant.getTime()-dayMilli*365);
+                break;
+        default :
+                debut=new Date(0);
+        }
+        ArrayList<ArrayList<HistoBoisson>> data= new ArrayList<ArrayList<HistoBoisson>>();
+        
+        ArrayList<String> tableauAffichage = vsm.obtenirBouttonAlcool();
+        for(String nom:tableauAffichage)
+        {
+                data.add(bdd.evolutionDesStocks(nom,debut,maintenant));
+        }
+        /**
+        graphique g=new graphique(data,tableauAffichage);
+        JFrame f = new JFrame();
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setBounds(10,10,500,500);
+        f.add(g);
+        f.setVisible(true);
+        /*vsm.add(g);*/
+         window.setContentPane(vsm);
+         this.setActualView(vsm) ;
+         window.validate();
 	}
 
 	public void visualiserCommandes(ViewCommandManagement vcm) {

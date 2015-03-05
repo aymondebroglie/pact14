@@ -1,6 +1,7 @@
 package BDD;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /*pour tous tables,on manque les méthodes affichant des dennées (attent des interfaces des autres modules)
  Remarquez le type Date utilisé. Si vous voulez mettre la date actuelle, mettez juste new Date() (le package est java.util, pas java.sql)
@@ -66,7 +67,7 @@ public interface BDDInterface {
 	// Visu de données
 	ArrayList<DispoBoisson> etatDesStocks(java.util.Date date);
 
-	ArrayList<HistoBoisson> evolutionDesStocks(String boisson); // évolution
+	ArrayList<HistoBoisson> evolutionDesStocks(String boisson, Date debut, Date fin); // évolution
 																// des stocks
 																// pour une
 																// boisson

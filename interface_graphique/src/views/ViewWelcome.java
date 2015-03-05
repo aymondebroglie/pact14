@@ -1,4 +1,4 @@
-package windows;
+package views;
 
 import java.awt.GridLayout;
 

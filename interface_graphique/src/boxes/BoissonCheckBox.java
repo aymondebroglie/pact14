@@ -1,4 +1,4 @@
-package windows;
+package boxes;
 
 import javax.swing.JCheckBox;
 
