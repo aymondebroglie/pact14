@@ -16,7 +16,8 @@ ATTENTION ici, la date créée est en février, les mois commencent à 0 !!!!!!!
 pour utiliser des longs, il faut metter un L à la fin, exemple  :  		long test =3268840001008L;*/
 public interface BDDInterface 
 {
-
+    boolean initialisation();
+    boolean setPrixParBoisson(long codeBarre,double prix);
 //Goulots
 	boolean ajouterGoulot(int bluetooth);
 	public boolean modifierGoulot(int bluetooth,int enCharge, float niveauDeCharge);
@@ -44,7 +45,6 @@ public interface BDDInterface
 	ArrayList<DispoBoisson> etatDesStocks(java.util.Date date); 
 	ArrayList<HistoBoisson> evolutionDesStocks(String boisson, Date dateDebut, Date dateFin); //évolution des stocks pour une boisson donnée.
 	ArrayList<String> listeDesBoissons();
-	
 	
 	
 	
