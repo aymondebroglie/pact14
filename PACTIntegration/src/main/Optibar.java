@@ -12,6 +12,8 @@ import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import materiel.SerialTest;
+
 import bdd.*;
 import visu.*;
 
@@ -23,6 +25,17 @@ public class Optibar {
 		Window window =new Window(bdd);
 		
 		
+		SerialTest main = new SerialTest();
+		main.initialize();
+		Thread t=new Thread() {
+			public void run() {
+				//the following line will keep this app alive for 1000 seconds,
+				//waiting for events to occur and responding to them (printing incoming messages to console).
+				try {Thread.sleep(1000000);} catch (InterruptedException ie) {}
+			}
+		};
+		t.start();
+		System.out.println("Started");
 		/*ArrayList<DispoBoisson> data2=new ArrayList<DispoBoisson>();
 		data2=bdd.etatDesStocks(maintenant);
 		graphique graph2=new graphique(data2,maintenant);
