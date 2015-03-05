@@ -15,6 +15,7 @@ public class Optibar {
 	public static void main(String[] args)
 	{
 		BDDInterface bdd = new BDD("BAR", "root", "12345678");
+		
 /*		long dayMilli=86400000L;
 		Calendar calendar= Calendar.getInstance();
 		calendar.setTime(new Date());
@@ -62,9 +63,9 @@ public class Optibar {
 // mal cohérence dans table Associe 
 		//bdd.associeBluetoothCodeBarre(12345678, 1);
 		//bdd.associeBluetoothCodeBarre(12346515, 2);
-		bdd.ajouterConsommation(1, 1, 11);
+		/*bdd.ajouterConsommation(1, 1, 11);
 		bdd.ajouterConsommation(2, 1, 11);
-		bdd.finDeCommande(1);
+		bdd.finDeCommande(1);*/
 	}
 
 }
