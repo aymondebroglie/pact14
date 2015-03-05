@@ -1,4 +1,4 @@
-package visu;
+
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -21,34 +21,33 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-import bdd.DispoBoisson;
-import bdd.HistoBoisson;
+import Interface.*;
 
 
 	public class graphique extends JPanel {
 
 		private static final long serialVersionUID = 1L;
 
-		/** titre : Le titre du graphique affichï¿½ en haut */
+		/** titre : Le titre du graphique affichŽ en haut */
 		private String titre;
-		/** ordonnee : le nom de l'axe des ordonnï¿½es */
+		/** ordonnee : le nom de l'axe des ordonnŽes */
 		private String ordonnee;
 		/** abscisses : le nom de l'axe des abscisses */
 		private String abscisse;
-		/** valeurs : les valeurs ï¿½ afficher, elles sont triï¿½es par sï¿½ries et par catï¿½gories*/
+		/** valeurs : les valeurs ˆ afficher, elles sont triŽes par sŽries et par catŽgories*/
 		private List<Float> valeurs;
-		/** series : la liste des sï¿½ries */
+		/** series : la liste des sŽries */
 		private List<String> series;
-		/** categories : la liste des categories */
+		/** categories : la liste des catŽgories */
 		private List<String> categories;
-		/** legende : booleen vrai si on affiche la lï¿½gende */
+		/** legende : booleen vrai si on affiche la lŽgende */
 		private boolean legende;
 		/** couleurFond : la couleur du fond */
 		private Color couleurFond;
-		/** couleurBarres : les couleurs appliquï¿½es aux barres */
-		private Color[] couleursBarres = {Color.cyan.darker(), 
-				Color.red, Color.green, Color.cyan, Color.magenta, 
-				Color.yellow, Color.pink, Color.darkGray, Color.orange};
+		/** couleurBarres : les couleurs appliquŽes aux barres */
+		private Color[] couleursBarres = { 
+				Color.green, Color.red, Color.cyan, Color.yellow, Color.cyan.darker(), Color.orange,Color.magenta, Color.pink,
+				Color.darkGray};
 		
 
 		public graphique(String titre, String abscisse, String ordonnee, List<Float> valeurs, Color fond, List<String> listeSeries, List<String> listeCategory, boolean legende) {
@@ -71,7 +70,7 @@ import bdd.HistoBoisson;
 			this.ordonnee="Volume";
 			this.abscisse="Temps";
 			this.valeurs= new ArrayList<Float>();
-			/*j'avais dis des bÃªtises, les diffÃ©rentes arraylist<histoBoisson> n'ont pas nÃ©cessairement le mÃªme nombre d'Ã©lÃ©ment, je complÃ¨te donc avec des zÃ©ros*/
+			/*j'avais dis des betises, les differentes arraylist<histoBoisson> n'ont pas necessairement le meme nombre d'element, je complete donc avec des zeros*/
 			ArrayList<HistoBoisson> plusLongue= new ArrayList<HistoBoisson>();
 			int i,j=0,size;
 			
@@ -99,7 +98,7 @@ import bdd.HistoBoisson;
 					
 				}
 			}
-			//voilÃ  en fait j'en ai chiÃ© des boules c'Ã©tait pas Ã©vident du tout.
+			//voila en fait j'en ai chie des boules c'etait pas evident du tout.
 			this.series=boissons;
 			
 			this.categories=new ArrayList<String>();
@@ -117,7 +116,7 @@ import bdd.HistoBoisson;
 		public graphique(ArrayList<DispoBoisson> data,Date date ) 
 		{
 			super(new GridLayout(1,0));
-			this.titre="Etat des stocks ï¿½ la date "+date.toString();
+			this.titre="Etat des stocks ˆ la date "+date.toString();
 			this.ordonnee="Volume";
 			this.abscisse="Boissons";
 			this.valeurs= new ArrayList<Float>();

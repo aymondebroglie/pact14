@@ -12,16 +12,25 @@ public class Main {
 	
 	ArrayList<String> boissons = new ArrayList<String>();
 	ArrayList<ArrayList<HistoBoisson>> dataHisto = new ArrayList<ArrayList<HistoBoisson>>();
-	ArrayList<HistoBoisson> temp = new ArrayList<HistoBoisson>();;
+	ArrayList<HistoBoisson> temp = new ArrayList<HistoBoisson>();
 	boissons.add("Whisky");
 	boissons.add("Vodka");
-	temp.add(new HistoBoisson(new Date(432536345L),12));
+	boissons.add("Tequila");
+	temp.add(new HistoBoisson(new Date(432536345L),8));
 	temp.add(new HistoBoisson(new Date(4325363422L),3));
+	temp.add(new HistoBoisson(new Date(),11));
 	dataHisto.add(new ArrayList<HistoBoisson>(temp));
 
 	temp.clear();
 	temp.add(new HistoBoisson(new Date(432536345L),4));
-	temp.add(new HistoBoisson(new Date(4325363422L),70));
+	temp.add(new HistoBoisson(new Date(4325363422L),12));
+	temp.add(new HistoBoisson(new Date(),7));
+	dataHisto.add(new ArrayList<HistoBoisson>(temp));
+	
+	temp.clear();
+	temp.add(new HistoBoisson(new Date(432536345L),5));
+	temp.add(new HistoBoisson(new Date(4325363422L),15));
+	temp.add(new HistoBoisson(new Date(),9));
 	dataHisto.add(new ArrayList<HistoBoisson>(temp));
 
 	JFrame f = new JFrame();
@@ -39,6 +48,14 @@ public class Main {
 	
 	PieChart tpc = new PieChart(temp2, date); 
     tpc.setVisible(true); 
+    
+    JFrame f2 = new JFrame();
+	f2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	f2.setBounds(10,10,500,500);
+	graphique g2 = new graphique(temp2, date);
+	f2.add(g2);
+	f2.setVisible(true);
+    
 }
 
 }

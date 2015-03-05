@@ -11,7 +11,11 @@ import org.jfree.chart.*;
 import org.jfree.data.general.DefaultPieDataset;
 
 public class PieChart extends JFrame { 
-  private JPanel pnl; 
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+private JPanel pnl; 
 
  /* public PieChart() { 
     addWindowListener(new WindowAdapter() { 

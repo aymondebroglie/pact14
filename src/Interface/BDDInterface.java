@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 
-/*pour tous tables,on manque les méthodes affichant des dennées (attent des interfaces des autres modules)
+/*pour tous tables,on manque les méthodes affichant des données (attent des interfaces des autres modules)
 Remarquez le type Date utilisé. Si vous voulez mettre la date actuelle, mettez juste new Date() (le package est java.util, pas java.sql)
 Pour créer une autre date il faut faire comme suit.
 	Calendar calendar=Calendar.getInstance();
