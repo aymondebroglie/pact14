@@ -265,7 +265,7 @@ public void gestionStocks()
 public void retirerGoulot()
 {
 	//Demander quel goulot il faut prendre pour l'instant il ferme la fen�tre pour le test
-	JPanel pan = new JPanel();
+	ViewRetirerGoulot pan = new ViewRetirerGoulot(this);
 	int goulot=bdd.attributionDeGoulot();
 	pan.add(new JLabel("Vous pouvez retirer le goulot "+goulot));
 	window.setContentPane(pan);
