@@ -108,6 +108,23 @@ public class BDD implements BDDInterface
 			String updateSql = "UPDATE Barman SET CPK="+0+" WHERE RFID="+rFID;
 		int updateResultat=st.executeUpdate(updateSql);
 		System.out.println("UPDATE:" + updateResultat);
+		
+/*Ici pour prix*/
+		double prixTotal=0.0;
+		long codeBarre=0;
+		int volume=0;
+		rs=st.executeQuery("SELECT CodeBarre,Volume From Composition WHERE CPK="+cpk);
+		if(rs.next())
+		{
+			codeBarre=rs.getLong(1);
+			volume=rs.getInt(2);
+			rs2=st2.executeQuery("SELECT Prix From PrixBoisson WHERE CodeBarre="+codeBarre);
+			if(rs2.next())
+				prixTotal=prixTotal+volume*rs2.getDouble(1);
+		}
+		st.executeUpdate("UPDATE Commande SET Prix="+prixTotal+"WHERE CPK="+cpk);
+/*fin de prix*/
+
 		rs=st.executeQuery("SELECT Prix FROM Commande WHERE CPK="+cpk);
 		if(!rs.next())
 			throw new Exception("Commande introuvable");
@@ -606,7 +623,7 @@ public class BDD implements BDDInterface
 		rs=st.executeQuery("SELECT Prix From PrixBoisson WHERE CodeBarre="+codeBarre);
 		if(!rs.next())
 			throw new Exception("Boisson introuvable");
-		 st.executeQuery("UPDATE PrixBoisson SET Prix="+prix+"WHERE CodeBarre="+codeBarre);	
+		 st.executeUpdate("UPDATE PrixBoisson SET Prix="+prix+"WHERE CodeBarre="+codeBarre);	
 	    }catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
