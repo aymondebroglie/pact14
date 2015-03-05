@@ -1,5 +1,6 @@
 package ui;
 import bdd.*;
+
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.io.BufferedReader;
@@ -9,10 +10,15 @@ import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Stack;
+
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import visu.graphique;
 
 //Classe permettant de controller ce qui se passe quand on appuie sur un bouton, c'est elle qui
 //interrogera la base de donn�e
@@ -27,8 +33,7 @@ public class Controller
 	{
 		this.window = window ;
 		this.bdd = bdd ;
-		this.loadMDP() ;
-		
+		this.loadMDP();
 	}
 	
 	/****************************************************************************************************/
@@ -261,7 +266,8 @@ public void retirerGoulot()
 {
 	//Demander quel goulot il faut prendre pour l'instant il ferme la fen�tre pour le test
 	JPanel pan = new JPanel();
-	pan.add(new JLabel("test retirerGoulot() r�ussi"));
+	int goulot=bdd.attributionDeGoulot();
+	pan.add(new JLabel("Vous pouvez retirer le goulot "+goulot));
 	window.setContentPane(pan);
 	this.setActualView(pan) ;
 	window.validate();
@@ -329,13 +335,47 @@ public void motDePasse(char[] cs)
 	}
 
 	public ArrayList<String> obtenirAlcools() {
-		return bdd.listeDesBoissons();
+			return bdd.listeDesBoissons();
 	}
 
 	public void visualiser(ViewStocksManagement vsm) {
-		ArrayList<String> tableauAffichage = vsm.obtenirBouttonAlcool();
-		System.out.println(tableauAffichage);
+		long dayMilli=86400000L;
+		Date maintenant=new Date(),debut;
 		System.out.println(duree);
+		switch(duree)
+		{
+		case "soiree":
+			debut=new Date(maintenant.getTime()-dayMilli);
+			break;
+		case "semaine":
+			debut=new Date(maintenant.getTime()-dayMilli*7);
+			break;
+		case "mois":
+			debut=new Date(maintenant.getTime()-dayMilli*30);
+			break;
+		case "année":
+			debut=new Date(maintenant.getTime()-dayMilli*365);
+			break;
+		default :
+			debut=new Date(0);
+		}
+		ArrayList<ArrayList<HistoBoisson>> data= new ArrayList<ArrayList<HistoBoisson>>();
+		
+		ArrayList<String> tableauAffichage = vsm.obtenirBouttonAlcool();
+		for(String nom:tableauAffichage)
+		{
+			data.add(bdd.evolutionDesStocks(nom,debut,maintenant));
+		}
+		graphique g=new graphique(data,tableauAffichage);
+		JFrame f = new JFrame();
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setBounds(10,10,500,500);
+		f.add(g);
+		f.setVisible(true);
+		/*vsm.add(g);
+		 window.setContentPane(vsm);
+		 this.setActualView(vsm) ;
+		 window.validate();*/
 	}
 
 	public void visualiserCommandes(ViewCommandManagement vcm) {

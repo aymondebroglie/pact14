@@ -470,7 +470,6 @@ public class BDD implements BDDInterface
 			rs=st.executeQuery("SELECT Date FROM Stock WHERE Date <= '"+sqlTime+"'");
 			while(rs.next())
 			{
-				System.out.println(sqlTime);
 				derniereDate=rs.getTimestamp(1).after(derniereDate)?rs.getTimestamp(1):derniereDate;
 
 			}
