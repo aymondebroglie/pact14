@@ -574,5 +574,28 @@ public class BDD implements BDDInterface
 		openfood.ajouterBoisson(codeBarre);
 		return false;
 	}
+	@Override
+	public boolean initialisation() {
+		try
+		{
+		st.executeUpdate("DELETE FROM Associe");
+		st.executeUpdate("DELETE FROM Barman");
+		st.executeUpdate("DELETE FROM Boisson");
+		st.executeUpdate("DELETE FROM Cocktail");
+		st.executeUpdate("DELETE FROM Commande");
+		st.executeUpdate("DELETE FROM Composition");
+		st.executeUpdate("DELETE FROM Contenue");
+		st.executeUpdate("DELETE FROM Disponibilite");
+		st.executeUpdate("DELETE FROM Goulots");
+		st.executeUpdate("DELETE FROM Recette");
+		st.executeUpdate("DELETE FROM Servi");
+		st.executeUpdate("DELETE FROM Stock");
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+	}return true;
+	}
 
 }

@@ -16,7 +16,7 @@ ATTENTION ici, la date créée est en février, les mois commencent à 0 !!!!!!!
 pour utiliser des longs, il faut metter un L à la fin, exemple  :  		long test =3268840001008L;*/
 public interface BDDInterface 
 {
-
+    boolean initialisation();
 //Goulots
 	boolean ajouterGoulot(int bluetooth);
 	public boolean modifierGoulot(int bluetooth,int enCharge, float niveauDeCharge);
