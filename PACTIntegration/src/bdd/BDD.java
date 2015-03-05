@@ -114,7 +114,7 @@ public class BDD implements BDDInterface
 		long codeBarre=0;
 		int volume=0;
 		rs=st.executeQuery("SELECT CodeBarre,Volume From Composition WHERE CPK="+cpk);
-		if(rs.next())
+		while(rs.next())
 		{
 			codeBarre=rs.getLong(1);
 			volume=rs.getInt(2);
@@ -623,12 +623,25 @@ public class BDD implements BDDInterface
 		rs=st.executeQuery("SELECT Prix From PrixBoisson WHERE CodeBarre="+codeBarre);
 		if(!rs.next())
 			throw new Exception("Boisson introuvable");
-		 st.executeUpdate("UPDATE PrixBoisson SET Prix="+prix+"WHERE CodeBarre="+codeBarre);	
+		 st.executeUpdate("UPDATE PrixBoisson SET Prix="+prix+" WHERE CodeBarre="+codeBarre);	
 	    }catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 		return false;
         }return true;
     }
+	@Override
+	public boolean associeBluetoothCodeBarre(long codeBarre, long bluetoothID) {
+		try
+		{   rs=st.executeQuery("SELECT CodeBarre From Associe WHERE BluetoothID="+bluetoothID);
+		if(!rs.next())
+			throw new Exception("Boisson introuvable");
+			st.executeUpdate("UPDATE Associe SET CodeBarre="+codeBarre+" WHERE BluetoothID="+bluetoothID);
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+	        }return true;
+	    }
 
 }
