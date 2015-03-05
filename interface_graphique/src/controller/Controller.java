@@ -103,7 +103,7 @@ public class Controller
 	
 	// changer de mot de passe
 	
-
+	// renvoie sur la page de chgt de MDP
 	public void changementMDP()
 	{
 		ViewChangePassword cp = new ViewChangePassword(this);
@@ -111,7 +111,7 @@ public class Controller
 		window.validate();
 	}
 	
-	// changer de mot de passe
+	// prend en charge le chgt de mot de passe après remplissage des champs nécessaires et validation.
 		public void changerMDP(char[] cs0, char[] cs1, char[] cs2) {
 			if (this.verifMDP(cs0)) {
 				if (Arrays.equals(cs1, cs2)) {
@@ -188,6 +188,23 @@ public class Controller
 		}
 	}
 
+	/*
+	 * L'idée est la suivante : 
+	 * 
+	 *  1) à chaque fois qu'on quitte un page par un lien normal (sans passer par les outils de navigations), il faut ajouter la page quittée à la pile stackpreviousview.
+	 *  2) on renseigne au controller la nouvelle page sur laquelle on se trouve : elle est stockée dans l'attribut actualview ;
+	 *  3) si on décide de faire marche arrière la page quittée est stockée dans stacknextview.
+	 *  4) si on décide de faire un retour arrière après 3), la page quittée est de nouveau stockée dans stacknextview
+	 *  
+	 *  Autrement dit :
+	 *  
+	 *  1) actual view -> stackpreviousview
+	 *  2) actual view <- newactualview
+	 *  3) actual view -> stacknextview
+	 *  4) actual view -> stackpreviousview
+	 *  
+	 * 
+	 * */
 	
 	/****************************************************************************************************/
 
