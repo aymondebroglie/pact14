@@ -239,7 +239,17 @@ public void imprimerNote()
 	//M�thode appel�e si on appuie sur imprimer note dans l'�cran du Barman
 	//Code pour le test, il faudra demander a la base de donn�e de nous fournir la note pour le serveur donn�
 	JPanel pan = new JPanel();
-	pan.add(new JLabel("test imprimerNote() r�ussi"));
+    ArrayList<DetailDeCommand> list= bdd.imprimerCommande(1);//suposse rfid ets 1
+	String resultat="******Command******";
+	pan.add(new JLabel(resultat));
+	double prix=0;
+	for(DetailDeCommand t:list)
+	{
+		resultat=t.getNom()+"  "+t.getPrixParVolume()+"  "+t.getVolume();
+		pan.add(new JLabel(resultat));
+	    prix=t.getPrixTotal();
+	}
+	pan.add(new JLabel("PRIX TOTAL :"+prix));
 	window.setContentPane(pan);
 	this.setActualView(pan) ;
 	window.validate();

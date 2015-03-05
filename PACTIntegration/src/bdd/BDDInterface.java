@@ -18,6 +18,7 @@ public interface BDDInterface
 {
     boolean initialisation();
     boolean setPrixParBoisson(long codeBarre,double prix);
+    public ArrayList<DetailDeCommand> imprimerCommande(int rFID);
 //Goulots
 	boolean ajouterGoulot(int bluetooth);
 	public boolean modifierGoulot(int bluetooth,int enCharge, float niveauDeCharge);

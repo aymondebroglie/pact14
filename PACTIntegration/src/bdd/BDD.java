@@ -497,10 +497,10 @@ public class BDD implements BDDInterface
 		int codeBarre=0;
 		try{
 			float niveauChargeMax=0;
-			rs=st.executeQuery("SELECT BluetoothID,NiveauDeCharge FROM Goulots");
+			rs=st.executeQuery("SELECT BluetoothID,NiveauDeCharge,EnCharge FROM Goulots");
 			while(rs.next())
 			{
-				if(rs.getFloat(2)>niveauChargeMax)
+				if(rs.getFloat(2)>niveauChargeMax&&rs.getInt(3)==1)
 				{
 					niveauChargeMax=rs.getFloat(2);
 					codeBarre=rs.getInt(1);
@@ -629,4 +629,45 @@ public class BDD implements BDDInterface
 		return false;
         }return true;
     }
+
+	@Override
+	public ArrayList<DetailDeCommand> imprimerCommande(int rFID) {
+		long cpk;
+		float prixTotal;
+		ArrayList<DetailDeCommand> list =new ArrayList<DetailDeCommand>();
+		try{
+		rs=st.executeQuery("SELECT CPK FROM Barman WHERE RFID="+rFID);
+		if(!rs.next())
+			throw(new Exception("Pas de Barman associé à l'identifiant rFID "+rFID));
+		cpk=rs.getLong(1);
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+		prixTotal=this.finDeCommande(rFID);
+		try{
+		String Nom;
+		Double prix;
+		DetailDeCommand temp;
+		rs=st.executeQuery("SELECT CodeBarre, Volume FROM Composition WHERE CPK="+cpk);
+		while(rs.next())
+		{
+			rs2=st2.executeQuery("SELECT Nom FROM Boisson WHERE CodeBarre="+rs.getLong(1));
+			rs2.next();
+			Nom=rs2.getString(1);
+			rs2=st2.executeQuery("SELECT Prix FROM PrixBoisson WHERE CodeBarre="+rs.getLong(1));
+			rs2.next();
+			prix=rs2.getDouble(1);
+			temp=new DetailDeCommand(Nom,rs.getInt(2),prix,prixTotal);
+			list.add(temp);
+			
+		}}catch(Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+			
+		return list;
+	}
 }
