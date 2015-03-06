@@ -1,5 +1,0 @@
-package GUIExceptions;
-
-public class PassWordFromBDDException extends Exception {
-
-}
