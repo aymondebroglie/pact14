@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 import visu.graphique;
 
 //Classe permettant de controller ce qui se passe quand on appuie sur un bouton, c'est elle qui
-//interrogera la base de donneï¿½e
+//interrogera la base de donne½e
 public class Controller
 {
 	private BDDInterface bdd;
@@ -167,7 +167,7 @@ public class Controller
 	{
 		//System.out.println("before :" + actualview) ;
 		this.actualview = actualview ;
-		//System.out.println("after :" + actualview) ;
+		System.out.println("actual :" + actualview) ;
 	}
 	
 	public void clearStacks()
@@ -176,11 +176,13 @@ public class Controller
 		{
 			stackpreviousview.pop() ;
 		}
+		System.out.println("is stackpreviousview empty ?" + stackpreviousview.empty()) ;
 		while(!stacknextview.empty())
 		{
 			stacknextview.pop() ;
 		}
-		this.setActualView(null);
+		System.out.println("is stacknextview empty ?" + stacknextview.empty()) ;
+		//this.setActualView(null);
 	}
 	
 	public JPanel getActualView()
@@ -191,6 +193,7 @@ public class Controller
 	public void addPreviousView(JPanel previousview)
 	{
 		stackpreviousview.push(previousview) ;
+		
 	}
 	
 	public void previousView(JPanel actualview)
@@ -203,6 +206,8 @@ public class Controller
 		{
 			JPanel previousview = stackpreviousview.pop() ;
 			stacknextview.push(actualview) ;
+			System.out.println("new next : " + actualview) ;
+			this.setActualView(previousview) ;
 			window.setContentPane(previousview);
 			window.validate();
 		}
@@ -218,6 +223,8 @@ public class Controller
 		{
 			JPanel nextview = stacknextview.pop() ;
 			stackpreviousview.push(actualview) ;
+			System.out.println("new previous : " + actualview) ;
+			this.setActualView(nextview) ;
 			window.setContentPane(nextview);
 			window.validate();
 		}
@@ -290,6 +297,7 @@ public class Controller
 	public void boutonBarman()
 	{
 		//Methode appelee quand on appuie sur Barman sur l'ecran d'accueil
+		this.addPreviousView(actualview);
 		ViewBarmanHome vbh = new ViewBarmanHome(this);
 		window.setContentPane(vbh);
 		window.validate();
@@ -298,6 +306,7 @@ public class Controller
 	public void boutonGestionnaire()
 	{
 		//Methode appelee quand on appuie sur Barman sur l'ecran d'accueil
+		this.addPreviousView(actualview);
 		ViewBossLogin vbh = new ViewBossLogin(this);
 		window.setContentPane(vbh);
 		window.validate(); 
@@ -332,6 +341,7 @@ public class Controller
 	public void retirerGoulot()
 	{
 		//Demander quel goulot il faut prendre pour l'instant il ferme la fenetre pour le test
+		this.addPreviousView(actualview);
 		ViewRetirerGoulot pan = new ViewRetirerGoulot(this);
 		window.setContentPane(pan);
 		this.setActualView(pan) ;
@@ -361,9 +371,10 @@ public class Controller
 	/** ViewBossHome */
 	public void consulterVosDonnees() 
 	{
+		this.addPreviousView(actualview);
 		ViewSeeDatas vsd = new ViewSeeDatas(this);
-		 window.setContentPane(vsd);
-		 window.validate();
+		window.setContentPane(vsd);
+		window.validate();
 	}
 	
 	public void gestionStocks() 
@@ -376,6 +387,7 @@ public class Controller
 	/****************************************************************************************************/
 
 	public void obtenirstock() {
+		this.addPreviousView(actualview);
 		ViewStocksManagement vsm = new ViewStocksManagement(this);
 		Container cp = window.getContentPane();
 		cp.removeAll();
@@ -388,6 +400,7 @@ public class Controller
 	}
 
 	public void commande() {
+		this.addPreviousView(actualview);
 		ViewCommandManagement vsm = new ViewCommandManagement(this);
 		Container cp = window.getContentPane();
 		cp.removeAll();
