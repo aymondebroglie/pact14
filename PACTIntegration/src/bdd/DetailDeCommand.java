@@ -2,34 +2,37 @@ package bdd;
 
 public class DetailDeCommand 
 {
-
-	public DetailDeCommand(String nom, int int1, Double prix, float prixTotal) 
+	String boisson;
+	int volume;
+	float prix;
+	public DetailDeCommand(String nom, int volume, float prix) 
 	{
+		this.volume=volume;
+		this.boisson=nom;
+		this.prix=prix;
 		// TODO Auto-generated constructor stub
 	}
 
-	public String getNom() 
+	public String getBoisson() 
 	{
 		// TODO Auto-generated method stub
-		return null;
+		return boisson;
 	}
 
-	public String getVolume() 
+	public int getVolume() 
 	{
 		// TODO Auto-generated method stub
-		return null;
+		return volume;
 	}
 
-	public double getPrixTotal() 
+	public float getPrix() 
 	{
 		// TODO Auto-generated method stub
-		return 0;
+		return prix;
 	}
-
-	public String getPrixParVolume() 
+	public String toString()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return "Boisson: "+boisson+"\t Volume: "+volume+"cL\t Prix: "+prix+"€\n";
 	}
 
 }

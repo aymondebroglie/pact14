@@ -17,8 +17,8 @@ pour utiliser des longs, il faut metter un L à la fin, exemple  :  		long test 
 public interface BDDInterface 
 {
     boolean initialisation();
-    boolean setPrixParBoisson(long codeBarre,double prix);
-    public ArrayList<DetailDeCommand> imprimerCommande(int rFID);
+    boolean setPrixParBoisson(long codeBarre,float prix);
+    
 //Goulots
 	boolean ajouterGoulot(int bluetooth);
 	public boolean modifierGoulot(int bluetooth,int enCharge, float niveauDeCharge);
@@ -30,7 +30,7 @@ public interface BDDInterface
 	public boolean modifierInformationBarman(int rFID,String nom,String prenom,int age,java.util.Date dateEmbauche);
 	public boolean supprimerBarman(int rFID);
 //Boisson
-    public boolean ajouterBoisson(long codeBarre,String nom,String marque, int volume, double degre);
+    public boolean ajouterBoisson(long codeBarre,String nom,String marque, int volume, float degre);
     public boolean boissonConnue(long codeBarre);
     public boolean ajouterBoissonParWeb(long codeBarre);
 //Cocktail
@@ -39,6 +39,7 @@ public interface BDDInterface
 //Commande
 	boolean ajouterConsommation(int bluetoothID, int rFID, int volume ); //il faut mettre le volume en cL, un entier.
 	float finDeCommande(int rFID); //retourne le prix à payer, pour l'instant c'est toujours 0
+	public ArrayList<DetailDeCommand> imprimerCommande(int rFID);
 //Stock
 	boolean bouteilleFinie(int bluetoothID);
 	boolean livraison(ArrayList<Livraison> livraison);

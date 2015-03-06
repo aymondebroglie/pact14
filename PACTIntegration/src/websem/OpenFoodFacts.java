@@ -112,11 +112,11 @@ public class OpenFoodFacts implements OFFInterface
 	}
 	
 	// renvoie le degr� d'alcool de la boisson
-	public double getDegree(List<QuerySolution> solutionlist)
+	public float getDegree(List<QuerySolution> solutionlist)
 	{
 		QuerySolution qs = solutionlist.get(0) ;
 		
-		double degree = qs.getLiteral("degree").getDouble();
+		float degree = qs.getLiteral("degree").getFloat();
 		return degree ;
 	}
 	
@@ -128,7 +128,7 @@ public class OpenFoodFacts implements OFFInterface
 		long code = this.getCode(solutionlist);
 		String nom = this.getName(solutionlist) ;
 		int volume = this.getVolume(nom) ;
-		double degree = this.getDegree(solutionlist);
+		float degree = this.getDegree(solutionlist);
 		return bdd.ajouterBoisson(code, nom, "in the name",volume, degree) ;
 	   }
 	  catch(VolumeException e)

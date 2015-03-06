@@ -45,12 +45,12 @@ public class BDD implements BDDInterface
 		{
 			rs=st.executeQuery("SELECT CodeBarre FROM Associe WHERE Associe.BluetoothID='"+bluetoothID+"'");
 			if(!rs.next())
-				throw(new Exception("Pas de goulot associe a� l'identifiant bluetooth "+bluetoothID));
+				throw(new Exception("Pas de goulot associe a� l'identifiant bluetooth "+bluetoothID));
 			codeBarre=rs.getLong(1);
 			
 			rs=st.executeQuery("SELECT CPK FROM Barman WHERE Barman.RFID='"+rFID+"'");
 			if(!rs.next())
-				throw(new Exception("Pas de barman associe a� l'identifiant RFID "+rFID));
+				throw(new Exception("Pas de barman associe a� l'identifiant RFID "+rFID));
 			cPK=rs.getInt(1);
 			if(codeBarre==0)
 				throw(new Exception("Pas de boisson associee au goulot d'identifiant bluetooth "+bluetoothID));
@@ -90,19 +90,12 @@ public class BDD implements BDDInterface
 		//ajouter une entrée dans Servi
 		//passer le CPK de barman à 0
 		long cpk;
-		float prix;
+		float prixTotal=0.00f;
 		try{
 		rs=st.executeQuery("SELECT CPK FROM Barman WHERE RFID="+rFID);
 		if(!rs.next())
 			throw(new Exception("Pas de Barman associe à l'identifiant rFID "+rFID));
 		cpk=rs.getLong(1);
-		}catch(Exception e)
-		{
-			e.printStackTrace();
-			return 0;
-		}
-//********************************
-		try {
 			st.executeUpdate("INSERT INTO Servi(CPK, RFID )" + 
 					"VALUES ('"+cpk+"','"+rFID+"')");
 			String updateSql = "UPDATE Barman SET CPK="+0+" WHERE RFID="+rFID;
@@ -110,7 +103,6 @@ public class BDD implements BDDInterface
 		System.out.println("UPDATE:" + updateResultat);
 		
 /*Ici pour prix*/
-		double prixTotal=0.0;
 		long codeBarre=0;
 		int volume=0;
 		rs=st.executeQuery("SELECT CodeBarre,Volume From Composition WHERE CPK="+cpk);
@@ -118,26 +110,23 @@ public class BDD implements BDDInterface
 		{
 			codeBarre=rs.getLong(1);
 			volume=rs.getInt(2);
-			rs2=st2.executeQuery("SELECT Prix From PrixBoisson WHERE CodeBarre="+codeBarre);
+			rs2=st2.executeQuery("SELECT Prix From Boisson WHERE CodeBarre="+codeBarre);
 			if(rs2.next())
-				prixTotal=prixTotal+volume*rs2.getDouble(1);
+				prixTotal+=volume*rs2.getFloat(1);
 		}
+		prixTotal=Math.round(100*prixTotal)/100.0f;
 		st.executeUpdate("UPDATE Commande SET Prix="+prixTotal+"WHERE CPK="+cpk);
 /*fin de prix*/
 
-		rs=st.executeQuery("SELECT Prix FROM Commande WHERE CPK="+cpk);
-		if(!rs.next())
-			throw new Exception("Commande introuvable");
-		prix=rs.getFloat(1);
 			} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
-		return 0;
+		return 0f;
 			}
 //****************************************
 		System.out.println("La commande numero "+ cpk +" a bien ete enregistree");
 		
-		return prix;
+		return prixTotal;
 	}
 
 
@@ -257,15 +246,15 @@ public class BDD implements BDDInterface
 	@Override
 /*NEGLIGER LES COMMENTAIRES DE CE METHODE, TOUT EST BON MAINTENANT*/
 	public boolean ajouterBoisson(long codeBarre, String nom, String marque,int volume,
-			double degre) 
+			float degre) 
 	{
 	 /*PAS CLAIRE POUR FONCTIONNALITE(-Yunzhi)*/
 	 /*Ici on crée dernierDate dans ce méthode, et on juste ajoute 1 line d'information,
 	   donc généralement, on a juste un boisson lié à un data. Modifier après ou 
 	   rest comme ça*/
 		java.sql.Timestamp derniereDate=new java.sql.Timestamp(0), maintenant=new java.sql.Timestamp(new java.util.Date().getTime());
-		String sql = "INSERT INTO Boisson (CodeBarre,Nom,Marque,Volume, Degre)" +
-				"VALUES ('"+codeBarre+"','"+echapper(nom)+"','"+echapper(marque)+"','"+volume+"','"+degre+"')";
+		String sql = "INSERT INTO Boisson (CodeBarre,Nom,Marque,Volume, Degre, Prix)" +
+				"VALUES ('"+codeBarre+"','"+echapper(nom)+"','"+echapper(marque)+"','"+volume+"','"+degre+"','0.0')";
 		
 		try {
 			st.executeUpdate(sql);
@@ -283,43 +272,17 @@ public class BDD implements BDDInterface
 			}
 			st.executeUpdate("INSERT INTO Disponibilite (Date, CodeBarre, Volume) VALUES ('"+maintenant+"','"+codeBarre+"','0')");
 			System.out.println("La boisson "+nom+" a bien ete ajoutee");
- /*Ici pour prix*/
-			st.executeUpdate("INSERT INTO PrixBoisson (CodeBarre, Prix) VALUES ('"+codeBarre+"','"+0.0+"')");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 			return false;
 		}return true;
 	}
-	
-//	public boolean ajouterBoisson(long codeBarre, String nom, String marque,int volume,
-//			int degre) 
-//	{/*PAS CLAIRE POUR FONCTIONNALITE(-Yunzhi)*/
-//	 /*Ici on cree dernierDate dans ce methode, et on juste ajoute 1 line d'information,
-//	   donc generalement, on a juste un boisson lie e� un data. Modifier apres ou 
-//	   rest comme cela*/
-//
-///*Dans cette methode, je pense on doit supposer le Boisson n'existe pas dans notre base de donnes*/
-//		java.sql.Timestamp  maintenant=new java.sql.Timestamp(new java.util.Date().getTime());
-//		String sql = "INSERT INTO Boisson (CodeBarre,Nom,Marque,Volume, Degre)" +
-//				"VALUES ('"+codeBarre+"','"+echapper(nom)+"','"+echapper(marque)+"','"+volume+"','"+degre+"')";
-//		
-//		try {
-//			st.executeUpdate(sql);
-//			st.executeUpdate("INSERT INTO Stock (Date) VALUES ('"+maintenant+"')");
-//			st.executeUpdate("INSERT INTO Disponibilite (Date, CodeBarre, Volume) VALUES ('"+maintenant+"','"+codeBarre+"','0')");
-//			System.out.println("La boisson "+nom+" a bien ete ajoutee");
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			return false;
-//		}return true;
-//	}
 
 	@Override
 	public boolean bouteilleFinie(int bluetoothID) 
 	{
-		//A COMPLETER
 		java.sql.Timestamp derniereDate=new java.sql.Timestamp(0), maintenant=new java.sql.Timestamp(new java.util.Date().getTime());
 		long millisecondes=maintenant.getTime()%1000;
 		millisecondes=millisecondes>500?maintenant.getTime()-millisecondes:maintenant.getTime()-millisecondes+1000;
@@ -358,48 +321,6 @@ public class BDD implements BDDInterface
 		}
 		return true;
 	}
-
-//	@Override
-//	public boolean bouteilleFinie(int bluetoothID) 
-//	{ /*il faut trouver derniereDate concernant un boisson que l'on consomme maintenant;
-//	    De plus, je suis pas sur table 'Stock' est necessaire ou pas*/
-//		//A COMPLETER
-//		java.sql.Timestamp derniereDate=new java.sql.Timestamp(0), maintenant=new java.sql.Timestamp(new java.util.Date().getTime());
-//		long codeBarre=0;
-//		int ancienVolume=0;
-//		
-//		try {
-//			rs=st.executeQuery("SELECT CodeBarre FROM Associe WHERE BluetoothID="+bluetoothID);
-//			if(!rs.next())
-//				throw new Exception("Il n'y a pas de goulot associe au bluetooth "+bluetoothID);
-//			codeBarre=rs.getLong(1);
-//			
-//			rs=st.executeQuery("SELECT Date FROM Disponibilite Where CodeBarre="+codeBarre);
-//			if(!rs.next())
-//				throw new Exception("Boisson introuvable dans les stocks");
-//			while(rs.next())
-//			{
-///*?*/				derniereDate=rs.getTimestamp(1).after(derniereDate)?rs.getTimestamp(1):derniereDate;
-//			}
-//			rs=st.executeQuery("SELECT CodeBarre, Volume FROM Disponibilite WHERE Date="+derniereDate);
-//			st.executeUpdate("INSERT INTO Stock (Date) VALUES ('"+maintenant+"'");
-//			/*a� verifier si INSERT ne retourne pas de resultat dans statement*/
-//			while(rs.next())
-//			{/*a cause de un date a juste un boisson, donc on a qu'une resultat;
-//			  Et bien remarquer l'importance d'utilisation de st2*/
-//				ancienVolume=rs.getInt(2);
-//				st2.executeUpdate("INSERT INTO Disponibilite (Date, CodeBarre, Volume) VALUES ('"+maintenant+"','"+rs.getLong(1)+"','"+rs.getInt(2));
-//			}
-//
-//			st.executeUpdate("UPDATE Disponibilite SET Volume="+ancienVolume--+" WHERE CodeBarre="+codeBarre+" AND Date="+maintenant);
-//			
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			return false;
-//		}
-//		return true;
-//	}
 
 	@Override
 	public boolean livraison(ArrayList<Livraison> livraison) {
@@ -494,7 +415,7 @@ public class BDD implements BDDInterface
 	public int attributionDeGoulot() {
 		// TODO Auto-generated method stub
 		/*On suppose il va distribuer qu'une goulot*/
-		int codeBarre=0;
+		int bluetoothID=0;
 		try{
 			float niveauChargeMax=0;
 			rs=st.executeQuery("SELECT BluetoothID,NiveauDeCharge,EnCharge FROM Goulots");
@@ -503,7 +424,7 @@ public class BDD implements BDDInterface
 				if(rs.getFloat(2)>niveauChargeMax&&rs.getInt(3)==1)
 				{
 					niveauChargeMax=rs.getFloat(2);
-					codeBarre=rs.getInt(1);
+					bluetoothID=rs.getInt(1);
 				}
 			}
 			
@@ -513,7 +434,7 @@ public class BDD implements BDDInterface
 			return 0;
 		}
 		
-		return codeBarre;
+		return bluetoothID;
 	}
 	@Override
 	public boolean ajoueterCocktail(long coPK, String nom, float prix,
@@ -617,12 +538,12 @@ public class BDD implements BDDInterface
 	}
 	
 	@Override
-	public boolean setPrixParBoisson(long codeBarre,double prix) {	
+	public boolean setPrixParBoisson(long codeBarre,float prix) {	
 	    try{ 
-		rs=st.executeQuery("SELECT Prix From PrixBoisson WHERE CodeBarre="+codeBarre);
+		rs=st.executeQuery("SELECT Prix From Boisson WHERE CodeBarre="+codeBarre);
 		if(!rs.next())
 			throw new Exception("Boisson introuvable");
-		 st.executeUpdate("UPDATE PrixBoisson SET Prix="+prix+" WHERE CodeBarre="+codeBarre);	
+		 st.executeUpdate("UPDATE Boisson SET Prix="+prix+" WHERE CodeBarre="+codeBarre);	
 	    }catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -633,34 +554,18 @@ public class BDD implements BDDInterface
 	@Override
 	public ArrayList<DetailDeCommand> imprimerCommande(int rFID) {
 		long cpk;
-		float prixTotal;
 		ArrayList<DetailDeCommand> list =new ArrayList<DetailDeCommand>();
 		try{
 		rs=st.executeQuery("SELECT CPK FROM Barman WHERE RFID="+rFID);
 		if(!rs.next())
 			throw(new Exception("Pas de Barman associe à l'identifiant rFID "+rFID));
 		cpk=rs.getLong(1);
-		}catch(Exception e)
-		{
-			e.printStackTrace();
-			return null;
-		}
-		prixTotal=this.finDeCommande(rFID);
-		try{
-		String Nom;
-		Double prix;
-		DetailDeCommand temp;
 		rs=st.executeQuery("SELECT CodeBarre, Volume FROM Composition WHERE CPK="+cpk);
 		while(rs.next())
 		{
-			rs2=st2.executeQuery("SELECT Nom FROM Boisson WHERE CodeBarre="+rs.getLong(1));
+			rs2=st2.executeQuery("SELECT Nom,Prix FROM Boisson WHERE CodeBarre="+rs.getLong(1));
 			rs2.next();
-			Nom=rs2.getString(1);
-			rs2=st2.executeQuery("SELECT Prix FROM PrixBoisson WHERE CodeBarre="+rs.getLong(1));
-			rs2.next();
-			prix=rs2.getDouble(1);
-			temp=new DetailDeCommand(Nom,rs.getInt(2),prix,prixTotal);
-			list.add(temp);
+			list.add(new DetailDeCommand(rs2.getString(1),rs.getInt(2),Math.round(100*(rs.getInt(2)*rs2.getFloat(2)))/100.0f));//ici j'arrondi à deux chiffre car par exemple j'avais mis 5*0.24 et obtenu 1.999999 
 			
 		}}catch(Exception e)
 		{

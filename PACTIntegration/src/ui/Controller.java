@@ -21,7 +21,7 @@ import javax.swing.JPanel;
 import visu.graphique;
 
 //Classe permettant de controller ce qui se passe quand on appuie sur un bouton, c'est elle qui
-//interrogera la base de donne½e
+//interrogera la base de donneï¿½e
 public class Controller
 {
 	private BDDInterface bdd;
@@ -179,7 +179,7 @@ public class Controller
 	{
 		if(stackpreviousview.empty())
 		{
-			JOptionPane.showMessageDialog(null, "L'opération demandée est impossible", "Attention", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "L'opï¿½ration demandï¿½e est impossible", "Attention", JOptionPane.WARNING_MESSAGE);
 		}
 		else
 		{
@@ -194,7 +194,7 @@ public class Controller
 	{
 		if(stacknextview.empty())
 		{
-			JOptionPane.showMessageDialog(null, "L'opération demandée est impossible", "Attention", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "L'opï¿½ration demandï¿½e est impossible", "Attention", JOptionPane.WARNING_MESSAGE);
 		}
 		else
 		{
@@ -227,17 +227,17 @@ public class Controller
 	private void fonctionnaliteNonImplementee(String methodname)
 	{
 		System.out.println("WARNING : the method " + methodname + "hasn't been implemented yet !!!") ;
-		JOptionPane.showMessageDialog(null, "L'opération demandée n'est pas encore disonible.", "Attention", JOptionPane.WARNING_MESSAGE);
+		JOptionPane.showMessageDialog(null, "L'opÃ©ration demandÃ©e n'est pas encore disonible.", "Attention", JOptionPane.WARNING_MESSAGE);
 	}
 	public void aProposOptibar() 
 	{
 		JOptionPane.showMessageDialog(null, 
 				
-				 "OptiBar a pour objectif de fournir à un bar des outils novateurs et pratiques d’utilisation permettant d’en faciliter la gestion. \n"
-				+"Il permettra au patron de gérer ses stocks et aussi de savoir quelles sont les habitudes de consommation de ses clients de façon claire et précise. \n"
-				+"Puisque la gestion des stocks est une dépense importante pour les bars, notre projet permettra au bar de minimiser ses stocks, sans jamais être à court. \n"
-				+"Enfin, notre système fournit aussi une aide au barman en lui indiquant les quantités qu’il a versées ce qui lui permet à la fois de préparer de meilleures boissons \n "
-				+ "mais lui facilite également la production de l’addition, gain de temps toujours utile à l’heure de pointe."
+				 "OptiBar a pour objectif de fournir ï¿½ un bar des outils novateurs et pratiques dï¿½utilisation permettant dï¿½en faciliter la gestion. \n"
+				+"Il permettra au patron de gï¿½rer ses stocks et aussi de savoir quelles sont les habitudes de consommation de ses clients de faï¿½on claire et prï¿½cise. \n"
+				+"Puisque la gestion des stocks est une dï¿½pense importante pour les bars, notre projet permettra au bar de minimiser ses stocks, sans jamais ï¿½tre ï¿½ court. \n"
+				+"Enfin, notre systï¿½me fournit aussi une aide au barman en lui indiquant les quantitï¿½s quï¿½il a versï¿½es ce qui lui permet ï¿½ la fois de prï¿½parer de meilleures boissons \n "
+				+ "mais lui facilite ï¿½galement la production de lï¿½addition, gain de temps toujours utile ï¿½ lï¿½heure de pointe."
 				
 				, "A propos d'OptiBar", JOptionPane.INFORMATION_MESSAGE);
 		
@@ -294,19 +294,21 @@ public class Controller
 		//Methode appelee si on appuie sur imprimer note dans l'ecran du Barman
 		//Code pour le test, il faudra demander a la base de donnee de nous fournir la note pour le serveur donne
 		JPanel pan = new JPanel();
+		
 	    ArrayList<DetailDeCommand> list= bdd.imprimerCommande(1);//suposse rfid ets 1
-		String resultat="******Command******";
-		pan.add(new JLabel(resultat));
-		double prix=0;
-		for(DetailDeCommand t:list)
+	    
+		if(list.size()==0)
 		{
-			resultat=t.getNom()+"  "+t.getPrixParVolume()+"  "+t.getVolume();
-			pan.add(new JLabel(resultat));
-		    prix=t.getPrixTotal();
+			window.add(new JLabel("Pas de commande en cour pour ce barman"),BorderLayout.CENTER);
+			window.validate();
+			return;
 		}
-		pan.add(new JLabel("PRIX TOTAL :"+prix));
-		window.setContentPane(pan);
-		this.setActualView(pan) ;
+		pan.add(new JLabel("********Commande********"));
+		for(DetailDeCommand t:list)
+			pan.add(new JLabel(t.toString()));
+		pan.add(new JLabel("Total:\t\t"+bdd.finDeCommande(1)+"â‚¬"));
+		
+		window.add(pan);
 		window.validate();
 	}
 	
@@ -315,7 +317,10 @@ public class Controller
 		//Demander quel goulot il faut prendre pour l'instant il ferme la fenetre pour le test
 		ViewRetirerGoulot pan = new ViewRetirerGoulot(this);
 		int goulot=bdd.attributionDeGoulot();
-		pan.add(new JLabel("Vous pouvez retirer le goulot "+goulot));
+		if(goulot==0)
+			pan.add(new JLabel("Pas de goulot disponible"));
+		else
+			pan.add(new JLabel("Vous pouvez retirer le goulot "+goulot));
 		window.setContentPane(pan);
 		this.setActualView(pan) ;
 		window.validate();
@@ -382,7 +387,7 @@ public class Controller
 		{
 			switch(duree)
 			{
-			case "soirée":
+			case "soirï¿½e":
 				debut=new Date(maintenant.getTime()-dayMilli);
 				break;
 			case "semaine":
@@ -391,7 +396,7 @@ public class Controller
 			case "mois":
 				debut=new Date(maintenant.getTime()-dayMilli*30);
 				break;
-			case "année":
+			case "annï¿½e":
 				debut=new Date(maintenant.getTime()-dayMilli*365);
 				break;
 			default :

@@ -56,6 +56,7 @@ public class SerialTest implements SerialPortEventListener {
 				}
 			}
 		}
+		System.out.println("Bluetooth connection started");
 		if (portId == null) {
 			System.out.println("Could not find COM port.");
 			return;
