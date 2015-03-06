@@ -1,0 +1,19 @@
+package mains;
+
+import windows.ViewWelcome;
+import windows.Window;
+import BDD.BDDInterface;
+import controller.Controller;
+
+public class Main {
+
+	public static void main(String[] args) 
+	{
+			BDDInterface bdd = null;
+			Window window = new Window(bdd);
+
+		
+		
+	}
+
+}

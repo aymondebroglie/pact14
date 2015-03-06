@@ -1,0 +1,27 @@
+package mains;
+
+import java.io.PrintStream;
+
+import javax.swing.JOptionPane;
+
+public class MainPasswordGenerator {
+
+	public static void main(String[] args) 
+	{
+		try
+        {
+			int crypted = "poney".toCharArray().hashCode()
+			PrintStream ps =new PrintStream("Password") ; 
+        	ps.print(crypted);
+        	JOptionPane.showMessageDialog(null, "try ; setCryptedMDP", "Attention", JOptionPane.WARNING_MESSAGE);
+        }
+        catch(Exception e)
+        {
+        	System.err.println(e) ;
+            e.printStackTrace(System.err);
+            JOptionPane.showMessageDialog(null, "catch ; setCryptedMDP", "Attention", JOptionPane.WARNING_MESSAGE);
+        }
+
+	}
+
+}

@@ -21,12 +21,12 @@ import javax.swing.JPanel;
 import visu.graphique;
 
 //Classe permettant de controller ce qui se passe quand on appuie sur un bouton, c'est elle qui
-//interrogera la base de donnï¿½e
+//interrogera la base de donne½e
 public class Controller
 {
 	private BDDInterface bdd;
 	private Window window;
-	private String duree;// Ce tableau permet de connaitre la durï¿½e ï¿½ afficher
+	private String duree;// Ce tableau permet de connaitre la duree a afficher
 	/** private String temps = "mois"; */
 
 	public Controller(Window window, BDDInterface bdd) 
@@ -37,8 +37,7 @@ public class Controller
 	}
 	
 	/****************************************************************************************************/
-	// gestion du mot de passe pour la session gestionnaire
-	// attribut + setter
+	/** MDP */
 	String currentcryptedMDP ;
 	
 	public void setMDP(String newcryptedMDP)
@@ -96,7 +95,7 @@ public class Controller
 		
 	}
 	
-	// teste juste l'ï¿½galitï¿½ du mot de passse et de la chaine entrï¿½e
+	// teste juste l'egalite du mot de passe et de la chaine entree
 	private Boolean verifMDP(char[] cs)
 	{
 		String word = String.valueOf(cs) ;
@@ -114,7 +113,7 @@ public class Controller
 		window.validate();
 	}
 	
-	// prend en charge le chgt de mot de passe aprï¿½s remplissage des champs nï¿½cessaires et validation.
+	// prend en charge le chgt de mot de passe apres remplissage des champs necessaires et validation.
 		public void changerMDP(char[] cs0, char[] cs1, char[] cs2) {
 			if (this.verifMDP(cs0)) {
 				if (Arrays.equals(cs1, cs2)) {
@@ -139,9 +138,24 @@ public class Controller
 						"Erreur", JOptionPane.ERROR_MESSAGE);
 			}
 		}
+		
+		public void motDePasse(char[] cs)
+		{
+			if(this.verifMDP(cs))
+			{
+				ViewBossHome vbh = new ViewBossHome(this);
+				window.setContentPane(vbh);
+				this.setActualView(vbh) ;
+				window.validate();
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null, "Mot de passe invalide.", "Erreur", JOptionPane.ERROR_MESSAGE);
+			}
+		}
   
 	/****************************************************************************************************/
-	
+	/** Navigation */
 	private Stack<JPanel> stackpreviousview = new Stack<JPanel>() ; 
 	private Stack<JPanel> stacknextview = new Stack<JPanel>() ;
 	private JPanel actualview ;
@@ -165,7 +179,7 @@ public class Controller
 	{
 		if(stackpreviousview.empty())
 		{
-			JOptionPane.showMessageDialog(null, "L'opï¿½ration demandï¿½e est impossible", "Attention", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "L'opération demandée est impossible", "Attention", JOptionPane.WARNING_MESSAGE);
 		}
 		else
 		{
@@ -180,7 +194,7 @@ public class Controller
 	{
 		if(stacknextview.empty())
 		{
-			JOptionPane.showMessageDialog(null, "L'opï¿½ration demandï¿½e est impossible", "Attention", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "L'opération demandée est impossible", "Attention", JOptionPane.WARNING_MESSAGE);
 		}
 		else
 		{
@@ -192,12 +206,12 @@ public class Controller
 	}
 
 	/*
-	 * L'idï¿½e est la suivante : 
+	 * L'idee est la suivante : 
 	 * 
-	 *  1) ï¿½ chaque fois qu'on quitte un page par un lien normal (sans passer par les outils de navigations), il faut ajouter la page quittï¿½e ï¿½ la pile stackpreviousview.
-	 *  2) on renseigne au controller la nouvelle page sur laquelle on se trouve : elle est stockï¿½e dans l'attribut actualview ;
-	 *  3) si on dï¿½cide de faire marche arriï¿½re la page quittï¿½e est stockï¿½e dans stacknextview.
-	 *  4) si on dï¿½cide de faire un retour arriï¿½re aprï¿½s 3), la page quittï¿½e est de nouveau stockï¿½e dans stacknextview
+	 *  1) a chaque fois qu'on quitte un page par un lien normal (sans passer par les outils de navigations), il faut ajouter la page quittee a la pile stackpreviousview.
+	 *  2) on renseigne au controller la nouvelle page sur laquelle on se trouve : elle est stockee dans l'attribut actualview ;
+	 *  3) si on decide de faire marche arriere la page quittee est stockee dans stacknextview.
+	 *  4) si on decide de faire un retour arriere apres 3), la page quittee est de nouveau stockee dans stacknextview
 	 *  
 	 *  Autrement dit :
 	 *  
@@ -210,109 +224,77 @@ public class Controller
 	 * */
 	
 	/****************************************************************************************************/
-
-	
-
-
-/** ViewWelcome */
-public void boutonBarman()
-{
-	//Mï¿½thode appelï¿½e quand on appuie sur Barman sur l'ï¿½cran d'accueil
-	ViewBarmanHome vbh = new ViewBarmanHome(this);
-	this.setActualView(vbh) ;
-	window.setContentPane(vbh);
-	window.validate();
-}
-
-public void boutonGestionnaire()
-{
-	//Mï¿½thode appelï¿½e quand on appuie sur Barman sur l'ï¿½cran d'accueil
-	ViewBossLogin vbh = new ViewBossLogin(this);
-	window.setContentPane(vbh);
-	this.setActualView(vbh) ;
-	window.validate(); 
-}
-
-/** ViewBarmanHome */
-public void imprimerNote()
-{
-	//Mï¿½thode appelï¿½e si on appuie sur imprimer note dans l'ï¿½cran du Barman
-	//Code pour le test, il faudra demander a la base de donnï¿½e de nous fournir la note pour le serveur donnï¿½
-	JPanel pan = new JPanel();
-    ArrayList<DetailDeCommand> list= bdd.imprimerCommande(1);//suposse rfid ets 1
-	String resultat="******Command******";
-	pan.add(new JLabel(resultat));
-	double prix=0;
-	for(DetailDeCommand t:list)
+	/** ViewWelcome */
+	public void boutonBarman()
 	{
-		resultat=t.getNom()+"  "+t.getPrixParVolume()+"  "+t.getVolume();
-		pan.add(new JLabel(resultat));
-	    prix=t.getPrixTotal();
-	}
-	pan.add(new JLabel("PRIX TOTAL :"+prix));
-	window.setContentPane(pan);
-	this.setActualView(pan) ;
-	window.validate();
-}
-
-/** ViewBossHome */
-public void consulterVosDonnees() 
-{
-	ViewSeeDatas vsd = new ViewSeeDatas(this);
-	 window.setContentPane(vsd);
-	 this.setActualView(vsd) ;
-	 window.validate();
-}
-
-public void gestionStocks() 
-{
-	ViewStocksManagement vsm = new ViewStocksManagement(this);
-	 window.setContentPane(vsm);
-	 this.setActualView(vsm) ;
-	 window.validate();
-}
-
-public void retirerGoulot()
-{
-	//Demander quel goulot il faut prendre pour l'instant il ferme la fenï¿½tre pour le test
-	ViewRetirerGoulot pan = new ViewRetirerGoulot(this);
-	int goulot=bdd.attributionDeGoulot();
-	pan.add(new JLabel("Vous pouvez retirer le goulot "+goulot));
-	window.setContentPane(pan);
-	this.setActualView(pan) ;
-	window.validate();
-	
-}
-
-/** View Login*/
-public void login() 
-{
-	ViewBossLogin vbl = new ViewBossLogin(this);
-	 window.setContentPane(vbl);
-	 this.setActualView(vbl) ;
-	 window.validate();
-}
-
-
-		
-
-public void motDePasse(char[] cs)
-{
-	if(this.verifMDP(cs))
-	{
-		ViewBossHome vbh = new ViewBossHome(this);
-		window.setContentPane(vbh);
+		//Methode appelee quand on appuie sur Barman sur l'ecran d'accueil
+		ViewBarmanHome vbh = new ViewBarmanHome(this);
 		this.setActualView(vbh) ;
+		window.setContentPane(vbh);
 		window.validate();
 	}
-	else
+	
+	public void boutonGestionnaire()
 	{
-		JOptionPane.showMessageDialog(null, "Mot de passe invalide.", "Erreur", JOptionPane.ERROR_MESSAGE);
+		//Methode appelee quand on appuie sur Barman sur l'ecran d'accueil
+		ViewBossLogin vbh = new ViewBossLogin(this);
+		window.setContentPane(vbh);
+		this.setActualView(vbh) ;
+		window.validate(); 
 	}
-}
-	
 
+	/****************************************************************************************************/
+	/** ViewBarmanHome */
+	public void imprimerNote()
+	{
+		//Methode appelee si on appuie sur imprimer note dans l'ecran du Barman
+		//Code pour le test, il faudra demander a la base de donnee de nous fournir la note pour le serveur donne
+		JPanel pan = new JPanel();
+	    ArrayList<DetailDeCommand> list= bdd.imprimerCommande(1);//suposse rfid ets 1
+		String resultat="******Command******";
+		pan.add(new JLabel(resultat));
+		double prix=0;
+		for(DetailDeCommand t:list)
+		{
+			resultat=t.getNom()+"  "+t.getPrixParVolume()+"  "+t.getVolume();
+			pan.add(new JLabel(resultat));
+		    prix=t.getPrixTotal();
+		}
+		pan.add(new JLabel("PRIX TOTAL :"+prix));
+		window.setContentPane(pan);
+		this.setActualView(pan) ;
+		window.validate();
+	}
 	
+	public void retirerGoulot()
+	{
+		//Demander quel goulot il faut prendre pour l'instant il ferme la fenetre pour le test
+		ViewRetirerGoulot pan = new ViewRetirerGoulot(this);
+		int goulot=bdd.attributionDeGoulot();
+		pan.add(new JLabel("Vous pouvez retirer le goulot "+goulot));
+		window.setContentPane(pan);
+		this.setActualView(pan) ;
+		window.validate();
+		
+	}
+
+	/****************************************************************************************************/
+	/** ViewBossHome */
+	public void consulterVosDonnees() 
+	{
+		ViewSeeDatas vsd = new ViewSeeDatas(this);
+		 window.setContentPane(vsd);
+		 this.setActualView(vsd) ;
+		 window.validate();
+	}
+	
+	public void gestionStocks() 
+	{
+		ViewStocksManagement vsm = new ViewStocksManagement(this);
+		 window.setContentPane(vsm);
+		 this.setActualView(vsm) ;
+		 window.validate();
+	}
 
 
 
