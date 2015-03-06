@@ -234,12 +234,11 @@ public class Controller
 		JOptionPane.showMessageDialog(null, 
 				
 				 "OptiBar a pour objectif de fournir à un bar des outils novateurs et pratiques d’utilisation permettant d’en faciliter la gestion. \n"
-				+"Il permettra au patron de gérer ses stocks et aussi de savoir quelles sont les habitudes de consommation de ses clients de façon claire et précise. \n"
-				+"Puisque la gestion des stocks est une dépense importante pour les bars, notre projet permettra au bar de minimiser ses stocks, sans jamais être à court. \n"
-				+"Enfin, notre système fournit aussi une aide au barman en lui indiquant les quantités qu’il a versées ce qui lui permet à la fois de préparer de meilleures boissons \n "
-				+ "mais lui facilite également la production de l’addition, gain de temps toujours utile à l’heure de pointe."
+				+"Il permettra au patron de gérer ses stocks et aussi de savoir quelles sont les habitudes de consommation de ses clients de façon claire et précise."
+				+"Puisque la gestion des stocks est une dépense importante pour les bars, notre projet permettra au bar de minimiser ses stocks, sans jamais être à court."
+				+"Enfin, notre système fournit aussi une aide au barman en lui indiquant les quantités qu’il a versées ce qui lui permet à la fois de préparer de meilleures boissons mais lui facilite également la production de l’addition, gain de temps toujours utile à l’heure de pointe."
 				
-				, "A propos d'OptiBar", JOptionPane.INFORMATION_MESSAGE);
+				, "A propos d'OptiBar", JOptionPane.WARNING_MESSAGE);
 		
 	}
 

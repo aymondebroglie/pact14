@@ -102,54 +102,19 @@ public class Window extends JFrame {
 			}
 		});
 		this.settings.addSeparator();
-		
-		
+
 		// Sous-menu langue
 		this.settings.add(this.settings_language);
-		this.settings_language.addActionListener(new ActionListener()
-		{					
-			public void actionPerformed(ActionEvent arg0)
-			{
-				controller.changementLanguage();
-			}
-		});
+
 		// Sous-menu units
 
 		this.settings.add(this.settings_units);
 		this.settings_units.add(this.settings_units_money);
-		this.settings_units_money.addActionListener(new ActionListener()
-		{					
-			public void actionPerformed(ActionEvent arg0)
-			{
-				controller.changementSystemeMonetaire();
-			}
-		});
 		this.settings_units.add(this.settings_units_metric);
-		this.settings_units_metric.addActionListener(new ActionListener()
-		{					
-			public void actionPerformed(ActionEvent arg0)
-			{
-				controller.changementSystemeMetrique();
-			}
-		});
 
 		/** Menu help */
 		this.help.add(this.help_help);
-		this.help_help.addActionListener(new ActionListener()
-		{					
-			public void actionPerformed(ActionEvent arg0)
-			{
-				controller.afficherAide();
-			}
-		});
 		this.help.add(this.help_about);
-		this.help_about.addActionListener(new ActionListener()
-		{					
-			public void actionPerformed(ActionEvent arg0)
-			{
-				controller.aProposOptibar();
-			}
-		});
 
 		this.menubar.add(general);
 		this.menubar.add(settings);

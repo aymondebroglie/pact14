@@ -227,7 +227,7 @@ public class Controller
 	private void fonctionnaliteNonImplementee(String methodname)
 	{
 		System.out.println("WARNING : the method " + methodname + "hasn't been implemented yet !!!") ;
-		JOptionPane.showMessageDialog(null, "L'opération demandée n'est pas encore disonible.", "Attention", JOptionPane.WARNING_MESSAGE);
+		JOptionPane.showMessageDialog(null, "L'opération demandée n'est pas encore disonible.", "Attention", JOptionPane.INFORMATION_MESSAGE);
 	}
 	public void aProposOptibar() 
 	{
@@ -239,7 +239,7 @@ public class Controller
 				+"Enfin, notre système fournit aussi une aide au barman en lui indiquant les quantités qu’il a versées ce qui lui permet à la fois de préparer de meilleures boissons \n "
 				+ "mais lui facilite également la production de l’addition, gain de temps toujours utile à l’heure de pointe."
 				
-				, "A propos d'OptiBar", JOptionPane.INFORMATION_MESSAGE);
+				, "A propos d'OptiBar", JOptionPane.WARNING_MESSAGE);
 		
 	}
 

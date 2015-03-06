@@ -222,50 +222,6 @@ public class Controller
 	 *  
 	 * 
 	 * */
-	/****************************************************************************************************/
-	/** Fonctionnalites barre de menu */
-	private void fonctionnaliteNonImplementee(String methodname)
-	{
-		System.out.println("WARNING : the method " + methodname + "hasn't been implemented yet !!!") ;
-		JOptionPane.showMessageDialog(null, "L'opération demandée n'est pas encore disonible.", "Attention", JOptionPane.WARNING_MESSAGE);
-	}
-	public void aProposOptibar() 
-	{
-		JOptionPane.showMessageDialog(null, 
-				
-				 "OptiBar a pour objectif de fournir à un bar des outils novateurs et pratiques d’utilisation permettant d’en faciliter la gestion. \n"
-				+"Il permettra au patron de gérer ses stocks et aussi de savoir quelles sont les habitudes de consommation de ses clients de façon claire et précise. \n"
-				+"Puisque la gestion des stocks est une dépense importante pour les bars, notre projet permettra au bar de minimiser ses stocks, sans jamais être à court. \n"
-				+"Enfin, notre système fournit aussi une aide au barman en lui indiquant les quantités qu’il a versées ce qui lui permet à la fois de préparer de meilleures boissons \n "
-				+ "mais lui facilite également la production de l’addition, gain de temps toujours utile à l’heure de pointe."
-				
-				, "A propos d'OptiBar", JOptionPane.INFORMATION_MESSAGE);
-		
-	}
-
-	public void afficherAide() 
-	{
-		this.fonctionnaliteNonImplementee("afficherAide()");
-		
-	}
-
-	public void changementSystemeMetrique() 
-	{
-		this.fonctionnaliteNonImplementee("changementSystemeMetrique()");
-		
-	}
-
-	public void changementSystemeMonetaire() 
-	{
-		this.fonctionnaliteNonImplementee("changementSystemeMonetaire()");
-		
-	}
-
-	public void changementLanguage() 
-	{
-		this.fonctionnaliteNonImplementee("changementLanguage()");
-		
-	}
 	
 	/****************************************************************************************************/
 	/** ViewWelcome */
@@ -382,7 +338,7 @@ public class Controller
 		{
 			switch(duree)
 			{
-			case "soirée":
+			case "soiree":
 				debut=new Date(maintenant.getTime()-dayMilli);
 				break;
 			case "semaine":
@@ -391,7 +347,7 @@ public class Controller
 			case "mois":
 				debut=new Date(maintenant.getTime()-dayMilli*30);
 				break;
-			case "année":
+			case "annÃ©e":
 				debut=new Date(maintenant.getTime()-dayMilli*365);
 				break;
 			default :
@@ -434,7 +390,6 @@ public class Controller
 	public void etatDesStocks(){
 		
 	}
-	
 
 
 
