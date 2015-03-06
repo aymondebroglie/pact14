@@ -24,15 +24,17 @@ private JPasswordField mdp = new JPasswordField();
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			controller.addPreviousView(ViewBossLogin.this);
+			
 			controller.motDePasse(mdp.getPassword());
 		}
 
 		
 	}
 	
-	public ViewBossLogin(Controller view){	
-		this.controller = view;
+	public ViewBossLogin(Controller controller){	
+		this.controller = controller;
+		this.controller.setActualView(this) ;
+		
 		this.add(new JLabel("Veuillez rentrer votre mot de passe"));
 		MotDePasse mp = new MotDePasse();
 		mdp.setPreferredSize(new Dimension(300,25));

@@ -34,6 +34,8 @@ public class ViewStocksManagement extends JPanel {
 
 	public ViewStocksManagement(Controller controller) {
 		this.controller = controller;
+		this.controller.setActualView(this) ;
+		
 		tableauAlcool=controller.obtenirAlcools();
 		for (String boisson : tableauAlcool) {
 			tableauBouton.add(new BoissonCheckBox(boisson));

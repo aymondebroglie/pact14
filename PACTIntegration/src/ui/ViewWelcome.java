@@ -15,6 +15,7 @@ public class ViewWelcome extends JPanel {
 	public ViewWelcome(Controller controller) 
 	{
 		this.controller = controller;
+		//this.controller.setActualView(this) ;
 				
 		this.setLayout(new GridLayout(4,1));
 		

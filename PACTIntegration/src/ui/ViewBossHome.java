@@ -10,10 +10,11 @@ import javax.swing.JPanel;
 public class ViewBossHome extends JPanel {
 	private static final long serialVersionUID = 1L;
 
-	private Controller view;
+	private Controller controller;
 
-	public ViewBossHome(Controller view) {
-		this.view = view;
+	public ViewBossHome(Controller controller) {
+		this.controller = controller;
+		this.controller.setActualView(this) ;
 
 		JButton consultervosdonnees = new JButton("Consulter vos donnees");
 		JButton gerervosstocks = new JButton("Gerer vos stocks");
@@ -42,14 +43,14 @@ public class ViewBossHome extends JPanel {
 	private class ConsulterVosDonnees implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			view.consulterVosDonnees();
+			controller.consulterVosDonnees();
 		}
 	}
 
 	private class GererVosStocks implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			view.gestionStocks();
+			controller.gestionStocks();
 		}
 	}
 }

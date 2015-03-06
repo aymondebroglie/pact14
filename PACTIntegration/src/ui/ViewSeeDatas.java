@@ -49,6 +49,7 @@ public class ViewSeeDatas extends JPanel
 		commande.addActionListener(new Commande());
 		etatDesStocks.addActionListener(new EtatDesStocks());
 		this.controller = controller;
+		this.controller.setActualView(this) ;
 		this.add(stocks);
 		this.add(commande);
 		this.add(etatDesStocks);

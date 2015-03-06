@@ -12,9 +12,7 @@ import javax.swing.JPasswordField;
 
 
 public class ViewChangePassword extends JPanel {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private Controller controller;
 	private JPasswordField mdp = new JPasswordField();
@@ -35,8 +33,9 @@ public class ViewChangePassword extends JPanel {
 	}
 	
 
-	public ViewChangePassword(Controller view) {
-		this.controller = view;
+	public ViewChangePassword(Controller controller) {
+		this.controller = controller;
+		this.controller.setActualView(this) ;
 
 		this.add(new JLabel("Votre mot de passe actuel"));
 		mdp.setPreferredSize(new Dimension(300, 25));

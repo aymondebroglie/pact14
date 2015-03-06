@@ -34,6 +34,8 @@ public class ViewCommandManagement extends JPanel {
 
 	public ViewCommandManagement(Controller controller) {
 		this.controller = controller;
+		this.controller.setActualView(this) ;
+		
 		for (String boisson : tableauAlcool) {
 			tableauBouton.add(new BoissonCheckBox(boisson));
 

@@ -50,7 +50,8 @@ public class ViewBarmanHome extends JPanel {
 		this.add(bouteilleFinie);
 		JButton goulot = new JButton("Retirer goulot");
 		goulot.addActionListener(retirerGoulot);
-		this.add(goulot);
+		this.add(goulot);
+
 
 	
 }

@@ -25,6 +25,7 @@ public class Controller
 	private BDDInterface bdd;
 	private Window window;
 	private String duree;// Ce tableau permet de connaitre la duree a afficher
+	
 	/** private String temps = "mois"; */
 
 	public Controller(Window window, BDDInterface bdd) 
@@ -32,6 +33,11 @@ public class Controller
 		this.window = window ;
 		this.bdd = bdd ;
 		this.loadMDP();
+	}
+	
+	public BDDInterface getBDD()
+	{
+		return this.bdd ;
 	}
 	
 	/****************************************************************************************************/
@@ -143,7 +149,6 @@ public class Controller
 			{
 				ViewBossHome vbh = new ViewBossHome(this);
 				window.setContentPane(vbh);
-				this.setActualView(vbh) ;
 				window.validate();
 			}
 			else
@@ -160,7 +165,22 @@ public class Controller
 	
 	public void setActualView(JPanel actualview)
 	{
+		//System.out.println("before :" + actualview) ;
 		this.actualview = actualview ;
+		//System.out.println("after :" + actualview) ;
+	}
+	
+	public void clearStacks()
+	{
+		while(!stackpreviousview.empty())
+		{
+			stackpreviousview.pop() ;
+		}
+		while(!stacknextview.empty())
+		{
+			stacknextview.pop() ;
+		}
+		this.setActualView(null);
 	}
 	
 	public JPanel getActualView()
@@ -271,7 +291,6 @@ public class Controller
 	{
 		//Methode appelee quand on appuie sur Barman sur l'ecran d'accueil
 		ViewBarmanHome vbh = new ViewBarmanHome(this);
-		this.setActualView(vbh) ;
 		window.setContentPane(vbh);
 		window.validate();
 	}
@@ -281,7 +300,6 @@ public class Controller
 		//Methode appelee quand on appuie sur Barman sur l'ecran d'accueil
 		ViewBossLogin vbh = new ViewBossLogin(this);
 		window.setContentPane(vbh);
-		this.setActualView(vbh) ;
 		window.validate(); 
 	}
 
@@ -345,7 +363,6 @@ public class Controller
 	{
 		ViewSeeDatas vsd = new ViewSeeDatas(this);
 		 window.setContentPane(vsd);
-		 this.setActualView(vsd) ;
 		 window.validate();
 	}
 	
@@ -353,7 +370,6 @@ public class Controller
 	{
 		ViewAddBottle vsm = new ViewAddBottle(this);
 		 window.setContentPane(vsm);
-		 this.setActualView(vsm) ;
 		 window.validate();
 	}
 
@@ -431,7 +447,6 @@ public class Controller
 		f.setVisible(true);*/
 		/*vsm.add(g);
 		 window.setContentPane(vsm);
-		 this.setActualView(vsm) ;
 		 window.validate();*/
 	}
 
@@ -442,7 +457,8 @@ public class Controller
 		System.out.println(duree);
 	}
 
-	public void setDuree(String duree) {
+	public void setDuree(String duree) 
+	{
 		this.duree = duree;
 	}
 	

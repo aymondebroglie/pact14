@@ -23,6 +23,8 @@ public class ViewRetirerGoulot extends JPanel {
 
 	public ViewRetirerGoulot(Controller controller) {
 		this.controller = controller;
+		this.controller.setActualView(this) ;
+		
 		tableauBoisson = controller.obtenirAlcools();
 		for (String boisson : tableauBoisson) {
            tableauBoutton.add(new BoissonRadioButton(boisson));

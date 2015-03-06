@@ -75,17 +75,20 @@ public class Window extends JFrame {
 					{					
 						public void actionPerformed(ActionEvent arg0)
 						{
+							controller.clearStacks() ;
 							controller.boutonBarman();
 						}
 					});
 				this.general_user.add(boss);
-				this.boss.addActionListener(new ActionListener()
-				{					
-					public void actionPerformed(ActionEvent arg0)
-					{
-						controller.boutonGestionnaire();
-					}
-				});
+					this.boss.addActionListener(new ActionListener()
+					{					
+						public void actionPerformed(ActionEvent arg0)
+						{
+							controller.clearStacks() ;
+							controller.boutonGestionnaire();
+							
+						}
+					});
 				
 		
 			
