@@ -9,10 +9,10 @@ import javax.swing.JRadioButton;
 
 public class ViewStockManagementSouth extends JPanel {
 
-	private JRadioButton soiree = new JRadioButton("soir�e");
+	private JRadioButton soiree = new JRadioButton("soirée");
 	private JRadioButton semaine = new JRadioButton("semaine");
 	private JRadioButton mois = new JRadioButton("mois");
-	private JRadioButton annee = new JRadioButton("annee");
+	private JRadioButton annee = new JRadioButton("année");
 	private static final long serialVersionUID = 1L;
 
 	public ViewStockManagementSouth(final Controller controller) {

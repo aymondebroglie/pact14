@@ -293,22 +293,23 @@ public class Controller
 	{
 		//Methode appelee si on appuie sur imprimer note dans l'ecran du Barman
 		//Code pour le test, il faudra demander a la base de donnee de nous fournir la note pour le serveur donne
-		JPanel pan = new JPanel();
 		
 	    ArrayList<DetailDeCommand> list= bdd.imprimerCommande(1);//suposse rfid ets 1
-	    
+	    String result="<html><br />";
 		if(list.size()==0)
 		{
-			window.add(new JLabel("Pas de commande en cour pour ce barman"),BorderLayout.CENTER);
+			window.add(new JLabel("<html><h1 style=\"color:red\">Pas de commande en cours pour ce barman<h1 /><html />"),BorderLayout.SOUTH);
 			window.validate();
 			return;
-		}
-		pan.add(new JLabel("********Commande********"));
+		} 
+		result+="<h1>********Commande********<h1 /><br />";
 		for(DetailDeCommand t:list)
-			pan.add(new JLabel(t.toString()));
-		pan.add(new JLabel("Total:\t\t"+bdd.finDeCommande(1)+"€"));
+		{
+			result+="<h3>"+t.toString()+"<h3 /><br />";
+		}
+		result+="<h2 >Total:\t\t"+bdd.finDeCommande(1)+"€<h2 /><br /><html />";
 		
-		window.add(pan);
+		window.add(new JLabel(result),BorderLayout.SOUTH);
 		window.validate();
 	}
 	
@@ -382,12 +383,12 @@ public class Controller
 	public void visualiser(ViewStocksManagement vsm) {
 		long dayMilli=86400000L;
 		Date maintenant=new Date(),debut;
-		graphique g;
+		graphique g=null;
 		if(duree!=null)
 		{
 			switch(duree)
 			{
-			case "soir�e":
+			case "soiree":
 				debut=new Date(maintenant.getTime()-dayMilli);
 				break;
 			case "semaine":
@@ -396,7 +397,7 @@ public class Controller
 			case "mois":
 				debut=new Date(maintenant.getTime()-dayMilli*30);
 				break;
-			case "ann�e":
+			case "annee":
 				debut=new Date(maintenant.getTime()-dayMilli*365);
 				break;
 			default :
@@ -411,8 +412,6 @@ public class Controller
 			}
 			 g=new graphique(data,tableauAffichage);
 		}
-		else 
-			 g = new graphique(bdd.etatDesStocks(maintenant),maintenant);
 		window.add(g,BorderLayout.CENTER);
 		window.validate();
 		/*JFrame f = new JFrame();
@@ -436,8 +435,12 @@ public class Controller
 		this.duree = duree;
 	}
 	
-	public void etatDesStocks(){
-		
+	public void etatDesStocks()
+	{
+		Date maintenant= new Date();
+		graphique g = new graphique(bdd.etatDesStocks(maintenant),maintenant);
+		window.add(g,BorderLayout.CENTER);
+		window.validate();
 	}
 	
 

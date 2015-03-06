@@ -35,10 +35,6 @@ public class Optibar {
 			}
 		};
 		t.start();
-		bdd.ajouterConsommation(1, 1, 5);
-		bdd.associerGoulot(1, 3180290047897l);
-		bdd.ajouterConsommation(1, 1, 5);
-		bdd.associerGoulot(1, 3263855090276l);
 	}
 
 }
