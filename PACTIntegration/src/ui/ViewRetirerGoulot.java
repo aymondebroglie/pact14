@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
@@ -30,19 +31,30 @@ public class ViewRetirerGoulot extends JPanel {
 		}
         for(BoissonRadioButton boutton : tableauBoutton ){
         	bg.add(boutton);
+        	
         	this.add(boutton);
         }
         JButton ok = new JButton("OK");
         ok.addActionListener(new ActionListener(){
 
-			@Override
+			
 			public void actionPerformed(ActionEvent e) {
-				
-				
-			}
-        	;
+
+
+		
         	
-        });
+        }});
         this.add(ok);
+	}
+	public ArrayList<String> obtenirBouttonAlcool() {
+
+		ArrayList<String> tableau = new ArrayList<String>();
+		for (BoissonRadioButton boutton : tableauBoutton) {
+			if (boutton.isSelected()) {
+				tableau.add(boutton.getNom());
+			}
+		}
+		return tableau;
+
 	}
 }

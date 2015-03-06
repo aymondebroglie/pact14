@@ -327,6 +327,19 @@ public class Controller
 		window.validate();
 		
 	}
+	
+	public void attribution(ViewRetirerGoulot vrg)
+	{
+		ArrayList<String> tableauAffichage = vrg.obtenirBouttonAlcool();
+        if(tableauAffichage.size()!=1) 
+        {
+        	ViewRetirerGoulot pan = new ViewRetirerGoulot(this);
+        	pan.add(new JLabel("une boisson SVP"));
+        }
+        else{
+        	bdd.associerGoulot(goulot, bdd.codeBarreDeBoisson(tableauAffichage.get(0)));
+        }
+	}
 
 	/****************************************************************************************************/
 	/** ViewBossHome */

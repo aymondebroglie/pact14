@@ -575,4 +575,19 @@ public class BDD implements BDDInterface
 			
 		return list;
 	}
+	@Override
+	public long codeBarreDeBoisson(String nom) {
+		long code;
+		try{
+			rs=st.executeQuery("SELECT CodeBarre FROM Boisson WHERE Nom="+echapper(nom));
+			if(!rs.next())
+				throw(new Exception("Pas de CodeBarre associe à "+nom));
+			code=rs.getLong(1);
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+			return 0;
+		}
+		return code;
+	}
 }
