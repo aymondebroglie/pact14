@@ -18,8 +18,11 @@ public class ViewWelcome extends JPanel {
 				
 		this.setLayout(new GridLayout(4,1));
 		
-		this.add(new JLabel("Bienvenue sur OptiBar ! \n",JLabel.CENTER));
-		this.add(new JLabel("Mais avant tout... Barman ou Patron ?",JLabel.CENTER)) ;
-		this.add(new JLabel(" Pour cela : Général >> Utilisateur",JLabel.CENTER)) ;
+		this.add(new JLabel(
+				 "Bienvenue sur OptiBar ! \n"
+				+"Mais avant tout... Etes-vous un barman ou le patron ? \n"
+				+"Il suffit pour cela d'aller dans le menu : \n"));
+		
+		this.add(new JLabel(" Général >> Utilisateur",JLabel.CENTER)) ;
 	}
 }
