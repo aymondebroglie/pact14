@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Stack;
+
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -19,7 +21,7 @@ import javax.swing.JPanel;
 import visu.graphique;
 
 //Classe permettant de controller ce qui se passe quand on appuie sur un bouton, c'est elle qui
-//interrogera la base de donne�e
+//interrogera la base de donne�e
 public class Controller
 {
 	private BDDInterface bdd;
@@ -452,12 +454,10 @@ public class Controller
 			}
 			 g=new graphique(data,tableauAffichage);
 		}
-		window.add(g,BorderLayout.CENTER);
-		window.validate();
-		/*JFrame f = new JFrame();
+		JFrame f = new JFrame();
 		f.setBounds(10,10,500,500);
 		f.add(g);
-		f.setVisible(true);*/
+		f.setVisible(true);
 		/*vsm.add(g);
 		 window.setContentPane(vsm);
 		 window.validate();*/
@@ -479,13 +479,17 @@ public class Controller
 	{
 		Date maintenant= new Date();
 		graphique g = new graphique(bdd.etatDesStocks(maintenant),maintenant);
-		window.add(g,BorderLayout.CENTER);
-		window.validate();
+		JFrame f = new JFrame();
+		f.setBounds(10,10,500,500);
+		f.add(g);
+		f.setVisible(true);
 	}
 	
 	public void bouteilleFinie()
 	{
 		bdd.bouteilleFinie(1);
+		window.add(new JLabel("Changement enregistré"),BorderLayout.CENTER);
+		window.validate();
 	}
 	
 	public void ajoutBouteille(String codeBarre){
@@ -506,9 +510,10 @@ public class Controller
     }
     
     public void ajoutBarman(String nom,String prenom,int age){
-    	System.out.println(nom);
-    	System.out.println(prenom);
-    	System.out.println(age);
+    	int rFID=nom.hashCode();
+    	bdd.ajouterBarman(rFID, nom, prenom, age, new Date());
+    	window.add(new JLabel("Barman enregistré"),BorderLayout.CENTER);
+		window.validate();
     }
 
 }

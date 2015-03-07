@@ -12,7 +12,7 @@ public class ViewBossHome extends JPanel {
 
 	private Controller controller;
 
-	public ViewBossHome(Controller controller) {
+	public ViewBossHome(final Controller controller) {
 		this.controller = controller;
 		this.controller.setActualView(this) ;
 
@@ -23,7 +23,7 @@ public class ViewBossHome extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				view.ecranAjoutBarman();
+				controller.ecranAjoutBarman();
 			}
 			
 		});
