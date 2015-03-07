@@ -448,11 +448,12 @@ public class Controller
 				data.add(bdd.evolutionDesStocks(nom,debut,maintenant));
 			}
 			 g=new graphique(data,tableauAffichage);
-		}
+		
 		JFrame f = new JFrame();
 		f.setBounds(10,10,500,500);
 		f.add(g);
 		f.setVisible(true);
+		}
 		/*vsm.add(g);
 		 window.setContentPane(vsm);
 		 window.validate();*/
