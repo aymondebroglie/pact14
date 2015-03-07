@@ -11,6 +11,8 @@ import javax.swing.JTextField;
 
 public class ViewAddBottle extends JPanel {
 
+
+	private static final long serialVersionUID = 1L;
 	private Controller controller;
 	private JTextField tf = new JTextField();
 public ViewAddBottle(Controller controller){

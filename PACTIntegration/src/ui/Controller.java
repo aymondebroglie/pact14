@@ -465,7 +465,17 @@ public class Controller
 		window.validate();
 	}
 	
-
-
+    public void ecranAjoutBarman()
+    {
+    	ViewAddBarman vab = new ViewAddBarman(this);
+    	window.setContentPane(vab);
+    	window.validate();
+    }
+    
+    public void ajoutBarman(String nom,String prenom,int age){
+    	System.out.println(nom);
+    	System.out.println(prenom);
+    	System.out.println(age);
+    }
 
 }
