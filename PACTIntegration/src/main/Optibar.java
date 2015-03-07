@@ -1,30 +1,16 @@
 package main;
-import ui.ViewWelcome;
 import ui.Window;
-import ui.Controller;
-
-import java.io.File;
-import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
 import materiel.SerialTest;
-
 import bdd.*;
-import visu.*;
 
 public class Optibar {
 
 	public static void main(String[] args)
 	{
 		BDDInterface bdd = new BDD("BAR", "root", "12345678");
+		@SuppressWarnings("unused")
 		Window window =new Window(bdd);
-		
-		
+		InitializationPassword.initialiserPassword("binouze");
 		SerialTest main = new SerialTest();
 		main.initialize();
 		Thread t=new Thread() {

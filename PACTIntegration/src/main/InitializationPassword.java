@@ -1,20 +1,20 @@
 package main;
 
-		import java.io.File;
-		import java.io.PrintStream;
-		import javax.swing.JOptionPane;
+import java.io.File;
+import java.io.PrintStream;
+import javax.swing.JOptionPane;
 
-public class InitializationPassword 
+public abstract class InitializationPassword 
 {
-	public static void main(String[] args) 
+	public static void initialiserPassword(String mdp) 
 	{	
 		
 		try
 		{
-			int crypted = "poney".hashCode() ;
+			int crypted = mdp.hashCode() ;
 			PrintStream ps =new PrintStream("datas" + File.separator + "Password") ; 
 			ps.print(crypted);
-			JOptionPane.showMessageDialog(null, "MainPassWordGenerator has been successful", "youpi", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Password has been successfully updated", "youpi", JOptionPane.INFORMATION_MESSAGE);
 			ps.close() ;
 		}
 		catch(Exception e)
@@ -23,7 +23,6 @@ public class InitializationPassword
 			e.printStackTrace(System.err);
 			JOptionPane.showMessageDialog(null, "MainPassWordGenerator failed", "Fatal Error", JOptionPane.ERROR_MESSAGE);
 		}
-		System.out.println("poney".hashCode()) ;
 		
 	}
 }
