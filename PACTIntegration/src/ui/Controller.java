@@ -326,11 +326,13 @@ public class Controller
 		{
 			JOptionPane.showMessageDialog(null, "Pas de commande en cours pour vous", "Attention", JOptionPane.WARNING_MESSAGE);
 		} 
-		
-		ViewNote pan = new ViewNote(this);
-		window.setContentPane(pan);
-		this.setActualView(pan) ;
-		window.validate();
+		else
+		{
+			ViewNote pan = new ViewNote(this);
+			window.setContentPane(pan);
+			this.setActualView(pan) ;
+			window.validate();
+		}
 	}
 	
 	public void retirerGoulot()
