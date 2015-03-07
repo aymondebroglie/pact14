@@ -17,7 +17,7 @@ public class ViewAddBottle extends JPanel {
 	private JTextField tf = new JTextField();
 public ViewAddBottle(final Controller controller){
 	this.controller = controller;
-	this.add(new JLabel("Veuillez rentrer le code barre de la bouteille � ajouter"));
+	this.add(new JLabel("Veuillez rentrer le code barre de la bouteille à ajouter"));
 	tf.setPreferredSize(new Dimension(300,25));
 	this.add(tf);
 	JButton ok = new JButton("OK");
