@@ -16,7 +16,7 @@ public class Window extends JFrame {
 	private Controller controller ;
 
 	private JMenuBar menubar = new JMenuBar();
-	private JMenu general = new JMenu("Général");
+	private JMenu general = new JMenu("GÃ©nÃ©ral");
 	private JMenu general_user = new JMenu("Utilisateur");
 	private JMenuItem barman = new JMenuItem("Barman");
 	private JMenuItem boss = new JMenuItem("Patron");
@@ -24,12 +24,12 @@ public class Window extends JFrame {
 	private JMenuItem previous = new JMenuItem("<<<");
 	private JMenuItem next = new JMenuItem(">>>");
 	
-	private JMenu settings = new JMenu("Paramètres");
+	private JMenu settings = new JMenu("ParamÃ¨tres");
 	private JMenuItem settings_language = new JMenuItem("Langue");
 	private JMenuItem settings_mdp = new JMenuItem("Mot de Passe");
-	private JMenu settings_units = new JMenu("Unités");
+	private JMenu settings_units = new JMenu("UnitÃ©s");
 	private JMenuItem settings_units_money = new JMenuItem("Monnaie");
-	private JMenuItem settings_units_metric = new JMenuItem("Système métrique");
+	private JMenuItem settings_units_metric = new JMenuItem("SystÃ¨me mÃ©trique");
 
 	private JMenu help = new JMenu("Aide");
 	private JMenuItem help_help = new JMenuItem("Aide");

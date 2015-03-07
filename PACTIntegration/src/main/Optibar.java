@@ -8,9 +8,9 @@ public class Optibar {
 	public static void main(String[] args)
 	{
 		BDDInterface bdd = new BDD("BAR", "root", "12345678");
+		//InitializationPassword.initialiserPassword("binouze");
 		@SuppressWarnings("unused")
 		Window window =new Window(bdd);
-		InitializationPassword.initialiserPassword("binouze");
 		SerialTest main = new SerialTest();
 		main.initialize();
 		Thread t=new Thread() {

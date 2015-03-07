@@ -119,9 +119,9 @@ public class Controller
 					
 					this.printMDP(cs1);
 					JOptionPane.showMessageDialog(null,
-							"Mot de passe chang� avec succ�s !", "Information",
+							"Mot de passe changé avec succès !", "Information",
 							JOptionPane.INFORMATION_MESSAGE);
-					panneau.add(new JLabel("Mot de Passe chang�"));
+					panneau.add(new JLabel("Mot de Passe changé"));
 					window.setContentPane(panneau);
 					window.validate();
 				} else {
@@ -177,7 +177,7 @@ public class Controller
 	{
 		if(stackpreviousview.empty())
 		{
-			JOptionPane.showMessageDialog(null, "L'op�ration demand�e est impossible", "Attention", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "L'opération demandée est impossible", "Attention", JOptionPane.WARNING_MESSAGE);
 		}
 		else
 		{
@@ -192,7 +192,7 @@ public class Controller
 	{
 		if(stacknextview.empty())
 		{
-			JOptionPane.showMessageDialog(null, "L'op�ration demand�e est impossible", "Attention", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "L'opération demandée est impossible", "Attention", JOptionPane.WARNING_MESSAGE);
 		}
 		else
 		{
@@ -231,11 +231,11 @@ public class Controller
 	{
 		JOptionPane.showMessageDialog(null, 
 				
-				 "OptiBar a pour objectif de fournir � un bar des outils novateurs et pratiques d�utilisation permettant d�en faciliter la gestion. \n"
-				+"Il permettra au patron de g�rer ses stocks et aussi de savoir quelles sont les habitudes de consommation de ses clients de fa�on claire et pr�cise. \n"
-				+"Puisque la gestion des stocks est une d�pense importante pour les bars, notre projet permettra au bar de minimiser ses stocks, sans jamais �tre � court. \n"
-				+"Enfin, notre syst�me fournit aussi une aide au barman en lui indiquant les quantit�s qu�il a vers�es ce qui lui permet � la fois de pr�parer de meilleures boissons \n "
-				+ "mais lui facilite �galement la production de l�addition, gain de temps toujours utile � l�heure de pointe."
+				 "OptiBar a pour objectif de fournir à un bar des outils novateurs et pratiques d'utilisation permettant d'en faciliter la gestion. \n"
+				+"Il permettra au patron de gérer ses stocks et aussi de savoir quelles sont les habitudes de consommation de ses clients de façon claire et précise. \n"
+				+"Puisque la gestion des stocks est une dépense importante pour les bars, notre projet permettra au bar de minimiser ses stocks, sans jamais être à court. \n"
+				+"Enfin, notre système fournit aussi une aide au barman en lui indiquant les quantités qu'il a versées ce qui lui permet à la fois de préparer de meilleures boissons \n "
+				+ "mais lui facilite également la production de l'addition, gain de temps toujours utile à l'heure de pointe."
 				
 				, "A propos d'OptiBar", JOptionPane.INFORMATION_MESSAGE);
 		

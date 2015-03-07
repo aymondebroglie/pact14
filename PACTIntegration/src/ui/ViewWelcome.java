@@ -20,6 +20,6 @@ public class ViewWelcome extends JPanel {
 		
 		this.add(new JLabel("Bienvenue sur OptiBar ! \n",JLabel.CENTER));
 		this.add(new JLabel("Mais avant tout... Barman ou Patron ?",JLabel.CENTER)) ;
-		this.add(new JLabel(" Pour cela : Général >> Utilisateur",JLabel.CENTER)) ;
+		this.add(new JLabel(" Pour cela : GÃ©nÃ©ral >> Utilisateur",JLabel.CENTER)) ;
 	}
 }
