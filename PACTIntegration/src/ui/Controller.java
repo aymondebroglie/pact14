@@ -454,13 +454,17 @@ public class Controller
 		window.validate();
 	}
 	
-	public void bouteilleFinie(){
-		
+	public void bouteilleFinie()
+	{
+		bdd.bouteilleFinie(1);
 	}
 	
 	public void ajoutBouteille(String codeBarre){
 		JPanel pan = new JPanel();
-		pan.add(new JLabel(codeBarre));
+		long code=Long.parseLong(codeBarre);
+		System.out.println(code);
+		bdd.ajouterBoissonParWeb(code);
+		pan.add(new JLabel("Boisson ajoutée : "+codeBarre));
 		window.setContentPane(pan);
 		window.validate();
 	}

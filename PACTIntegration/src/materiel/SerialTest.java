@@ -20,7 +20,7 @@ public class SerialTest implements SerialPortEventListener {
 	private static final String PORT_NAMES[] = { 
 			"/dev/tty.usbserial-A9007UX1", // Mac OS X
                         "/dev/ttyACM0", // Raspberry Pi
-			"/dev/ttyUSB0", // Linux
+			"/dev/bluetooth/rfcomm0", // Linux
 			"COM5", // Windows
 	};
 	/**

@@ -12,7 +12,7 @@ public class ViewBossHome extends JPanel {
 
 	private Controller view;
 
-	public ViewBossHome(Controller view) {
+	public ViewBossHome(final Controller view) {
 		this.view = view;
 
 		JButton consultervosdonnees = new JButton("Consulter vos donnees");
@@ -23,7 +23,6 @@ public class ViewBossHome extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				view.ecranAjoutBarman();
-				
 			}
 			
 		});
