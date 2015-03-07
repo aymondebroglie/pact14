@@ -23,6 +23,15 @@ public class ViewBarmanHome extends JPanel {
 
 		}
 	}
+	
+	private class BouteilleFinie implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			view.bouteilleFinie();
+		}
+		
+	}
 
 	/**
 	 * 
@@ -34,11 +43,17 @@ public class ViewBarmanHome extends JPanel {
 		JButton note = new JButton("Imprimer Note");
 		ImprimerNote imprimerNote = new ImprimerNote();
 		RetirerGoulot retirerGoulot = new RetirerGoulot();
+		JButton bouteilleFinie = new JButton("Bouteille finie");
+		bouteilleFinie.addActionListener(new BouteilleFinie());
 		note.addActionListener(imprimerNote);
 		this.add(note);
+		this.add(bouteilleFinie);
 		JButton goulot = new JButton("Retirer goulot");
 		goulot.addActionListener(retirerGoulot);
-		this.add(goulot);
-		;
-	}
+		this.add(goulot);
+
+	
+}
+		
+	
 }

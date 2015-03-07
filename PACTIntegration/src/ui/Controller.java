@@ -351,7 +351,7 @@ public class Controller
 	
 	public void gestionStocks() 
 	{
-		ViewStocksManagement vsm = new ViewStocksManagement(this);
+		ViewAddBottle vsm = new ViewAddBottle(this);
 		 window.setContentPane(vsm);
 		 this.setActualView(vsm) ;
 		 window.validate();
@@ -451,6 +451,17 @@ public class Controller
 		Date maintenant= new Date();
 		graphique g = new graphique(bdd.etatDesStocks(maintenant),maintenant);
 		window.add(g,BorderLayout.CENTER);
+		window.validate();
+	}
+	
+	public void bouteilleFinie(){
+		
+	}
+	
+	public void ajoutBouteille(String codeBarre){
+		JPanel pan = new JPanel();
+		pan.add(new JLabel(codeBarre));
+		window.setContentPane(pan);
 		window.validate();
 	}
 	
