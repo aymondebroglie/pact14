@@ -35,15 +35,9 @@ public class ViewRetirerGoulot extends JPanel {
         	this.add(boutton);
         }
         JButton ok = new JButton("OK");
-        ok.addActionListener(new ActionListener(){
+      
+        ok.addActionListener(new Associer());
 
-			
-			public void actionPerformed(ActionEvent e) {
-
-
-		
-        	
-        }});
         this.add(ok);
 	}
 	public ArrayList<String> obtenirBouttonAlcool() {
@@ -56,5 +50,13 @@ public class ViewRetirerGoulot extends JPanel {
 		}
 		return tableau;
 
+	}
+	public class Associer implements ActionListener
+	{
+		@Override
+		public void actionPerformed(ActionEvent arg0) 
+		{
+			controller.attribution(obtenirBouttonAlcool());
+		}
 	}
 }

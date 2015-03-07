@@ -427,6 +427,7 @@ public class BDD implements BDDInterface
 					bluetoothID=rs.getInt(1);
 				}
 			}
+			st.executeUpdate("UPDATE Goulots SET EnCharge=0 WHERE BluetoothID="+bluetoothID);
 			
 		}catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -511,7 +512,7 @@ public class BDD implements BDDInterface
 	public boolean ajouterBoissonParWeb(long codeBarre) {
 		OFFInterface openfood=new OpenFoodFacts(this);
 		openfood.ajouterBoisson(codeBarre);
-		return false;
+		return true;
 	}
 	@Override
 	public boolean initialisation() {
@@ -579,7 +580,7 @@ public class BDD implements BDDInterface
 	public long codeBarreDeBoisson(String nom) {
 		long code;
 		try{
-			rs=st.executeQuery("SELECT CodeBarre FROM Boisson WHERE Nom="+echapper(nom));
+			rs=st.executeQuery("SELECT CodeBarre FROM Boisson WHERE Nom='"+echapper(nom)+"'");
 			if(!rs.next())
 				throw(new Exception("Pas de CodeBarre associe à "+nom));
 			code=rs.getLong(1);

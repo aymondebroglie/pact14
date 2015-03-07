@@ -317,28 +317,28 @@ public class Controller
 	{
 		//Demander quel goulot il faut prendre pour l'instant il ferme la fenetre pour le test
 		ViewRetirerGoulot pan = new ViewRetirerGoulot(this);
-		int goulot=bdd.attributionDeGoulot();
-		if(goulot==0)
-			pan.add(new JLabel("Pas de goulot disponible"));
-		else
-			pan.add(new JLabel("Vous pouvez retirer le goulot "+goulot));
 		window.setContentPane(pan);
 		this.setActualView(pan) ;
 		window.validate();
 		
 	}
 	
-	public void attribution(ViewRetirerGoulot vrg)
+	public void attribution(ArrayList<String> tableauAffichage)
 	{
-		ArrayList<String> tableauAffichage = vrg.obtenirBouttonAlcool();
+		int goulot=bdd.attributionDeGoulot();
+		ViewRetirerGoulot pan = new ViewRetirerGoulot(this);
         if(tableauAffichage.size()!=1) 
+        	pan.add(new JLabel("Veuillez choisir une boisson SVP"));
+        else if(goulot==0)
+        	pan.add(new JLabel("Pas de goulots disponible"));
+        else
         {
-        	ViewRetirerGoulot pan = new ViewRetirerGoulot(this);
-        	pan.add(new JLabel("une boisson SVP"));
-        }
-        else{
+        	pan.add(new JLabel("Vous pouvez retirer le goulot "+goulot));
         	bdd.associerGoulot(goulot, bdd.codeBarreDeBoisson(tableauAffichage.get(0)));
         }
+        window.setContentPane(pan);
+        this.setActualView(pan);
+        window.validate();
 	}
 
 	/****************************************************************************************************/
