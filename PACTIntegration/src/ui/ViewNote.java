@@ -1,5 +1,6 @@
 package ui;
 
+import java.awt.BorderLayout;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
@@ -18,20 +19,24 @@ public class ViewNote extends JPanel
 		this.controller = controller ;
 		this.controller.setActualView(this) ;
 		
-		JPanel pan = new JPanel();
-		BDDInterface bdd = this.controller.getBDD() ;
+		//Methode appelee si on appuie sur imprimer note dans l'ecran du Barman
+		//Code pour le test, il faudra demander a la base de donnee de nous fournir la note pour le serveur donne
+		BDDInterface bdd = this.controller.getBDD() ;		
 		
-    	ArrayList<DetailDeCommand> list= bdd.imprimerCommande(1);//suposse rfid ets 1
-		String resultat="******Command******";
-		pan.add(new JLabel(resultat));
-		double prix=0;
+		
+		   ArrayList<DetailDeCommand> list= bdd.imprimerCommande(1);//suppose rfid ets 1
+		    
+		String result="<html><br />";	
+		result += "<h1>********Commande********<h1 /><br />";
+				
 		for(DetailDeCommand t:list)
 		{
-			resultat=t.getNom()+"  "+t.getPrixParVolume()+"  "+t.getVolume();
-			pan.add(new JLabel(resultat));
-	    	prix=t.getPrixTotal();
+			result += "<h3>"+t.toString()+"<h3 /><br />";
 		}
-		pan.add(new JLabel("PRIX TOTAL :"+prix));
+				
+		result += "<h2 >Total:\t\t"+bdd.finDeCommande(1)+"€<h2 /><br /><html />";
+		
+		this.add(new JLabel(result),BorderLayout.SOUTH);
 	}
 	
 }

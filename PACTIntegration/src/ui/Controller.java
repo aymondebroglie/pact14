@@ -320,21 +320,14 @@ public class Controller
 		//Code pour le test, il faudra demander a la base de donnee de nous fournir la note pour le serveur donne
 		
 	    ArrayList<DetailDeCommand> list= bdd.imprimerCommande(1);//suposse rfid ets 1
-	    String result="<html><br />";
 		if(list.size()==0)
 		{
-			window.add(new JLabel("<html><h1 style=\"color:red\">Pas de commande en cours pour ce barman<h1 /><html />"),BorderLayout.SOUTH);
-			window.validate();
-			return;
+			JOptionPane.showMessageDialog(null, "Pas de commande en cours pour vous", "Attention", JOptionPane.WARNING_MESSAGE);
 		} 
-		result+="<h1>********Commande********<h1 /><br />";
-		for(DetailDeCommand t:list)
-		{
-			result+="<h3>"+t.toString()+"<h3 /><br />";
-		}
-		result+="<h2 >Total:\t\t"+bdd.finDeCommande(1)+"€<h2 /><br /><html />";
 		
-		window.add(new JLabel(result),BorderLayout.SOUTH);
+		ViewNote pan = new ViewNote(this);
+		window.setContentPane(pan);
+		this.setActualView(pan) ;
 		window.validate();
 	}
 	
