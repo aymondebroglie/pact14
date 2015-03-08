@@ -478,7 +478,7 @@ public class Controller {
 
 	public void bouteilleFinie() {
 		bdd.bouteilleFinie(1);
-		window.add(new JLabel("Changement enregistrï¿½"), BorderLayout.CENTER);
+		window.add(new JLabel("Changement enregistré"), BorderLayout.CENTER);
 		window.validate();
 	}
 
@@ -487,7 +487,7 @@ public class Controller {
 		long code = Long.parseLong(codeBarre);
 		System.out.println(code);
 		bdd.ajouterBoissonParWeb(code);
-		pan.add(new JLabel("Boisson ajoutï¿½e : " + codeBarre));
+		pan.add(new JLabel("Boisson ajoutée : " + codeBarre));
 		window.setContentPane(pan);
 		window.validate();
 	}
