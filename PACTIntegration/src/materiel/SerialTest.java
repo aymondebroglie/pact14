@@ -38,7 +38,10 @@ public class SerialTest implements SerialPortEventListener {
 	/** Default bits per second for COM port. */
 	private static final int DATA_RATE = 115200;
 	
-
+   public SerialTest(BDDInterface bdd){
+	   super();
+	  this.bdd = bdd;
+   }
 
 	public void initialize() {
                
@@ -104,9 +107,9 @@ public class SerialTest implements SerialPortEventListener {
 		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 			try {
 				String inputLine=input.readLine();
-				System.out.println("input");
-				/*int volume  = Integer.parseInt(inputLine);
-				bdd.ajouterConsommation(0, 0, volume);*/
+				int volume  = Integer.parseInt(inputLine);
+				bdd.ajouterConsommation(1, 1, volume);
+				System.out.println(volume);
 			} catch (Exception e) {
 				System.err.println(e.toString());
 			}
