@@ -447,7 +447,7 @@ public class Controller
 			{
 				data.add(bdd.evolutionDesStocks(nom,debut,maintenant));
 			}
-			 g=new graphique(data,tableauAffichage);
+			 g=new graphique(data,tableauAffichage, true);
 		
 		JFrame f = new JFrame();
 		f.setBounds(10,10,500,500);
@@ -461,9 +461,41 @@ public class Controller
 
 	public void visualiserCommandes(ViewCommandManagement vcm) {
 		ArrayList<String> tableauAffichage = vcm.obtenirBouttonAlcool();
-		System.out.println("Commande");
-		System.out.println(tableauAffichage);
-		System.out.println(duree);
+		
+		long dayMilli=86400000L;
+		Date maintenant=new Date(),debut;
+		graphique g=null;
+		if(duree!=null)
+		{
+			switch(duree)
+			{
+			case "soiree":
+				debut=new Date(maintenant.getTime()-dayMilli);
+				break;
+			case "semaine":
+				debut=new Date(maintenant.getTime()-dayMilli*7);
+				break;
+			case "mois":
+				debut=new Date(maintenant.getTime()-dayMilli*30);
+				break;
+			case "annee":
+				debut=new Date(maintenant.getTime()-dayMilli*365);
+				break;
+			default :
+				debut=new Date(0);
+			}
+			ArrayList<ArrayList<HistoBoisson>> data= new ArrayList<ArrayList<HistoBoisson>>();
+			for(String nom:tableauAffichage)
+			{
+				data.add(bdd.boissonCommande(nom,debut,maintenant));
+			}
+			 g=new graphique(data,tableauAffichage,false);
+		
+		JFrame f = new JFrame();
+		f.setBounds(10,10,500,500);
+		f.add(g);
+		f.setVisible(true);
+		}
 	}
 
 	public void setDuree(String duree) 
