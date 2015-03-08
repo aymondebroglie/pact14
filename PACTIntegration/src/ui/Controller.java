@@ -2,6 +2,7 @@ package ui;
 import bdd.*;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Container;
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,6 +11,7 @@ import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Stack;
 
@@ -18,13 +20,16 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import visu.graphique;
+import stat.DataSet;
+import stat.DimensionException;
+import visu.Graphique;
+import websem.OpenFoodFacts;
 
 //Classe permettant de controller ce qui se passe quand on appuie sur un bouton, c'est elle qui
 //interrogera la base de donneï¿½e
 public class Controller
 {
-	private BDDInterface bdd;
+	private  BDDInterface bdd;
 	private Window window;
 	private String duree;// Ce tableau permet de connaitre la duree a afficher
 	
@@ -416,11 +421,186 @@ public class Controller
 	public ArrayList<String> obtenirAlcools() {
 			return bdd.listeDesBoissons();
 	}
+	
+	/****************************************************************************************************/
+	
+	/**
+	private static ArrayList<Date> montee(ArrayList<Date> liste_date, int p)
+	{
+		ArrayList<Date> result = liste_date ;
+		
+		int i = p ;
+		Date clef = result.get(p) ;
+		while( i >= 2 && clef.after(result.get(i/2)))
+		{
+			result.set(i, result.get(i/2));
+			i = i/2 ;
+		}
+		result.set(i, clef) ;
+		
+		return result ;
 
-	public void visualiser(ViewStocksManagement vsm) {
+	}
+	
+	private static ArrayList<Date> descente(ArrayList<Date> liste_date, int q, int p)
+	{
+		ArrayList<Date> result = liste_date ;
+		
+		boolean found = false ;
+		int indice_grand ;
+		int i = q ;
+		Date clef = result.get(q) ;
+		
+		
+		while(!found && 2*i <= p)
+		{
+			if(2*i == p)
+			{
+				indice_grand = p ;
+			}
+			else
+			{
+				if( T[2i]>= T[2i+1] )
+				{
+					indice_grand = 2*i ;
+				}
+				else
+				{
+					indice_grand = 2*p+1 ;
+				}
+			}
+			if(clef<T[indice_grand])
+			{
+				result.set(i, result.get(indice_grand)) ;
+				i = indice_grand ;
+			}
+			else
+			{
+				found = true ;
+			}
+		}
+		
+		result.set(i, clef) ;
+		
+		return result ;
+	}
+	
+	private static ArrayList<Date> swap(ArrayList<Date> liste_date , int i , int j)
+	{
+		ArrayList<Date> result = liste_date ;
+		result.set(i, liste_date.get(j)) ;
+		result.set(j, liste_date.get(i)) ;
+		
+		return result ;
+		
+	}
+	
+	
+	
+	private static ArrayList<Date> heapSortDates(ArrayList<Date> liste_date)
+	{
+		int p ;
+		int n = liste_date.size() ;
+		ArrayList<Date> result = liste_date ;
+		
+		
+		for(p = 2 ; p<=n ; p++ )
+		{
+			result = Controller.montee(result, p) ;
+		}
+		for(p = n ; p>=2 ; p--)
+		{
+			Controller.swap(result, 1,p) ;
+			Controller.descente(liste_date, 1, p-1) ;
+		}
+		
+		return result ;
+	}*/
+	// ****************************************************************************************
+	/**
+	private static long getTho(ArrayList<Date> liste_date)
+	{
+		int length = liste_date.size() ;
+		ArrayList<Long> liste_delta = new ArrayList<Long>() ;
+		for(int i = 0 ; i<length ; i++)
+		{
+			liste_delta.add(liste_date.get(i).getTime()) ;
+		}
+		
+		for(int i = 0 ; i<length ; i++)
+		{
+			liste_delta = liste_data - 
+		}
+		
+		// Controller.heapSortDates(liste_date) ;
+		 
+		
+		int tho ;
+		
+		
+		
+		return tho ;
+		
+	} 
+	 * @throws DimensionException */
+
+	
+	public ArrayList<ArrayList<HistoBoisson>> integrerModelisationStatistique(ArrayList<ArrayList<HistoBoisson>> data, ViewStocksManagement vsm, ArrayList<String> tableauAffichage) throws DimensionException
+	{
+			String nom_boisson = tableauAffichage.get(0);
+			
+			ArrayList<HistoBoisson> liste_histo=data.get(0);				
+			ArrayList<Date> liste_date = new ArrayList<Date>() ;
+			int length = liste_histo.size();
+			
+			
+			
+			for(long i = 0 ; i<length ; i++)
+			{
+				liste_date.add(liste_histo.get( (int) i).getDate()) ;
+			}
+			
+			Date debut = liste_date.get(0);
+			Date fin = liste_date.get(length-1) ;
+			
+			long n = 60000L ;
+			long tho = (fin.getTime()-debut.getTime())/n ;
+			
+					
+			DataSet dataset = new DataSet() ;
+			for(long i = 0 ; i<n ; i++)
+			{
+				Date date = new Date(debut.getTime() + i*tho) ;
+				double volume = (double) bdd.volumeDateBoisson(date, nom_boisson) ;
+				dataset.add(volume) ;					
+			}
+			for(int j = 0 ; j<10 ; j++)
+			{
+				System.out.println(dataset.get(j));
+			}
+			
+			
+				ArrayList<Double> delta = dataset.moindrecarre() ;
+			
+			ArrayList<HistoBoisson> histo_modele = new ArrayList<HistoBoisson>() ;
+			for(int i = 0 ; i<length ; i++)
+			{
+				HistoBoisson histo = new HistoBoisson(liste_date.get(i), (int)((liste_date.get(i).getTime()-debut.getTime())*delta.get(0)+delta.get(1))) ;
+				histo_modele.add(histo) ;
+			}
+			
+			data.add(histo_modele) ;
+			
+		return data;
+	}
+	
+	public void visualiser(ViewStocksManagement vsm) throws DimensionException 
+	{
+				
 		long dayMilli=86400000L;
 		Date maintenant=new Date(),debut;
-		graphique g=null;
+		Graphique g=null;
+		ArrayList<String> tableauAffichage = vsm.obtenirBouttonAlcool();
 		if(duree!=null)
 		{
 			switch(duree)
@@ -440,14 +620,23 @@ public class Controller
 			default :
 				debut=new Date(0);
 			}
-			ArrayList<ArrayList<HistoBoisson>> data= new ArrayList<ArrayList<HistoBoisson>>();
 			
-			ArrayList<String> tableauAffichage = vsm.obtenirBouttonAlcool();
+			ArrayList<ArrayList<HistoBoisson>> data = new ArrayList<ArrayList<HistoBoisson>>();
+			
+			
+			
 			for(String nom:tableauAffichage)
 			{
 				data.add(bdd.evolutionDesStocks(nom,debut,maintenant));
 			}
-			 g=new graphique(data,tableauAffichage);
+			if(vsm.isStat() && tableauAffichage.size()==1)
+			{
+			data = integrerModelisationStatistique( data, vsm, tableauAffichage) ;
+			tableauAffichage.add("Modèle");
+			}
+		
+			
+			g=new Graphique(data,tableauAffichage);
 		}
 		JFrame f = new JFrame();
 		f.setBounds(10,10,500,500);
@@ -473,7 +662,7 @@ public class Controller
 	public void etatDesStocks()
 	{
 		Date maintenant= new Date();
-		graphique g = new graphique(bdd.etatDesStocks(maintenant),maintenant);
+		Graphique g = new Graphique(bdd.etatDesStocks(maintenant),maintenant);
 		JFrame f = new JFrame();
 		f.setBounds(10,10,500,500);
 		f.add(g);

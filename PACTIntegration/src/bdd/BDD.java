@@ -591,4 +591,27 @@ public class BDD implements BDDInterface
 		}
 		return code;
 	}
+	@Override
+	public int volumeDateBoisson(Date date, String boisson) {
+		java.sql.Timestamp sqlTime=new java.sql.Timestamp(date.getTime()),derniereDate=new java.sql.Timestamp(0);
+		long codeBarre=this.codeBarreDeBoisson(boisson);
+		String nom;
+		try {
+			rs=st.executeQuery("SELECT Date FROM Stock WHERE Date <= '"+sqlTime+"'");
+			while(rs.next())
+			{
+				derniereDate=rs.getTimestamp(1).after(derniereDate)?rs.getTimestamp(1):derniereDate;
+
+			}
+			rs=st.executeQuery("SELECT Volume FROM Disponibilite WHERE Date='"+derniereDate+"' AND CodeBarre="+codeBarre);
+			if(!rs.next())
+				throw new Exception("Boisson introuvable");
+			return rs.getInt(1);
+		} catch (Exception e) {
+			
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+	}
 }

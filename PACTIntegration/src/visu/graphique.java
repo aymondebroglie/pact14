@@ -25,7 +25,7 @@ import bdd.DispoBoisson;
 import bdd.HistoBoisson;
 
 
-	public class graphique extends JPanel {
+	public class Graphique extends JPanel {
 
 		private static final long serialVersionUID = 1L;
 
@@ -51,7 +51,7 @@ import bdd.HistoBoisson;
 				Color.yellow, Color.pink, Color.darkGray, Color.orange};
 		
 
-		public graphique(String titre, String abscisse, String ordonnee, List<Float> valeurs, Color fond, List<String> listeSeries, List<String> listeCategory, boolean legende) {
+		public Graphique(String titre, String abscisse, String ordonnee, List<Float> valeurs, Color fond, List<String> listeSeries, List<String> listeCategory, boolean legende) {
 			super(new GridLayout(1,0));
 			this.titre=titre;
 			this.ordonnee=ordonnee;
@@ -64,7 +64,7 @@ import bdd.HistoBoisson;
 			initialiser();
 		}
 		
-		public graphique(ArrayList<ArrayList<HistoBoisson>> data,ArrayList<String> boissons) 
+		public Graphique(ArrayList<ArrayList<HistoBoisson>> data,ArrayList<String> boissons) 
 		{
 			super(new GridLayout(1,0));
 			this.titre="Evolution des stocks";
@@ -114,7 +114,7 @@ import bdd.HistoBoisson;
 			initialiser();
 		}
 		
-		public graphique(ArrayList<DispoBoisson> data,Date date ) 
+		public Graphique(ArrayList<DispoBoisson> data,Date date ) 
 		{
 			super(new GridLayout(1,0));
 			this.titre="Etat des stocks � la date "+date.toString();

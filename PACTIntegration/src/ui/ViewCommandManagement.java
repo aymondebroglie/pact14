@@ -4,8 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 public class ViewCommandManagement extends JPanel {
 	private ArrayList<BoissonCheckBox> tableauBouton = new ArrayList<BoissonCheckBox>();
@@ -43,6 +46,7 @@ public class ViewCommandManagement extends JPanel {
 		for(BoissonCheckBox boutton: tableauBouton){
 			this.add(boutton);
 		}
+				
 		JButton boutton = new JButton("Visualiser");
 		EcouteurAction ea = new EcouteurAction(this);
 		boutton.addActionListener(ea);
