@@ -10,7 +10,7 @@ import bdd.*;
 public class Window extends JFrame {
 	private static final long serialVersionUID = 1L;
 	String title = "OptiBar";
-	private int width = 400;
+	private int width = 500;
 	private int height = 300;
 	BDDInterface bdd = null;
 	private Controller controller ;
