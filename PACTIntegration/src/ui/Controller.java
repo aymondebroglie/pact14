@@ -236,11 +236,11 @@ public class Controller {
 				.showMessageDialog(
 						null,
 
-						"OptiBar a pour objectif de fournir Ã  un bar des outils novateurs et pratiques d'utilisation permettant d'en faciliter la gestion. \n"
-								+ "Il permettra au patron de gÃ©rer ses stocks et aussi de savoir quelles sont les habitudes de consommation de ses clients de faÃ§on claire et prÃ©cise. \n"
-								+ "Puisque la gestion des stocks est une dÃ©pense importante pour les bars, notre projet permettra au bar de minimiser ses stocks, sans jamais Ãªtre Ã  court. \n"
-								+ "Enfin, notre systÃ¨me fournit aussi une aide au barman en lui indiquant les quantitÃ©s qu'il a versÃ©es ce qui lui permet Ã  la fois de prÃ©parer de meilleures boissons \n "
-								+ "mais lui facilite Ã©galement la production de l'addition, gain de temps toujours utile Ã  l'heure de pointe."
+						"OptiBar a pour objectif de fournir à  un bar des outils novateurs et pratiques d'utilisation permettant d'en faciliter la gestion. \n"
+								+ "Il permettra au patron de gérer ses stocks et aussi de savoir quelles sont les habitudes de consommation de ses clients de façon claire et précise. \n"
+								+ "Puisque la gestion des stocks est une dépense importante pour les bars, notre projet permettra au bar de minimiser ses stocks, sans jamais être à court. \n"
+								+ "Enfin, notre système fournit aussi une aide au barman en lui indiquant les quantités qu'il a versées ce qui lui permet à la fois de préparer de meilleures boissons \n "
+								+ "mais lui facilite également la production de l'addition, gain de temps toujours utile à l'heure de pointe."
 
 						, "A propos d'OptiBar", JOptionPane.INFORMATION_MESSAGE);
 

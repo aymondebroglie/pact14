@@ -53,7 +53,6 @@ public class SerialTest implements SerialPortEventListener {
 		while (portEnum.hasMoreElements()) {
 			CommPortIdentifier currPortId = (CommPortIdentifier) portEnum.nextElement();
 			for (String portName : PORT_NAMES) {
-				System.out.println(portName);
 				if (currPortId.getName().equals(portName)) {
 					portId = currPortId;
 					break;
