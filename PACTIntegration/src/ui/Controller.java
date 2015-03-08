@@ -178,7 +178,7 @@ public class Controller {
 	public void previousView(JPanel actualview) {
 		if (stackpreviousview.empty()) {
 			JOptionPane.showMessageDialog(null,
-					"L'op√©ration demand√©e est impossible", "Attention",
+					"L'opÈration demandÈe est impossible", "Attention",
 					JOptionPane.WARNING_MESSAGE);
 		} else {
 			JPanel previousview = stackpreviousview.pop();
@@ -193,7 +193,7 @@ public class Controller {
 	public void nextView(JPanel actualview) {
 		if (stacknextview.empty()) {
 			JOptionPane.showMessageDialog(null,
-					"L'op√©ration demand√©e est impossible", "Attention",
+					"L'opÈration demand√©e est impossible", "Attention",
 					JOptionPane.WARNING_MESSAGE);
 		} else {
 			JPanel nextview = stacknextview.pop();
@@ -227,7 +227,7 @@ public class Controller {
 		System.out.println("WARNING : the method " + methodname
 				+ "hasn't been implemented yet !!!");
 		JOptionPane.showMessageDialog(null,
-				"L'op√©ration demand√©e n'est pas encore disonible.",
+				"L'opÈration demandÈe n'est pas encore disonible.",
 				"Attention", JOptionPane.WARNING_MESSAGE);
 	}
 
@@ -478,7 +478,7 @@ public class Controller {
 
 	public void bouteilleFinie() {
 		bdd.bouteilleFinie(1);
-		window.add(new JLabel("Changement enregistr√©"), BorderLayout.CENTER);
+		window.add(new JLabel("Changement enregistrÈ"), BorderLayout.CENTER);
 		window.validate();
 	}
 
@@ -487,7 +487,7 @@ public class Controller {
 		long code = Long.parseLong(codeBarre);
 		System.out.println(code);
 		bdd.ajouterBoissonParWeb(code);
-		pan.add(new JLabel("Boisson ajout√©e : " + codeBarre));
+		pan.add(new JLabel("Boisson ajoutÈe : " + codeBarre));
 		window.setContentPane(pan);
 		window.validate();
 	}
