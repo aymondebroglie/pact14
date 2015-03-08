@@ -20,7 +20,7 @@ public class SerialTest implements SerialPortEventListener {
 	private static final String PORT_NAMES[] = { 
 			"/dev/tty.usbserial-A9007UX1", // Mac OS X
                         "/dev/ttyACM0", // Raspberry Pi
-			"/dev/bluetooth/rfcomm0", // Linux
+			"/dev/rfcomm0", // Linux
 			"COM5", // Windows
 	};
 	/**
@@ -50,6 +50,7 @@ public class SerialTest implements SerialPortEventListener {
 		while (portEnum.hasMoreElements()) {
 			CommPortIdentifier currPortId = (CommPortIdentifier) portEnum.nextElement();
 			for (String portName : PORT_NAMES) {
+				System.out.println(portName);
 				if (currPortId.getName().equals(portName)) {
 					portId = currPortId;
 					break;
@@ -103,8 +104,9 @@ public class SerialTest implements SerialPortEventListener {
 		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 			try {
 				String inputLine=input.readLine();
-				int volume  = Integer.parseInt(inputLine);
-				bdd.ajouterConsommation(0, 0, volume);
+				System.out.println("input");
+				/*int volume  = Integer.parseInt(inputLine);
+				bdd.ajouterConsommation(0, 0, volume);*/
 			} catch (Exception e) {
 				System.err.println(e.toString());
 			}
