@@ -51,6 +51,17 @@ public class ViewBarmanHome extends JPanel {
 		JButton goulot = new JButton("Retirer goulot");
 		goulot.addActionListener(retirerGoulot);
 		this.add(goulot);
+		JButton associerGoulot = new JButton("Associer Goulot");
+		associerGoulot.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+			 view.ecranAssocierGoulot();
+				
+			}
+			
+		});
+		this.add(associerGoulot);
 
 
 	

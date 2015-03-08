@@ -520,4 +520,14 @@ public class Controller {
         window.setContentPane(vab);
         window.validate();
 	}
+	
+	public void ecranAssocierGoulot(){
+		ViewAssocierGoulot vag = new ViewAssocierGoulot(this);
+		window.setContentPane(vag);
+		window.validate();
+	}
+	
+	public void associerGoulot(String boisson){
+		System.out.println(boisson);
+	}
 }

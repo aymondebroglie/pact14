@@ -11,15 +11,18 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
-public class ViewDelivery extends JPanel {
+public class ViewAssocierGoulot extends JPanel {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 	private Controller controller;
-	private ArrayList<String> tableauAlcool;
-    private String alcoolSelectionne;
-	public ViewDelivery(final Controller controller) {
+	ArrayList<String> tableauAlcool;
+	String alcoolSelectionne;
+	
+	public ViewAssocierGoulot(Controller controller){
 		this.controller = controller;
 		tableauAlcool = controller.obtenirAlcools();;
 		JComboBox<String> menu = new JComboBox<String>();
@@ -37,34 +40,19 @@ public class ViewDelivery extends JPanel {
 			}
 			
 		});
-		this.add(new JLabel("Selectionnez l'alcool livré"));
+		this.add(new JLabel("Choisissez l'alcool"));
 		this.add(menu);
-		final JTextField nombreBouteille = new JTextField("0");
-		nombreBouteille.setPreferredSize(new Dimension(300,25));
-		this.add(new JLabel("Nombre de Bouteilles"));
-		this.add(nombreBouteille);
 		JButton ok = new JButton("OK");
 		ok.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				controller.livraison(alcoolSelectionne,Integer.parseInt(nombreBouteille.getText()));
-				
+				controller.associerGoulot(alcoolSelectionne)
+;				
 			}
 			
 		});
 		this.add(ok);
-		JButton ajout = new JButton("ajouter nouvelle bouteille");
-		ajout.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				controller.ecranAjoutBouteille();
-				
-			}
-			
-		});
-		this.add(ajout);
 	}
 
 }
