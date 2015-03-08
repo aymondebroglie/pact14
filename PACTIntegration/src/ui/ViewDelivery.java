@@ -19,7 +19,7 @@ public class ViewDelivery extends JPanel {
 	private Controller controller;
 	private ArrayList<String> tableauAlcool;
     private String alcoolSelectionne;
-	public ViewDelivery(Controller controller) {
+	public ViewDelivery(final Controller controller) {
 		this.controller = controller;
 		tableauAlcool = controller.obtenirAlcools();;
 		JComboBox<String> menu = new JComboBox<String>();
@@ -37,9 +37,9 @@ public class ViewDelivery extends JPanel {
 			}
 			
 		});
-		this.add(new JLabel("Selectionnez l'alcool livré"));
+		this.add(new JLabel("Selectionnez l'alcool livrï¿½"));
 		this.add(menu);
-		JTextField nombreBouteille = new JTextField("0");
+		final JTextField nombreBouteille = new JTextField("0");
 		nombreBouteille.setPreferredSize(new Dimension(300,25));
 		this.add(new JLabel("Nombre de Bouteilles"));
 		this.add(nombreBouteille);

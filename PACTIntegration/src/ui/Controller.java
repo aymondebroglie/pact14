@@ -178,7 +178,7 @@ public class Controller {
 	public void previousView(JPanel actualview) {
 		if (stackpreviousview.empty()) {
 			JOptionPane.showMessageDialog(null,
-					"L'opération demandée est impossible", "Attention",
+					"L'opï¿½ration demandï¿½e est impossible", "Attention",
 					JOptionPane.WARNING_MESSAGE);
 		} else {
 			JPanel previousview = stackpreviousview.pop();
@@ -193,7 +193,7 @@ public class Controller {
 	public void nextView(JPanel actualview) {
 		if (stacknextview.empty()) {
 			JOptionPane.showMessageDialog(null,
-					"L'opération demandÃ©e est impossible", "Attention",
+					"L'opï¿½ration demandÃ©e est impossible", "Attention",
 					JOptionPane.WARNING_MESSAGE);
 		} else {
 			JPanel nextview = stacknextview.pop();
@@ -227,7 +227,7 @@ public class Controller {
 		System.out.println("WARNING : the method " + methodname
 				+ "hasn't been implemented yet !!!");
 		JOptionPane.showMessageDialog(null,
-				"L'opération demandée n'est pas encore disonible.",
+				"L'opï¿½ration demandï¿½e n'est pas encore disonible.",
 				"Attention", JOptionPane.WARNING_MESSAGE);
 	}
 
@@ -478,7 +478,7 @@ public class Controller {
 
 	public void bouteilleFinie() {
 		bdd.bouteilleFinie(1);
-		window.add(new JLabel("Changement enregistré"), BorderLayout.CENTER);
+		window.add(new JLabel("Changement enregistrï¿½"), BorderLayout.CENTER);
 		window.validate();
 	}
 
@@ -487,7 +487,7 @@ public class Controller {
 		long code = Long.parseLong(codeBarre);
 		System.out.println(code);
 		bdd.ajouterBoissonParWeb(code);
-		pan.add(new JLabel("Boisson ajoutée : " + codeBarre));
+		pan.add(new JLabel("Boisson ajoutï¿½e : " + codeBarre));
 		window.setContentPane(pan);
 		window.validate();
 	}
@@ -506,10 +506,13 @@ public class Controller {
 	}
 
 	public void livraison(String boisson, int nombre) {
+		ArrayList<Livraison> livraisons = new ArrayList<Livraison>();
+		livraisons.add(new Livraison(bdd.codeBarreDeBoisson(boisson),nombre));
+		bdd.livraison(livraisons);
 		ViewDelivery vd = new ViewDelivery(this);
 		window.setContentPane(vd);
+		window.add(new JLabel("Livraison enregistrÃ©e"));
 		window.validate();
-		System.out.println(boisson + nombre);
 	}
 
 	public void ecranAjoutBouteille() {
