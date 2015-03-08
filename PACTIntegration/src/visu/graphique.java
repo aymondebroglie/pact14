@@ -64,10 +64,10 @@ import bdd.HistoBoisson;
 			initialiser();
 		}
 		
-		public graphique(ArrayList<ArrayList<HistoBoisson>> data,ArrayList<String> boissons) 
+		public graphique(ArrayList<ArrayList<HistoBoisson>> data,ArrayList<String> boissons, boolean stocks)//true si on visualise les stocks, false si on visualise les commandes 
 		{
 			super(new GridLayout(1,0));
-			this.titre="Evolution des stocks";
+			this.titre=stocks?"Evolution des stocks":"Consommation en cL dans les commandes";
 			this.ordonnee="Volume";
 			this.abscisse="Temps";
 			this.valeurs= new ArrayList<Float>();

@@ -48,7 +48,7 @@ public interface BDDInterface
 	ArrayList<DispoBoisson> etatDesStocks(java.util.Date date); 
 	ArrayList<HistoBoisson> evolutionDesStocks(String boisson, Date dateDebut, Date dateFin); //évolution des stocks pour une boisson donnée.
 	ArrayList<String> listeDesBoissons();
-	
+	ArrayList<HistoBoisson> boissonCommande(String boisson, Date dateDebut, Date dateFin);
 	
 	
 }
