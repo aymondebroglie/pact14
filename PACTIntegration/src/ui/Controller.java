@@ -236,11 +236,11 @@ public class Controller {
 				.showMessageDialog(
 						null,
 
-						"OptiBar a pour objectif de fournir à  un bar des outils novateurs et pratiques d'utilisation permettant d'en faciliter la gestion. \n"
-								+ "Il permettra au patron de gérer ses stocks et aussi de savoir quelles sont les habitudes de consommation de ses clients de façon claire et précise. \n"
-								+ "Puisque la gestion des stocks est une dépense importante pour les bars, notre projet permettra au bar de minimiser ses stocks, sans jamais être à court. \n"
-								+ "Enfin, notre système fournit aussi une aide au barman en lui indiquant les quantités qu'il a versées ce qui lui permet à la fois de préparer de meilleures boissons \n "
-								+ "mais lui facilite également la production de l'addition, gain de temps toujours utile à l'heure de pointe."
+						"OptiBar a pour objectif de fournir ï¿½ un bar des outils novateurs et pratiques d'utilisation permettant d'en faciliter la gestion. \n"
+								+ "Il permettra au patron de gï¿½rer ses stocks et aussi de savoir quelles sont les habitudes de consommation de ses clients de faï¿½on claire et prï¿½cise. \n"
+								+ "Puisque la gestion des stocks est une dï¿½pense importante pour les bars, notre projet permettra au bar de minimiser ses stocks, sans jamais ï¿½tre ï¿½court. \n"
+								+ "Enfin, notre systï¿½me fournit aussi une aide au barman en lui indiquant les quantitï¿½s qu'il a versï¿½es ce qui lui permet ï¿½la fois de prï¿½parer de meilleures boissons \n "
+								+ "mais lui facilite ï¿½galement la production de l'addition, gain de temps toujours utile ï¿½l'heure de pointe."
 
 						, "A propos d'OptiBar", JOptionPane.INFORMATION_MESSAGE);
 
@@ -528,6 +528,7 @@ public class Controller {
 	}
 	
 	public void associerGoulot(String boisson){
+		bdd.associerGoulot(1, bdd.codeBarreDeBoisson(boisson));
 		ViewBarmanHome vbh = new ViewBarmanHome(this);
 		window.setContentPane(vbh);
 		window.validate();

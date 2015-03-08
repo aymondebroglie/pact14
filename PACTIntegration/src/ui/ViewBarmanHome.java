@@ -38,7 +38,7 @@ public class ViewBarmanHome extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public ViewBarmanHome(Controller view) {
+	public ViewBarmanHome(final Controller view) {
 		this.view = view;
 		JButton note = new JButton("Imprimer Note");
 		ImprimerNote imprimerNote = new ImprimerNote();

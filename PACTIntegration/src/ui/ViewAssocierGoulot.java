@@ -22,7 +22,7 @@ public class ViewAssocierGoulot extends JPanel {
 	ArrayList<String> tableauAlcool;
 	String alcoolSelectionne;
 	
-	public ViewAssocierGoulot(Controller controller){
+	public ViewAssocierGoulot(final Controller controller){
 		this.controller = controller;
 		tableauAlcool = controller.obtenirAlcools();;
 		JComboBox<String> menu = new JComboBox<String>();
