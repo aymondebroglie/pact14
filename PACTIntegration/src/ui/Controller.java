@@ -528,6 +528,8 @@ public class Controller {
 	}
 	
 	public void associerGoulot(String boisson){
-		System.out.println(boisson);
+		ViewBarmanHome vbh = new ViewBarmanHome(this);
+		window.setContentPane(vbh);
+		window.validate();
 	}
 }
