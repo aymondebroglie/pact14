@@ -22,7 +22,7 @@ import javax.swing.JPanel;
 
 import stat.DataSet;
 import stat.DimensionException;
-import visu.Graphique;
+import visu.graphique;
 import websem.OpenFoodFacts;
 
 //Classe permettant de controller ce qui se passe quand on appuie sur un bouton, c'est elle qui
@@ -585,7 +585,7 @@ public class Controller
 			ArrayList<HistoBoisson> histo_modele = new ArrayList<HistoBoisson>() ;
 			for(int i = 0 ; i<length ; i++)
 			{
-				HistoBoisson histo = new HistoBoisson(liste_date.get(i), (int)((liste_date.get(i).getTime()-debut.getTime())*delta.get(0)+delta.get(1))) ;
+				HistoBoisson histo = new HistoBoisson(liste_date.get(i), (int)((liste_date.get(i).getTime()-debut.getTime())/tho*delta.get(0)+delta.get(1))) ;
 				histo_modele.add(histo) ;
 			}
 			
@@ -599,7 +599,7 @@ public class Controller
 				
 		long dayMilli=86400000L;
 		Date maintenant=new Date(),debut;
-		Graphique g=null;
+		graphique g=null;
 		ArrayList<String> tableauAffichage = vsm.obtenirBouttonAlcool();
 		if(duree!=null)
 		{
@@ -636,7 +636,7 @@ public class Controller
 			}
 		
 			
-			g=new Graphique(data,tableauAffichage);
+			g=new graphique(data,tableauAffichage);
 		}
 		JFrame f = new JFrame();
 		f.setBounds(10,10,500,500);
@@ -662,7 +662,7 @@ public class Controller
 	public void etatDesStocks()
 	{
 		Date maintenant= new Date();
-		Graphique g = new Graphique(bdd.etatDesStocks(maintenant),maintenant);
+		graphique g = new graphique(bdd.etatDesStocks(maintenant),maintenant);
 		JFrame f = new JFrame();
 		f.setBounds(10,10,500,500);
 		f.add(g);
