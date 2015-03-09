@@ -22,11 +22,7 @@ public class Optibar {
 			}
 		};
 		t.start();
-		bdd.associerGoulot(1, bdd.codeBarreDeBoisson("Rhum Blanc"));
-		/*bdd.setPrixParBoisson(3147690059004L, 1.157f);
-		bdd.ajouterConsommation(1, 1, 15);
-		bdd.associerGoulot(1, 3180290047897L);
-		bdd.ajouterConsommation(1, 1, 24);*/
+		bdd.setPrixParBoisson(5449000131805L, 0.07f);
 	}
 
 }
