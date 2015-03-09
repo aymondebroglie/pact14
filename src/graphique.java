@@ -105,7 +105,7 @@ import Interface.*;
 		
 			for(HistoBoisson temp:plusLongue)
 			{
-				categories.add(temp.getDate().toString());
+				categories.add(temp.getDate().toString().subSequence(4, 16).toString() + temp.getDate().toString().subSequence(23,28).toString());
 			}
 			
 			this.legende=true;
@@ -117,7 +117,7 @@ import Interface.*;
 		{
 			super(new GridLayout(1,0));
 			String dateString;
-			dateString=date.toString().subSequence(4, 16).toString();
+			dateString=date.toString().subSequence(4, 16).toString() + date.toString().subSequence(23,28).toString();
 			this.titre="Etat des stocks ˆ la date "+dateString;
 			this.ordonnee="Volume";
 			this.abscisse="Boissons";

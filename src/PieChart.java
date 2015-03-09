@@ -62,7 +62,7 @@ public PieChart(ArrayList<DispoBoisson> data, Date date) {
       }
  
     String dateString;
-	dateString=date.toString().subSequence(4, 16).toString();
+	dateString=date.toString().subSequence(4, 16).toString() + date.toString().subSequence(23,28).toString();;
     JFreeChart pieChart = ChartFactory.createPieChart("Etat des stocks le "+dateString, 
       pieDataset, true, true, true); 
     ChartPanel cPanel = new ChartPanel(pieChart); 
