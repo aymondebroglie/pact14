@@ -116,7 +116,9 @@ import Interface.*;
 		public graphique(ArrayList<DispoBoisson> data,Date date ) 
 		{
 			super(new GridLayout(1,0));
-			this.titre="Etat des stocks ˆ la date "+date.toString();
+			String dateString;
+			dateString=date.toString().subSequence(4, 16).toString();
+			this.titre="Etat des stocks ˆ la date "+dateString;
 			this.ordonnee="Volume";
 			this.abscisse="Boissons";
 			this.valeurs= new ArrayList<Float>();
