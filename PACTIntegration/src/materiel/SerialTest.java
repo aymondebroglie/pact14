@@ -20,7 +20,7 @@ public class SerialTest implements SerialPortEventListener {
 	private static final String PORT_NAMES[] = { 
 			"/dev/tty.usbserial-A9007UX1", // Mac OS X
                         "/dev/ttyACM0", // Raspberry Pi
-			"/dev/bluetooth/rfcomm0", // Linux
+			"/dev/rfcomm0", // Linux
 			"COM5", // Windows
 	};
 	/**
@@ -38,7 +38,10 @@ public class SerialTest implements SerialPortEventListener {
 	/** Default bits per second for COM port. */
 	private static final int DATA_RATE = 115200;
 	
-
+   public SerialTest(BDDInterface bdd){
+	   super();
+	  this.bdd = bdd;
+   }
 
 	public void initialize() {
                
@@ -104,7 +107,8 @@ public class SerialTest implements SerialPortEventListener {
 			try {
 				String inputLine=input.readLine();
 				int volume  = Integer.parseInt(inputLine);
-				bdd.ajouterConsommation(0, 0, volume);
+				bdd.ajouterConsommation(1, 1, volume);
+				System.out.println(volume);
 			} catch (Exception e) {
 				System.err.println(e.toString());
 			}

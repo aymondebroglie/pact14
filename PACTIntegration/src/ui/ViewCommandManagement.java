@@ -13,12 +13,7 @@ import javax.swing.JRadioButton;
 public class ViewCommandManagement extends JPanel {
 	private ArrayList<BoissonCheckBox> tableauBouton = new ArrayList<BoissonCheckBox>();
 	private Controller controller;
-	ArrayList<String> tableauAlcool = /*controller.obtenirAlcools();*/ 
-			new ArrayList<String>() {/**
-				 */
-				private static final long serialVersionUID = 1L;
-
-			{ add("Whisky"); add("Vodka"); add("Alcool"); }};
+	ArrayList<String> tableauAlcool ;
 	private static final long serialVersionUID = 1L;
 	
 	public class EcouteurAction implements ActionListener {
@@ -38,7 +33,7 @@ public class ViewCommandManagement extends JPanel {
 	public ViewCommandManagement(Controller controller) {
 		this.controller = controller;
 		this.controller.setActualView(this) ;
-		
+		this.tableauAlcool=controller.obtenirAlcools();
 		for (String boisson : tableauAlcool) {
 			tableauBouton.add(new BoissonCheckBox(boisson));
 

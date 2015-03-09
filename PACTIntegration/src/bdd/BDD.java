@@ -592,7 +592,9 @@ public class BDD implements BDDInterface
 		return code;
 	}
 	@Override
-	public int volumeDateBoisson(Date date, String boisson) {
+
+	public int volumeDateBoisson(Date date, String boisson) 
+	{
 		java.sql.Timestamp sqlTime=new java.sql.Timestamp(date.getTime()),derniereDate=new java.sql.Timestamp(0);
 		long codeBarre=this.codeBarreDeBoisson(boisson);
 		String nom;
@@ -613,5 +615,36 @@ public class BDD implements BDDInterface
 			e.printStackTrace();
 			return 0;
 		}
+	}
+
+	public ArrayList<HistoBoisson> boissonCommande(String boisson,
+			Date dateDebut, Date dateFin) {
+		long codeBarre=this.codeBarreDeBoisson(boisson);
+		Timestamp debut=new Timestamp(dateDebut.getTime()), fin = new Timestamp(dateFin.getTime());
+		ArrayList<HistoBoisson> result=new ArrayList<HistoBoisson>();
+		ArrayList<Integer> cPKs = new ArrayList<Integer>();
+		ArrayList<Date> dates = new ArrayList<Date>();
+		try {
+			rs=st.executeQuery("SELECT CPK,Date FROM Commande WHERE Date BETWEEN '"+ debut+"' AND '"+fin+"'");
+			while(rs.next())
+			{
+				cPKs.add(rs.getInt(1));
+				dates.add(new Date(rs.getTimestamp(2).getTime()));
+			}
+			for(int i=0; i<cPKs.size();i++)
+			{
+				rs=st.executeQuery("SELECT Volume FROM Composition WHERE CPK="+cPKs.get(i)+" AND CodeBarre="+codeBarre);
+				if(rs.next())
+						result.add(new HistoBoisson(dates.get(i),rs.getInt(1)));
+			}
+			return result;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// TODO Auto-generated method stub
+		return null;
+
 	}
 }

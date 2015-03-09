@@ -38,7 +38,7 @@ public class ViewBarmanHome extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public ViewBarmanHome(Controller view) {
+	public ViewBarmanHome(final Controller view) {
 		this.view = view;
 		JButton note = new JButton("Imprimer Note");
 		ImprimerNote imprimerNote = new ImprimerNote();
@@ -51,6 +51,17 @@ public class ViewBarmanHome extends JPanel {
 		JButton goulot = new JButton("Retirer goulot");
 		goulot.addActionListener(retirerGoulot);
 		this.add(goulot);
+		JButton associerGoulot = new JButton("Associer Goulot");
+		associerGoulot.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+			 view.ecranAssocierGoulot();
+				
+			}
+			
+		});
+		this.add(associerGoulot);
 
 
 	
