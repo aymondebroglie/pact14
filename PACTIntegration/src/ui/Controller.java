@@ -785,4 +785,8 @@ public class Controller
 		window.setContentPane(vbh);
 		window.validate();
 	}
+	
+	public void ajoutBouteilleMain(String nom,String marque,int degre,int prix,int volume ){
+		
+	}
 }
