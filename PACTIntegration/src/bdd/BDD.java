@@ -641,10 +641,9 @@ public class BDD implements BDDInterface
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
 		
 		// TODO Auto-generated method stub
-		return null;
-
 	}
 }

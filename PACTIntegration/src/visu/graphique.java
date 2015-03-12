@@ -87,9 +87,7 @@ import bdd.HistoBoisson;
 			{
 				for(j=0; j<data.size(); j++)
 				{
-					if(plusLongue.get(i).getDate().before(data.get(j).get(compteurs[j]).getDate()))
-						valeurs.add(0f);
-					else if (compteurs[j]== data.get(j).size())
+					if(data.get(j).size()==compteurs[j]||plusLongue.get(i).getDate().before(data.get(j).get(compteurs[j]).getDate()))
 						valeurs.add(0f);
 					else
 					{
