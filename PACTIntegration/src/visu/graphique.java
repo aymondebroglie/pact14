@@ -104,7 +104,7 @@ import bdd.HistoBoisson;
 		
 			for(HistoBoisson temp:plusLongue)
 			{
-				categories.add(temp.getDate().toString());
+				categories.add(temp.getDate().toString().subSequence(4, 16).toString() + temp.getDate().toString().subSequence(23,28).toString());
 			}
 			
 			this.legende=true;
@@ -115,7 +115,9 @@ import bdd.HistoBoisson;
 		public graphique(ArrayList<DispoBoisson> data,Date date ) 
 		{
 			super(new GridLayout(1,0));
-			this.titre="Etat des stocks � la date "+date.toString();
+			String dateString;
+			dateString=date.toString().subSequence(4, 16).toString() + date.toString().subSequence(23,28).toString();
+			this.titre="Etat des stocks � la date "+dateString;
 			this.ordonnee="Volume";
 			this.abscisse="Boissons";
 			this.valeurs= new ArrayList<Float>();

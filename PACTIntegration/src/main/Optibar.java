@@ -22,7 +22,6 @@ public class Optibar {
 			}
 		};
 		t.start();
-		bdd.setPrixParBoisson(5449000131805L, 0.07f);
 	}
 
 }
