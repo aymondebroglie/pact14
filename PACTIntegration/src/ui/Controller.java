@@ -137,9 +137,9 @@ public class Controller
 
 				this.printMDP(cs1);
 				JOptionPane.showMessageDialog(null,
-						"Mot de passe changÃ© avec succÃ¨s !", "Information",
+						"Mot de passe changé avec succès !", "Information",
 						JOptionPane.INFORMATION_MESSAGE);
-				panneau.add(new JLabel("Mot de Passe changÃ©"));
+				panneau.add(new JLabel("Mot de Passe changé"));
 				window.setContentPane(panneau);
 				window.validate();
 			} else 
@@ -182,7 +182,7 @@ public class Controller
 	{
 		// System.out.println("before :" + actualview) ;
 		this.actualview = actualview;
-		System.out.println("actual :" + actualview);
+		//System.out.println("actual :" + actualview);
 	}
 
 	public void clearStacks() 
@@ -191,13 +191,12 @@ public class Controller
 		{
 			stackpreviousview.pop();
 		}
-		System.out.println("is stackpreviousview empty ?"
-				+ stackpreviousview.empty());
-		while (!stacknextview.empty()) 
-		{
+		//System.out.println("is stackpreviousview empty ?"
+				//+ stackpreviousview.empty());
+		while (!stacknextview.empty()) {
 			stacknextview.pop();
 		}
-		System.out.println("is stacknextview empty ?" + stacknextview.empty());
+		//System.out.println("is stacknextview empty ?" + stacknextview.empty());
 		// this.setActualView(null);
 	}
 
@@ -217,7 +216,7 @@ public class Controller
 		if (stackpreviousview.empty()) 
 		{
 			JOptionPane.showMessageDialog(null,
-					"L'opï¿½ration demandï¿½e est impossible", "Attention",
+					"L'opération demandée est impossible", "Attention",
 					JOptionPane.WARNING_MESSAGE);
 		} 
 		else 
@@ -236,7 +235,7 @@ public class Controller
 		if (stacknextview.empty()) 
 		{
 			JOptionPane.showMessageDialog(null,
-					"L'opï¿½ration demandÃ©e est impossible", "Attention",
+					"L'opération demandÃ©e est impossible", "Attention",
 					JOptionPane.WARNING_MESSAGE);
 		} else 
 		{
@@ -272,7 +271,7 @@ public class Controller
 		System.out.println("WARNING : the method " + methodname
 				+ "hasn't been implemented yet !!!");
 		JOptionPane.showMessageDialog(null,
-				"L'opï¿½ration demandï¿½e n'est pas encore disonible.",
+				"L'opération demandée n'est pas encore disonible.",
 				"Attention", JOptionPane.WARNING_MESSAGE);
 	}
 
@@ -282,11 +281,11 @@ public class Controller
 				.showMessageDialog(
 						null,
 
-						"OptiBar a pour objectif de fournir ï¿½ un bar des outils novateurs et pratiques d'utilisation permettant d'en faciliter la gestion. \n"
-								+ "Il permettra au patron de gï¿½rer ses stocks et aussi de savoir quelles sont les habitudes de consommation de ses clients de faï¿½on claire et prï¿½cise. \n"
-								+ "Puisque la gestion des stocks est une dï¿½pense importante pour les bars, notre projet permettra au bar de minimiser ses stocks, sans jamais ï¿½tre ï¿½court. \n"
-								+ "Enfin, notre systï¿½me fournit aussi une aide au barman en lui indiquant les quantitï¿½s qu'il a versï¿½es ce qui lui permet ï¿½la fois de prï¿½parer de meilleures boissons \n "
-								+ "mais lui facilite ï¿½galement la production de l'addition, gain de temps toujours utile ï¿½l'heure de pointe."
+						"OptiBar a pour objectif de fournir à un bar des outils novateurs et pratiques d'utilisation permettant d'en faciliter la gestion. \n"
+								+ "Il permettra au patron de gérer ses stocks et aussi de savoir quelles sont les habitudes de consommation de ses clients de façon claire et précise. \n"
+								+ "Puisque la gestion des stocks est une dépense importante pour les bars, notre projet permettra au bar de minimiser ses stocks, sans jamais être à court. \n"
+								+ "Enfin, notre système fournit aussi une aide au barman en lui indiquant les quantités qu'il a versées ce qui lui permet à la fois de préparer de meilleures boissons \n "
+								+ "mais lui facilite également la production de l'addition, gain de temps toujours utile à l'heure de pointe."
 
 						, "A propos d'OptiBar", JOptionPane.INFORMATION_MESSAGE);
 
@@ -660,7 +659,7 @@ public class Controller
 			if(vsm.isStat() && tableauAffichage.size()==1)
 			{
 			data = integrerModelisationStatistique( data, vsm, tableauAffichage) ;
-			tableauAffichage.add("Modï¿½le");
+			ArrayList<String> tableauAffichage = vsm.obtenirBouttonAlcool();
 			}
 		
 			
@@ -740,7 +739,7 @@ public class Controller
 		long code = Long.parseLong(codeBarre);
 		System.out.println(code);
 		bdd.ajouterBoissonParWeb(code);
-		pan.add(new JLabel("Boisson ajoutï¿½e : " + codeBarre));
+		pan.add(new JLabel("Boisson ajoutée : " + codeBarre));
 		window.setContentPane(pan);
 		window.validate();
 	}
@@ -754,7 +753,7 @@ public class Controller
 	public void ajoutBarman(String nom, String prenom, int age) {
 		int rFID = nom.hashCode();
 		bdd.ajouterBarman(rFID, nom, prenom, age, new Date());
-		window.add(new JLabel("Barman enregistrÃ©"), BorderLayout.CENTER);
+		window.add(new JLabel("Barman enregistré"), BorderLayout.CENTER);
 		window.validate();
 	}
 
@@ -764,7 +763,7 @@ public class Controller
 		bdd.livraison(livraisons);
 		ViewDelivery vd = new ViewDelivery(this);
 		window.setContentPane(vd);
-		window.add(new JLabel("Livraison enregistrÃ©e"));
+		window.add(new JLabel("Livraison enregistrée"));
 		window.validate();
 	}
 

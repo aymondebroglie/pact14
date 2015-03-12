@@ -32,7 +32,7 @@ public class DetailDeCommand
 	}
 	public String toString()
 	{
-		return "Boisson: "+boisson+"\t Volume: "+volume+"cL\t Prix: "+prix+"â‚¬\n";
+		return "Boisson: "+boisson+"\t Volume: "+volume+"cL\t Prix: "+prix+"€\n";
 	}
 
 }
