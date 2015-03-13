@@ -385,7 +385,7 @@ public class Controller
 		{
 			pan.add(new JLabel("Vous pouvez retirer le goulot " + goulot));
 			bdd.associerGoulot(goulot,
-					bdd.codeBarreDeBoisson(tableauAffichage.get(0)));
+			bdd.codeBarreDeBoisson(tableauAffichage.get(0)));
 		}
 		window.setContentPane(pan);
 		this.setActualView(pan);
@@ -785,7 +785,12 @@ public class Controller
 		window.validate();
 	}
 	
-	public void ajoutBouteilleMain(String nom,String marque,int degre,int prix,int volume ){
+	public void ajoutBouteilleMain(Long codeBarre,String nom,String marque,float degre,int volume ){
+		JPanel pan = new JPanel();
+		bdd.ajouterBoisson(codeBarre, nom, marque, volume, degre);
+		pan.add(new JLabel("Boisson ajout�e : " + codeBarre));
+		window.setContentPane(pan);
+		window.validate();
 		
 	}
 }
