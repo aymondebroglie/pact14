@@ -456,168 +456,31 @@ public class Controller
 	
 	/****************************************************************************************************/
 	
-	/**
-	private static ArrayList<Date> montee(ArrayList<Date> liste_date, int p)
+	public ArrayList<ArrayList<HistoBoisson>> integrerModelisationStatistique(ArrayList<ArrayList<HistoBoisson>> data) throws DimensionException
 	{
-		ArrayList<Date> result = liste_date ;
-		
-		int i = p ;
-		Date clef = result.get(p) ;
-		while( i >= 2 && clef.after(result.get(i/2)))
-		{
-			result.set(i, result.get(i/2));
-			i = i/2 ;
-		}
-		result.set(i, clef) ;
-		
-		return result ;
-
-	}
-	
-	private static ArrayList<Date> descente(ArrayList<Date> liste_date, int q, int p)
-	{
-		ArrayList<Date> result = liste_date ;
-		
-		boolean found = false ;
-		int indice_grand ;
-		int i = q ;
-		Date clef = result.get(q) ;
-		
-		
-		while(!found && 2*i <= p)
-		{
-			if(2*i == p)
-			{
-				indice_grand = p ;
-			}
-			else
-			{
-				if( T[2i]>= T[2i+1] )
-				{
-					indice_grand = 2*i ;
-				}
-				else
-				{
-					indice_grand = 2*p+1 ;
-				}
-			}
-			if(clef<T[indice_grand])
-			{
-				result.set(i, result.get(indice_grand)) ;
-				i = indice_grand ;
-			}
-			else
-			{
-				found = true ;
-			}
-		}
-		
-		result.set(i, clef) ;
-		
-		return result ;
-	}
-	
-	private static ArrayList<Date> swap(ArrayList<Date> liste_date , int i , int j)
-	{
-		ArrayList<Date> result = liste_date ;
-		result.set(i, liste_date.get(j)) ;
-		result.set(j, liste_date.get(i)) ;
-		
-		return result ;
-		
-	}
-	
-	
-	
-	private static ArrayList<Date> heapSortDates(ArrayList<Date> liste_date)
-	{
-		int p ;
-		int n = liste_date.size() ;
-		ArrayList<Date> result = liste_date ;
-		
-		
-		for(p = 2 ; p<=n ; p++ )
-		{
-			result = Controller.montee(result, p) ;
-		}
-		for(p = n ; p>=2 ; p--)
-		{
-			Controller.swap(result, 1,p) ;
-			Controller.descente(liste_date, 1, p-1) ;
-		}
-		
-		return result ;
-	}*/
-	// ****************************************************************************************
-	/**
-	private static long getTho(ArrayList<Date> liste_date)
-	{
-		int length = liste_date.size() ;
-		ArrayList<Long> liste_delta = new ArrayList<Long>() ;
-		for(int i = 0 ; i<length ; i++)
-		{
-			liste_delta.add(liste_date.get(i).getTime()) ;
-		}
-		
-		for(int i = 0 ; i<length ; i++)
-		{
-			liste_delta = liste_data - 
-		}
-		
-		// Controller.heapSortDates(liste_date) ;
-		 
-		
-		int tho ;
-		
-		
-		
-		return tho ;
-		
-	} 
-	 * @throws DimensionException */
-
-	
-	public ArrayList<ArrayList<HistoBoisson>> integrerModelisationStatistique(ArrayList<ArrayList<HistoBoisson>> data, ViewStocksManagement vsm, ArrayList<String> tableauAffichage) throws DimensionException
-	{
-			String nom_boisson = tableauAffichage.get(0);
-			
 			ArrayList<HistoBoisson> liste_histo=data.get(0);				
-			ArrayList<Date> liste_date = new ArrayList<Date>() ;
 			int length = liste_histo.size();
 			
-			
-			
-			for(long i = 0 ; i<length ; i++)
+			ArrayList<Date> liste_date = new ArrayList<Date>() ;
+			for(int i = 0 ; i<length ; i++)
 			{
-				liste_date.add(liste_histo.get( (int) i).getDate()) ;
+				liste_date.add(liste_histo.get(i).getDate()) ;
 			}
 			
-			Date debut = liste_date.get(0);
-			Date fin = liste_date.get(length-1) ;
-			
-			long n = 60000L ;
-			long tho = (fin.getTime()-debut.getTime())/n ;
-			
-					
-			DataSet dataset = new DataSet() ;
-			for(long i = 0 ; i<n ; i++)
+			ArrayList<Integer> liste_volume = new ArrayList<Integer>() ;
+			for(int i = 0 ; i<length ; i++)
 			{
-				Date date = new Date(debut.getTime() + i*tho) ;
-				double volume = (double) bdd.volumeDateBoisson(date, nom_boisson) ;
-				dataset.add(volume) ;					
-			}
-			for(int j = 0 ; j<10 ; j++)
-			{
-				System.out.println(dataset.get(j));
+				liste_volume.add(liste_histo.get(i).getVolume()) ;
 			}
 			
+			DataSet dataset = DataSet.volumeToDataSet(liste_volume) ;
 			
-				ArrayList<Double> delta = dataset.moindrecarre() ;
+			ArrayList<Double> delta = dataset.moindrecarre(liste_date) ;
 			
 			ArrayList<HistoBoisson> histo_modele = new ArrayList<HistoBoisson>() ;
 			for(int i = 0 ; i<length ; i++)
 			{
-				HistoBoisson histo = new HistoBoisson(liste_date.get(i), (int)((liste_date.get(i).getTime()-debut.getTime())/tho*delta.get(0)+delta.get(1))) ;
+				HistoBoisson histo = new HistoBoisson(liste_date.get(i), (int) (liste_date.get(i).getTime()*delta.get(0) + delta.get(1)) ) ;
 				histo_modele.add(histo) ;
 			}
 			
@@ -653,18 +516,12 @@ public class Controller
 			}
 
 			
-			ArrayList<ArrayList<HistoBoisson>> data = new ArrayList<ArrayList<HistoBoisson>>();
-			
-
+			ArrayList<ArrayList<HistoBoisson>> data= new ArrayList<ArrayList<HistoBoisson>>();
 			for(String nom:tableauAffichage)
 			{
-				data.add(bdd.boissonCommande(nom,debut,maintenant));
+				data.add(bdd.evolutionDesStocks(nom,debut,maintenant));
 			}
-
-			if(vsm.isStat() && tableauAffichage.size()==1)
-			{
-			data = integrerModelisationStatistique( data, vsm, tableauAffichage) ;
-			}
+			
 		
 			
 			g=new graphique(data,tableauAffichage, true);
@@ -674,6 +531,88 @@ public class Controller
 		f.setBounds(10,10,500,500);
 		f.add(g);
 		f.setVisible(true);
+	}
+	
+	public void visualiserStat(ViewStocksManagement vsm) throws DimensionException 
+	{
+		long dayMilli=86400000L;
+		Date maintenant=new Date(),debut;
+		graphique g=null;
+		ArrayList<String> tableauAffichage = vsm.obtenirBouttonAlcool();
+		if(duree!=null)
+		{
+			switch(duree)
+			{
+			case "soiree":
+				debut=new Date(maintenant.getTime()-dayMilli);
+				break;
+			case "semaine":
+				debut=new Date(maintenant.getTime()-dayMilli*7);
+				break;
+			case "mois":
+				debut=new Date(maintenant.getTime()-dayMilli*30);
+				break;
+			case "annee":
+				debut=new Date(maintenant.getTime()-dayMilli*365);
+				break;
+			default :
+				debut=new Date(0);
+			}
+
+			
+			ArrayList<ArrayList<HistoBoisson>> data = new ArrayList<ArrayList<HistoBoisson>>();
+			ArrayList<ArrayList<HistoBoisson>> data_histo = new ArrayList<ArrayList<HistoBoisson>>() ;
+			
+		if(tableauAffichage.size()==1)
+		{
+			data.add(bdd.evolutionDesStocks(tableauAffichage.get(0),debut,maintenant));
+			//data.add(bdd.boissonCommande(tableauAffichage.get(0),debut,maintenant));
+			
+			ArrayList<HistoBoisson> liste_histo=data.get(0);				
+			int length = liste_histo.size();
+			
+			ArrayList<Date> liste_date = new ArrayList<Date>() ;
+			for(int i = 0 ; i<length ; i++)
+			{
+				liste_date.add(liste_histo.get(i).getDate()) ;
+			}
+			
+			ArrayList<Integer> liste_volume = new ArrayList<Integer>() ;
+			for(int i = 0 ; i<length ; i++)
+			{
+
+
+
+				liste_volume.add(liste_histo.get(i).getVolume()) ;
+
+			}
+			
+			DataSet dataset = DataSet.volumeToDataSet(liste_volume) ;
+			
+			ArrayList<Double> delta = dataset.moindrecarre(liste_date) ;
+			
+			ArrayList<HistoBoisson> histo_modele = new ArrayList<HistoBoisson>() ;
+			for(int i = 0 ; i<length ; i++)
+			{
+				HistoBoisson histo = new HistoBoisson(liste_date.get(i), (int) (liste_date.get(i).getTime()*delta.get(0) + delta.get(1)) ) ;
+				histo_modele.add(histo) ;
+			}
+			
+			data_histo.add(histo_modele) ;
+			
+		
+		//tableauAffichage.add("Mod�le");
+	}
+		
+			
+			g=new graphique(data_histo,tableauAffichage, true);
+		}
+
+		JFrame f = new JFrame();
+		f.setBounds(10,10,500,500);
+		f.add(g);
+		f.setVisible(true);
+		
 	}
 	
 	public void visualiserCommandes(ViewCommandManagement vcm) {
@@ -807,6 +746,7 @@ public class Controller
 		window.setContentPane(vbh);
 		window.validate();
 	}
+
 	
 	public void ajoutBouteilleMain(Long codeBarre,String nom,String marque,float degre,int volume ){
 		JPanel pan = new JPanel();
@@ -816,4 +756,5 @@ public class Controller
 		window.validate();
 		
 	}
+
 }

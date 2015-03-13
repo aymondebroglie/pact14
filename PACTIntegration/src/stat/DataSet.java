@@ -2,6 +2,7 @@ package stat;
 
 
 import java.util.ArrayList ;
+import java.util.Date;
 import java.lang.Math ;
 
 
@@ -93,8 +94,38 @@ public class DataSet extends ArrayList<Double> implements DataSetInterface
 		return(Math.sqrt(normcarre)) ;
 	}
 		
-	/**************************************************************************************/
+	/**
+	 * @param liste_date ************************************************************************************/
 	// methode de construction de vecteurs particuliers ones, stairs, salle, barman, commandes ...
+	
+	public static DataSet dateToDataSet(ArrayList<Date> liste_date)
+	{
+		int length = liste_date.size() ; 
+		DataSet dataset = new DataSet() ;
+		
+		for(int i = 0 ; i < length ; i++)
+		{
+			double converted_data = (double) liste_date.get(i).getTime();
+			dataset.add(converted_data) ;
+		}
+		
+		return dataset ;
+		
+	}
+	
+	public static DataSet volumeToDataSet(ArrayList<Integer> liste_volume)
+	{
+		int length = liste_volume.size() ;
+		DataSet dataset = new DataSet() ;
+		
+		for(int i = 0 ; i < length ; i++)
+		{
+			double converted_data = (double) liste_volume.get(i) ;
+			dataset.add(converted_data) ;
+		}
+		
+		return dataset ;
+	}
 	
 	public static DataSet ones(int length)
 	{
@@ -124,13 +155,13 @@ public class DataSet extends ArrayList<Double> implements DataSetInterface
 	{
 		BarModele barModele = new BarModele() ;
 		
-		// Etude sur un cr�neau de 10h (entre 19h00 et 5h00), soit 600 minutes. (cf def. Modele)
+		// Etude sur un creneau de 10h (entre 19h00 et 5h00), soit 600 minutes. (cf def. Modele)
 		int t = barModele.getTime() ;
 
-		// Capacit� du bar � accueillir ses clients. (en th�orie un entier, en pratique un r�el)
+		// Capacite du bar a accueillir ses clients. (en theorie un entier, en pratique un reel)
 		double capacite = barModele.getCapaciteSalle() ;
 
-		// On discr�tise l'ensemble.
+		// On discretise l'ensemble.
 		DataSet l_IN = new DataSet() ;
 
 		for( int k = 0 ; k < t ; k++)
@@ -156,8 +187,8 @@ public class DataSet extends ArrayList<Double> implements DataSetInterface
 	     * Le nombre X[k] de personnes dans le bar � un instant k vaut ce qu'il y avait
 		 * au temps (k-1) plus ce qui rentre ( poissrnd(l_IN(k-1)) ) ce qui sort (
 		 * poissrnd(l_OUT(k-1)) ). L'utilisation du max est pour forcer la
-		 * positivit� du r�sultat sans passer par une valeur absolue qui inverserait
-		 * le r�le de lambdaIN et lambdaOUT.
+		 * positivite du resultat sans passer par une valeur absolue qui inverserait
+		 * le role de lambdaIN et lambdaOUT.
 		 */
 		    
 		for(int k=1 ; k<t ; k++)
@@ -234,20 +265,26 @@ public class DataSet extends ArrayList<Double> implements DataSetInterface
 	/**************************************************************************************/
 	// methode moindrecarre
 	
-	public ArrayList<Double> moindrecarre() throws DimensionException
+	public ArrayList<Double> moindrecarre(ArrayList<Date> liste_date) throws DimensionException
 	{
 		ArrayList<Double> Y = new ArrayList<Double>(2) ;
 		
 		int length = this.size() ;
 				
-		DataSet A = DataSet.stairs(length) ; 
+		DataSet A = DataSet.dateToDataSet(liste_date) ; 
+		
+		if(length != A.size())
+		{
+			throw new DimensionException() ;
+		}
+		
 		DataSet B = DataSet.ones(length) ;
 		double nB = B.norm() ;
 		
 		/*
 		 * L'id�e est de trouver des coefficients a et b pour minimiser Sum(|X(t)-(at + b)|^2)
-		 * Cela revient donc � trouver la projection orthogonale de [X(0) X(1) ...
-		 * X(t-1)] sur le plan engendr� par A et B (cf. ci-dessus)
+		 * Cela revient donc a trouver la projection orthogonale de [X(0) X(1) ...
+		 * X(t-1)] sur le plan engendre par A et B (cf. ci-dessus)
 		 *
 		 * Un petit coup de Gram-Schmidt :
 		 */
@@ -259,14 +296,14 @@ public class DataSet extends ArrayList<Double> implements DataSetInterface
 		double nA0 = A0.norm() ;
 		DataSet A1 = A0.smultiply(1/nA0) ;
 		
-		// (A1,B1) est une base orthonorm�e du plan engendr� par (A,B). 
+		// (A1,B1) est une base orthonormee du plan engendre par (A,B). 
 		
 		double a1 = this.dot(A1) ;
 		double b1 = this.dot(B1) ;
 		
 		/*
-		 * Y= [a1 b1] est exprim� dans la base (A1,B1) i.e Y = a1.A1 + b1.B1
-		 * Ne reste plus qu'� retourner les coefficients recherch�s :
+		 * Y= [a1 b1] est exprime dans la base (A1,B1) i.e Y = a1.A1 + b1.B1
+		 * Ne reste plus qu'a retourner les coefficients recherches :
 		 */
 		
 		Y.add(a1/nA0) ;
@@ -274,4 +311,5 @@ public class DataSet extends ArrayList<Double> implements DataSetInterface
 		
 		return Y ;
 	}
+
 }

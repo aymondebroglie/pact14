@@ -1,6 +1,7 @@
 package stat;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 
 
@@ -25,7 +26,7 @@ public interface DataSetInterface
 	/**************************************************************************************/
 	// methode moindrecarre
 	
-	public ArrayList<Double> moindrecarre() throws DimensionException ;
+	public ArrayList<Double> moindrecarre(ArrayList<Date> liste_date) throws DimensionException ;
 	
 	
 	
