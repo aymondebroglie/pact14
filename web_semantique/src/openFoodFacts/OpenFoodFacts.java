@@ -15,10 +15,12 @@ import BDD.BDDInterface;
 
 
 public class OpenFoodFacts implements OFFInterface
-{
+{   
+	public static int Volume0;
 	private BDDInterface bdd ;
 	private final static HttpAuthenticator authenticator = new SimpleAuthenticator("off", "off".toCharArray());	
-	private final static String ENDPOINT = "http://opendata1.opendata.u-psud.fr:8890/sparql-auth/" ;
+	private final
+	static String ENDPOINT = "http://opendata1.opendata.u-psud.fr:8890/sparql-auth/" ;
 
 	
 	public OpenFoodFacts(BDDInterface bdd) 
@@ -39,7 +41,7 @@ public class OpenFoodFacts implements OFFInterface
 		+ 			"?s food:name ?name."
 		+ 			"?s food:code '" + codebarre + "'."
 		+ 			"?s food:code ?codebarre."
-		+ 			"?s food:alcoholPer100g ?degree."
+		+ 			"OPTIONAL{?s food:alcoholPer100g ?degree}."
 		+ 		"}"
 		+ 	"}" ;
 
@@ -73,9 +75,10 @@ public class OpenFoodFacts implements OFFInterface
 	}
 	
 	// renvoie (si possible) le volume de la bouteille 
-	public int getVolume(String name) throws VolumeException
+	public int getVolume(String name) //throws VolumeException
 	{
-		// on v�rifie la pr�sence d'un volume par la pr�sence de " cl " (volumes donn�s en centilitres)
+		System.out.println(name);
+		/*// on v�rifie la pr�sence d'un volume par la pr�sence de " cl " (volumes donn�s en centilitres)
 		if(!name.contains(" cl "))
 		{
 			throw new VolumeException() ;
@@ -100,7 +103,30 @@ public class OpenFoodFacts implements OFFInterface
 		String svolume = name.subSequence(i_debut, i_fin).toString() ;
 		
 		// on retourne cette portion convertie en int		
-		return Integer.parseInt(svolume) ;	
+		return Integer.parseInt(svolume) ;*/
+		
+		String[] minus=name.split("[0123456789]+[ ]*(cl|cL|L|litre|Litre|litres|Litres)");
+		for(int i=0; i<minus.length;i++)
+		{
+			name=name.replaceAll(minus[i], "");
+		}
+		name=name.replaceAll("(cl|cL|L|litre|Litre|litres|Litres)", "");
+		
+		name=name.replaceAll(" ","");
+		if(!name.matches("[0123456789]+"))
+		{
+//			try {
+//				throw new VolumeException();
+//			} catch (VolumeException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//				return -1;
+//			}
+		Volume0=0;
+		return 0;	
+		}
+		return Integer.parseInt(name);
+			
 	}
 	
 	// renvoie le codebarre de la boisson
@@ -113,11 +139,12 @@ public class OpenFoodFacts implements OFFInterface
 	}
 	
 	// renvoie le degr� d'alcool de la boisson
-	public double getDegree(List<QuerySolution> solutionlist)
+	public float getDegree(List<QuerySolution> solutionlist)
 	{
 		QuerySolution qs = solutionlist.get(0) ;
+		if(!qs.contains("degree")) return 0;
 		
-		double degree = qs.getLiteral("degree").getDouble();
+		float degree = qs.getLiteral("degree").getFloat();
 		return degree ;
 	}
 	
@@ -129,14 +156,9 @@ public class OpenFoodFacts implements OFFInterface
 		long code = this.getCode(solutionlist);
 		String nom = this.getName(solutionlist) ;
 		int volume = this.getVolume(nom) ;
-		double degree = this.getDegree(solutionlist);
-		return bdd.ajouterBoisson(code, nom, "in the name",volume, degree);
+		float degree = this.getDegree(solutionlist);
+		return bdd.ajouterBoisson(code, nom, "in the name",volume, degree) ;
 	   }
-	  catch(VolumeException e)
-	  {
-		  e.printStackTrace();
-		  return false;
-	  }
 	  catch(BarCodeException e)
 	  {
 		  e.printStackTrace();
