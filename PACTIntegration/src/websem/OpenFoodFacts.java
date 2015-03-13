@@ -39,7 +39,7 @@ public class OpenFoodFacts implements OFFInterface
 		+ 			"?s food:name ?name."
 		+ 			"?s food:code '" + codebarre + "'."
 		+ 			"?s food:code ?codebarre."
-		+ 			"?s food:alcoholPer100g ?degree."
+		+ 			"OPTIONAL{?s food:alcoholPer100g ?degree}."
 		+ 		"}"
 		+ 	"}" ;
 
@@ -113,13 +113,15 @@ public class OpenFoodFacts implements OFFInterface
 		name=name.replaceAll(" ","");
 		if(!name.matches("[0123456789]+"))
 		{
-			try {
-				throw new VolumeException();
-			} catch (VolumeException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return -1;
-			}}
+//			try {
+//				throw new VolumeException();
+//			} catch (VolumeException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//				return -1;
+//			}
+		return 0;	
+		}
 		return Integer.parseInt(name);
 			
 	}
@@ -137,6 +139,7 @@ public class OpenFoodFacts implements OFFInterface
 	public float getDegree(List<QuerySolution> solutionlist)
 	{
 		QuerySolution qs = solutionlist.get(0) ;
+		if(!qs.contains("degree")) return 0;
 		
 		float degree = qs.getLiteral("degree").getFloat();
 		return degree ;

@@ -19,6 +19,7 @@ public class ViewDelivery extends JPanel {
 	private Controller controller;
 	private ArrayList<String> tableauAlcool;
     private String alcoolSelectionne;
+    
 	public ViewDelivery(final Controller controller) {
 		this.controller = controller;
 		tableauAlcool = controller.obtenirAlcools();;
@@ -37,7 +38,7 @@ public class ViewDelivery extends JPanel {
 			}
 			
 		});
-		this.add(new JLabel("Selectionnez l'alcool livré"));
+		this.add(new JLabel("Selectionnez l'alcool livrï¿½"));
 		this.add(menu);
 		final JTextField nombreBouteille = new JTextField("0");
 		nombreBouteille.setPreferredSize(new Dimension(300,25));
