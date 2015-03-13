@@ -5,6 +5,9 @@ import bdd.*;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,10 +19,12 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Stack;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import stat.DataSet;
 import stat.DimensionException;
@@ -732,13 +737,31 @@ public class Controller
 		window.validate();
 	}
 
-	public void ajoutBouteille(String codeBarre) 
+	public void ajoutBouteille(final String codeBarre) 
 	{
-		JPanel pan = new JPanel();
-		long code = Long.parseLong(codeBarre);
+		final JPanel pan = new JPanel();
+		final long code = Long.parseLong(codeBarre);
 		System.out.println(code);
 		bdd.ajouterBoissonParWeb(code);
-		pan.add(new JLabel("Boisson ajout�e : " + codeBarre));
+		
+		if(OpenFoodFacts.Volume0==0)
+		{
+		pan.add(new JLabel("Pas de volume, merci d'entrer a la main"));
+		pan.add(new JLabel("Volume de la boisson"));
+		final JTextField volume1 = new JTextField();
+		volume1.setPreferredSize(new Dimension(300,25));
+		pan.add(volume1);
+		JButton ok3 = new JButton("OK");
+		ok3.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				bdd.setVolumeDeBoisson(Integer.parseInt(volume1.getText()), code);
+				pan.add(new JLabel("Boisson ajout�e : " + codeBarre));
+			}
+		});
+		pan.add(ok3);
+		}
+		else{pan.add(new JLabel("Boisson ajout�e : " + codeBarre));}
 		window.setContentPane(pan);
 		window.validate();
 	}

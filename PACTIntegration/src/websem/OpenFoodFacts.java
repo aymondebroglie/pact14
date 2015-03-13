@@ -14,7 +14,8 @@ import bdd.BDDInterface;
 
 
 public class OpenFoodFacts implements OFFInterface
-{
+{   
+	public static int Volume0;
 	private BDDInterface bdd ;
 	private final static HttpAuthenticator authenticator = new SimpleAuthenticator("off", "off".toCharArray());	
 	private final
@@ -120,6 +121,7 @@ public class OpenFoodFacts implements OFFInterface
 //				e.printStackTrace();
 //				return -1;
 //			}
+		Volume0=0;
 		return 0;	
 		}
 		return Integer.parseInt(name);

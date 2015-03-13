@@ -646,4 +646,14 @@ public class BDD implements BDDInterface
 		
 		// TODO Auto-generated method stub
 	}
+	@Override
+	public boolean setVolumeDeBoisson(int volume,long codebarre) {
+		try{
+			st.executeUpdate("UPDATE Boisson SET Volume="+volume+" WHERE CodeBarre="+codebarre);	
+	}catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return false;
+        }return true;
+	}
 }
