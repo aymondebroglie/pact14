@@ -200,18 +200,14 @@ public class Controller
 		{
 			stackpreviousview.pop();
 		}
-<<<<<<< 0b60bf5df7af5331b34591ec9896605c229400e6
-		//System.out.println("is stackpreviousview empty ?"
-				//+ stackpreviousview.empty());
-		while (!stacknextview.empty()) {
-=======
+
 		System.out.println("is stackpreviousview empty ?"
 				+ stackpreviousview.empty());
 		System.out.println("is stacknextview empty ?"
 				+ stacknextview.empty());
 		while (!stacknextview.empty()) 
 		{
->>>>>>> 76914a39855e41205f44acfb06eaa47bcae7c080
+
 			stacknextview.pop();
 		}
 		//System.out.println("is stacknextview empty ?" + stacknextview.empty());
@@ -697,14 +693,10 @@ public class Controller
 
 	public void ajoutBouteille(final String codeBarre) 
 	{
-<<<<<<< 0b60bf5df7af5331b34591ec9896605c229400e6
-		final JPanel pan = new JPanel();
-		final long code = Long.parseLong(codeBarre);
-=======
+
 		this.addPreviousView(actualview);
 		JPanel pan = new JPanel();
 		long code = Long.parseLong(codeBarre);
->>>>>>> 76914a39855e41205f44acfb06eaa47bcae7c080
 		System.out.println(code);
 		bdd.ajouterBoissonParWeb(code);
 		
@@ -753,12 +745,10 @@ public class Controller
 		bdd.livraison(livraisons);
 		ViewDelivery vd = new ViewDelivery(this);
 		window.setContentPane(vd);
-<<<<<<< 0b60bf5df7af5331b34591ec9896605c229400e6
-		window.add(new JLabel("Livraison enregistr�e"));
-=======
+
 		window.add(new JLabel("Livraison enregistrée"));
 		this.setActualView(vd);
->>>>>>> 76914a39855e41205f44acfb06eaa47bcae7c080
+
 		window.validate();
 	}
 
