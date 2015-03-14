@@ -167,8 +167,10 @@ public class Controller
 	{
 		if (this.verifMDP(cs)) 
 		{
+			this.addPreviousView(actualview);
 			ViewBossHome vbh = new ViewBossHome(this);
 			window.setContentPane(vbh);
+			this.setActualView(vbh);
 			window.validate();
 		} else 
 		{
@@ -192,13 +194,24 @@ public class Controller
 
 	public void clearStacks() 
 	{
+		System.out.println("is stackpreviousview empty ?"
+				+ stackpreviousview.empty());
 		while (!stackpreviousview.empty()) 
 		{
 			stackpreviousview.pop();
 		}
+<<<<<<< 0b60bf5df7af5331b34591ec9896605c229400e6
 		//System.out.println("is stackpreviousview empty ?"
 				//+ stackpreviousview.empty());
 		while (!stacknextview.empty()) {
+=======
+		System.out.println("is stackpreviousview empty ?"
+				+ stackpreviousview.empty());
+		System.out.println("is stacknextview empty ?"
+				+ stacknextview.empty());
+		while (!stacknextview.empty()) 
+		{
+>>>>>>> 76914a39855e41205f44acfb06eaa47bcae7c080
 			stacknextview.pop();
 		}
 		//System.out.println("is stacknextview empty ?" + stacknextview.empty());
@@ -213,11 +226,12 @@ public class Controller
 	public void addPreviousView(JPanel previousview) 
 	{
 		stackpreviousview.push(previousview);
-
 	}
 
 	public void previousView(JPanel actualview) 
 	{
+		System.out.println("test " + stackpreviousview.empty()) ;
+		
 		if (stackpreviousview.empty()) 
 		{
 			JOptionPane.showMessageDialog(null,
@@ -228,7 +242,6 @@ public class Controller
 		{
 			JPanel previousview = stackpreviousview.pop();
 			stacknextview.push(actualview);
-			System.out.println("new next : " + actualview);
 			this.setActualView(previousview);
 			window.setContentPane(previousview);
 			window.validate();
@@ -246,7 +259,6 @@ public class Controller
 		{
 			JPanel nextview = stacknextview.pop();
 			stackpreviousview.push(actualview);
-			System.out.println("new previous : " + actualview);
 			this.setActualView(nextview);
 			window.setContentPane(nextview);
 			window.validate();
@@ -325,18 +337,20 @@ public class Controller
 	public void boutonBarman() 
 	{
 		// Methode appelee quand on appuie sur Barman sur l'ecran d'accueil
-		this.addPreviousView(actualview);
+		this.clearStacks() ;
 		ViewBarmanHome vbh = new ViewBarmanHome(this);
 		window.setContentPane(vbh);
+		this.setActualView(vbh);
 		window.validate();
 	}
 
 	public void boutonGestionnaire() 
 	{
 		// Methode appelee quand on appuie sur Barman sur l'ecran d'accueil
-		this.addPreviousView(actualview);
+		this.clearStacks() ;
 		ViewBossLogin vbh = new ViewBossLogin(this);
 		window.setContentPane(vbh);
+		this.setActualView(vbh);
 		window.validate();
 	}
 
@@ -359,6 +373,7 @@ public class Controller
 		} 
 		else 
 		{
+			this.addPreviousView(actualview);
 			ViewNote pan = new ViewNote(this);
 			window.setContentPane(pan);
 			this.setActualView(pan);
@@ -380,6 +395,7 @@ public class Controller
 
 	public void attribution(ArrayList<String> tableauAffichage) 
 	{
+		this.addPreviousView(actualview);
 		int goulot = bdd.attributionDeGoulot();
 		ViewRetirerGoulot pan = new ViewRetirerGoulot(this);
 		if (tableauAffichage.size() != 1)
@@ -404,13 +420,16 @@ public class Controller
 		this.addPreviousView(actualview);
 		ViewSeeDatas vsd = new ViewSeeDatas(this);
 		window.setContentPane(vsd);
+		this.setActualView(vsd);
 		window.validate();
 	}
 
 	public void gestionStocks() 
 	{
+		this.addPreviousView(actualview);
 		ViewDelivery vsm = new ViewDelivery(this);
 		window.setContentPane(vsm);
+		this.setActualView(vsm);
 		window.validate();
 	}
 
@@ -678,8 +697,14 @@ public class Controller
 
 	public void ajoutBouteille(final String codeBarre) 
 	{
+<<<<<<< 0b60bf5df7af5331b34591ec9896605c229400e6
 		final JPanel pan = new JPanel();
 		final long code = Long.parseLong(codeBarre);
+=======
+		this.addPreviousView(actualview);
+		JPanel pan = new JPanel();
+		long code = Long.parseLong(codeBarre);
+>>>>>>> 76914a39855e41205f44acfb06eaa47bcae7c080
 		System.out.println(code);
 		bdd.ajouterBoissonParWeb(code);
 		
@@ -702,12 +727,15 @@ public class Controller
 		}
 		else{pan.add(new JLabel("Boisson ajout�e : " + codeBarre));}
 		window.setContentPane(pan);
+		this.setActualView(pan);
 		window.validate();
 	}
 
 	public void ecranAjoutBarman() {
+		this.addPreviousView(actualview);
 		ViewAddBarman vab = new ViewAddBarman(this);
 		window.setContentPane(vab);
+		this.setActualView(vab);
 		window.validate();
 	}
 
@@ -719,31 +747,43 @@ public class Controller
 	}
 
 	public void livraison(String boisson, int nombre) {
+		this.addPreviousView(actualview);
 		ArrayList<Livraison> livraisons = new ArrayList<Livraison>();
 		livraisons.add(new Livraison(bdd.codeBarreDeBoisson(boisson),nombre));
 		bdd.livraison(livraisons);
 		ViewDelivery vd = new ViewDelivery(this);
 		window.setContentPane(vd);
+<<<<<<< 0b60bf5df7af5331b34591ec9896605c229400e6
 		window.add(new JLabel("Livraison enregistr�e"));
+=======
+		window.add(new JLabel("Livraison enregistrée"));
+		this.setActualView(vd);
+>>>>>>> 76914a39855e41205f44acfb06eaa47bcae7c080
 		window.validate();
 	}
 
 	public void ecranAjoutBouteille() {
-        ViewAddBottle vab = new ViewAddBottle(this);
+		this.addPreviousView(actualview);
+		ViewAddBottle vab = new ViewAddBottle(this);
         window.setContentPane(vab);
+        this.setActualView(vab);
         window.validate();
 	}
 	
 	public void ecranAssocierGoulot(){
+		this.addPreviousView(actualview);
 		ViewAssocierGoulot vag = new ViewAssocierGoulot(this);
 		window.setContentPane(vag);
+		this.setActualView(vag);
 		window.validate();
 	}
 	
 	public void associerGoulot(String boisson){
+		this.addPreviousView(actualview);
 		bdd.associerGoulot(1, bdd.codeBarreDeBoisson(boisson));
 		ViewBarmanHome vbh = new ViewBarmanHome(this);
 		window.setContentPane(vbh);
+		this.setActualView(vbh);
 		window.validate();
 	}
 

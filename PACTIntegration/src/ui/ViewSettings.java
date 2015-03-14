@@ -11,7 +11,6 @@ public class ViewSettings extends JPanel {
 	public ViewSettings(Controller controller)
 	{
 		this.controller = controller ;
-		this.controller.setActualView(this) ;
 	}
 
 }

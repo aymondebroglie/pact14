@@ -17,7 +17,6 @@ public class ViewSeeDatas extends JPanel
 		@Override
 		public void actionPerformed(ActionEvent arg0) 
 		{
-			controller.addPreviousView(ViewSeeDatas.this);
 			controller.obtenirstock();
 		}
 	}
@@ -26,7 +25,6 @@ public class ViewSeeDatas extends JPanel
 		@Override
 		public void actionPerformed(ActionEvent arg0) 
 		{
-			controller.addPreviousView(ViewSeeDatas.this);
 			controller.commande();
 		}
 	}
@@ -34,7 +32,6 @@ public class ViewSeeDatas extends JPanel
 	private class EtatDesStocks implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			controller.addPreviousView(ViewSeeDatas.this);
 			controller.etatDesStocks();
 
 		}
@@ -49,7 +46,6 @@ public class ViewSeeDatas extends JPanel
 		commande.addActionListener(new Commande());
 		etatDesStocks.addActionListener(new EtatDesStocks());
 		this.controller = controller;
-		this.controller.setActualView(this) ;
 		this.add(stocks);
 		this.add(commande);
 		this.add(etatDesStocks);

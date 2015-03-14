@@ -14,7 +14,6 @@ public class ViewBossHome extends JPanel {
 
 	public ViewBossHome(final Controller controller) {
 		this.controller = controller;
-		this.controller.setActualView(this) ;
 
 		JButton consultervosdonnees = new JButton("Consulter vos donnees");
 		JButton gerervosstocks = new JButton("Gerer vos stocks");

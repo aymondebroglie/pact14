@@ -33,7 +33,6 @@ private JPasswordField mdp = new JPasswordField();
 	
 	public ViewBossLogin(Controller controller){	
 		this.controller = controller;
-		this.controller.setActualView(this) ;
 		
 		this.add(new JLabel("Veuillez rentrer votre mot de passe"));
 		MotDePasse mp = new MotDePasse();

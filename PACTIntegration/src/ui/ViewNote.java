@@ -17,7 +17,6 @@ public class ViewNote extends JPanel
 	public ViewNote(Controller controller)
 	{
 		this.controller = controller ;
-		this.controller.setActualView(this) ;
 		
 		//Methode appelee si on appuie sur imprimer note dans l'ecran du Barman
 		//Code pour le test, il faudra demander a la base de donnee de nous fournir la note pour le serveur donne

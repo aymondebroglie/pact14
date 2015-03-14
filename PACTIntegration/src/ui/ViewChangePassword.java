@@ -24,7 +24,6 @@ public class ViewChangePassword extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 
-		controller.addPreviousView(ViewChangePassword.this);
 		controller.changerMDP(mdp.getPassword(),nmdp1.getPassword(),nmdp2.getPassword());	
 
 							
@@ -34,8 +33,7 @@ public class ViewChangePassword extends JPanel {
 	
 
 	public ViewChangePassword(Controller controller) {
-		this.controller = controller;
-		this.controller.setActualView(this) ;
+		this.controller = controller ;
 
 		this.add(new JLabel("Votre mot de passe actuel"));
 		mdp.setPreferredSize(new Dimension(300, 25));

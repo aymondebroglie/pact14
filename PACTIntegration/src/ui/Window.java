@@ -75,7 +75,6 @@ public class Window extends JFrame {
 					{					
 						public void actionPerformed(ActionEvent arg0)
 						{
-							controller.clearStacks() ;
 							controller.boutonBarman();
 						}
 					});
@@ -84,7 +83,6 @@ public class Window extends JFrame {
 					{					
 						public void actionPerformed(ActionEvent arg0)
 						{
-							controller.clearStacks() ;
 							controller.boutonGestionnaire();
 							
 						}
