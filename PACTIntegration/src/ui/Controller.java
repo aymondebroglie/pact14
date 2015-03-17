@@ -192,7 +192,19 @@ public class Controller
 		//System.out.println("actual :" + actualview);
 	}
 
-	public void clearStacks() 
+	public void clearNextStacks()
+	{
+		System.out.println("is stacknextview empty ?"
+				+ stacknextview.empty());
+		while (!stacknextview.empty()) 
+		{
+
+			stacknextview.pop();
+		}
+		System.out.println("is stacknextview empty ?" + stacknextview.empty());
+	}
+	
+	public void clearPreviousStacks()
 	{
 		System.out.println("is stackpreviousview empty ?"
 				+ stackpreviousview.empty());
@@ -203,15 +215,12 @@ public class Controller
 
 		System.out.println("is stackpreviousview empty ?"
 				+ stackpreviousview.empty());
-		System.out.println("is stacknextview empty ?"
-				+ stacknextview.empty());
-		while (!stacknextview.empty()) 
-		{
-
-			stacknextview.pop();
-		}
-		//System.out.println("is stacknextview empty ?" + stacknextview.empty());
-		// this.setActualView(null);
+	}
+	
+	public void clearStacks() 
+	{
+		this.clearNextStacks();
+		this.clearPreviousStacks() ;
 	}
 
 	public JPanel getActualView() 
@@ -221,6 +230,10 @@ public class Controller
 
 	public void addPreviousView(JPanel previousview) 
 	{
+		if(!stacknextview.empty())
+		{
+			this.clearNextStacks() ;
+		}
 		stackpreviousview.push(previousview);
 	}
 
