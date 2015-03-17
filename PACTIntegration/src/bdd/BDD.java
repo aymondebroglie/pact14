@@ -37,13 +37,13 @@ public class BDD implements BDDInterface
 	}
 	
 	@Override
-	public boolean ajouterConsommation(int bluetoothID, int rFID, int volume) 
+	public boolean ajouterConsommation(String bluetoothID, int rFID, int volume) 
 	{
 		int cPK=0, ancienVolume;
 		long codeBarre=0;
 		try
 		{
-			rs=st.executeQuery("SELECT CodeBarre FROM Associe WHERE Associe.BluetoothID='"+bluetoothID+"'");
+			rs=st.executeQuery("SELECT CodeBarre FROM Associe WHERE Associe.BluetoothID="+bluetoothID);
 			if(!rs.next())
 				throw(new Exception("Pas de goulot associe a� l'identifiant bluetooth "+bluetoothID));
 			codeBarre=rs.getLong(1);
@@ -131,7 +131,7 @@ public class BDD implements BDDInterface
 
 
 	@Override
-	public boolean ajouterGoulot(int bluetooth) 
+	public boolean ajouterGoulot(String bluetooth) 
 	{
 	/*Dans 'Associe', on a une liste de Goulots, à chaque changement, 
 	 on change BluettoothID associé a chaque goulot*/
@@ -150,7 +150,7 @@ public class BDD implements BDDInterface
 		
 	}
 	
-	public boolean modifierGoulot(int bluetooth,int enCharge, float niveauDeCharge)
+	public boolean modifierGoulot(String bluetooth,int enCharge, float niveauDeCharge)
 	{ /*Ici on modifie pas bluetooth d'un goulot*/  
 		String updateSql = "UPDATE Goulots SET EnCharge="+enCharge+",NiveauDeCharge="
 				+ niveauDeCharge+ "WHERE BluetoothID ="+bluetooth;
@@ -167,7 +167,7 @@ public class BDD implements BDDInterface
 		return true;
 	}
 	
-	public boolean supprimerGoulot(int bluetooth)
+	public boolean supprimerGoulot(String bluetooth)
 	{  /*si bien supprimer, on affiche 1*/
 		String sql = "DELETE FROM Goulots WHERE BluetoothID = "+bluetooth;
 		try
@@ -281,7 +281,7 @@ public class BDD implements BDDInterface
 	}
 
 	@Override
-	public boolean bouteilleFinie(int bluetoothID) 
+	public boolean bouteilleFinie(String bluetoothID) 
 	{
 		java.sql.Timestamp derniereDate=new java.sql.Timestamp(0), maintenant=new java.sql.Timestamp(new java.util.Date().getTime());
 		long millisecondes=maintenant.getTime()%1000;
@@ -365,7 +365,7 @@ public class BDD implements BDDInterface
 	}
 
 	@Override
-	public boolean associerGoulot(int bluetoothID, long codeBarre) {
+	public boolean associerGoulot(String bluetoothID, long codeBarre) {
 		String sql = "UPDATE Associe SET CodeBarre="+codeBarre+" WHERE BluetoothID="+bluetoothID;
 		
 		try {
@@ -412,10 +412,10 @@ public class BDD implements BDDInterface
 		
 	}
 	@Override
-	public int attributionDeGoulot() {
+	public String attributionDeGoulot() {
 		// TODO Auto-generated method stub
 		/*On suppose il va distribuer qu'une goulot*/
-		int bluetoothID=0;
+		String bluetoothID="0000000000";
 		try{
 			float niveauChargeMax=0;
 			rs=st.executeQuery("SELECT BluetoothID,NiveauDeCharge,EnCharge FROM Goulots");
@@ -424,7 +424,7 @@ public class BDD implements BDDInterface
 				if(rs.getFloat(2)>niveauChargeMax&&rs.getInt(3)==1)
 				{
 					niveauChargeMax=rs.getFloat(2);
-					bluetoothID=rs.getInt(1);
+					bluetoothID=rs.getString(1);
 				}
 			}
 			st.executeUpdate("UPDATE Goulots SET EnCharge=0 WHERE BluetoothID="+bluetoothID);
@@ -432,7 +432,7 @@ public class BDD implements BDDInterface
 		}catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return 0;
+			return "0000000000";
 		}
 		
 		return bluetoothID;

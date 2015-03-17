@@ -107,7 +107,7 @@ public class SerialTest implements SerialPortEventListener {
 			try {
 				String inputLine=input.readLine();
 				int volume  = Integer.parseInt(inputLine);
-				bdd.ajouterConsommation(1, 1, volume);
+				bdd.ajouterConsommation("1", 1, volume);
 				System.out.println(volume);
 			} catch (Exception e) {
 				System.err.println(e.toString());

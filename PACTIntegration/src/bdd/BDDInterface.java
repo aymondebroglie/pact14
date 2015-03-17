@@ -20,11 +20,11 @@ public interface BDDInterface
     boolean setPrixParBoisson(long codeBarre,float prix);
     
 //Goulots
-	boolean ajouterGoulot(int bluetooth);
-	public boolean modifierGoulot(int bluetooth,int enCharge, float niveauDeCharge);
-	public boolean supprimerGoulot(int bluetooth);
-	boolean associerGoulot(int blutoothID, long codeBarre);
-	public int attributionDeGoulot();
+	boolean ajouterGoulot(String bluetooth);
+	public boolean modifierGoulot(String bluetooth,int enCharge, float niveauDeCharge);
+	public boolean supprimerGoulot(String bluetooth);
+	boolean associerGoulot(String blutoothID, long codeBarre);
+	public String attributionDeGoulot();
 //Barman
 	boolean ajouterBarman(int rFID,String nom,String prenom,int age,java.util.Date dateEmbauche);
 	public boolean modifierInformationBarman(int rFID,String nom,String prenom,int age,java.util.Date dateEmbauche);
@@ -39,11 +39,11 @@ public interface BDDInterface
     public boolean ajoueterCocktail(long coPK,String nom,float prix,ArrayList<DispoBoisson> recette);
 
 //Commande
-	boolean ajouterConsommation(int bluetoothID, int rFID, int volume ); //il faut mettre le volume en cL, un entier.
+	boolean ajouterConsommation(String bluetoothID, int rFID, int volume ); //il faut mettre le volume en cL, un entier.
 	float finDeCommande(int rFID); //retourne le prix à payer, pour l'instant c'est toujours 0
 	public ArrayList<DetailDeCommand> imprimerCommande(int rFID);
 //Stock
-	boolean bouteilleFinie(int bluetoothID);
+	boolean bouteilleFinie(String bluetoothID);
 	boolean livraison(ArrayList<Livraison> livraison);
 //Visu de données
 	ArrayList<DispoBoisson> etatDesStocks(java.util.Date date); 

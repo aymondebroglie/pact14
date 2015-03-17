@@ -392,11 +392,11 @@ public class Controller
 	public void attribution(ArrayList<String> tableauAffichage) 
 	{
 		this.addPreviousView(actualview);
-		int goulot = bdd.attributionDeGoulot();
+		String goulot = bdd.attributionDeGoulot();
 		ViewRetirerGoulot pan = new ViewRetirerGoulot(this);
 		if (tableauAffichage.size() != 1)
 			pan.add(new JLabel("Veuillez choisir une boisson SVP"));
-		else if (goulot == 0)
+		else if (goulot == "0000000000")
 			pan.add(new JLabel("Pas de goulots disponible"));
 		else 
 		{
@@ -686,7 +686,7 @@ public class Controller
 
 	public void bouteilleFinie() 
 	{
-		bdd.bouteilleFinie(1);
+		bdd.bouteilleFinie("1");
 		window.add(new JLabel("Changement enregistr�"), BorderLayout.CENTER);
 		window.validate();
 	}
@@ -695,8 +695,8 @@ public class Controller
 	{
 
 		this.addPreviousView(actualview);
-		JPanel pan = new JPanel();
-		long code = Long.parseLong(codeBarre);
+		final JPanel pan = new JPanel();
+		final long code = Long.parseLong(codeBarre);
 		System.out.println(code);
 		bdd.ajouterBoissonParWeb(code);
 		
@@ -770,7 +770,7 @@ public class Controller
 	
 	public void associerGoulot(String boisson){
 		this.addPreviousView(actualview);
-		bdd.associerGoulot(1, bdd.codeBarreDeBoisson(boisson));
+		bdd.associerGoulot("1", bdd.codeBarreDeBoisson(boisson));
 		ViewBarmanHome vbh = new ViewBarmanHome(this);
 		window.setContentPane(vbh);
 		this.setActualView(vbh);
