@@ -721,12 +721,11 @@ public class Controller
 		final JPanel pan = new JPanel();
 		final long code = Long.parseLong(codeBarre);
 		System.out.println(code);
-		bdd.ajouterBoissonParWeb(code);
+		//bdd.ajouterBoissonParWeb(code);
 		
 		if(OpenFoodFacts.Volume0==0)
 		{
-		pan.add(new JLabel("Pas de volume, merci d'entrer a la main"));
-		pan.add(new JLabel("Volume de la boisson"));
+		pan.add(new JLabel("<html>Pas de volume, merci d'entrer a la main<br /> Volume de  la boisson <html/>"));
 		final JTextField volume1 = new JTextField();
 		volume1.setPreferredSize(new Dimension(300,25));
 		pan.add(volume1);
@@ -735,7 +734,9 @@ public class Controller
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				bdd.setVolumeDeBoisson(Integer.parseInt(volume1.getText()), code);
-				pan.add(new JLabel("Boisson ajout�e : " + codeBarre));
+				JOptionPane.showMessageDialog(null,
+						"Boisson ajoutée", "Info",
+						JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		pan.add(ok3);

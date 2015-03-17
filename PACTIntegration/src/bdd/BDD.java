@@ -137,7 +137,7 @@ public class BDD implements BDDInterface
 	 on change BluettoothID associé a chaque goulot*/
 		try {
 			st.executeUpdate("INSERT INTO Goulots (BluetoothID, EnCharge, NiveauDeCharge )" +
-					"VALUES ('"+bluetooth+"','0','1.0')");
+					"VALUES ('"+bluetooth+"','1','1.0')");
 			st.executeUpdate("INSERT INTO Associe (CodeBarre, BluetoothID )" + 
 					"VALUES ('0','"+bluetooth+"')");
 		} catch (SQLException e) {

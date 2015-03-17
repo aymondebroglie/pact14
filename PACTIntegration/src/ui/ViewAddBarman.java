@@ -13,7 +13,6 @@ public class ViewAddBarman extends JPanel{
 
 	
 	private static final long serialVersionUID = 1L;
-	private  Controller controller;
 	private JTextField nom = new JTextField();
 	private JTextField prenom = new JTextField();
 	private JTextField age = new JTextField();
