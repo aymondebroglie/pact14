@@ -32,7 +32,7 @@ import visu.graphique;
 import websem.OpenFoodFacts;
 
 //Classe permettant de controller ce qui se passe quand on appuie sur un bouton, c'est elle qui
-//interrogera la base de donneï¿½e
+//interrogera la base de donnee
 
 public class Controller
 {
@@ -142,9 +142,9 @@ public class Controller
 
 				this.printMDP(cs1);
 				JOptionPane.showMessageDialog(null,
-						"Mot de passe changï¿½ avec succï¿½s !", "Information",
+						"Mot de passe changé avec succès !", "Information",
 						JOptionPane.INFORMATION_MESSAGE);
-				panneau.add(new JLabel("Mot de Passe changï¿½"));
+				panneau.add(new JLabel("Mot de Passe changé"));
 				window.setContentPane(panneau);
 				window.validate();
 			} else 
@@ -244,7 +244,7 @@ public class Controller
 		if (stackpreviousview.empty()) 
 		{
 			JOptionPane.showMessageDialog(null,
-					"L'opï¿½ration demandï¿½e est impossible", "Attention",
+					"L'opération demandée est impossible", "Attention",
 					JOptionPane.WARNING_MESSAGE);
 		} 
 		else 
@@ -262,7 +262,7 @@ public class Controller
 		if (stacknextview.empty()) 
 		{
 			JOptionPane.showMessageDialog(null,
-					"L'opï¿½ration demandÃ©e est impossible", "Attention",
+					"L'opération demandÃ©e est impossible", "Attention",
 					JOptionPane.WARNING_MESSAGE);
 		} else 
 		{
@@ -408,12 +408,22 @@ public class Controller
 		String goulot = bdd.attributionDeGoulot();
 		ViewRetirerGoulot pan = new ViewRetirerGoulot(this);
 		if (tableauAffichage.size() != 1)
-			pan.add(new JLabel("Veuillez choisir une boisson SVP"));
+			//pan.add(new JLabel("Veuillez choisir une boisson SVP"));
+		JOptionPane.showMessageDialog(null,
+				"Veuillez choisir une boisson, s'il-vous-plaît", "Attention",
+				JOptionPane.WARNING_MESSAGE);
 		else if (goulot == "0000000000")
-			pan.add(new JLabel("Pas de goulots disponible"));
+		{
+			JOptionPane.showMessageDialog(null,
+				"Pas de goulot disponible", "Attention",
+				JOptionPane.WARNING_MESSAGE);
+		}
+		
 		else 
 		{
-			pan.add(new JLabel("Vous pouvez retirer le goulot " + goulot));
+			JOptionPane.showMessageDialog(null,
+					"Vous pouvez retirer le goulot" + goulot, "Information",
+					JOptionPane.INFORMATION_MESSAGE);
 			bdd.associerGoulot(goulot,
 			bdd.codeBarreDeBoisson(tableauAffichage.get(0)));
 		}
