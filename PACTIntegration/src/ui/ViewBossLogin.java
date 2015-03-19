@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -33,6 +34,7 @@ private JPasswordField mdp = new JPasswordField();
 	
 	public ViewBossLogin(Controller controller){	
 		this.controller = controller;
+		
 		
 		this.add(new JLabel("Veuillez rentrer votre mot de passe"));
 		MotDePasse mp = new MotDePasse();

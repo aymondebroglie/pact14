@@ -3,6 +3,7 @@ package ui;
 import bdd.*;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -14,6 +15,7 @@ import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Stack;
 
@@ -140,9 +142,9 @@ public class Controller
 
 				this.printMDP(cs1);
 				JOptionPane.showMessageDialog(null,
-						"Mot de passe changï¿½ avec succï¿½s !", "Information",
+						"Mot de passe changé avec succès !", "Information",
 						JOptionPane.INFORMATION_MESSAGE);
-				panneau.add(new JLabel("Mot de Passe changï¿½"));
+				panneau.add(new JLabel("Mot de Passe changé"));
 				window.setContentPane(panneau);
 				window.validate();
 			} else 
@@ -242,7 +244,7 @@ public class Controller
 		if (stackpreviousview.empty()) 
 		{
 			JOptionPane.showMessageDialog(null,
-					"L'opï¿½ration demandï¿½e est impossible", "Attention",
+					"L'opération demandée est impossible", "Attention",
 					JOptionPane.WARNING_MESSAGE);
 		} 
 		else 
@@ -260,7 +262,7 @@ public class Controller
 		if (stacknextview.empty()) 
 		{
 			JOptionPane.showMessageDialog(null,
-					"L'opï¿½ration demandÃ©e est impossible", "Attention",
+					"L'opération demandée est impossible", "Attention",
 					JOptionPane.WARNING_MESSAGE);
 		} else 
 		{
@@ -295,7 +297,7 @@ public class Controller
 		System.out.println("WARNING : the method " + methodname
 				+ "hasn't been implemented yet !!!");
 		JOptionPane.showMessageDialog(null,
-				"L'opï¿½ration demandï¿½e n'est pas encore disonible.",
+				"L'opération demandée n'est pas encore disonible.",
 				"Attention", JOptionPane.WARNING_MESSAGE);
 	}
 
@@ -305,11 +307,11 @@ public class Controller
 				.showMessageDialog(
 						null,
 
-						"OptiBar a pour objectif de fournir ï¿½ un bar des outils novateurs et pratiques d'utilisation permettant d'en faciliter la gestion. \n"
-								+ "Il permettra au patron de gï¿½rer ses stocks et aussi de savoir quelles sont les habitudes de consommation de ses clients de faï¿½on claire et prï¿½cise. \n"
-								+ "Puisque la gestion des stocks est une dï¿½pense importante pour les bars, notre projet permettra au bar de minimiser ses stocks, sans jamais ï¿½tre ï¿½ court. \n"
-								+ "Enfin, notre systï¿½me fournit aussi une aide au barman en lui indiquant les quantitï¿½s qu'il a versï¿½es ce qui lui permet ï¿½ la fois de prï¿½parer de meilleures boissons \n "
-								+ "mais lui facilite ï¿½galement la production de l'addition, gain de temps toujours utile ï¿½ l'heure de pointe."
+						"OptiBar a pour objectif de fournir à un bar des outils novateurs et pratiques d'utilisation permettant d'en faciliter la gestion. \n"
+								+ "Il permettra au patron de gérer ses stocks et aussi de savoir quelles sont les habitudes de consommation de ses clients de façon claire et précise. \n"
+								+ "Puisque la gestion des stocks est une dépense importante pour les bars, notre projet permettra au bar de minimiser ses stocks, sans jamais être à court. \n"
+								+ "Enfin, notre système fournit aussi une aide au barman en lui indiquant les quantités qu'il a versées ce qui lui permet à la fois de préparer de meilleures boissons \n "
+								+ "mais lui facilite également la production de l'addition, gain de temps toujours utile à l'heure de pointe."
 
 						, "A propos d'OptiBar", JOptionPane.INFORMATION_MESSAGE);
 
@@ -408,7 +410,7 @@ public class Controller
 		if (tableauAffichage.size() != 1)
 			//pan.add(new JLabel("Veuillez choisir une boisson SVP"));
 		JOptionPane.showMessageDialog(null,
-				"Veuillez choisir une boisson, s'il-vous-plaï¿½t", "Attention",
+				"Veuillez choisir une boisson, s'il-vous-plaît", "Attention",
 				JOptionPane.WARNING_MESSAGE);
 		else if (goulot == "0000000000")
 		{
@@ -455,14 +457,19 @@ public class Controller
 	public void obtenirstock() 
 	{
 		this.addPreviousView(actualview);
-		ViewStocksManagement vsm = new ViewStocksManagement(this);
-		Container cp = window.getContentPane();
+		//ViewStocksManagement vsm = new ViewStocksManagement(this);
+		/*Container cp = window.getContentPane();
 		cp.removeAll();
-		window.validate();
-		ViewStockManagementSouth pan2 = new ViewStockManagementSouth(this);
+		
+		
+		window.validate();*/
+		//ViewStockManagementSouth pan2 = new ViewStockManagementSouth(this);
 
-		window.add(vsm, BorderLayout.EAST);
-		window.add(pan2, BorderLayout.SOUTH);
+		//window.add(vsm, BorderLayout.EAST);
+		MetaViewStockManagement pan = new MetaViewStockManagement(this) ;
+		
+		window.setContentPane(pan) ;
+		this.setActualView(pan) ;
 		window.validate();
 	}
 
@@ -472,6 +479,7 @@ public class Controller
 		ViewCommandManagement vsm = new ViewCommandManagement(this);
 		Container cp = window.getContentPane();
 		cp.removeAll();
+		
 		window.validate();
 		ViewStockManagementSouth pan2 = new ViewStockManagementSouth(this);
 
@@ -637,7 +645,7 @@ public class Controller
 			data_histo.add(histo_modele) ;
 			
 		
-		//tableauAffichage.add("Modï¿½le");
+		//tableauAffichage.add("Modèle");
 	}
 		
 			
@@ -708,9 +716,7 @@ public class Controller
 	public void bouteilleFinie() 
 	{
 		bdd.bouteilleFinie("1");
-		JOptionPane.showMessageDialog(null,
-				"Changement enregistrÃ©", "Info",
-				JOptionPane.INFORMATION_MESSAGE);
+		window.add(new JLabel("Changement enregistré"), BorderLayout.CENTER);
 		window.validate();
 	}
 
@@ -760,9 +766,7 @@ public class Controller
 	public void ajoutBarman(String nom, String prenom, int age) {
 		int rFID = nom.hashCode();
 		bdd.ajouterBarman(rFID, nom, prenom, age, new Date());
-		JOptionPane.showMessageDialog(null,
-				"Barman enregistrÃ©", "Info",
-				JOptionPane.INFORMATION_MESSAGE);
+		window.add(new JLabel("Barman enregistré"), BorderLayout.CENTER);
 		window.validate();
 	}
 
@@ -773,9 +777,8 @@ public class Controller
 		bdd.livraison(livraisons);
 		ViewDelivery vd = new ViewDelivery(this);
 		window.setContentPane(vd);
-		JOptionPane.showMessageDialog(null,
-				"Livraison enregistrÃ©e", "Info",
-				JOptionPane.INFORMATION_MESSAGE);
+
+		window.add(new JLabel("Livraison enregistrée"));
 		this.setActualView(vd);
 
 		window.validate();
@@ -810,9 +813,7 @@ public class Controller
 	public void ajoutBouteilleMain(Long codeBarre,String nom,String marque,float degre,int volume ){
 		JPanel pan = new JPanel();
 		bdd.ajouterBoisson(codeBarre, nom, marque, volume, degre);
-		JOptionPane.showMessageDialog(null,
-				"Boisson ajoutÃ©e: "+codeBarre, "Info",
-				JOptionPane.INFORMATION_MESSAGE);
+		pan.add(new JLabel("Boisson ajoutée : " + codeBarre));
 		window.setContentPane(pan);
 		window.validate();
 		
