@@ -3,7 +3,6 @@ package ui;
 import bdd.*;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -15,7 +14,6 @@ import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Date;
 import java.util.Stack;
 
@@ -142,9 +140,9 @@ public class Controller
 
 				this.printMDP(cs1);
 				JOptionPane.showMessageDialog(null,
-						"Mot de passe changé avec succès !", "Information",
+						"Mot de passe changï¿½ avec succï¿½s !", "Information",
 						JOptionPane.INFORMATION_MESSAGE);
-				panneau.add(new JLabel("Mot de Passe changé"));
+				panneau.add(new JLabel("Mot de Passe changï¿½"));
 				window.setContentPane(panneau);
 				window.validate();
 			} else 
@@ -244,7 +242,7 @@ public class Controller
 		if (stackpreviousview.empty()) 
 		{
 			JOptionPane.showMessageDialog(null,
-					"L'opération demandée est impossible", "Attention",
+					"L'opï¿½ration demandï¿½e est impossible", "Attention",
 					JOptionPane.WARNING_MESSAGE);
 		} 
 		else 
@@ -262,7 +260,7 @@ public class Controller
 		if (stacknextview.empty()) 
 		{
 			JOptionPane.showMessageDialog(null,
-					"L'opération demandÃ©e est impossible", "Attention",
+					"L'opï¿½ration demandÃ©e est impossible", "Attention",
 					JOptionPane.WARNING_MESSAGE);
 		} else 
 		{
@@ -410,7 +408,7 @@ public class Controller
 		if (tableauAffichage.size() != 1)
 			//pan.add(new JLabel("Veuillez choisir une boisson SVP"));
 		JOptionPane.showMessageDialog(null,
-				"Veuillez choisir une boisson, s'il-vous-plaît", "Attention",
+				"Veuillez choisir une boisson, s'il-vous-plaï¿½t", "Attention",
 				JOptionPane.WARNING_MESSAGE);
 		else if (goulot == "0000000000")
 		{
@@ -710,7 +708,9 @@ public class Controller
 	public void bouteilleFinie() 
 	{
 		bdd.bouteilleFinie("1");
-		window.add(new JLabel("Changement enregistrï¿½"), BorderLayout.CENTER);
+		JOptionPane.showMessageDialog(null,
+				"Changement enregistrÃ©", "Info",
+				JOptionPane.INFORMATION_MESSAGE);
 		window.validate();
 	}
 
@@ -735,13 +735,15 @@ public class Controller
 			public void actionPerformed(ActionEvent e) {
 				bdd.setVolumeDeBoisson(Integer.parseInt(volume1.getText()), code);
 				JOptionPane.showMessageDialog(null,
-						"Boisson ajoutÃ©e", "Info",
+						"Boisson ajoutÃ©e: "+codeBarre, "Info",
 						JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		pan.add(ok3);
 		}
-		else{pan.add(new JLabel("Boisson ajoutï¿½e : " + codeBarre));}
+		else{JOptionPane.showMessageDialog(null,
+				"Boisson ajoutÃ©e: "+codeBarre, "Info",
+				JOptionPane.INFORMATION_MESSAGE);}
 		window.setContentPane(pan);
 		this.setActualView(pan);
 		window.validate();
@@ -758,7 +760,9 @@ public class Controller
 	public void ajoutBarman(String nom, String prenom, int age) {
 		int rFID = nom.hashCode();
 		bdd.ajouterBarman(rFID, nom, prenom, age, new Date());
-		window.add(new JLabel("Barman enregistrï¿½"), BorderLayout.CENTER);
+		JOptionPane.showMessageDialog(null,
+				"Barman enregistrÃ©", "Info",
+				JOptionPane.INFORMATION_MESSAGE);
 		window.validate();
 	}
 
@@ -769,8 +773,9 @@ public class Controller
 		bdd.livraison(livraisons);
 		ViewDelivery vd = new ViewDelivery(this);
 		window.setContentPane(vd);
-
-		window.add(new JLabel("Livraison enregistrÃ©e"));
+		JOptionPane.showMessageDialog(null,
+				"Livraison enregistrÃ©e", "Info",
+				JOptionPane.INFORMATION_MESSAGE);
 		this.setActualView(vd);
 
 		window.validate();
@@ -805,7 +810,9 @@ public class Controller
 	public void ajoutBouteilleMain(Long codeBarre,String nom,String marque,float degre,int volume ){
 		JPanel pan = new JPanel();
 		bdd.ajouterBoisson(codeBarre, nom, marque, volume, degre);
-		pan.add(new JLabel("Boisson ajoutï¿½e : " + codeBarre));
+		JOptionPane.showMessageDialog(null,
+				"Boisson ajoutÃ©e: "+codeBarre, "Info",
+				JOptionPane.INFORMATION_MESSAGE);
 		window.setContentPane(pan);
 		window.validate();
 		
