@@ -38,7 +38,7 @@ public class ViewDelivery extends JPanel {
 			}
 			
 		});
-		this.add(new JLabel("Selectionnez l'alcool livrï¿½"));
+		this.add(new JLabel("Selectionnez l'alcool livré"));
 		this.add(menu);
 		final JTextField nombreBouteille = new JTextField("0");
 		nombreBouteille.setPreferredSize(new Dimension(300,25));

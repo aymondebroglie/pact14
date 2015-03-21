@@ -454,11 +454,29 @@ public class Controller
 
 	/****************************************************************************************************/
 	/** ViewBossHome */
+	public void ecranAjoutBarman() {
+		this.addPreviousView(actualview);
+		ViewAddBarman vab = new ViewAddBarman(this);
+		
+		Container cp = new Container() ;		
+		cp.setLayout(new GridBagLayout());
+		cp.add(vab) ;
+		window.setContentPane(cp);
+		
+		this.setActualView(vab);
+		window.validate();
+	}
+	
 	public void consulterVosDonnees() 
 	{
 		this.addPreviousView(actualview);
 		ViewSeeDatas vsd = new ViewSeeDatas(this);
-		window.setContentPane(vsd);
+
+		Container cp = new Container() ;		
+		cp.setLayout(new GridBagLayout());
+		cp.add(vsd) ;
+		window.setContentPane(cp);
+		
 		this.setActualView(vsd);
 		window.validate();
 	}
@@ -473,7 +491,7 @@ public class Controller
 	}
 
 	/****************************************************************************************************/
-
+	/** viewSeeDatas */
 	public void obtenirstock() 
 	{
 		this.addPreviousView(actualview);
@@ -506,6 +524,16 @@ public class Controller
 		window.add(vsm, BorderLayout.EAST);
 		window.add(pan2, BorderLayout.SOUTH);
 		window.validate();
+	}
+	
+	public void etatDesStocks()
+	{
+		Date maintenant = new Date();
+		graphique g = new graphique(bdd.etatDesStocks(maintenant), maintenant);
+		JFrame f = new JFrame();
+		f.setBounds(10, 10, 500, 500);
+		f.add(g);
+		f.setVisible(true);
 	}
 
 	public void budget() 
@@ -723,16 +751,6 @@ public class Controller
 		this.duree = duree;
 	}
 
-	public void etatDesStocks()
-	{
-		Date maintenant = new Date();
-		graphique g = new graphique(bdd.etatDesStocks(maintenant), maintenant);
-		JFrame f = new JFrame();
-		f.setBounds(10, 10, 500, 500);
-		f.add(g);
-		f.setVisible(true);
-	}
-
 	public void bouteilleFinie() 
 	{
 		bdd.bouteilleFinie("1");
@@ -772,19 +790,6 @@ public class Controller
 				JOptionPane.INFORMATION_MESSAGE);}
 		window.setContentPane(pan);
 		this.setActualView(pan);
-		window.validate();
-	}
-
-	public void ecranAjoutBarman() {
-		this.addPreviousView(actualview);
-		ViewAddBarman vab = new ViewAddBarman(this);
-		
-		Container cp = new Container() ;		
-		cp.setLayout(new GridBagLayout());
-		cp.add(vab) ;
-		window.setContentPane(cp);
-		
-		this.setActualView(vab);
 		window.validate();
 	}
 
