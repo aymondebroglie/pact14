@@ -178,7 +178,7 @@ public class Controller
 			cp.add(vbh) ;
 			window.setContentPane(cp);
 			
-			this.setActualView(vbh);
+			this.setActualView(cp);
 			window.validate();
 		} else 
 		{
@@ -189,11 +189,11 @@ public class Controller
 
 	/****************************************************************************************************/
 	/** Navigation */
-	private Stack<JPanel> stackpreviousview = new Stack<JPanel>();
-	private Stack<JPanel> stacknextview = new Stack<JPanel>();
-	private JPanel actualview;
+	private Stack<Container> stackpreviousview = new Stack<Container>();
+	private Stack<Container> stacknextview = new Stack<Container>();
+	private Container actualview;
 
-	public void setActualView(JPanel actualview) 
+	public void setActualView(Container actualview) 
 	{
 		// System.out.println("before :" + actualview) ;
 		this.actualview = actualview;
@@ -231,12 +231,12 @@ public class Controller
 		this.clearPreviousStacks() ;
 	}
 
-	public JPanel getActualView() 
+	public Container getActualView() 
 	{
 		return actualview;
 	}
 
-	public void addPreviousView(JPanel previousview) 
+	public void addPreviousView(Container previousview) 
 	{
 		if(!stacknextview.empty())
 		{
@@ -245,7 +245,7 @@ public class Controller
 		stackpreviousview.push(previousview);
 	}
 
-	public void previousView(JPanel actualview) 
+	public void previousView(Container actualview) 
 	{
 		System.out.println("test " + stackpreviousview.empty()) ;
 		
@@ -257,7 +257,7 @@ public class Controller
 		} 
 		else 
 		{
-			JPanel previousview = stackpreviousview.pop();
+			Container previousview = stackpreviousview.pop();
 			stacknextview.push(actualview);
 			this.setActualView(previousview);
 			window.setContentPane(previousview);
@@ -265,7 +265,7 @@ public class Controller
 		}
 	}
 
-	public void nextView(JPanel actualview) 
+	public void nextView(Container actualview) 
 	{
 		if (stacknextview.empty()) 
 		{
@@ -274,7 +274,7 @@ public class Controller
 					JOptionPane.WARNING_MESSAGE);
 		} else 
 		{
-			JPanel nextview = stacknextview.pop();
+			Container nextview = stacknextview.pop();
 			stackpreviousview.push(actualview);
 			this.setActualView(nextview);
 			window.setContentPane(nextview);
@@ -363,7 +363,7 @@ public class Controller
 		cp.add(vbh) ;
 		window.setContentPane(cp);
 		
-		this.setActualView(vbh);
+		this.setActualView(cp);
 		window.validate();
 	}
 
@@ -379,7 +379,7 @@ public class Controller
 		cp.add(vbh) ;
 		window.setContentPane(cp);
 		
-		this.setActualView(vbh);
+		this.setActualView(cp);
 		window.validate();
 	}
 
@@ -463,7 +463,7 @@ public class Controller
 		cp.add(vab) ;
 		window.setContentPane(cp);
 		
-		this.setActualView(vab);
+		this.setActualView(cp);
 		window.validate();
 	}
 	
@@ -477,7 +477,7 @@ public class Controller
 		cp.add(vsd) ;
 		window.setContentPane(cp);
 		
-		this.setActualView(vsd);
+		this.setActualView(cp);
 		window.validate();
 	}
 
