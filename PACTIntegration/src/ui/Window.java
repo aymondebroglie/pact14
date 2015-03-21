@@ -1,11 +1,15 @@
 package ui;
 
+import java.awt.Container;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+
 import bdd.*;
 public class Window extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -14,6 +18,7 @@ public class Window extends JFrame {
 	private int height = 300;
 	BDDInterface bdd = null;
 	private Controller controller ;
+	//private GroupLayout layout ;
 
 	private JMenuBar menubar = new JMenuBar();
 	private JMenu general = new JMenu("Général");
@@ -40,7 +45,12 @@ public class Window extends JFrame {
 		this.height = height;
 	}
 
-	public Window(BDDInterface bdd) {
+	public Window(BDDInterface bdd) 
+	{
+		
+		Container cont = this.getContentPane();
+        cont.setLayout(new GridBagLayout());
+
 		this.bdd=bdd;
 		this.setTitle(title);
 		this.setSize(width, height);

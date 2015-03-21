@@ -6,6 +6,8 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -25,6 +27,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SpringLayout;
 
 import stat.DataSet;
 import stat.DimensionException;
@@ -347,8 +350,19 @@ public class Controller
 	{
 		// Methode appelee quand on appuie sur Barman sur l'ecran d'accueil
 		this.clearStacks() ;
+		
 		ViewBarmanHome vbh = new ViewBarmanHome(this);
-		window.setContentPane(vbh);
+		
+		Container cp = new Container() ;
+		//cp.removeAll() ;
+		
+		cp.setLayout(new GridBagLayout());
+		
+		cp.add(vbh) ;
+		window.setContentPane(cp);
+		
+		        
+		//window.setContentPane(vbh);
 		this.setActualView(vbh);
 		window.validate();
 	}
