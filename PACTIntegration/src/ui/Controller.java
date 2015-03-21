@@ -515,14 +515,15 @@ public class Controller
 	{
 		this.addPreviousView(actualview);
 		ViewCommandManagement vsm = new ViewCommandManagement(this);
-		Container cp = window.getContentPane();
-		cp.removeAll();
-		
-		window.validate();
 		ViewStockManagementSouth pan2 = new ViewStockManagementSouth(this);
-
-		window.add(vsm, BorderLayout.EAST);
-		window.add(pan2, BorderLayout.SOUTH);
+		/*Container cp = window.getContentPane();
+		cp.removeAll();*/
+		Container cp = new Container() ;		
+		cp.setLayout(new GridBagLayout());
+		
+		cp.add(vsm);
+		cp.add(pan2);
+		window.setContentPane(cp);
 		window.validate();
 	}
 	
