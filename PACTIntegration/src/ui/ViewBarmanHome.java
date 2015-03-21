@@ -58,8 +58,6 @@ public class ViewBarmanHome extends JPanel {
 		JButton bouteilleFinie = new JButton("Bouteille finie");
 		bouteilleFinie.addActionListener(new BouteilleFinie());
 		note.addActionListener(imprimerNote);
-		//this.add(note);
-		//this.add(bouteilleFinie);
 		
 		JButton goulot = new JButton("Retirer goulot");
 		goulot.addActionListener(retirerGoulot);
@@ -75,7 +73,6 @@ public class ViewBarmanHome extends JPanel {
 			}
 			
 		});
-		//this.add(associerGoulot);
 
 		layout.setAutoCreateGaps(true);
 		layout.linkSize(SwingConstants.HORIZONTAL, note, bouteilleFinie, goulot, associerGoulot );

@@ -8,10 +8,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.BoxLayout;
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.SwingConstants;
 
 
 public class ViewBossLogin extends JPanel implements KeyListener
@@ -37,15 +39,36 @@ private JPasswordField mdp = new JPasswordField();
 	public ViewBossLogin(Controller controller){	
 		this.controller = controller;
 		
+		// definition du layout
+		GroupLayout layout = new GroupLayout(this) ;
+		this.setLayout(layout);
 		
-		this.add(new JLabel("Veuillez rentrer votre mot de passe"));
+		JLabel message = new JLabel("Veuillez rentrer votre mot de passe");
 		MotDePasse mp = new MotDePasse();
-		mdp.setPreferredSize(new Dimension(300,25));
+		mdp.setPreferredSize(new Dimension(200,25));
 		JButton boutton = new JButton("OK");
 		boutton.addActionListener(mp);
 		mdp.addKeyListener(this);
-		this.add(mdp);
-		this.add(boutton);
+		//this.add(mdp);
+		//this.add(boutton);
+		
+		layout.setAutoCreateGaps(true);
+				
+		layout.setHorizontalGroup(
+	               layout.createParallelGroup(GroupLayout.Alignment.CENTER) 
+	                   .addGroup(layout.createSequentialGroup()
+	                		   .addComponent(message)
+	                		   .addComponent(mdp))
+	                   .addComponent(boutton)
+	               );
+	       
+	    layout.setVerticalGroup(
+	               layout.createSequentialGroup()
+	               		.addGroup(layout.createParallelGroup()
+	               				.addComponent(message)
+	               				.addComponent(mdp))
+	               		.addComponent(boutton)
+	               );
 	}
 
 	@Override

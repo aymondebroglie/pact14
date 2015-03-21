@@ -353,16 +353,11 @@ public class Controller
 		
 		ViewBarmanHome vbh = new ViewBarmanHome(this);
 		
-		Container cp = new Container() ;
-		//cp.removeAll() ;
-		
+		Container cp = new Container() ;		
 		cp.setLayout(new GridBagLayout());
-		
 		cp.add(vbh) ;
 		window.setContentPane(cp);
 		
-		        
-		//window.setContentPane(vbh);
 		this.setActualView(vbh);
 		window.validate();
 	}
@@ -371,8 +366,14 @@ public class Controller
 	{
 		// Methode appelee quand on appuie sur Barman sur l'ecran d'accueil
 		this.clearStacks() ;
+		
 		ViewBossLogin vbh = new ViewBossLogin(this);
-		window.setContentPane(vbh);
+		
+		Container cp = new Container() ;		
+		cp.setLayout(new GridBagLayout());
+		cp.add(vbh) ;
+		window.setContentPane(cp);
+		
 		this.setActualView(vbh);
 		window.validate();
 	}
