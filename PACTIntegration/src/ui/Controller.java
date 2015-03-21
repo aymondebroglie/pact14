@@ -172,7 +172,12 @@ public class Controller
 		{
 			this.addPreviousView(actualview);
 			ViewBossHome vbh = new ViewBossHome(this);
-			window.setContentPane(vbh);
+			
+			Container cp = new Container() ;		
+			cp.setLayout(new GridBagLayout());
+			cp.add(vbh) ;
+			window.setContentPane(cp);
+			
 			this.setActualView(vbh);
 			window.validate();
 		} else 
