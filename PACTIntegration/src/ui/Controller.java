@@ -761,14 +761,14 @@ public class Controller
 			public void actionPerformed(ActionEvent e) {
 				bdd.setVolumeDeBoisson(Integer.parseInt(volume1.getText()), code);
 				JOptionPane.showMessageDialog(null,
-						"Boisson ajoutÃ©e: "+codeBarre, "Info",
+						"Boisson ajoutée: "+codeBarre, "Info",
 						JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		pan.add(ok3);
 		}
 		else{JOptionPane.showMessageDialog(null,
-				"Boisson ajoutÃ©e: "+codeBarre, "Info",
+				"Boisson ajoutée: "+codeBarre, "Info",
 				JOptionPane.INFORMATION_MESSAGE);}
 		window.setContentPane(pan);
 		this.setActualView(pan);
@@ -778,7 +778,12 @@ public class Controller
 	public void ecranAjoutBarman() {
 		this.addPreviousView(actualview);
 		ViewAddBarman vab = new ViewAddBarman(this);
-		window.setContentPane(vab);
+		
+		Container cp = new Container() ;		
+		cp.setLayout(new GridBagLayout());
+		cp.add(vab) ;
+		window.setContentPane(cp);
+		
 		this.setActualView(vab);
 		window.validate();
 	}
@@ -786,7 +791,9 @@ public class Controller
 	public void ajoutBarman(String nom, String prenom, int age) {
 		int rFID = nom.hashCode();
 		bdd.ajouterBarman(rFID, nom, prenom, age, new Date());
-		window.add(new JLabel("Barman enregistré"), BorderLayout.CENTER);
+		JOptionPane.showMessageDialog(null,
+				"Barman ajouté", "Info",
+				JOptionPane.INFORMATION_MESSAGE);
 		window.validate();
 	}
 
