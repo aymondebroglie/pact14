@@ -128,8 +128,15 @@ public class Controller
 	// renvoie sur la page de chgt de MDP
 	public void changementMDP() 
 	{
-		ViewChangePassword cp = new ViewChangePassword(this);
+		ViewChangePassword vcp = new ViewChangePassword(this);
+		
+		Container cp = new Container() ;		
+		cp.setLayout(new GridBagLayout());
+		cp.add(vcp) ;
 		window.setContentPane(cp);
+		
+		this.setActualView(cp);
+		
 		window.validate();
 	}
 
@@ -141,14 +148,19 @@ public class Controller
 		{
 			if (Arrays.equals(cs1, cs2)) 
 			{
-				JPanel panneau = new JPanel();
-
 				this.printMDP(cs1);
 				JOptionPane.showMessageDialog(null,
-						"Mot de passe changé avec succès !", "Information",
+						"Mot de passe changé avec succès ! Vous allez être redirigé vers l'écran d'accueil.", "Information",
 						JOptionPane.INFORMATION_MESSAGE);
-				panneau.add(new JLabel("Mot de Passe changé"));
-				window.setContentPane(panneau);
+				
+				ViewWelcome vw = new ViewWelcome(this);
+				
+				Container cp = new Container() ;		
+				cp.setLayout(new GridBagLayout());
+				cp.add(vw) ;
+				window.setContentPane(cp);
+				
+				this.setActualView(cp);
 				window.validate();
 			} else 
 			{
@@ -795,7 +807,8 @@ public class Controller
 		window.validate();
 	}
 
-	public void ajoutBarman(String nom, String prenom, int age) {
+	public void ajoutBarman(String nom, String prenom, int age) 
+	{
 		int rFID = nom.hashCode();
 		bdd.ajouterBarman(rFID, nom, prenom, age, new Date());
 		JOptionPane.showMessageDialog(null,
@@ -804,7 +817,8 @@ public class Controller
 		window.validate();
 	}
 
-	public void livraison(String boisson, int nombre) {
+	public void livraison(String boisson, int nombre) 
+	{
 		this.addPreviousView(actualview);
 		ArrayList<Livraison> livraisons = new ArrayList<Livraison>();
 		livraisons.add(new Livraison(bdd.codeBarreDeBoisson(boisson),nombre));
@@ -818,7 +832,8 @@ public class Controller
 		window.validate();
 	}
 
-	public void ecranAjoutBouteille() {
+	public void ecranAjoutBouteille() 
+	{
 		this.addPreviousView(actualview);
 		ViewAddBottle vab = new ViewAddBottle(this);
         window.setContentPane(vab);
@@ -826,7 +841,8 @@ public class Controller
         window.validate();
 	}
 	
-	public void ecranAssocierGoulot(){
+	public void ecranAssocierGoulot()
+	{
 		this.addPreviousView(actualview);
 		ViewAssocierGoulot vag = new ViewAssocierGoulot(this);
 
@@ -839,13 +855,15 @@ public class Controller
 		window.validate();
 	}
 	
-	public void associerGoulot(String boisson){
+	public void associerGoulot(String boisson)
+	{
 		this.addPreviousView(actualview);
 		bdd.associerGoulot("1", bdd.codeBarreDeBoisson(boisson));
 		JOptionPane.showMessageDialog(null,
 				"Le goulot a bien été associé. Vous allez être redirigé vers l'écran d'accueil.", "Information",
 				JOptionPane.INFORMATION_MESSAGE);
-ViewBarmanHome vbh = new ViewBarmanHome(this);
+
+		ViewBarmanHome vbh = new ViewBarmanHome(this);
 		
 		Container cp = new Container() ;		
 		cp.setLayout(new GridBagLayout());
@@ -857,7 +875,8 @@ ViewBarmanHome vbh = new ViewBarmanHome(this);
 	}
 
 	
-	public void ajoutBouteilleMain(Long codeBarre,String nom,String marque,float degre,int volume ){
+	public void ajoutBouteilleMain(Long codeBarre,String nom,String marque,float degre,int volume )
+	{
 		JPanel pan = new JPanel();
 		bdd.ajouterBoisson(codeBarre, nom, marque, volume, degre);
 		pan.add(new JLabel("Boisson ajoutée : " + codeBarre));

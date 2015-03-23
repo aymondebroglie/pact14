@@ -170,8 +170,11 @@ public class Window extends JFrame {
 		this.setVisible(true);
 		
 		controller=new Controller(this,bdd);
-		ViewWelcome welcome = new ViewWelcome(controller); 
-		this.setContentPane(welcome);
-		this.validate();
+		ViewWelcome vw = new ViewWelcome(controller);
+		
+		Container cp = new Container() ;		
+		cp.setLayout(new GridBagLayout());
+		cp.add(vw) ;
+		this.setContentPane(cp);
 	}
 }
