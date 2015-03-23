@@ -7,10 +7,12 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 public class ViewAssocierGoulot extends JPanel {
 
@@ -22,37 +24,61 @@ public class ViewAssocierGoulot extends JPanel {
 	ArrayList<String> tableauAlcool;
 	String alcoolSelectionne;
 	
-	public ViewAssocierGoulot(final Controller controller){
+	public ViewAssocierGoulot(final Controller controller)
+	{
 		this.controller = controller;
+		
+		// definition du layout
+				GroupLayout layout = new GroupLayout(this) ;
+				this.setLayout(layout);
+		
 		tableauAlcool = controller.obtenirAlcools();;
 		JComboBox<String> menu = new JComboBox<String>();
 		alcoolSelectionne = tableauAlcool.get(0);
 		
-		menu.setPreferredSize(new Dimension(300,25));
-		for (String boisson : tableauAlcool) {
+		menu.setPreferredSize(new Dimension(200,25));
+		for (String boisson : tableauAlcool)
+		{
 			menu.addItem(boisson);
 		}
-		menu.addItemListener(new ItemListener(){
+		menu.addItemListener(new ItemListener()
+		{
 
 			@Override
-			public void itemStateChanged(ItemEvent arg0) {
+			public void itemStateChanged(ItemEvent arg0) 
+			{
 				alcoolSelectionne = (String) arg0.getItem();
 			}
 			
 		});
-		this.add(new JLabel("Choisissez l'alcool"));
-		this.add(menu);
+		JLabel msg = new JLabel("Choisissez l'alcool :");
 		JButton ok = new JButton("OK");
 		ok.addActionListener(new ActionListener(){
 
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				controller.associerGoulot(alcoolSelectionne)
-;				
-			}
-			
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				controller.associerGoulot(alcoolSelectionne);				
+			}	
 		});
-		this.add(ok);
+		
+		layout.setAutoCreateGaps(true);
+		
+		layout.setHorizontalGroup(
+	               layout.createParallelGroup(GroupLayout.Alignment.CENTER) 
+	                   .addGroup(layout.createSequentialGroup()
+	                		   .addComponent(msg)
+	                		   .addComponent(menu))
+	                	.addComponent(ok)
+	               );
+	       
+	    layout.setVerticalGroup(
+	               layout.createSequentialGroup()
+	                   .addGroup(layout.createParallelGroup()
+	                		   .addComponent(msg)
+	                		   .addComponent(menu))
+	                   .addComponent(ok)		   
+	               );
 	}
 
 }

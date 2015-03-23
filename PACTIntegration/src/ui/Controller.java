@@ -755,8 +755,9 @@ public class Controller
 	public void bouteilleFinie() 
 	{
 		bdd.bouteilleFinie("1");
-		window.add(new JLabel("Changement enregistré"), BorderLayout.CENTER);
-		window.validate();
+		JOptionPane.showMessageDialog(null,
+				"Le changement a bien été enregistré.", "Information",
+				JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	public void ajoutBouteille(final String codeBarre) 
@@ -798,7 +799,7 @@ public class Controller
 		int rFID = nom.hashCode();
 		bdd.ajouterBarman(rFID, nom, prenom, age, new Date());
 		JOptionPane.showMessageDialog(null,
-				"Barman ajouté", "Info",
+				"Barman ajouté", "Information",
 				JOptionPane.INFORMATION_MESSAGE);
 		window.validate();
 	}
@@ -828,17 +829,30 @@ public class Controller
 	public void ecranAssocierGoulot(){
 		this.addPreviousView(actualview);
 		ViewAssocierGoulot vag = new ViewAssocierGoulot(this);
-		window.setContentPane(vag);
-		this.setActualView(vag);
+
+		Container cp = new Container() ;		
+		cp.setLayout(new GridBagLayout());
+		cp.add(vag) ;
+		window.setContentPane(cp);
+		
+		this.setActualView(cp);
 		window.validate();
 	}
 	
 	public void associerGoulot(String boisson){
 		this.addPreviousView(actualview);
 		bdd.associerGoulot("1", bdd.codeBarreDeBoisson(boisson));
-		ViewBarmanHome vbh = new ViewBarmanHome(this);
-		window.setContentPane(vbh);
-		this.setActualView(vbh);
+		JOptionPane.showMessageDialog(null,
+				"Le goulot a bien été associé. Vous allez être redirigé vers l'écran d'accueil.", "Information",
+				JOptionPane.INFORMATION_MESSAGE);
+ViewBarmanHome vbh = new ViewBarmanHome(this);
+		
+		Container cp = new Container() ;		
+		cp.setLayout(new GridBagLayout());
+		cp.add(vbh) ;
+		window.setContentPane(cp);
+		
+		this.setActualView(cp);
 		window.validate();
 	}
 
