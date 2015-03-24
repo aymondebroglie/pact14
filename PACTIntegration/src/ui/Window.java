@@ -1,6 +1,7 @@
 package ui;
 
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,7 +16,7 @@ public class Window extends JFrame {
 	private static final long serialVersionUID = 1L;
 	String title = "OptiBar";
 	private int width = 500;
-	private int height = 300;
+	private int height = 400;
 	BDDInterface bdd = null;
 	private Controller controller ;
 	//private GroupLayout layout ;
@@ -25,10 +26,9 @@ public class Window extends JFrame {
 	private JMenu general_user = new JMenu("Utilisateur");
 	private JMenuItem barman = new JMenuItem("Barman");
 	private JMenuItem boss = new JMenuItem("Patron");
-	private JMenu general_navigation = new JMenu("Navigation");
+	//private JMenu general_navigation = new JMenu("Navigation");
 	private JMenuItem previous = new JMenuItem("<<<");
-	private JMenuItem next = new JMenuItem(">>>");
-	
+	private JMenuItem next = new JMenuItem(">>>");	
 	private JMenu settings = new JMenu("Paramètres");
 	private JMenuItem settings_language = new JMenuItem("Langue");
 	private JMenuItem settings_mdp = new JMenuItem("Mot de Passe");
@@ -48,6 +48,9 @@ public class Window extends JFrame {
 	public Window(BDDInterface bdd) 
 	{
 		
+		//previous.setMinimumSize(new Dimension(20, previous.getPreferredSize().height));
+		//next.setMinimumSize(new Dimension(20, next.getPreferredSize().height));
+		
 		Container cont = this.getContentPane();
         cont.setLayout(new GridBagLayout());
 
@@ -58,9 +61,10 @@ public class Window extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		/** Menu general */
+		
 		// Sous-menu utilisateur
 		this.general.add(this.general_user);
-			this.general_navigation.add(previous);
+			//this.general_navigation.add(previous);
 				this.previous.addActionListener(new ActionListener()
 				{					
 					public void actionPerformed(ActionEvent arg0)
@@ -68,7 +72,7 @@ public class Window extends JFrame {
 						controller.previousView(controller.getActualView());
 					}
 				});
-			this.general_navigation.add(next);
+			//this.general_navigation.add(next);
 			this.next.addActionListener(new ActionListener()
 			{					
 				public void actionPerformed(ActionEvent arg0)
@@ -79,7 +83,7 @@ public class Window extends JFrame {
 			
 			
 			//Sous-menu navigation
-			this.general.add(this.general_navigation);
+			//this.general.add(this.general_navigation);
 				this.general_user.add(barman);
 					this.barman.addActionListener(new ActionListener()
 					{					
@@ -161,13 +165,13 @@ public class Window extends JFrame {
 				controller.aProposOptibar();
 			}
 		});
-
+		this.menubar.add(previous);
+		this.menubar.add(next);
 		this.menubar.add(general);
 		this.menubar.add(settings);
 		this.menubar.add(help);
 
 		this.setJMenuBar(menubar);
-		this.setVisible(true);
 		
 		controller=new Controller(this,bdd);
 		ViewWelcome vw = new ViewWelcome(controller);
@@ -175,5 +179,6 @@ public class Window extends JFrame {
 		cp.setLayout(new GridBagLayout());
 		cp.add(vw) ;
 		this.setContentPane(cp);
+		this.setVisible(true);
 	}
 }
