@@ -64,7 +64,7 @@ import bdd.HistoBoisson;
 			initialiser();
 		}
 		
-		public graphique(ArrayList<ArrayList<HistoBoisson>> data,ArrayList<String> boissons, boolean stocks)//true si on visualise les stocks, false si on visualise les commandes 
+		public graphique(ArrayList<ArrayList<HistoBoisson>> data,ArrayList<String> boissons,int n, boolean stocks)//true si on visualise les stocks, false si on visualise les commandes 
 		{
 			super(new GridLayout(1,0));
 			
@@ -72,7 +72,7 @@ import bdd.HistoBoisson;
 			this.ordonnee=stocks?"Volume (cl)":"Volume (bouteille)";
 			this.abscisse="Temps";
 			this.valeurs= new ArrayList<Float>();
-			Date[] dates=new Date[10];
+			Date[] dates=new Date[n];
 			/*j'avais dis des bêtises, les différentes arraylist<histoBoisson> n'ont pas nécessairement le même nombre d'élément, je complète donc avec des zéros*/
 			ArrayList<HistoBoisson> plusLongue= new ArrayList<HistoBoisson>();
 			int i,j=0,k,size;
@@ -87,10 +87,10 @@ import bdd.HistoBoisson;
 			if(size==0)
 				return;
 			dates[0]=plusLongue.get(0).getDate();
-			dates[9]=plusLongue.get(size-1).getDate();
-			long longueur = dates[9].getTime() - dates[0].getTime();
-			long pas = longueur/9;
-			for(i=1; i<9; i++)
+			dates[n-1]=plusLongue.get(size-1).getDate();
+			long longueur = dates[n-1].getTime() - dates[0].getTime();
+			long pas = longueur/(n-1);
+			for(i=1; i<n-1; i++)
 			dates[i]=new Date(dates[0].getTime() + i*pas) ;
 			/*int[] compteurs=new int[data.size()];
 			for(i=0; i<data.size();i++)
@@ -110,7 +110,7 @@ import bdd.HistoBoisson;
 				}
 			}*/
 			//voilà en fait j'en ai chié des boules c'était pas évident du tout.
-			for(i=0; i<10; i++)
+			for(i=0; i<n; i++)
 			{
 				for(j=0; j<data.size(); j++)
 				{

@@ -22,7 +22,6 @@ public class Optibar {
 			}
 		};
 		t.start();
-		bdd.ajouterConsommation("1", 1, 5);
 	}
 
 }
