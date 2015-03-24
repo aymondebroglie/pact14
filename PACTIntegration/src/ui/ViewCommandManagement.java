@@ -20,10 +20,10 @@ public class ViewCommandManagement extends JPanel
 	private static final long serialVersionUID = 1L;
 	private Controller controller;
 	
-	private JRadioButton soiree = new JRadioButton("soirée");
+	private JRadioButton soiree = new JRadioButton("soirï¿½e");
 	private JRadioButton semaine = new JRadioButton("semaine");
 	private JRadioButton mois = new JRadioButton("mois");
-	private JRadioButton annee = new JRadioButton("année");
+	private JRadioButton annee = new JRadioButton("annï¿½e");
 	
 	private ArrayList<BoissonCheckBox> tableauBouton = new ArrayList<BoissonCheckBox>();
 	ArrayList<String> tableauAlcool ;
@@ -44,7 +44,7 @@ public class ViewCommandManagement extends JPanel
 	}
 }
 
-	public ViewCommandManagement(Controller controller) 
+	public ViewCommandManagement(final Controller controller) 
 	{
 		this.controller = controller;
 		
