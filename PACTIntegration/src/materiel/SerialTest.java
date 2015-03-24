@@ -29,7 +29,7 @@ public class SerialTest implements SerialPortEventListener {
 	* making the displayed results codepage independent
 	*/
 	private BufferedReader input;
-	
+	String barman="0" ; 
 	private BDDInterface bdd ;
 	/** The output stream to the port */
 	private OutputStream output;
@@ -47,6 +47,7 @@ public class SerialTest implements SerialPortEventListener {
                
 
 		CommPortIdentifier portId = null;
+		@SuppressWarnings("rawtypes")
 		Enumeration portEnum = CommPortIdentifier.getPortIdentifiers();
 
 		//First, Find an instance of serial port as set in PORT_NAMES.
@@ -103,18 +104,21 @@ public class SerialTest implements SerialPortEventListener {
 	 * Handle an event on the serial port. Read the data and print it.
 	 */
 	public synchronized void serialEvent(SerialPortEvent oEvent) {
-		String barman ; 
 		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 			try {
 				String inputLine=input.readLine();
-				if(inputLine.contains("U")){
-					barman = inputLine;
+				if(inputLine.matches("UServeur [0123456789]+")){
+					barman=inputLine.replace("UServeur ", "");
 				}
-				else{
-				int volume  = Integer.parseInt(inputLine);
-				bdd.ajouterConsommation("1", 1, volume);
-				System.out.println(volume);
+				else if(inputLine.matches("[123456789][0123456789]*"))
+				{
+					int volume  = Integer.parseInt(inputLine);
+					System.out.println(volume);
+					if(!barman.equalsIgnoreCase("0"))
+						bdd.ajouterConsommation("1", Integer.parseInt(barman), volume);
 				}
+				else
+					System.out.println("Erreur, inputLine non reconnue");
 			} catch (Exception e) {
 				System.err.println(e.toString());
 			}
