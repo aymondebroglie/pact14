@@ -509,19 +509,14 @@ public class Controller
 	public void obtenirstock() 
 	{
 		this.addPreviousView(actualview);
-		//ViewStocksManagement vsm = new ViewStocksManagement(this);
-		/*Container cp = window.getContentPane();
-		cp.removeAll();
-		
-		
-		window.validate();*/
-		//ViewStockManagementSouth pan2 = new ViewStockManagementSouth(this);
+		ViewStocksManagement vsm = new ViewStocksManagement(this);
 
-		//window.add(vsm, BorderLayout.EAST);
-		MetaViewStockManagement pan = new MetaViewStockManagement(this) ;
+		Container cp = new Container() ;		
+		cp.setLayout(new GridBagLayout());
+		cp.add(vsm) ;
+		window.setContentPane(cp);
 		
-		window.setContentPane(pan) ;
-		this.setActualView(pan) ;
+		this.setActualView(cp);
 		window.validate();
 	}
 
@@ -529,14 +524,14 @@ public class Controller
 	{
 		this.addPreviousView(actualview);
 		ViewCommandManagement vsm = new ViewCommandManagement(this);
-		ViewStockManagementSouth pan2 = new ViewStockManagementSouth(this);
+		
 		/*Container cp = window.getContentPane();
 		cp.removeAll();*/
 		Container cp = new Container() ;		
 		cp.setLayout(new GridBagLayout());
 		
 		cp.add(vsm);
-		cp.add(pan2);
+		
 		window.setContentPane(cp);
 		window.validate();
 	}
