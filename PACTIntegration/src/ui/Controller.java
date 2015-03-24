@@ -440,11 +440,11 @@ public class Controller
 
 	public void attribution(ArrayList<String> tableauAffichage) 
 	{
-		this.addPreviousView(actualview);
+		
 		String goulot = bdd.attributionDeGoulot();
-		ViewRetirerGoulot pan = new ViewRetirerGoulot(this);
+		
 		if (tableauAffichage.size() != 1)
-			//pan.add(new JLabel("Veuillez choisir une boisson SVP"));
+		
 		JOptionPane.showMessageDialog(null,
 				"Veuillez choisir une boisson, s'il-vous-plaît", "Attention",
 				JOptionPane.WARNING_MESSAGE);
@@ -463,9 +463,7 @@ public class Controller
 			bdd.associerGoulot(goulot,
 			bdd.codeBarreDeBoisson(tableauAffichage.get(0)));
 		}
-		window.setContentPane(pan);
-		this.setActualView(pan);
-		window.validate();
+		
 	}
 
 	/****************************************************************************************************/
