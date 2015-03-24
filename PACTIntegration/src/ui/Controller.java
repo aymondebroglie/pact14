@@ -498,9 +498,13 @@ public class Controller
 	public void gestionStocks() 
 	{
 		this.addPreviousView(actualview);
-		ViewDelivery vsm = new ViewDelivery(this);
-		window.setContentPane(vsm);
-		this.setActualView(vsm);
+		ViewDelivery vd = new ViewDelivery(this);
+		Container cp = new Container() ;		
+		cp.setLayout(new GridBagLayout());
+		cp.add(vd) ;
+		window.setContentPane(cp);
+		
+		this.setActualView(cp);
 		window.validate();
 	}
 
@@ -820,12 +824,15 @@ public class Controller
 		ArrayList<Livraison> livraisons = new ArrayList<Livraison>();
 		livraisons.add(new Livraison(bdd.codeBarreDeBoisson(boisson),nombre));
 		bdd.livraison(livraisons);
+		
 		ViewDelivery vd = new ViewDelivery(this);
-		window.setContentPane(vd);
-
-		window.add(new JLabel("Livraison enregistrée"));
-		this.setActualView(vd);
-
+		
+		Container cp = new Container() ;		
+		cp.setLayout(new GridBagLayout());
+		cp.add(vd) ;
+		window.setContentPane(cp);
+		
+		this.setActualView(cp);
 		window.validate();
 	}
 

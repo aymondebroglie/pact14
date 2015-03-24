@@ -56,7 +56,7 @@ public class BDD implements BDDInterface
 				throw(new Exception("Pas de boisson associee au goulot d'identifiant bluetooth "+bluetoothID));
 			if(cPK==0)
 			{
-				rs=st.executeQuery("SELECT CPK FROM Servi");
+				rs=st.executeQuery("SELECT CPK FROM Commande");
 				while(rs.next())
 					cPK=Math.max(rs.getInt(1),cPK);
 				cPK++;

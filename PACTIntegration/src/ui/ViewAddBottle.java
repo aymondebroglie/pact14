@@ -17,7 +17,7 @@ public class ViewAddBottle extends JPanel {
 	
     public ViewAddBottle(final Controller controller)
     {
-	this.add(new JLabel("Veuillez rentrer le code barre de la bouteille Ã  ajouter"));
+	this.add(new JLabel("Veuillez rentrer le code barre de la bouteille à ajouter"));
 	tf.setPreferredSize(new Dimension(300,25));
 	this.add(tf);
 	JButton ok = new JButton("OK");
@@ -30,7 +30,7 @@ public class ViewAddBottle extends JPanel {
 	});
 	this.add(ok);
 	
-	this.add(new JLabel("Ou rentrer les informations Ã  la main"));
+	this.add(new JLabel("Ou rentrer les informations à la main"));
 	this.add(new JLabel("codeBarre de la boisson"));
 	final JTextField codeBarre = new JTextField();
 	codeBarre.setPreferredSize(new Dimension(300,25));
@@ -43,7 +43,7 @@ public class ViewAddBottle extends JPanel {
 	final JTextField marque = new JTextField();
 	marque.setPreferredSize(new Dimension(300,25));
 	this.add(marque);
-	this.add(new JLabel("Degrï¿½ de la boisson"));
+	this.add(new JLabel("Degré de la boisson"));
 	final JTextField degre = new JTextField();
 	degre.setPreferredSize(new Dimension(300,25));
 	this.add(degre);
