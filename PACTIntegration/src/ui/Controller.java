@@ -428,8 +428,12 @@ public class Controller
 		// fenetre pour le test
 		this.addPreviousView(actualview);
 		ViewRetirerGoulot pan = new ViewRetirerGoulot(this);
-		window.setContentPane(pan);
-		this.setActualView(pan);
+		Container cp = new Container() ;		
+		cp.setLayout(new GridBagLayout());
+		cp.add(pan) ;
+		window.setContentPane(cp);
+		
+		this.setActualView(cp);
 		window.validate();
 
 	}

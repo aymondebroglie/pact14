@@ -1,12 +1,17 @@
 package ui;
 
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 public class ViewRetirerGoulot extends JPanel {
 
@@ -21,23 +26,44 @@ public class ViewRetirerGoulot extends JPanel {
 	private Controller controller;
 	
 
-	public ViewRetirerGoulot(Controller controller) {
+	public ViewRetirerGoulot(Controller controller) 
+	{
 		this.controller = controller;
+		
+		// definition du layout
+		GroupLayout layout = new GroupLayout(this) ;
+		this.setLayout(layout);
 		
 		tableauBoisson = controller.obtenirAlcools();
 		for (String boisson : tableauBoisson) {
            tableauBoutton.add(new BoissonRadioButton(boisson));
 		}
-        for(BoissonRadioButton boutton : tableauBoutton ){
+		JPanel scrollingarea = new JPanel() ;
+		scrollingarea.setLayout(new BoxLayout(scrollingarea, BoxLayout.PAGE_AXIS)) ;
+        for(BoissonRadioButton boutton : tableauBoutton )
+        {
         	bg.add(boutton);
         	
-        	this.add(boutton);
+        	scrollingarea.add(boutton);
         }
+        JScrollPane scroll = new JScrollPane(scrollingarea) ;
+		scroll.setPreferredSize(new Dimension(185,220));
+		
         JButton ok = new JButton("OK");
       
         ok.addActionListener(new Associer());
 
-        this.add(ok);
+        //layout.setAutoCreateGaps(true);
+        
+        layout.setHorizontalGroup(layout.createSequentialGroup()
+        		.addComponent(scroll)
+        		.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED) 
+        		.addComponent(ok)
+        		);
+        layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+        		.addComponent(scroll)
+        		.addComponent(ok)
+        		);
 	}
 	public ArrayList<String> obtenirBouttonAlcool() {
 

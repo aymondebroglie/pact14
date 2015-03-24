@@ -171,7 +171,6 @@ public class Window extends JFrame {
 		
 		controller=new Controller(this,bdd);
 		ViewWelcome vw = new ViewWelcome(controller);
-		
 		Container cp = new Container() ;		
 		cp.setLayout(new GridBagLayout());
 		cp.add(vw) ;

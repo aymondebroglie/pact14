@@ -2,6 +2,7 @@ package ui;
 
 import java.awt.GridLayout;
 
+import javax.swing.GroupLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -16,10 +17,23 @@ public class ViewWelcome extends JPanel {
 	{
 		this.controller = controller;
 				
-		this.setLayout(new GridLayout(4,1));
+		// definition du layout
+		GroupLayout layout = new GroupLayout(this) ;
+		this.setLayout(layout);
 		
-		this.add(new JLabel("Bienvenue sur OptiBar ! \n",JLabel.CENTER));
-		this.add(new JLabel("Mais avant tout... Barman ou Patron ?",JLabel.CENTER)) ;
-		this.add(new JLabel(" Pour cela : Général >> Utilisateur",JLabel.CENTER)) ;
+		JLabel lign1 = new JLabel("Bienvenue sur OptiBar !",JLabel.CENTER);
+		JLabel lign2 = new JLabel("Mais avant tout... Barman ou Patron ?",JLabel.CENTER) ;
+		JLabel lign3 = new JLabel(" Pour cela : Général >> Utilisateur",JLabel.CENTER) ;
+		
+		layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+				.addComponent(lign1)
+				.addComponent(lign2)
+				.addComponent(lign3)
+				);
+		layout.setVerticalGroup(layout.createSequentialGroup()
+				.addComponent(lign1)
+				.addComponent(lign2)
+				.addComponent(lign3)
+				);
 	}
 }
