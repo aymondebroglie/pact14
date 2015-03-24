@@ -64,23 +64,35 @@ import bdd.HistoBoisson;
 			initialiser();
 		}
 		
-		public graphique(ArrayList<ArrayList<HistoBoisson>> data,ArrayList<String> boissons, boolean stocks)//true si on visualise les stocks, false si on visualise les commandes 
+		public graphique(ArrayList<ArrayList<HistoBoisson>> data,ArrayList<String> boissons,int n, boolean stocks)//true si on visualise les stocks, false si on visualise les commandes 
 		{
 			super(new GridLayout(1,0));
+			
 			this.titre=stocks?"Evolution des stocks":"Consommation en cL dans les commandes";
-			this.ordonnee="Volume";
+			this.ordonnee=stocks?"Volume (cl)":"Volume (bouteille)";
 			this.abscisse="Temps";
 			this.valeurs= new ArrayList<Float>();
+			Date[] dates=new Date[n];
 			/*j'avais dis des bêtises, les différentes arraylist<histoBoisson> n'ont pas nécessairement le même nombre d'élément, je complète donc avec des zéros*/
 			ArrayList<HistoBoisson> plusLongue= new ArrayList<HistoBoisson>();
-			int i,j=0,size;
+			int i,j=0,k,size;
 			
 			for(ArrayList<HistoBoisson> temp:data)
 			{
 				plusLongue=temp.size()>plusLongue.size()?temp:plusLongue;
 			}
+			
+			
 			size=plusLongue.size();
-			int[] compteurs=new int[data.size()];
+			if(size==0)
+				return;
+			dates[0]=plusLongue.get(0).getDate();
+			dates[n-1]=plusLongue.get(size-1).getDate();
+			long longueur = dates[n-1].getTime() - dates[0].getTime();
+			long pas = longueur/(n-1);
+			for(i=1; i<n-1; i++)
+			dates[i]=new Date(dates[0].getTime() + i*pas) ;
+			/*int[] compteurs=new int[data.size()];
 			for(i=0; i<data.size();i++)
 				compteurs[i]=0;
 			for(i=0; i<size; i++)
@@ -96,16 +108,45 @@ import bdd.HistoBoisson;
 					}
 					
 				}
-			}
+			}*/
 			//voilà en fait j'en ai chié des boules c'était pas évident du tout.
+			for(i=0; i<n; i++)
+			{
+				for(j=0; j<data.size(); j++)
+				{
+					System.out.println(dates[0]);
+					if(dates[i].before(data.get(j).get(0).getDate()))
+					{
+						valeurs.add(0f);
+					}
+					else
+					{
+						
+						k=0;
+						for(HistoBoisson temp:data.get(j))
+						{
+							if(dates[i].after(temp.getDate()))
+								k++;
+						}
+						valeurs.add((float)data.get(j).get(k).getVolume());
+					}
+					
+				}
+			}
+			
+			
+			
+			
 			this.series=boissons;
 			
 			this.categories=new ArrayList<String>();
 		
-			for(HistoBoisson temp:plusLongue)
+			/*for(HistoBoisson temp:plusLongue)
 			{
 				categories.add(temp.getDate().toString().subSequence(4, 16).toString() + temp.getDate().toString().subSequence(23,28).toString());
-			}
+			}*/
+			for(Date temp:dates)
+				categories.add(temp.toString().subSequence(4, 16).toString() + temp.toString().subSequence(23,28).toString());
 			
 			this.legende=true;
 			this.couleurFond=Color.white;
@@ -118,7 +159,7 @@ import bdd.HistoBoisson;
 			String dateString;
 			dateString=date.toString().subSequence(4, 16).toString() + date.toString().subSequence(23,28).toString();
 			this.titre="Etat des stocks � la date "+dateString;
-			this.ordonnee="Volume";
+			this.ordonnee="Volume (bouteille)";
 			this.abscisse="Boissons";
 			this.valeurs= new ArrayList<Float>();
 			for(DispoBoisson temp:data)

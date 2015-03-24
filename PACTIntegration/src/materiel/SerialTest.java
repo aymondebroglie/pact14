@@ -107,7 +107,7 @@ public class SerialTest implements SerialPortEventListener {
 		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 			try {
 				String inputLine=input.readLine();
-				if(inputLine.matches("UServeur [0123456789]+")){
+				if(inputLine.matches("UUser [0123456789]+")){
 					barman=inputLine.replace("UServeur ", "");
 				}
 				else if(inputLine.matches("[123456789][0123456789]*"))
