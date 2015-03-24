@@ -57,7 +57,7 @@ public class ViewRetirerGoulot extends JPanel {
         
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
         		.addComponent(scroll)
-        		//.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED) 
+        		.addGap(25) 
         		.addComponent(ok)
         		);
         layout.setVerticalGroup(layout.createSequentialGroup()

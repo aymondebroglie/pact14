@@ -840,9 +840,13 @@ public class Controller
 	{
 		this.addPreviousView(actualview);
 		ViewAddBottle vab = new ViewAddBottle(this);
-        window.setContentPane(vab);
-        this.setActualView(vab);
-        window.validate();
+		Container cp = new Container() ;		
+		cp.setLayout(new GridBagLayout());
+		cp.add(vab) ;
+		window.setContentPane(cp);
+		
+		this.setActualView(cp);
+		window.validate();
 	}
 	
 	public void ecranAssocierGoulot()
