@@ -509,8 +509,9 @@ public class Controller
 	public void obtenirstock() 
 	{
 		this.addPreviousView(actualview);
+		
 		ViewStocksManagement vsm = new ViewStocksManagement(this);
-
+		
 		Container cp = new Container() ;		
 		cp.setLayout(new GridBagLayout());
 		cp.add(vsm) ;
@@ -523,16 +524,15 @@ public class Controller
 	public void commande()
 	{
 		this.addPreviousView(actualview);
+		
 		ViewCommandManagement vsm = new ViewCommandManagement(this);
 		
-		/*Container cp = window.getContentPane();
-		cp.removeAll();*/
 		Container cp = new Container() ;		
 		cp.setLayout(new GridBagLayout());
-		
 		cp.add(vsm);
-		
 		window.setContentPane(cp);
+		
+		this.setActualView(cp);
 		window.validate();
 	}
 	

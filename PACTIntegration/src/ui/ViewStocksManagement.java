@@ -140,10 +140,7 @@ public class ViewStocksManagement extends JPanel {
 			}
 
 		});
-		/*this.add(soiree);
-		this.add(semaine);
-		this.add(mois);
-		this.add(annee);*/
+
 		/**********************************************************************************/
 		
 		tableauAlcool=controller.obtenirAlcools();
