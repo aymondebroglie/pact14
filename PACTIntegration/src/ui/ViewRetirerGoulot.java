@@ -47,20 +47,20 @@ public class ViewRetirerGoulot extends JPanel {
         	scrollingarea.add(boutton);
         }
         JScrollPane scroll = new JScrollPane(scrollingarea) ;
-		scroll.setPreferredSize(new Dimension(185,220));
+		scroll.setPreferredSize(new Dimension(185,140));
 		
         JButton ok = new JButton("OK");
       
         ok.addActionListener(new Associer());
 
-        //layout.setAutoCreateGaps(true);
+        layout.setAutoCreateGaps(true);
         
-        layout.setHorizontalGroup(layout.createSequentialGroup()
+        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
         		.addComponent(scroll)
-        		.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED) 
+        		//.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED) 
         		.addComponent(ok)
         		);
-        layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+        layout.setVerticalGroup(layout.createSequentialGroup()
         		.addComponent(scroll)
         		.addComponent(ok)
         		);
