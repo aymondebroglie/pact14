@@ -68,7 +68,7 @@ import bdd.HistoBoisson;
 		{
 			super(new GridLayout(1,0));
 			this.titre=stocks?"Evolution des stocks":"Consommation en cL dans les commandes";
-			this.ordonnee="Volume";
+			this.ordonnee=stocks?"Volume (cl)":"Volume (bouteille)";
 			this.abscisse="Temps";
 			this.valeurs= new ArrayList<Float>();
 			/*j'avais dis des bêtises, les différentes arraylist<histoBoisson> n'ont pas nécessairement le même nombre d'élément, je complète donc avec des zéros*/
@@ -118,7 +118,7 @@ import bdd.HistoBoisson;
 			String dateString;
 			dateString=date.toString().subSequence(4, 16).toString() + date.toString().subSequence(23,28).toString();
 			this.titre="Etat des stocks � la date "+dateString;
-			this.ordonnee="Volume";
+			this.ordonnee="Volume (bouteille)";
 			this.abscisse="Boissons";
 			this.valeurs= new ArrayList<Float>();
 			for(DispoBoisson temp:data)
