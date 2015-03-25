@@ -1,15 +1,18 @@
 package ui;
 
+import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JToolBar;
 
 import bdd.*;
 public class Window extends JFrame {
@@ -22,13 +25,14 @@ public class Window extends JFrame {
 	//private GroupLayout layout ;
 
 	private JMenuBar menubar = new JMenuBar();
+	private JToolBar toolbar = new JToolBar();
 	private JMenu general = new JMenu("Général");
 	private JMenu general_user = new JMenu("Utilisateur");
 	private JMenuItem barman = new JMenuItem("Barman");
 	private JMenuItem boss = new JMenuItem("Patron");
 	//private JMenu general_navigation = new JMenu("Navigation");
-	private JMenuItem previous = new JMenuItem("<<<");
-	private JMenuItem next = new JMenuItem(">>>");	
+	private JButton previous = new JButton("<<<");
+	private JButton next = new JButton(">>>");	
 	private JMenu settings = new JMenu("Paramètres");
 	private JMenuItem settings_language = new JMenuItem("Langue");
 	private JMenuItem settings_mdp = new JMenuItem("Mot de Passe");
@@ -50,7 +54,7 @@ public class Window extends JFrame {
 		
 		//previous.setMinimumSize(new Dimension(20, previous.getPreferredSize().height));
 		//next.setMinimumSize(new Dimension(20, next.getPreferredSize().height));
-		
+	
 		Container cont = this.getContentPane();
         cont.setLayout(new GridBagLayout());
 
@@ -60,6 +64,8 @@ public class Window extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+		toolbar.setFloatable(false);
+		
 		/** Menu general */
 		
 		// Sous-menu utilisateur
@@ -165,17 +171,21 @@ public class Window extends JFrame {
 				controller.aProposOptibar();
 			}
 		});
-		this.menubar.add(previous);
-		this.menubar.add(next);
+		
+		this.toolbar.add(previous);
+		this.toolbar.add(next);
+		this.menubar.add(toolbar);
 		this.menubar.add(general);
 		this.menubar.add(settings);
 		this.menubar.add(help);
 
 		this.setJMenuBar(menubar);
 		
+		
 		controller=new Controller(this,bdd);
 		ViewWelcome vw = new ViewWelcome(controller);
-		Container cp = new Container() ;		
+		Container cp = new Container() ;
+			
 		cp.setLayout(new GridBagLayout());
 		cp.add(vw) ;
 		this.setContentPane(cp);
