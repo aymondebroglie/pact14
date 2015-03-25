@@ -1,7 +1,5 @@
 package ui;
 
-import java.awt.GridLayout;
-
 import javax.swing.GroupLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;

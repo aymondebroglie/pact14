@@ -12,7 +12,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
 public class ViewAssocierGoulot extends JPanel {
 
@@ -20,6 +19,7 @@ public class ViewAssocierGoulot extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	@SuppressWarnings("unused")
 	private Controller controller;
 	ArrayList<String> tableauAlcool;
 	String alcoolSelectionne;

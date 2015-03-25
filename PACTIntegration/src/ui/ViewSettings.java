@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 public class ViewSettings extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
+	@SuppressWarnings("unused")
 	private Controller controller ;
 	
 	public ViewSettings(Controller controller)

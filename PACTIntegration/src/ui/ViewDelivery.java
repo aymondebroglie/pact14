@@ -18,6 +18,7 @@ import javax.swing.SwingConstants;
 public class ViewDelivery extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	@SuppressWarnings("unused")
 	private Controller controller;
 	private ArrayList<String> tableauAlcool;
     private String alcoolSelectionne;
