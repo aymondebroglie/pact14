@@ -1,6 +1,7 @@
 package ui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
@@ -47,6 +48,15 @@ public class Window extends JFrame {
 	public void setWSize(int width, int height) {
 		this.width = width;
 		this.height = height;
+	}
+	
+	public JButton getNextButton()
+	{
+		return next ;
+	}
+	public JButton getPreviousButton()
+	{
+		return previous ;
 	}
 
 	public Window(BDDInterface bdd) 
@@ -170,6 +180,9 @@ public class Window extends JFrame {
 				controller.aProposOptibar();
 			}
 		});
+		
+		previous.setForeground(Color.GRAY);
+		next.setForeground(Color.GRAY);
 		
 		this.toolbar.add(previous);
 		this.toolbar.add(next);

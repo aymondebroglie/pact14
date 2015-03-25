@@ -3,6 +3,7 @@ package ui;
 import bdd.*;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -223,7 +224,7 @@ public class Controller
 
 			stacknextview.pop();
 		}
-		System.out.println("is stacknextview empty ?" + stacknextview.empty());
+		window.getNextButton().setForeground(Color.GRAY);
 	}
 	
 	public void clearPreviousStacks()
@@ -234,9 +235,7 @@ public class Controller
 		{
 			stackpreviousview.pop();
 		}
-
-		System.out.println("is stackpreviousview empty ?"
-				+ stackpreviousview.empty());
+		window.getPreviousButton().setForeground(Color.gray);
 	}
 	
 	public void clearStacks() 
@@ -257,6 +256,7 @@ public class Controller
 			this.clearNextStacks() ;
 		}
 		stackpreviousview.push(previousview);
+		window.getPreviousButton().setForeground(Color.BLACK);
 	}
 
 	public void previousView(Container actualview) 
@@ -272,7 +272,14 @@ public class Controller
 		else 
 		{
 			Container previousview = stackpreviousview.pop();
+			
+			if(stackpreviousview.empty())
+			{
+				window.getPreviousButton().setForeground(Color.GRAY);
+			}
+			
 			stacknextview.push(actualview);
+			window.getNextButton().setForeground(Color.BLACK);
 			this.setActualView(previousview);
 			window.setContentPane(previousview);
 			window.validate();
@@ -286,10 +293,18 @@ public class Controller
 			JOptionPane.showMessageDialog(null,
 					"L'opération demandée est impossible", "Attention",
 					JOptionPane.WARNING_MESSAGE);
-		} else 
+		} 
+		else 
 		{
 			Container nextview = stacknextview.pop();
+			
+			if(stacknextview.empty())
+			{
+				window.getNextButton().setForeground(Color.GRAY);
+			}
+			
 			stackpreviousview.push(actualview);
+			window.getPreviousButton().setForeground(Color.BLACK);
 			this.setActualView(nextview);
 			window.setContentPane(nextview);
 			window.validate();
