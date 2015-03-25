@@ -51,7 +51,6 @@ public class Window extends JFrame {
 
 	public Window(BDDInterface bdd) 
 	{
-		
 		//previous.setMinimumSize(new Dimension(20, previous.getPreferredSize().height));
 		//next.setMinimumSize(new Dimension(20, next.getPreferredSize().height));
 	

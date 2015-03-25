@@ -41,7 +41,7 @@ public class ViewAddBottle extends JPanel
     	});
     	//this.add(ok);
 	
-    	JLabel msg2 = new JLabel("Ou rentrer les informations à la main");
+    	JLabel msg2 = new JLabel("Sinon, rentrez les informations à la main");
     	JLabel msg3 = new JLabel("Code-barre");
     	
     	final JTextField codeBarre = new JTextField();

@@ -128,6 +128,7 @@ public class Controller
 	// renvoie sur la page de chgt de MDP
 	public void changementMDP() 
 	{
+		this.clearStacks();
 		ViewChangePassword vcp = new ViewChangePassword(this);
 		
 		Container cp = new Container() ;		
@@ -152,6 +153,7 @@ public class Controller
 				JOptionPane.showMessageDialog(null,
 						"Mot de passe changé avec succès ! Vous allez être redirigé vers l'écran d'accueil.", "Information",
 						JOptionPane.INFORMATION_MESSAGE);
+				
 				
 				ViewWelcome vw = new ViewWelcome(this);
 				
