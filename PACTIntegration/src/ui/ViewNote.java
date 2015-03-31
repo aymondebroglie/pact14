@@ -33,7 +33,7 @@ public class ViewNote extends JPanel
 			result += "<h3>"+t.toString()+"<h3 /><br />";
 		}
 				
-		result += "<h2 >Total:\t\t"+bdd.finDeCommande(1)+"€<h2 /><br /><html />";
+		result += "<h2 >Total:\t\t"+bdd.finDeCommande(1)+"â‚¬<h2 /><br /><html />";
 		
 		this.add(new JLabel(result),BorderLayout.SOUTH);
 	}

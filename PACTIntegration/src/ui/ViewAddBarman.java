@@ -30,9 +30,9 @@ public class ViewAddBarman extends JPanel{
 		age.setPreferredSize(new Dimension(300,25));
 		JLabel l_nom = new JLabel("Nom");
 		//this.add(nom);
-		JLabel l_prenom = new JLabel("Prenom");
+		JLabel l_prenom = new JLabel("Prénom");
 		//this.add(prenom);
-		JLabel l_age = new JLabel("Age");
+		JLabel l_age = new JLabel("Âge");
 		//this.add(age);
 		JButton ok = new JButton("OK");
 		ok.addActionListener(new ActionListener(){

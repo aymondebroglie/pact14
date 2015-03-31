@@ -21,8 +21,8 @@ public class ViewBossHome extends JPanel {
 		GroupLayout layout = new GroupLayout(this) ;
 		this.setLayout(layout);
 		
-		JButton consultervosdonnees = new JButton("Consulter vos donnees");
-		JButton gerervosstocks = new JButton("Gerer vos stocks");
+		JButton consultervosdonnees = new JButton("Consulter vos données");
+		JButton gerervosstocks = new JButton("Gérer vos stocks");
 		JButton ajouterBarman = new JButton("Ajouter Barman");
 		ajouterBarman.addActionListener(new ActionListener(){
 
