@@ -82,16 +82,18 @@ import bdd.HistoBoisson;
 				plusLongue=temp.size()>plusLongue.size()?temp:plusLongue;
 			}
 			
-			
 			size=plusLongue.size();
+			
 			if(size==0)
 				return;
+			
 			dates[0]=plusLongue.get(0).getDate();
 			dates[n-1]=plusLongue.get(size-1).getDate();
 			long longueur = dates[n-1].getTime() - dates[0].getTime();
 			long pas = longueur/(n-1);
 			for(i=1; i<n-1; i++)
 			dates[i]=new Date(dates[0].getTime() + i*pas) ;
+			
 			/*int[] compteurs=new int[data.size()];
 			for(i=0; i<data.size();i++)
 				compteurs[i]=0;
@@ -110,6 +112,7 @@ import bdd.HistoBoisson;
 				}
 			}*/
 			//voilà en fait j'en ai chié des boules c'était pas évident du tout.
+			
 			for(i=0; i<n; i++)
 			{
 				for(j=0; j<data.size(); j++)
@@ -120,8 +123,7 @@ import bdd.HistoBoisson;
 						valeurs.add(0f);
 					}
 					else
-					{
-						
+					{						
 						k=0;
 						for(HistoBoisson temp:data.get(j))
 						{
@@ -129,13 +131,9 @@ import bdd.HistoBoisson;
 								k++;
 						}
 						valeurs.add((float)data.get(j).get(k).getVolume());
-					}
-					
+					}	
 				}
 			}
-			
-			
-			
 			
 			this.series=boissons;
 			

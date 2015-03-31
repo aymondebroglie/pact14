@@ -4,5 +4,15 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="C:/Users/Quentin/Documents/TelecomParis/PACT/VisuDonnees/FilesJar/jfreechart-1.0.19/lib/jcommon-1.0.23.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Quentin/Documents/TelecomParis/PACT/VisuDonnees/FilesJar/jfreechart-1.0.19/lib/jfreechart-1.0.19.jar"/>
+	<classpathentry kind="lib" path="E:/Program files/Eclipse/apache-jena-2.12.1/apache-jena-2.12.1/lib/jena-arq-2.12.1.jar"/>
+	<classpathentry kind="lib" path="E:/Program files/Eclipse/apache-jena-2.12.1/apache-jena-2.12.1/lib/jena-core-2.12.1.jar"/>
+	<classpathentry kind="lib" path="E:/Program files/Eclipse/apache-jena-2.12.1/apache-jena-2.12.1/lib/jena-iri-1.1.1.jar"/>
+	<classpathentry kind="lib" path="E:/Program files/Eclipse/apache-jena-2.12.1/apache-jena-2.12.1/lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="E:/Program files/Eclipse/apache-jena-2.12.1/apache-jena-2.12.1/lib/slf4j-api-1.7.6.jar"/>
+	<classpathentry kind="lib" path="E:/Program files/Eclipse/apache-jena-2.12.1/apache-jena-2.12.1/lib/slf4j-log4j12-1.7.6.jar"/>
+	<classpathentry kind="lib" path="E:/Program files/Eclipse/apache-jena-2.12.1/apache-jena-2.12.1/lib/xercesImpl-2.11.0.jar"/>
+	<classpathentry kind="lib" path="E:/Program files/Eclipse/apache-jena-2.12.1/apache-jena-2.12.1/lib/xml-apis-1.4.01.jar"/>
+	<classpathentry kind="lib" path="E:/Program files/Eclipse/mysql-connector-java-5.0.8/mysql-connector-java-5.0.8-bin.jar"/>
+	<classpathentry kind="lib" path="E:/Program files/Eclipse/rxtx-2.1-7-bins-r2/RXTXcomm.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
