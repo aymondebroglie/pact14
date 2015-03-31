@@ -35,6 +35,10 @@ public class SerialTest implements SerialPortEventListener {
 	private OutputStream output;
 	/** Milliseconds to block while waiting for port open */
 	private static final int TIME_OUT = 2000;
+	public String getBarman() {
+		return barman;
+	}
+
 	/** Default bits per second for COM port. */
 	private static final int DATA_RATE = 115200;
 	
