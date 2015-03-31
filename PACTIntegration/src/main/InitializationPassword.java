@@ -2,6 +2,7 @@ package main;
 
 import java.io.File;
 import java.io.PrintStream;
+
 import javax.swing.JOptionPane;
 
 public abstract class InitializationPassword 
@@ -25,5 +26,6 @@ public abstract class InitializationPassword
 		}
 		
 	}
+	
 }
 

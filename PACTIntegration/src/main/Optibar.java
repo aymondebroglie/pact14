@@ -5,8 +5,8 @@ import bdd.*;
 
 public class Optibar {
 
-	private static BDDInterface bdd = new BDD("BAR", "root", "12345678");
-	//InitializationPassword.initialiserPassword("poney");
+	private static BDDInterface bdd = new BDD("BAR", "root", "");
+
 	@SuppressWarnings("unused")
 	private static Window window =new Window(bdd);
 	private static SerialTest main = new SerialTest(bdd);
@@ -20,7 +20,7 @@ public class Optibar {
 	public static void main(String[] args)
 	{
 
-		
+		//InitializationPassword.initialiserPassword("poney");
 		main.initialize();
 		
 		t.start();
