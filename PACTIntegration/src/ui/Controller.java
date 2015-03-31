@@ -458,7 +458,7 @@ public class Controller
 		if (tableauAffichage.size() != 1)
 		
 		JOptionPane.showMessageDialog(null,
-				"Veuillez choisir une boisson, s'il-vous-pla�t", "Attention",
+				"Veuillez choisir une boisson, s'il-vous-plaît", "Attention",
 				JOptionPane.WARNING_MESSAGE);
 		else if (goulot == "0000000000")
 		{
