@@ -21,7 +21,7 @@ public class ViewWelcome extends JPanel {
 		
 		JLabel lign1 = new JLabel("Bienvenue sur OptiBar !",JLabel.CENTER);
 		JLabel lign2 = new JLabel("Mais avant tout... Barman ou Patron ?",JLabel.CENTER) ;
-		JLabel lign3 = new JLabel(" Pour cela : Général >> Utilisateur",JLabel.CENTER) ;
+		JLabel lign3 = new JLabel(" Pour cela : GÃ©nÃ©ral >> Utilisateur",JLabel.CENTER) ;
 		
 		layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
 				.addComponent(lign1)
