@@ -2,6 +2,7 @@ package ui;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,6 +31,7 @@ public class Window extends JFrame {
 	private JMenuItem barman = new JMenuItem("Barman");
 	private JMenuItem boss = new JMenuItem("Patron");
 	//private JMenu general_navigation = new JMenu("Navigation");
+	
 	private JButton previous = new JButton("⇦");
 	private JButton next = new JButton("⇨");	
 	private JMenu settings = new JMenu("Paramètres");
@@ -182,6 +184,10 @@ public class Window extends JFrame {
 		previous.setForeground(Color.GRAY);
 		next.setForeground(Color.GRAY);
 		
+		Font f = new Font(Font.DIALOG,Font.BOLD,15);
+		
+		previous.setFont(f);
+		next.setFont(f);
 		this.toolbar.add(previous);
 		this.toolbar.add(next);
 		this.menubar.add(toolbar);
