@@ -27,7 +27,7 @@ import javax.swing.JTextField;
 
 import stat.DataSet;
 import stat.DimensionException;
-import visu.graphique;
+import visu.Graphique;
 import websem.OpenFoodFacts;
 
 //Classe permettant de controller ce qui se passe quand on appuie sur un bouton, c'est elle qui
@@ -555,7 +555,7 @@ public class Controller
 	public void etatDesStocks()
 	{
 		Date maintenant = new Date();
-		graphique g = new graphique(bdd.etatDesStocks(maintenant), maintenant);
+		Graphique g = new Graphique(bdd.etatDesStocks(maintenant), maintenant);
 		JFrame f = new JFrame();
 		f.setBounds(10, 10, 500, 500);
 		f.add(g);
@@ -611,7 +611,7 @@ public class Controller
 	{
 		long dayMilli=86400000L;
 		Date maintenant=new Date(),debut;
-		graphique g=null;
+		Graphique g=null;
 		ArrayList<String> tableauAffichage = vsm.obtenirBouttonAlcool();
 		int n;
 		if(duree!=null)
@@ -648,7 +648,7 @@ public class Controller
 			
 		
 			
-			g=new graphique(data,tableauAffichage,n, true);
+			g=new Graphique(data,tableauAffichage,n, true);
 		}
 
 		JFrame f = new JFrame();
@@ -661,7 +661,7 @@ public class Controller
 	{
 		long dayMilli=86400000L;
 		Date maintenant=new Date(),debut;
-		graphique g=null;
+		Graphique g=null;
 		ArrayList<String> tableauAffichage = vsm.obtenirBouttonAlcool();
 		int n;
 		if(duree!=null)
@@ -735,7 +735,7 @@ public class Controller
 	}
 		
 			
-			g=new graphique(data_histo,tableauAffichage, n, true);
+			g=new Graphique(data_histo,tableauAffichage, n, true);
 		}
 
 		JFrame f = new JFrame();
@@ -750,7 +750,7 @@ public class Controller
 		
 		long dayMilli=86400000L;
 		Date maintenant=new Date(),debut;
-		graphique g=null;
+		Graphique g=null;
 		int n;
 		if(duree!=null)
 		{
@@ -781,7 +781,7 @@ public class Controller
 			{
 				data.add(bdd.boissonCommande(nom,debut,maintenant));
 			}
-			 g=new graphique(data,tableauAffichage,n,false);
+			 g=new Graphique(data,tableauAffichage,n,false);
 		
 		JFrame f = new JFrame();
 		f.setBounds(10,10,500,500);
