@@ -147,7 +147,7 @@ public class Controller
 			{
 				this.printMDP(cs1);
 				JOptionPane.showMessageDialog(null,
-						"Mot de passe changé avec succès ! Vous allez être redirigé vers l'écran d'accueil.", "Information",
+						"Mot de passe changÃ© avec succÃ¨s ! Vous allez Ãªtre redirigÃ© vers l'Ã©cran d'accueil.", "Information",
 						JOptionPane.INFORMATION_MESSAGE);
 				
 				
@@ -261,7 +261,7 @@ public class Controller
 		if (stackpreviousview.empty()) 
 		{
 			JOptionPane.showMessageDialog(null,
-					"L'opération demandée est impossible", "Attention",
+					"L'opÃ©ration demandÃ©e est impossible", "Attention",
 					JOptionPane.WARNING_MESSAGE);
 		} 
 		else 
@@ -286,7 +286,7 @@ public class Controller
 		if (stacknextview.empty()) 
 		{
 			JOptionPane.showMessageDialog(null,
-					"L'opération demandée est impossible", "Attention",
+					"L'opÃ©ration demandÃ©e est impossible", "Attention",
 					JOptionPane.WARNING_MESSAGE);
 		} 
 		else 
@@ -329,7 +329,7 @@ public class Controller
 		System.out.println("WARNING : the method " + methodname
 				+ "hasn't been implemented yet !!!");
 		JOptionPane.showMessageDialog(null,
-				"L'opération demandée n'est pas encore disonible.",
+				"L'opÃ©ration demandÃ©e n'est pas encore disonible.",
 				"Attention", JOptionPane.WARNING_MESSAGE);
 	}
 
@@ -339,11 +339,11 @@ public class Controller
 				.showMessageDialog(
 						null,
 
-						"OptiBar a pour objectif de fournir à un bar des outils novateurs et pratiques d'utilisation permettant d'en faciliter la gestion. \n"
-								+ "Il permettra au patron de gérer ses stocks et aussi de savoir quelles sont les habitudes de consommation de ses clients de façon claire et précise. \n"
-								+ "Puisque la gestion des stocks est une dépense importante pour les bars, notre projet permettra au bar de minimiser ses stocks, sans jamaisêtre à court. \n"
-								+ "Enfin, notre système fournit aussi une aide au barman en lui indiquant les quantités qu'il a versées ce qui lui permet à la fois de préparer de meilleures boissons \n "
-								+ "mais lui facilite également la production de l'addition, gain de temps toujours utile à l'heure de pointe."
+						"OptiBar a pour objectif de fournir Ã  un bar des outils novateurs et pratiques d'utilisation permettant d'en faciliter la gestion. \n"
+								+ "Il permettra au patron de gÃ©rer ses stocks et aussi de savoir quelles sont les habitudes de consommation de ses clients de faÃ§on claire et prÃ©cise. \n"
+								+ "Puisque la gestion des stocks est une dÃ©pense importante pour les bars, notre projet permettra au bar de minimiser ses stocks, sans jamais Ãªtre Ã  court. \n"
+								+ "Enfin, notre systÃ¨me fournit aussi une aide au barman en lui indiquant les quantitÃ©s qu'il a versÃ©es ce qui lui permet Ã  la fois de prÃ©parer de meilleures boissons \n "
+								+ "mais lui facilite Ã©galement la production de l'addition, gain de temps toujours utile Ã  l'heure de pointe."
 
 						, "A propos d'OptiBar", JOptionPane.INFORMATION_MESSAGE);
 
@@ -458,7 +458,7 @@ public class Controller
 		if (tableauAffichage.size() != 1)
 		
 		JOptionPane.showMessageDialog(null,
-				"Veuillez choisir une boisson, s'il-vous-plaît", "Attention",
+				"Veuillez choisir une boisson, s'il-vous-plaï¿½t", "Attention",
 				JOptionPane.WARNING_MESSAGE);
 		else if (goulot == "0000000000")
 		{
@@ -799,7 +799,7 @@ public class Controller
 	{
 		bdd.bouteilleFinie("1");
 		JOptionPane.showMessageDialog(null,
-				"Le changement a bien été enregistré.", "Information",
+				"Le changement a bien Ã©tÃ© enregistrÃ©.", "Information",
 				JOptionPane.INFORMATION_MESSAGE);
 	}
 
@@ -824,14 +824,14 @@ public class Controller
 			public void actionPerformed(ActionEvent e) {
 				bdd.setVolumeDeBoisson(Integer.parseInt(volume1.getText()), code);
 				JOptionPane.showMessageDialog(null,
-						"Boisson ajoutée: "+codeBarre, "Info",
+						"Boisson ajoutÃ©e: "+codeBarre, "Info",
 						JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		pan.add(ok3);
 		}
 		else{JOptionPane.showMessageDialog(null,
-				"Boisson ajoutée: "+codeBarre, "Info",
+				"Boisson ajoutÃ©e: "+codeBarre, "Info",
 				JOptionPane.INFORMATION_MESSAGE);}
 		window.setContentPane(pan);
 		this.setActualView(pan);
@@ -843,7 +843,7 @@ public class Controller
 		int rFID = nom.hashCode();
 		bdd.ajouterBarman(rFID, nom, prenom, age, new Date());
 		JOptionPane.showMessageDialog(null,
-				"Barman ajouté", "Information",
+				"Barman ajoutÃ©", "Information",
 				JOptionPane.INFORMATION_MESSAGE);
 		window.validate();
 	}
@@ -898,7 +898,7 @@ public class Controller
 		this.addPreviousView(actualview);
 		bdd.associerGoulot("1", bdd.codeBarreDeBoisson(boisson));
 		JOptionPane.showMessageDialog(null,
-				"Le goulot a bien été associé. Vous allez être redirigé vers l'écran d'accueil.", "Information",
+				"Le goulot a bien Ã©tÃ© associÃ©. Vous allez Ãªtre redirigÃ© vers l'Ã©cran d'accueil.", "Information",
 				JOptionPane.INFORMATION_MESSAGE);
 
 		ViewBarmanHome vbh = new ViewBarmanHome(this);
@@ -917,7 +917,7 @@ public class Controller
 	{
 		JPanel pan = new JPanel();
 		bdd.ajouterBoisson(codeBarre, nom, marque, volume, degre);
-		pan.add(new JLabel("Boisson ajoutée : " + codeBarre));
+		pan.add(new JLabel("Boisson ajoutÃ©e : " + codeBarre));
 		window.setContentPane(pan);
 		window.validate();
 		

@@ -24,7 +24,7 @@ public class ViewAddBottle extends JPanel
     	GroupLayout layout = new GroupLayout(this) ;
     	this.setLayout(layout);
     	
-    	JLabel msg1 = new JLabel("Veuillez rentrer le code barre de la bouteille à ajouter");
+    	JLabel msg1 = new JLabel("Veuillez rentrer le code barre de la bouteille Ã  ajouter");
     	
     	final JTextField tf = new JTextField();
     	tf.setPreferredSize(new Dimension(300,25));
@@ -41,7 +41,7 @@ public class ViewAddBottle extends JPanel
     	});
     	//this.add(ok);
 	
-    	JLabel msg2 = new JLabel("Sinon, rentrez les informations à la main");
+    	JLabel msg2 = new JLabel("Sinon, rentrez les informations Ã  la main");
     	JLabel msg3 = new JLabel("Code-barre");
     	
     	final JTextField codeBarre = new JTextField();
@@ -60,7 +60,7 @@ public class ViewAddBottle extends JPanel
     	marque.setPreferredSize(new Dimension(300,25));
     	//this.add(marque);
     	
-    	JLabel msg6 = new JLabel("Degré");
+    	JLabel msg6 = new JLabel("DegrÃ©");
     	
     	final JTextField degre = new JTextField();
     	degre.setPreferredSize(new Dimension(300,25));

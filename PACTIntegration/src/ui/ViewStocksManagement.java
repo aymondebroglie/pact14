@@ -25,10 +25,10 @@ public class ViewStocksManagement extends JPanel {
 	private ArrayList<BoissonCheckBox> tableauBouton = new ArrayList<BoissonCheckBox>();
 	ArrayList<String> tableauAlcool;
 	
-	private JRadioButton soiree = new JRadioButton("soirée");
+	private JRadioButton soiree = new JRadioButton("soirÃ©e");
 	private JRadioButton semaine = new JRadioButton("semaine");
 	private JRadioButton mois = new JRadioButton("mois");
-	private JRadioButton annee = new JRadioButton("année");
+	private JRadioButton annee = new JRadioButton("annÃ©e");
 
 	public class EcouteurVisualiser implements ActionListener 
 	{
