@@ -218,12 +218,7 @@ import bdd.HistoBoisson;
 			renderer.setDrawBarOutline(false);
 
 			// pour la couleur des barres pour chaque serie
-
-			for (int s=0; s<series.size(); s++){
-				GradientPaint gp0 = new GradientPaint(0.0f, 0.0f, couleursBarres[s], 0.0f, 0.0f, couleursBarres[s]);
-				renderer.setSeriesPaint(s, gp0);
-
-			}		
+	
 
 			ChartPanel chartPanel = new ChartPanel(chart);
 			chartPanel.setFillZoomRectangle(true);
