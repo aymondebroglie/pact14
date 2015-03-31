@@ -49,7 +49,7 @@ public class ViewDelivery extends JPanel {
 			}
 			
 		});
-		JLabel msg1 = new JLabel("Selectionnez l'alcool livré");
+		JLabel msg1 = new JLabel("Selectionnez l'alcool livrÃ©");
 		//this.add(menu);
 		final JTextField nombreBouteille = new JTextField("0");
 		nombreBouteille.setPreferredSize(new Dimension(300,25));
