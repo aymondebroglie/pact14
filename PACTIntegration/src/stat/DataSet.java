@@ -263,20 +263,70 @@ public class DataSet extends ArrayList<Double> implements DataSetInterface
 	}
 	
 	/**************************************************************************************/
+	// getters & setters
+	
+	public int getFenetre(ArrayList<Date> liste_date , String duree)
+	{
+			long fenetre ;
+			switch(duree)
+			{
+			case "soiree":
+				fenetre = 86400000L ; //correspond a une fenetre de 24 heures
+				break;
+			case "semaine":
+				fenetre = 604800000L ; //correspond a une fenetre de 2 mois (61 jours = 30 jours + 31 jours)
+				break;
+			case "mois":
+				fenetre =  2628000000L ;
+				break;
+			case "annee":
+				fenetre = 31536000000L ;
+				break;
+			default :
+				fenetre = new Date().getTime() ;
+			}
+			long time = new Date().getTime();
+			long timeStart = time-fenetre ;
+			Date start = new Date(timeStart);
+			
+			int k = 0 ;
+			
+			for(Date date : liste_date)
+			{
+				if(date.after(start))
+				{
+					k++ ;
+				}
+			}
+			
+			return k ;
+
+
+	}
+	/**************************************************************************************/
 	// methode moindrecarre
 	
-	public ArrayList<Double> moindrecarre(ArrayList<Date> liste_date) throws DimensionException
+	public ArrayList<Double> moindrecarre(ArrayList<Date> liste_date, String duree) throws DimensionException
 	{
 		ArrayList<Double> Y = new ArrayList<Double>(2) ;
 		
-		int length = this.size() ;
-				
-		DataSet A = DataSet.dateToDataSet(liste_date) ; 
+		int totalLength = this.size() ;
+		int length = this.getFenetre(liste_date, duree) ;
+		int firstMeasure = totalLength-length ; 
+		
+		DataSet totalA = DataSet.dateToDataSet(liste_date) ; 
+		DataSet A = new DataSet() ;
+		
+		for(int i = 0 ; i<length ; i++)
+		{
+			A.add(totalA.get(firstMeasure+i));
+		}
 		
 		if(length != A.size())
 		{
 			throw new DimensionException() ;
 		}
+		
 		
 		DataSet B = DataSet.ones(length) ;
 		double nB = B.norm() ;

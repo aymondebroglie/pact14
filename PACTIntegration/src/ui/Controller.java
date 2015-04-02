@@ -578,8 +578,8 @@ public class Controller
 	{
 			ArrayList<HistoBoisson> liste_histo=data.get(0);				
 			int length = liste_histo.size();
-			
 			ArrayList<Date> liste_date = new ArrayList<Date>() ;
+			
 			for(int i = 0 ; i<length ; i++)
 			{
 				liste_date.add(liste_histo.get(i).getDate()) ;
@@ -593,7 +593,7 @@ public class Controller
 			
 			DataSet dataset = DataSet.volumeToDataSet(liste_volume) ;
 			
-			ArrayList<Double> delta = dataset.moindrecarre(liste_date) ;
+			ArrayList<Double> delta = dataset.moindrecarre(liste_date,duree) ;
 			
 			ArrayList<HistoBoisson> histo_modele = new ArrayList<HistoBoisson>() ;
 			for(int i = 0 ; i<length ; i++)
@@ -719,7 +719,7 @@ public class Controller
 			
 			DataSet dataset = DataSet.volumeToDataSet(liste_volume) ;
 			
-			ArrayList<Double> delta = dataset.moindrecarre(liste_date) ;
+			ArrayList<Double> delta = dataset.moindrecarre(liste_date,duree) ;
 			
 			ArrayList<HistoBoisson> histo_modele = new ArrayList<HistoBoisson>() ;
 			for(int i = 0 ; i<length ; i++)

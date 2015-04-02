@@ -26,8 +26,9 @@ public interface DataSetInterface
 	/**************************************************************************************/
 	// methode moindrecarre
 	
-	public ArrayList<Double> moindrecarre(ArrayList<Date> liste_date) throws DimensionException ;
+	public ArrayList<Double> moindrecarre(ArrayList<Date> liste_date, String duree) throws DimensionException ;
 	
+	public int getFenetre(ArrayList<Date> liste_date , String duree);
 	
 	
 	
