@@ -731,7 +731,7 @@ public class Controller
 			data_histo.add(histo_modele) ;
 			
 		
-		//tableauAffichage.add("Mod�le");
+		//tableauAffichage.add("Modele");
 	}
 		
 			

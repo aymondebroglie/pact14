@@ -29,23 +29,23 @@ import bdd.HistoBoisson;
 
 		private static final long serialVersionUID = 1L;
 
-		/** titre : Le titre du graphique affich� en haut */
+		/** titre : Le titre du graphique affiche en haut */
 		private String titre;
-		/** ordonnee : le nom de l'axe des ordonn�es */
+		/** ordonnee : le nom de l'axe des ordonnees */
 		private String ordonnee;
 		/** abscisses : le nom de l'axe des abscisses */
 		private String abscisse;
-		/** valeurs : les valeurs � afficher, elles sont tri�es par s�ries et par cat�gories*/
+		/** valeurs : les valeurs a afficher, elles sont triees par series et par categories*/
 		private List<Float> valeurs;
-		/** series : la liste des s�ries */
+		/** series : la liste des series */
 		private List<String> series;
 		/** categories : la liste des categories */
 		private List<String> categories;
-		/** legende : booleen vrai si on affiche la l�gende */
+		/** legende : booleen vrai si on affiche la légende */
 		private boolean legende;
 		/** couleurFond : la couleur du fond */
 		private Color couleurFond;
-		/** couleurBarres : les couleurs appliqu�es aux barres */
+		/** couleurBarres : les couleurs appliquees aux barres */
 		private Color[] couleursBarres = {Color.cyan.darker(), 
 				Color.red, Color.green, Color.cyan, Color.magenta, 
 				Color.yellow, Color.pink, Color.darkGray, Color.orange};
@@ -64,7 +64,7 @@ import bdd.HistoBoisson;
 			initialiser();
 		}
 		
-		public Graphique(ArrayList<ArrayList<HistoBoisson>> data,ArrayList<String> boissons,int n, boolean stocks)//true si on visualise les stocks, false si on visualise les commandes 
+		public Graphique(ArrayList<ArrayList<HistoBoisson>> data,ArrayList<String> boissons,/**Date dateDebut, Date dateFin,*/int nbEchantillons, boolean stocks)//true si on visualise les stocks, false si on visualise les commandes 
 		{
 			super(new GridLayout(1,0));
 			
@@ -72,7 +72,7 @@ import bdd.HistoBoisson;
 			this.ordonnee=stocks?"Volume (cl)":"Volume (bouteille)";
 			this.abscisse="Temps";
 			this.valeurs= new ArrayList<Float>();
-			Date[] dates=new Date[n];
+			Date[] dates=new Date[nbEchantillons];
 			/*j'avais dis des bêtises, les différentes arraylist<histoBoisson> n'ont pas nécessairement le même nombre d'élément, je complète donc avec des zéros*/
 			ArrayList<HistoBoisson> plusLongue= new ArrayList<HistoBoisson>();
 			int i,j=0,k,size;
@@ -87,11 +87,11 @@ import bdd.HistoBoisson;
 			if(size==0)
 				return;
 			
-			dates[0]=plusLongue.get(0).getDate();
-			dates[n-1]=plusLongue.get(size-1).getDate();
-			long longueur = dates[n-1].getTime() - dates[0].getTime();
-			long pas = longueur/(n-1);
-			for(i=1; i<n-1; i++)
+			dates[0]=plusLongue.get(0).getDate(); /**dateDebut*/
+			dates[nbEchantillons-1]=plusLongue.get(size-1).getDate(); /**dateFin*/
+			long longueur = dates[nbEchantillons-1].getTime() - dates[0].getTime(); /**dateFin-dateDebut*/
+			long pas = longueur/(nbEchantillons-1);
+			for(i=1; i<nbEchantillons-1; i++)
 			dates[i]=new Date(dates[0].getTime() + i*pas) ;
 			
 			/*int[] compteurs=new int[data.size()];
@@ -113,7 +113,7 @@ import bdd.HistoBoisson;
 			}*/
 			//voilà en fait j'en ai chié des boules c'était pas évident du tout.
 			
-			for(i=0; i<n; i++)
+			for(i=0; i<nbEchantillons; i++)
 			{
 				for(j=0; j<data.size(); j++)
 				{
@@ -156,7 +156,7 @@ import bdd.HistoBoisson;
 			super(new GridLayout(1,0));
 			String dateString;
 			dateString=date.toString().subSequence(4, 16).toString() + date.toString().subSequence(23,28).toString();
-			this.titre="Etat des stocks � la date "+dateString;
+			this.titre="Etat des stocks à la date "+dateString;
 			this.ordonnee="Volume (bouteille)";
 			this.abscisse="Boissons";
 			this.valeurs= new ArrayList<Float>();
