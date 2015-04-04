@@ -175,7 +175,7 @@ import bdd.HistoBoisson;
 			}
 			
 			this.legende=false;
-			this.couleurFond=Color.white;
+			this.couleurFond=Color.yellow;
 			initialiser();
 		}
 
@@ -213,7 +213,7 @@ import bdd.HistoBoisson;
 			rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
 
 			BarRenderer renderer = (BarRenderer) plot.getRenderer();
-			renderer.setDrawBarOutline(false);
+			renderer.setDrawBarOutline(true);
 
 			// pour la couleur des barres pour chaque serie
 	
