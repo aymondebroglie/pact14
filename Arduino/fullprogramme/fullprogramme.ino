@@ -1,3 +1,19 @@
+#include <Wire.h>
+
+#include <PN532_I2C.h>
+
+#include <emulatetag.h>
+#include <llcp.h>
+#include <mac_link.h>
+#include <PN532.h>
+#include <PN532Interface.h>
+#include <PN532_debug.h>
+#include <snep.h>
+
+
+
+
+
 /**************************************************************************/
 /*!
     This example attempts to dump the contents of a Mifare Classic 1K card
@@ -9,9 +25,9 @@
 */
 /**************************************************************************/
 
-#include <Wire.h>
-#include <PN532_I2C.h>
-#include "PN532.h"
+
+
+
 
 /*alex */
 PN532_I2C pn532i2c(Wire);
@@ -20,8 +36,8 @@ PN532 nfc(pn532i2c);
 /*aymon*/
 byte statusLed    = 13;
 
-byte sensorInterrupt = 0;  // 0 = digital pin 2
-byte sensorPin       = 2;
+byte sensorInterrupt = 2;  // 0 = digital pin 2
+byte sensorPin       = 21;
 
 // The hall-effect flow sensor outputs approximately 4.5 pulses per second per
 // litre/minute of flow.
@@ -38,7 +54,7 @@ unsigned long oldTime;
 
 void setup(void) {
   // has to be fast to dump the entire memory contents!
-  Serial.begin(115200);
+  Serial1.begin(115200);
 
   nfc.begin();
 
@@ -131,14 +147,14 @@ void loop(void) {
         }
       }
       
-      Serial.println(""); // allez à la ligne à chaque user
+      // allez à la ligne à chaque user
     }
     attachInterrupt(sensorInterrupt, pulseCounter, FALLING);
   }
   Serial.flush();
   while (!Serial.available());
-  Serial.flush(); 
-  
+  Serial.flush(); */
+}}}
   /*aymon*/
    if((millis() - oldTime) > 1000)    // Only process counters once per second
   { 

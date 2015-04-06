@@ -1,3 +1,5 @@
+
+
 /**************************************************************************/
 /*!
     This example attempts to dump the contents of a Mifare Classic 1K card
@@ -8,6 +10,17 @@
     To enable debug message, define DEBUG in PN532/PN532_debug.h
 */
 /**************************************************************************/
+#include <Wire.h>
+
+#include <PN532_I2C.h>
+
+#include <emulatetag.h>
+#include <llcp.h>
+#include <mac_link.h>
+#include <PN532.h>
+#include <PN532Interface.h>
+#include <PN532_debug.h>
+#include <snep.h>
 
 #include <Wire.h>
 #include <PN532_I2C.h>
@@ -94,7 +107,7 @@ void loop(void) {
         }
       }
       
-      Serial.println(""); // allez à la ligne à chaque user
+     
     }
   }
 
