@@ -64,7 +64,7 @@ import bdd.HistoBoisson;
 			initialiser();
 		}
 		
-		public Graphique(ArrayList<ArrayList<HistoBoisson>> data,ArrayList<String> boissons,/**Date dateDebut, Date dateFin,*/int nbEchantillons, boolean stocks)//true si on visualise les stocks, false si on visualise les commandes 
+		public Graphique(ArrayList<ArrayList<HistoBoisson>> data,ArrayList<String> boissons, int nbEchantillons, boolean stocks)//true si on visualise les stocks, false si on visualise les commandes 
 		{
 			super(new GridLayout(1,0));
 			
@@ -87,9 +87,9 @@ import bdd.HistoBoisson;
 			if(size==0)
 				return;
 			
-			dates[0]=plusLongue.get(0).getDate(); /**dateDebut*/
-			dates[nbEchantillons-1]=plusLongue.get(size-1).getDate(); /**dateFin*/
-			long longueur = dates[nbEchantillons-1].getTime() - dates[0].getTime(); /**dateFin-dateDebut*/
+			dates[0]=plusLongue.get(0).getDate(); 
+			dates[nbEchantillons-1]=plusLongue.get(size-1).getDate(); 
+			long longueur = dates[nbEchantillons-1].getTime() - dates[0].getTime(); 
 			long pas = longueur/(nbEchantillons-1);
 			for(i=1; i<nbEchantillons-1; i++)
 			dates[i]=new Date(dates[0].getTime() + i*pas) ;
