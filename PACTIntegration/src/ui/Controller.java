@@ -329,7 +329,7 @@ public class Controller
 		System.out.println("WARNING : the method " + methodname
 				+ "hasn't been implemented yet !!!");
 		JOptionPane.showMessageDialog(null,
-				"L'opération demandée n'est pas encore disonible.",
+				"L'opération demandée n'est pas encore disponible.",
 				"Attention", JOptionPane.WARNING_MESSAGE);
 	}
 
