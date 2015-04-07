@@ -574,7 +574,7 @@ public class Controller
 	
 	/****************************************************************************************************/
 	
-	public ArrayList<ArrayList<HistoBoisson>> integrerModelisationStatistique(ArrayList<ArrayList<HistoBoisson>> data) throws DimensionException
+	/*public ArrayList<ArrayList<HistoBoisson>> integrerModelisationStatistique(ArrayList<ArrayList<HistoBoisson>> data) throws DimensionException
 	{
 			ArrayList<HistoBoisson> liste_histo=data.get(0);				
 			int length = liste_histo.size();
@@ -639,7 +639,7 @@ public class Controller
 			data.add(histo_modele) ;
 			
 		return data;
-	}
+	}*/
 	
 	public void visualiser(ViewStocksManagement vsm) throws DimensionException 
 	{
@@ -773,8 +773,8 @@ public class Controller
 					nombre = 7;
 					break;
 				case "mois":
-					longDuree = 3*24*hour;
-					nombre = 10;
+					longDuree = 2*24*hour;
+					nombre = 15;
 					break;
 				case "annee":
 					longDuree = 30*24*hour;
@@ -782,17 +782,15 @@ public class Controller
 					break;
 				default :
 					longDuree = (liste_date.get(length-1).getTime()-liste_date.get(0).getTime())/length;
-					nombre = length;
-					
-					
+					nombre = length;			
 				}
 			
-			for(int i = 0 ; i<nombre-1 ; i++)
+			for(int i = 0 ; i<nombre ; i++)
 			{
 				longMaintenant = longMaintenant + longDuree ;
 				Date date_i = new Date(longMaintenant) ;
 				
-				HistoBoisson histo = new HistoBoisson( date_i , (int) (liste_date.get(i).getTime()*delta.get(0) + delta.get(1)) ) ;
+				HistoBoisson histo = new HistoBoisson( date_i , (int) (date_i.getTime()*delta.get(0) + delta.get(1)) ) ;
 				histo_modele.add(histo) ;
 			}
 			
