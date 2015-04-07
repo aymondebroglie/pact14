@@ -174,7 +174,7 @@ void loop(void) {
    if (flowRate == 0 & totalMilliLitres !=0 & chaine != "0"){
      
      chaine = (String) (totalMilliLitres*20/(23*100));
-    Serial1.println(chaine + scan ); 
+    Serial1.println(chaine); 
     totalMilliLitres =0;
     identification =0;
    }

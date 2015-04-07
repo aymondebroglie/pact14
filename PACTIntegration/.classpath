@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="D:/Pact/mysql-connector-java-5.0.8-bin.jar"/>
+	<classpathentry kind="lib" path="D:/Pact/jfreechart-1.0.19.jar"/>
+	<classpathentry kind="lib" path="D:/Pact/jcommon-1.0.23.jar"/>
+	<classpathentry kind="lib" path="D:/Pact/Jena/commons-codec-1.6.jar"/>
+	<classpathentry kind="lib" path="D:/Pact/Jena/commons-csv-1.0.jar"/>
+	<classpathentry kind="lib" path="D:/Pact/Jena/commons-lang3-3.1.jar"/>
+	<classpathentry kind="lib" path="D:/Pact/Jena/httpclient-4.2.6.jar"/>
+	<classpathentry kind="lib" path="D:/Pact/Jena/httpclient-cache-4.2.6.jar"/>
+	<classpathentry kind="lib" path="D:/Pact/Jena/httpcore-4.2.5.jar"/>
+	<classpathentry kind="lib" path="D:/Pact/Jena/jackson-annotations-2.3.0.jar"/>
+	<classpathentry kind="lib" path="D:/Pact/Jena/jackson-core-2.3.3.jar"/>
+	<classpathentry kind="lib" path="D:/Pact/Jena/jackson-databind-2.3.3.jar"/>
+	<classpathentry kind="lib" path="D:/Pact/Jena/jcl-over-slf4j-1.7.6.jar"/>
+	<classpathentry kind="lib" path="D:/Pact/Jena/jena-arq-2.12.1.jar"/>
+	<classpathentry kind="lib" path="D:/Pact/Jena/jena-core-2.12.1.jar"/>
+	<classpathentry kind="lib" path="D:/Pact/Jena/jena-iri-1.1.1.jar"/>
+	<classpathentry kind="lib" path="D:/Pact/Jena/jena-sdb-1.5.1.jar"/>
+	<classpathentry kind="lib" path="D:/Pact/Jena/jena-tdb-1.1.1.jar"/>
+	<classpathentry kind="lib" path="D:/Pact/Jena/jsonld-java-0.5.0.jar"/>
+	<classpathentry kind="lib" path="D:/Pact/Jena/libthrift-0.9.1.jar"/>
+	<classpathentry kind="lib" path="D:/Pact/Jena/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="D:/Pact/Jena/slf4j-api-1.7.6.jar"/>
+	<classpathentry kind="lib" path="D:/Pact/Jena/slf4j-log4j12-1.7.6.jar"/>
+	<classpathentry kind="lib" path="D:/Pact/Jena/xercesImpl-2.11.0.jar"/>
+	<classpathentry kind="lib" path="D:/Pact/Jena/xml-apis-1.4.01.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
