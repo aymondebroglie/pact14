@@ -117,7 +117,7 @@ import bdd.HistoBoisson;
 			{
 				for(j=0; j<data.size(); j++)
 				{
-					System.out.println(dates[0]);
+					//System.out.println(dates[0]);
 					if(data.get(j).size()==0 || dates[i].before(data.get(j).get(0).getDate()))
 					{
 						valeurs.add(0f);

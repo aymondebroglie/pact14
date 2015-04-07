@@ -212,8 +212,8 @@ public class Controller
 
 	public void clearNextStacks()
 	{
-		System.out.println("is stacknextview empty ?"
-				+ stacknextview.empty());
+		/*System.out.println("is stacknextview empty ?"
+				+ stacknextview.empty());*/
 		while (!stacknextview.empty()) 
 		{
 
@@ -224,8 +224,8 @@ public class Controller
 	
 	public void clearPreviousStacks()
 	{
-		System.out.println("is stackpreviousview empty ?"
-				+ stackpreviousview.empty());
+		/*System.out.println("is stackpreviousview empty ?"
+				+ stackpreviousview.empty());*/
 		while (!stackpreviousview.empty()) 
 		{
 			stackpreviousview.pop();
@@ -256,7 +256,7 @@ public class Controller
 
 	public void previousView(Container actualview) 
 	{
-		System.out.println("test " + stackpreviousview.empty()) ;
+		//System.out.println("test " + stackpreviousview.empty()) ;
 		
 		if (stackpreviousview.empty()) 
 		{
