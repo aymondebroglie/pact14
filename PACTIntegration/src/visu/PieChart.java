@@ -67,7 +67,10 @@ public PieChart(ArrayList<DispoBoisson> data, Date date) {
  
 
     JFreeChart pieChart = ChartFactory.createPieChart("Etat des stocks le "+date.toString().subSequence(4, 16).toString() + date.toString().subSequence(23,28).toString(), 
-      pieDataset, true, true, true); 
+      pieDataset, true, true, true);
+    pieChart.setBackgroundPaint(new Color(250,250,227));
+    Plot plot = pieChart.getPlot();
+    plot.setBackgroundPaint(new Color(239,239,234));
     ChartPanel cPanel = new ChartPanel(pieChart); 
     pnl.add(cPanel); 
 }
