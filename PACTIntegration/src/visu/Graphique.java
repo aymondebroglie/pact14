@@ -67,9 +67,9 @@ import bdd.HistoBoisson;
 		public Graphique(ArrayList<ArrayList<HistoBoisson>> data,ArrayList<String> boissons, int nbEchantillons, boolean stocks)//true si on visualise les stocks, false si on visualise les commandes 
 		{
 			super(new GridLayout(1,0));
-			
+			String[] stringDate=new String[6];
 			this.titre=stocks?"Evolution des stocks":"Consommation en cL dans les commandes";
-			this.ordonnee=stocks?"Volume (cl)":"Volume (bouteille)";
+			this.ordonnee=stocks?"Volume (Bouteille)":"Volume (cL)";
 			this.abscisse="Temps";
 			this.valeurs= new ArrayList<Float>();
 			Date[] dates=new Date[nbEchantillons];
@@ -118,7 +118,7 @@ import bdd.HistoBoisson;
 				for(j=0; j<data.size(); j++)
 				{
 					System.out.println(dates[0]);
-					if(dates[i].before(data.get(j).get(0).getDate()))
+					if(data.get(j).size()==0 || dates[i].before(data.get(j).get(0).getDate()))
 					{
 						valeurs.add(0f);
 					}
@@ -130,6 +130,8 @@ import bdd.HistoBoisson;
 							if(dates[i].after(temp.getDate()))
 								k++;
 						}
+						if(k==data.get(j).size())
+							k--;
 						valeurs.add((float)data.get(j).get(k).getVolume());
 					}	
 				}
@@ -143,11 +145,45 @@ import bdd.HistoBoisson;
 			{
 				categories.add(temp.getDate().toString().subSequence(4, 16).toString() + temp.getDate().toString().subSequence(23,28).toString());
 			}*/
-			for(Date temp:dates)
-				categories.add(temp.toString().subSequence(4, 16).toString() + temp.toString().subSequence(23,28).toString());
+			switch(nbEchantillons)
+			{
+			case 10:
+				for(Date temp:dates)
+				{
+					stringDate=temp.toString().split(" ");
+					categories.add(stringDate[3].subSequence(0,5).toString());
+				}
+				break;
+			case 7:
+				for(Date temp:dates)
+				{
+					stringDate=temp.toString().split(" ");
+					categories.add(stringDate[0]+" "+stringDate[2]);
+				}
+				break;
+			case 8:
+				for(Date temp:dates)
+				{
+					stringDate=temp.toString().split(" ");
+					categories.add(stringDate[1] +" "+stringDate[2]);
+				}
+				break;
+			case 12:
+				for(Date temp:dates)
+				{
+					stringDate=temp.toString().split(" ");
+				categories.add(stringDate[1]+" "+stringDate[5]);
+				}
+				break;
+			default :
+				for(Date temp:dates)
+					categories.add(temp.toString());
+				break;
+			}
 			
 			this.legende=true;
 			this.couleurFond=Color.white;
+			
 			initialiser();
 		}
 		
@@ -155,7 +191,9 @@ import bdd.HistoBoisson;
 		{
 			super(new GridLayout(1,0));
 			String dateString;
-			dateString=date.toString().subSequence(4, 16).toString() + date.toString().subSequence(23,28).toString();
+			String[] stringDate=new String[6];
+			stringDate=date.toString().split(" ");
+			dateString=stringDate[1] +" "+ stringDate[2]+" "+stringDate[3].substring(0,5) + " " + stringDate[5];
 			this.titre="Etat des stocks à la date "+dateString;
 			this.ordonnee="Volume (bouteille)";
 			this.abscisse="Boissons";
@@ -175,7 +213,7 @@ import bdd.HistoBoisson;
 			}
 			
 			this.legende=false;
-			this.couleurFond=Color.yellow;
+			this.couleurFond=Color.white;
 			initialiser();
 		}
 
@@ -202,12 +240,12 @@ import bdd.HistoBoisson;
 			);
 
 			// definition de la couleur de fond
-			chart.setBackgroundPaint(couleurFond);
+			chart.setBackgroundPaint(new Color(250,250,227));
 
 			CategoryPlot plot = (CategoryPlot) chart.getPlot();
 
 			//valeur comprise entre 0 et 1 transparence de la zone graphique
-			plot.setBackgroundAlpha(0.9f);
+			plot.setBackgroundAlpha(0.4f);
 
 			NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
 			rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
