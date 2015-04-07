@@ -148,6 +148,7 @@ import bdd.HistoBoisson;
 			
 			this.legende=true;
 			this.couleurFond=Color.white;
+			
 			initialiser();
 		}
 		
@@ -175,7 +176,7 @@ import bdd.HistoBoisson;
 			}
 			
 			this.legende=false;
-			this.couleurFond=Color.yellow;
+			this.couleurFond=Color.white;
 			initialiser();
 		}
 
@@ -202,12 +203,12 @@ import bdd.HistoBoisson;
 			);
 
 			// definition de la couleur de fond
-			chart.setBackgroundPaint(couleurFond);
+			chart.setBackgroundPaint(new Color(250,250,227));
 
 			CategoryPlot plot = (CategoryPlot) chart.getPlot();
 
 			//valeur comprise entre 0 et 1 transparence de la zone graphique
-			plot.setBackgroundAlpha(0.9f);
+			plot.setBackgroundAlpha(0.4f);
 
 			NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
 			rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
