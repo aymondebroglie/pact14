@@ -67,7 +67,7 @@ import bdd.HistoBoisson;
 		public Graphique(ArrayList<ArrayList<HistoBoisson>> data,ArrayList<String> boissons,/**Date dateDebut, Date dateFin,*/int nbEchantillons, boolean stocks)//true si on visualise les stocks, false si on visualise les commandes 
 		{
 			super(new GridLayout(1,0));
-			
+			String[] stringDate=new String[6];
 			this.titre=stocks?"Evolution des stocks":"Consommation en cL dans les commandes";
 			this.ordonnee=stocks?"Volume (cl)":"Volume (bouteille)";
 			this.abscisse="Temps";
@@ -143,8 +143,41 @@ import bdd.HistoBoisson;
 			{
 				categories.add(temp.getDate().toString().subSequence(4, 16).toString() + temp.getDate().toString().subSequence(23,28).toString());
 			}*/
-			for(Date temp:dates)
-				categories.add(temp.toString().subSequence(4, 16).toString() + temp.toString().subSequence(23,28).toString());
+			switch(nbEchantillons)
+			{
+			case 10:
+				for(Date temp:dates)
+				{
+					stringDate=temp.toString().split(" ");
+					categories.add(stringDate[3].subSequence(0,5).toString());
+				}
+				break;
+			case 7:
+				for(Date temp:dates)
+				{
+					stringDate=temp.toString().split(" ");
+					categories.add(stringDate[0]+" "+stringDate[2]);
+				}
+				break;
+			case 8:
+				for(Date temp:dates)
+				{
+					stringDate=temp.toString().split(" ");
+					categories.add(stringDate[1] +" "+stringDate[2]);
+				}
+				break;
+			case 12:
+				for(Date temp:dates)
+				{
+					stringDate=temp.toString().split(" ");
+				categories.add(stringDate[1]+" "+stringDate[5]);
+				}
+				break;
+			default :
+				for(Date temp:dates)
+					categories.add(temp.toString().subSequence(3, 15).toString() + temp.toString().subSequence(23,29).toString());
+				break;
+			}
 			
 			this.legende=true;
 			this.couleurFond=Color.white;
