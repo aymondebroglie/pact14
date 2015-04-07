@@ -1,39 +1,11 @@
 #include <Wire.h>
-
 #include <PN532_I2C.h>
+#include "PN532.h"
 
-#include <emulatetag.h>
-#include <llcp.h>
-#include <mac_link.h>
-#include <PN532.h>
-#include <PN532Interface.h>
-#include <PN532_debug.h>
-#include <snep.h>
-
-
-
-
-
-/**************************************************************************/
-/*!
-    This example attempts to dump the contents of a Mifare Classic 1K card
-
-    Note that you need the baud rate to be 115200 because we need to print
-    out the data and read from the card at the same time!
-
-    To enable debug message, define DEBUG in PN532/PN532_debug.h
-*/
-/**************************************************************************/
-
-
-
-
-
-/*alex */
 PN532_I2C pn532i2c(Wire);
 PN532 nfc(pn532i2c);
+int identification;
 
-/*aymon*/
 byte statusLed    = 13;
 
 byte sensorInterrupt = 2;  // 0 = digital pin 2
@@ -51,10 +23,11 @@ unsigned long totalMilliLitres;
 
 unsigned long oldTime;
 
-
 void setup(void) {
   // has to be fast to dump the entire memory contents!
-  Serial1.begin(115200);
+  identification = 0;
+  Serial.begin(115200);
+
 
   nfc.begin();
 
@@ -65,12 +38,12 @@ void setup(void) {
   }
   // Got ok data, 
 
-/*alex*/
   // configure board to read RFID tags
   nfc.SAMConfig();
-
-/*aymon*/
-pinMode(statusLed, OUTPUT);
+ 
+ 
+ 
+  pinMode(statusLed, OUTPUT);
   digitalWrite(statusLed, HIGH);  // We have an active-low LED attached
   
   pinMode(sensorPin, INPUT);
@@ -86,11 +59,15 @@ pinMode(statusLed, OUTPUT);
   // Configured to trigger on a FALLING state change (transition from HIGH
   // state to LOW state)
   attachInterrupt(sensorInterrupt, pulseCounter, FALLING);
-  
 }
 
 
-void loop(void) { 
+void loop(void) {
+  if(identification == 0){
+ 
+   
+     detachInterrupt(sensorInterrupt);
+   
   uint8_t success;                          // Flag to check if there was an error with the PN532
   uint8_t uid[] = { 0, 0, 0, 0, 0, 0, 0 };  // Buffer to store the returned UID
   uint8_t uidLength;                        // Length of the UID (4 or 7 bytes depending on ISO14443A card type)
@@ -104,10 +81,10 @@ void loop(void) {
   // Wait for an ISO14443A type cards (Mifare, etc.).  When one is found
   // 'uid' will be populated with the UID, and uidLength will indicate
   // if the uid is 4 bytes (Mifare Classic) or 7 bytes (Mifare Ultralight)
+  
   success = nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, uid, &uidLength);
-
+  
   if (success) {
-    detachInterrupt(sensorInterrupt);
 
     if (uidLength == 4)
     {
@@ -119,7 +96,7 @@ void loop(void) {
         if (nfc.mifareclassic_IsFirstBlock(currentblock)) authenticated = false;
 
         // If the sector hasn't been authenticated, do so first
- /*       if (!authenticated)
+        if (!authenticated)
         {
           // Starting of a new sector ... try to to authenticate, essaye 2 types de blocks
           if (currentblock == 0)
@@ -135,28 +112,28 @@ void loop(void) {
             authenticated = true;
           }
          
-        }  
+        }
         // If we're still not authenticated just skip the block
         if (authenticated)
         {
           success = nfc.mifareclassic_ReadDataBlock(currentblock, data);
-         if (success)
+          if (success)
           {
-            nfc.PrintHexChar(data, 16); // à utiliser
-          } 
+            nfc.PrintHexChar(data, 16);
+            identification =1;
+            attachInterrupt(sensorInterrupt, pulseCounter, FALLING);
+            
+          }
         }
       }
       
-      // allez à la ligne à chaque user
+     
     }
-    attachInterrupt(sensorInterrupt, pulseCounter, FALLING);
   }
-  Serial.flush();
-  while (!Serial.available());
-  Serial.flush(); */
-}}}
-  /*aymon*/
-   if((millis() - oldTime) > 1000)    // Only process counters once per second
+  }
+  if(identification ==1){
+    
+ if((millis() - oldTime) > 1000)    // Only process counters once per second
   { 
     // Disable the interrupt while calculating flow rate and sending the value to
     // the host
@@ -187,10 +164,14 @@ void loop(void) {
     
     
    // Print the flow rate for this second in litres / minute
-   
-   if (flowRate == 0 & totalMilliLitres !=0){
-    Serial.println((String) (totalMilliLitres*20/(23*100))); 
+   String chaine;
+     chaine = (String) (totalMilliLitres*20/(23*100));
+   if (flowRate == 0 & totalMilliLitres !=0 & chaine != "0"){
+     
+     chaine = (String) (totalMilliLitres*20/(23*100));
+    Serial.println(chaine); 
     totalMilliLitres =0;
+    identification =0;
    }
 
     // Reset the pulse counter so we can start incrementing again
@@ -200,10 +181,9 @@ void loop(void) {
     attachInterrupt(sensorInterrupt, pulseCounter, FALLING);
   }
 }
+}
 
-/*
-Insterrupt Service Routine
- */
+
 void pulseCounter()
 {
   // Increment the pulse counter
