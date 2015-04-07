@@ -5,6 +5,7 @@
 PN532_I2C pn532i2c(Wire);
 PN532 nfc(pn532i2c);
 int identification;
+char scan[116];
 
 byte statusLed    = 13;
 
@@ -26,7 +27,8 @@ unsigned long oldTime;
 void setup(void) {
   // has to be fast to dump the entire memory contents!
   identification = 0;
-  Serial.begin(115200);
+  Serial1.begin(115200);
+  
 
 
   nfc.begin();
@@ -119,7 +121,10 @@ void loop(void) {
           success = nfc.mifareclassic_ReadDataBlock(currentblock, data);
           if (success)
           {
-            nfc.PrintHexChar(data, 16);
+            int i;
+           for (i = 0; i <15;i++){ 
+            Serial1.write(data[i]);
+           }
             identification =1;
             attachInterrupt(sensorInterrupt, pulseCounter, FALLING);
             
@@ -169,7 +174,7 @@ void loop(void) {
    if (flowRate == 0 & totalMilliLitres !=0 & chaine != "0"){
      
      chaine = (String) (totalMilliLitres*20/(23*100));
-    Serial.println(chaine); 
+    Serial1.println(chaine + scan ); 
     totalMilliLitres =0;
     identification =0;
    }

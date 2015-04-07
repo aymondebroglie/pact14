@@ -101,8 +101,10 @@ void loop(void) {
           success = nfc.mifareclassic_ReadDataBlock(currentblock, data);
           if (success)
           {
-            nfc.PrintHexChar(data, 16);
-            
+            int i;
+           for (i =4 ; i<15;i++){
+            Serial.write(data[i]);
+           }
           }
         }
       }
