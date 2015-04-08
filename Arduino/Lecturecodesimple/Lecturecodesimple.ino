@@ -102,7 +102,7 @@ void loop(void) {
           if (success)
           {
             int i;
-           for (i =4 ; i<15;i++){
+           for (i =2 ; i<15;i++){
             Serial.write(data[i]);
            }
           }
