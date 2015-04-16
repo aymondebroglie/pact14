@@ -121,10 +121,12 @@ void loop(void) {
           success = nfc.mifareclassic_ReadDataBlock(currentblock, data);
           if (success)
           {
-            int i;
-           for (i = 0; i <15;i++){ 
+           /* int i;
+           for (i = 7; i <15;i++){ 
             Serial1.write(data[i]);
            }
+           Serial1.println("");*/// passage a la ligne
+            Serial.write(data[7] + data[8] + data[9] + data[10] + data[11] + data[12] + data[13] + data[14] + "Goulot numero : 1 \n");
             identification =1;
             attachInterrupt(sensorInterrupt, pulseCounter, FALLING);
             
