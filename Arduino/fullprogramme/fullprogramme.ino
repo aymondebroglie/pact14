@@ -126,7 +126,7 @@ void loop(void) {
             Serial1.write(data[i]);
            }
            Serial1.println("");*/// passage a la ligne
-            Serial.write(data[7] + data[8] + data[9] + data[10] + data[11] + data[12] + data[13] + data[14] + "Goulot numero : 1 \n");
+            Serial1.write(data[7] + data[8] + data[9] + data[10] + data[11] + data[12] + data[13] + data[14] + "Goulot numero : 1 \n");
             identification =1;
             attachInterrupt(sensorInterrupt, pulseCounter, FALLING);
             
