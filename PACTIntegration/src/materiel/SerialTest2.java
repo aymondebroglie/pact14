@@ -113,7 +113,7 @@ public class SerialTest2 implements SerialPortEventListener {
 				String inputLine=input.readLine();
 				System.out.println(inputLine);
 				output.write("c".getBytes());
-				/*if(inputLine.matches("U User [0123456789]+")){
+				if(inputLine.matches("U User [0123456789]+")){
 					System.out.println(inputLine);
 					barman=inputLine.replace("UServeur ", "");
 				}
@@ -122,10 +122,10 @@ public class SerialTest2 implements SerialPortEventListener {
 					int volume  = Integer.parseInt(inputLine);
 					System.out.println(volume);
 					if(!barman.equalsIgnoreCase("0"))
-						bdd.ajouterConsommation("1", Integer.parseInt(barman), volume);
+						bdd.ajouterConsommation("2", Integer.parseInt(barman), volume);
 				}
 				else
-					System.out.println("Erreur, inputLine non reconnue");*/
+					System.out.println("Erreur, inputLine non reconnue");
 			} catch (Exception e) {
 				System.err.println(e.toString());
 			}

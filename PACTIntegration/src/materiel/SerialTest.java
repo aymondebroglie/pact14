@@ -29,7 +29,7 @@ public class SerialTest implements SerialPortEventListener {
 	* making the displayed results codepage independent
 	*/
 	private BufferedReader input;
-	String barman="0" ; 
+	String barman="0"; 
 	private BDDInterface bdd ;
 	/** The output stream to the port */
 	private OutputStream output;
@@ -113,7 +113,7 @@ public class SerialTest implements SerialPortEventListener {
 				String inputLine=input.readLine();
 				System.out.println(inputLine);
 				output.write("c".getBytes());
-				/*if(inputLine.matches("U User [0123456789]+")){
+				if(inputLine.matches("U User [0123456789]+")){
 					System.out.println(inputLine);
 					barman=inputLine.replace("UServeur ", "");
 				}
@@ -125,7 +125,7 @@ public class SerialTest implements SerialPortEventListener {
 						bdd.ajouterConsommation("1", Integer.parseInt(barman), volume);
 				}
 				else
-					System.out.println("Erreur, inputLine non reconnue");*/
+					System.out.println("Erreur, inputLine non reconnue");
 			} catch (Exception e) {
 				System.err.println(e.toString());
 			}
