@@ -15,12 +15,13 @@ import bdd.BDDInterface;
 
 public class OpenFoodFacts implements OFFInterface
 {   
-	public static int Volume0;
+	public static int Volume0 = 1;
 	private BDDInterface bdd ;
 	private final static HttpAuthenticator authenticator = new SimpleAuthenticator("off", "off".toCharArray());	
 	private final
 	static String ENDPOINT = "http://opendata1.opendata.u-psud.fr:8890/sparql-auth/" ;
-
+	//static String ENDPOINT = "http://virtuoso02.calcul.u-psud.fr/sparql-auth" ;
+	
 	
 	public OpenFoodFacts(BDDInterface bdd) 
 	{
@@ -151,7 +152,7 @@ public class OpenFoodFacts implements OFFInterface
 	public boolean ajouterBoisson(long codebarre)
 	{   try
 	   {
-		List<QuerySolution> solutionlist=getResults(codebarre);
+		List<QuerySolution> solutionlist=this.getResults(codebarre);
 		long code = this.getCode(solutionlist);
 		String nom = this.getName(solutionlist) ;
 		int volume = this.getVolume(nom) ;

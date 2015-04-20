@@ -878,7 +878,7 @@ public class Controller
 		final JPanel pan = new JPanel();
 		final long code = Long.parseLong(codeBarre);
 		System.out.println(code);
-		//bdd.ajouterBoissonParWeb(code);
+		bdd.ajouterBoissonParWeb(code);
 		
 		if(OpenFoodFacts.Volume0==0)
 		{
@@ -894,6 +894,7 @@ public class Controller
 				JOptionPane.showMessageDialog(null,
 						"Boisson ajoutée: "+codeBarre, "Info",
 						JOptionPane.INFORMATION_MESSAGE);
+				
 			}
 		});
 		pan.add(ok3);
