@@ -63,7 +63,7 @@ public class Controller
 	}
 
 	public void loadMDP() 
-	{
+	{ 
 		FileReader fs = null;
 		BufferedReader bs = null;
 		String filename = "datas" + File.separator + "Password";
@@ -870,7 +870,7 @@ public class Controller
 				"Le changement a bien été enregistré.", "Information",
 				JOptionPane.INFORMATION_MESSAGE);
 	}
-
+/**
 	public void ajoutBouteille(final String codeBarre) 
 	{
 
@@ -906,7 +906,41 @@ public class Controller
 		this.setActualView(pan);
 		window.validate();
 	}
+*/
+	public void ajoutBouteille(final String codeBarre) 
+	{
 
+		this.addPreviousView(actualview);
+		final long code = Long.parseLong(codeBarre);
+		System.out.println(code);
+		bdd.ajouterBoissonParWeb(code);
+		
+		if(OpenFoodFacts.Volume0==0)
+		{
+			//System.out.println("volume0 = 0");
+			ViewEntreeVolume pan = new ViewEntreeVolume(this,codeBarre);
+			Container cp = new Container() ;		
+			cp.setLayout(new GridBagLayout());
+			cp.add(pan) ;
+			window.setContentPane(cp);
+			
+			this.setActualView(cp);
+			window.validate();
+		}
+		else
+		{
+			//System.out.println("volume0 = 1");
+			JOptionPane.showMessageDialog(null,
+				"Boisson ajoutée: "+codeBarre, "Info",
+				JOptionPane.INFORMATION_MESSAGE);
+			ViewBossHome pan = new ViewBossHome(this);
+			window.setContentPane(pan);
+			this.setActualView(pan);
+			window.validate();
+		}
+			
+	}
+	
 	public void ajoutBarman(String nom, String prenom, int age) 
 	{
 		int rFID = nom.hashCode();

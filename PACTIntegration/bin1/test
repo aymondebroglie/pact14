@@ -1,0 +1,30 @@
+5449000131805 Coca cola zero 33 cl
+
+Fonctionnalit�s :
+-Imprimer Note
+-Bouteille finie
+-Associer Goulot
+-Retirer goulot
+
+-Mot de passe
+
+-Ajouter Barman
+-Consulter vos données
+	-stocks
+	-commande
+	-Etat des stocks
+-Gérer vos stocks
+	-Recevoir une livraison
+	-Ajouter une boisson
+	
+I Démonstration du programme coté patron
+  1)Achille le mdp
+  2)Montrer �tat des stocks (le coca n'apparait pas) -> ajouter le coca -> ajouter une livraison de coca -> retourner dans l'état des stocks.
+  3)Montrer l'évolution des stocks pour deux boisson (coca et rhum).
+II
+  1)Associer le goulot avec le curacao -> verser -> associer le goulot avec le rhum -> verser
+  2)Imprimer la note.
+  3)Seletionner bouteille finie (pour le rhum donc)
+III
+	1) Retourner dans l'interface patron. Visualiser les commandes pour le rhum et le curacao
+	2)Montrer l'état des stocks/evolution des stoks pour constater qu'on a une bouteille de moins de rhum.
