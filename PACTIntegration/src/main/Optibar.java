@@ -1,6 +1,7 @@
 package main;
 import ui.Window;
 import materiel.SerialTest;
+import materiel.SerialTest2;
 import bdd.*;
 
 public class Optibar {
@@ -10,6 +11,8 @@ public class Optibar {
 	@SuppressWarnings("unused")
 	private static Window window =new Window(bdd);
 	private static SerialTest main = new SerialTest(bdd);
+	private static SerialTest2 main2 = new SerialTest2(bdd);
+	
 	private static Thread t=new Thread() {
 		public void run() {
 			//the following line will keep this app alive for 1000 seconds,
@@ -22,6 +25,7 @@ public class Optibar {
 
 		//InitializationPassword.initialiserPassword("poney");
 		main.initialize();
+		main2.initialize();
 		
 		t.start();
 		
