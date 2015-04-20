@@ -15,13 +15,15 @@ import bdd.BDDInterface;
 
 public class OpenFoodFacts implements OFFInterface
 {   
-	public static int Volume0 = 1;
+	public static int Volume0;
 	private BDDInterface bdd ;
 	private final static HttpAuthenticator authenticator = new SimpleAuthenticator("off", "off".toCharArray());	
 	private final
 	static String ENDPOINT = "http://opendata1.opendata.u-psud.fr:8890/sparql-auth/" ;
-	//static String ENDPOINT = "http://virtuoso02.calcul.u-psud.fr/sparql-auth" ;
 	
+	//	static String ENDPOINT = "http://virtuoso02.calcul.u-psud.fr/sparql-auth/" ;
+	
+
 	
 	public OpenFoodFacts(BDDInterface bdd) 
 	{
