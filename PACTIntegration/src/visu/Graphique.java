@@ -111,7 +111,7 @@ import bdd.HistoBoisson;
 					
 				}
 			}*/
-			//voilà en fait j'en ai chié des boules c'était pas évident du tout.
+			//
 			
 			for(i=0; i<nbEchantillons; i++)
 			{
