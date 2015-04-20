@@ -112,6 +112,7 @@ public class SerialTest2 implements SerialPortEventListener {
 			try {
 				String inputLine=input.readLine();
 				System.out.println(inputLine);
+				output.write("c".getBytes());
 				/*if(inputLine.matches("U User [0123456789]+")){
 					System.out.println(inputLine);
 					barman=inputLine.replace("UServeur ", "");
