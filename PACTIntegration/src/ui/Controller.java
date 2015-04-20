@@ -933,7 +933,7 @@ public class Controller
 			JOptionPane.showMessageDialog(null,
 				"Boisson ajoutée: "+codeBarre, "Info",
 				JOptionPane.INFORMATION_MESSAGE);
-			ViewBossHome pan = new ViewBossHome(this);
+			ViewDelivery pan = new ViewDelivery(this);
 			window.setContentPane(pan);
 			this.setActualView(pan);
 			window.validate();
